@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume Builder — People Management Certificate | West Los Angeles College</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#1a2e4a; --gold:#c9922a; --gold-light:#fef3dc;
+    --blue:#2563a8; --blue-light:#ddeafc;
+    --green:#1e8c4a; --green-light:#d4f5e2;
+    --purple:#7b4ca8; --purple-light:#ede6fb;
+    --teal:#1a6b6b; --teal-light:#d0f0ee;
+    --orange:#c05a10; --orange-light:#fde8d0;
+    --text:#1e2c3a; --muted:#5a6a7a; --border:#d0dae8; --bg:#f0f4fb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);font-size:17px;line-height:1.7;min-height:100vh;}
+  .skip-nav{position:absolute;left:-9999px;}.skip-nav:focus{position:static;padding:8px;background:var(--navy);color:white;display:block;}
+  .gold-bar{height:6px;background:linear-gradient(90deg,var(--gold),#e8b84b,var(--gold));}
+  .top-bar{background:var(--navy);padding:20px 24px 16px;text-align:center;}
+  .top-bar h1{font-family:'Playfair Display',serif;font-size:25px;color:white;line-height:1.2;}
+  .top-bar h1 span{color:var(--gold);}
+  .top-bar p{color:rgba(255,255,255,0.75);font-size:14px;margin-top:5px;}
+
+  /* CERT BADGE */
+  .cert-badge{background:var(--gold-light);border:2px solid var(--gold);border-radius:0;padding:10px 20px;text-align:center;font-size:14px;font-weight:800;color:#7a5000;letter-spacing:0.5px;}
+  .cert-badge span{color:var(--navy);}
+
+  /* TABS */
+  .tabs{display:flex;background:var(--navy);padding:0 12px;overflow-x:auto;border-top:1px solid rgba(255,255,255,0.1);}
+  .tab-btn{flex:1;min-width:80px;padding:11px 8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;border:none;background:transparent;color:rgba(255,255,255,0.5);cursor:pointer;border-bottom:4px solid transparent;text-align:center;line-height:1.3;transition:all 0.2s;}
+  .tab-btn.active{color:white;border-bottom-color:var(--gold);}
+  .tab-btn:hover{color:rgba(255,255,255,0.85);}
+
+  .layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1140px;margin:0 auto;padding:22px 16px 60px;}
+  @media(max-width:760px){.layout{grid-template-columns:1fr;}}
+
+  /* FORM */
+  .form-panel{display:none;}
+  .form-panel.active{display:block;}
+  .form-card{background:white;border-radius:14px;padding:20px;border:1px solid var(--border);box-shadow:0 3px 10px rgba(0,0,0,0.05);margin-bottom:14px;}
+  .form-card h2{font-size:17px;font-weight:800;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .field-group{margin-bottom:13px;}
+  label{display:block;font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;}
+  input[type=text],input[type=email],input[type=tel],textarea,select{width:100%;padding:11px 13px;font-family:'Nunito',sans-serif;font-size:15px;border:2px solid var(--border);border-radius:10px;background:#f8faff;color:var(--text);outline:none;transition:border-color 0.2s;}
+  input:focus,textarea:focus,select:focus{border-color:var(--blue);background:white;}
+  textarea{min-height:88px;resize:vertical;}
+
+  .ai-hint{background:#0f2020;color:#e0f5f3;border-radius:8px;padding:12px 15px;margin-top:10px;font-size:13px;line-height:1.6;}
+  .ai-hint .hl{color:#7ecdc8;font-weight:800;}
+
+  /* PRE-LOADED COURSES */
+  .courses-preloaded{background:var(--green-light);border:2px solid var(--green);border-radius:12px;padding:16px 18px;margin-bottom:16px;}
+  .courses-preloaded-label{font-size:13px;font-weight:900;color:var(--green);text-transform:uppercase;letter-spacing:0.8px;display:flex;align-items:center;gap:6px;margin-bottom:12px;}
+  .cert-header{background:var(--navy);color:white;border-radius:8px;padding:10px 14px;margin-bottom:10px;text-align:center;}
+  .cert-header-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;}
+  .cert-header-sub{font-size:12px;opacity:0.8;margin-top:2px;}
+  .course-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(30,140,74,0.2);align-items:flex-start;}
+  .course-row:last-child{border-bottom:none;padding-bottom:0;}
+  .course-num{font-size:13px;font-weight:900;color:var(--navy);min-width:110px;flex-shrink:0;}
+  .course-info{flex:1;}
+  .course-name{font-size:14px;font-weight:800;color:var(--text);}
+  .course-skills{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.5;}
+
+  .add-btn{width:100%;padding:11px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;border:2px dashed var(--border);background:white;border-radius:10px;cursor:pointer;color:var(--muted);transition:all 0.2s;margin-top:4px;}
+  .add-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light);}
+  .remove-btn{padding:5px 10px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;border:none;background:#fee;border-radius:6px;cursor:pointer;color:#c0392b;float:right;}
+  .job-block{border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px;}
+
+  /* SKILLS GRID */
+  .skills-section-label{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:0.8px;padding:6px 0;margin:14px 0 8px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:6px;}
+  .skills-grid{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px;}
+  .skill-toggle{padding:7px 13px;border:2px solid var(--border);border-radius:20px;background:white;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;color:var(--muted);transition:all 0.18s;line-height:1.2;}
+  .skill-toggle:hover{border-color:var(--blue);color:var(--blue);}
+  .skill-toggle.on{border-color:var(--green);background:var(--green-light);color:var(--green);}
+  .skill-toggle.course-skill{border-color:var(--gold);background:var(--gold-light);color:#7a5000;}
+  .skill-toggle.course-skill.on{border-color:var(--green);background:var(--green-light);color:var(--green);}
+
+  .action-bar{display:flex;gap:10px;margin-bottom:14px;}
+  .btn-primary{flex:1;padding:13px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;border:none;border-radius:12px;cursor:pointer;background:var(--navy);color:white;transition:all 0.2s;}
+  .btn-primary:hover{background:#2a4e7a;transform:translateY(-1px);}
+  .btn-secondary{flex:1;padding:13px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;border:2px solid var(--border);border-radius:12px;cursor:pointer;background:white;color:var(--text);transition:all 0.2s;}
+  .btn-secondary:hover{border-color:var(--blue);color:var(--blue);}
+
+  /* PREVIEW */
+  .preview-panel{position:sticky;top:18px;max-height:92vh;overflow-y:auto;}
+  @media(max-width:760px){.preview-panel{position:static;max-height:none;}}
+  .preview-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+  .template-selector{display:flex;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
+  .tmpl-btn{padding:7px 13px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;border:2px solid var(--border);border-radius:8px;background:white;cursor:pointer;color:var(--muted);transition:all 0.15s;}
+  .tmpl-btn.active{border-color:var(--navy);color:var(--navy);background:var(--blue-light);}
+
+  /* RESUME DOCUMENT */
+  .resume{background:white;border:1px solid var(--border);border-radius:8px;padding:26px 28px;font-family:'Source Sans 3',Georgia,serif;font-size:12.5px;line-height:1.5;box-shadow:0 4px 16px rgba(0,0,0,0.08);}
+  .resume-name{font-family:'Playfair Display',serif;font-size:21px;font-weight:900;line-height:1.2;}
+  .resume-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-top:3px;opacity:0.75;}
+  .resume-contact{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:7px;font-size:11.5px;color:#555;}
+  .resume-divider{height:3px;margin:10px 0;}
+  .resume-section{margin-bottom:13px;}
+  .resume-section-title{font-size:10.5px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;border-bottom:1.5px solid #ddd;padding-bottom:3px;margin-bottom:7px;}
+  .resume-summary{font-size:12px;color:#333;line-height:1.6;}
+
+  /* CERT BLOCK IN RESUME */
+  .resume-cert-block{border:1.5px solid;border-radius:6px;padding:10px 12px;margin-bottom:8px;}
+  .resume-cert-title{font-size:13px;font-weight:800;}
+  .resume-cert-sub{font-size:11px;margin-top:2px;opacity:0.8;}
+  .resume-cert-courses{margin-top:6px;padding-left:0;list-style:none;}
+  .resume-cert-courses li{font-size:11px;padding:2px 0;display:flex;gap:6px;}
+  .resume-cert-courses li::before{content:'▸';flex-shrink:0;}
+
+  .resume-edu-item{margin-bottom:8px;}
+  .resume-edu-school{font-weight:800;font-size:13px;}
+  .resume-edu-detail{font-size:11.5px;color:#555;}
+
+  .resume-job{margin-bottom:10px;}
+  .resume-job-header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+  .resume-job-title{font-weight:800;font-size:13px;}
+  .resume-job-company{font-size:12px;font-weight:700;margin-top:1px;}
+  .resume-job-dates{font-size:11px;color:#777;white-space:nowrap;flex-shrink:0;}
+  .resume-job-bullets{margin-top:4px;padding-left:13px;font-size:11.5px;color:#333;}
+  .resume-job-bullets li{margin-bottom:2px;}
+
+  .resume-skills-wrap{display:flex;flex-wrap:wrap;gap:4px;}
+  .resume-skill-tag{background:#f2f5fb;border:1px solid #d8dff0;border-radius:10px;padding:2px 9px;font-size:11px;font-weight:700;color:#333;}
+  .placeholder-text{color:#ccc;font-style:italic;}
+
+  .print-btn{width:100%;padding:12px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;border:none;border-radius:10px;background:var(--green);color:white;cursor:pointer;margin-top:10px;transition:all 0.2s;}
+  .print-btn:hover{background:#166336;}
+  .print-note{font-size:12px;color:var(--muted);text-align:center;margin-top:6px;}
+
+  @media print{
+    body{background:white;}
+    .top-bar,.cert-badge,.tabs,.form-panel,.preview-label,.print-btn,.template-selector,.action-bar,.print-note{display:none!important;}
+    .layout{grid-template-columns:1fr;padding:0;}
+    .preview-panel{position:static;max-height:none;overflow:visible;}
+    .resume{box-shadow:none;border:none;padding:0;border-radius:0;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-nav" href="#main">Skip to main content</a>
+<div class="gold-bar"></div>
+<div class="top-bar">
+  <h1>📄 Professional <span>Resume Builder</span></h1>
+  <p>West Los Angeles College &nbsp;·&nbsp; People Management Certificate Program &nbsp;·&nbsp; All 5 courses pre-loaded!</p>
+</div>
+<div class="cert-badge" aria-label="Certificate program notice">
+  🏆 <span>People Management Certificate Program</span> &nbsp;—&nbsp; VOC ED 440CE · 441CE · 442CE · 288CE · 418CE &nbsp;all pre-loaded in your Education section
+</div>
+
+<div class="tabs" role="tablist">
+  <button class="tab-btn active" onclick="showTab('personal')" role="tab" aria-selected="true">👤<br>Personal</button>
+  <button class="tab-btn" onclick="showTab('summary')" role="tab" aria-selected="false">📝<br>Summary</button>
+  <button class="tab-btn" onclick="showTab('experience')" role="tab" aria-selected="false">💼<br>Work</button>
+  <button class="tab-btn" onclick="showTab('education')" role="tab" aria-selected="false">🎓<br>Education</button>
+  <button class="tab-btn" onclick="showTab('skills')" role="tab" aria-selected="false">⭐<br>Skills</button>
+  <button class="tab-btn" onclick="showTab('print')" role="tab" aria-selected="false">🖨️<br>Print</button>
+</div>
+
+<main id="main">
+<div class="layout">
+
+<!-- ══════ FORM COLUMN ══════ -->
+<div>
+
+  <!-- PERSONAL -->
+  <div class="form-panel active" id="tab-personal">
+    <div class="form-card">
+      <h2>👤 Personal Information</h2>
+      <div class="field-group">
+        <label for="f-name">Full Name <span aria-hidden="true">*</span></label>
+        <input type="text" id="f-name" placeholder="Maria Torres" oninput="updatePreview()" aria-required="true">
+      </div>
+      <div class="field-group">
+        <label for="f-title">Professional Title or Career Goal</label>
+        <input type="text" id="f-title" placeholder="Facilities Supervisor | Building Services Lead | Food Service Manager" oninput="updatePreview()">
+      </div>
+      <div class="field-group">
+        <label for="f-phone">Phone Number</label>
+        <input type="tel" id="f-phone" placeholder="(310) 555-0000" oninput="updatePreview()">
+      </div>
+      <div class="field-group">
+        <label for="f-email">Email Address</label>
+        <input type="email" id="f-email" placeholder="maria.torres@email.com" oninput="updatePreview()">
+      </div>
+      <div class="field-group">
+        <label for="f-city">City and State</label>
+        <input type="text" id="f-city" placeholder="Culver City, CA" oninput="updatePreview()">
+      </div>
+      <div class="field-group">
+        <label for="f-linkedin">LinkedIn or Portfolio (optional)</label>
+        <input type="text" id="f-linkedin" placeholder="linkedin.com/in/mariatorres" oninput="updatePreview()">
+      </div>
+      <div class="ai-hint" role="note">
+        <span class="hl">🤖 AI Tip — Copy this prompt:</span><br>
+        <em>"Help me write a professional job title for my resume. I work as a [your job] and I completed the People Management Certificate Program at West Los Angeles College, which included courses in leadership, workplace compliance, computer skills, and business correspondence."</em>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="btn-primary" onclick="showTab('summary')">Next: Summary →</button>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="form-panel" id="tab-summary">
+    <div class="form-card">
+      <h2>📝 Professional Summary</h2>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">Write 3–4 sentences: who you are, your experience, and your top strengths. This is the first thing an employer reads.</p>
+      <div class="field-group">
+        <label for="f-summary">Your Professional Summary</label>
+        <textarea id="f-summary" rows="5" placeholder="Dedicated and experienced building services professional with [X] years in facilities maintenance, team leadership, and worker advocacy. Completed the People Management Certificate Program at West Los Angeles College, including training in leadership development, workplace compliance, computer applications, and professional business correspondence. Bilingual (English/Spanish) with a strong commitment to team safety, quality standards, and professional growth." oninput="updatePreview()"></textarea>
+      </div>
+      <div class="ai-hint" role="note">
+        <span class="hl">🤖 AI Prompt — Copy and Use:</span><br>
+        <em>"Help me write a 3–4 sentence professional summary for my resume. I am a [job title] with [X] years of experience in [janitorial / food service / security]. I completed the People Management Certificate Program at West Los Angeles College (2025–2026), including courses in leadership, workplace compliance, computer skills, and business correspondence. I am also [bilingual / a union steward / a team lead — add your strengths]. Use professional but simple English."</em>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="btn-secondary" onclick="showTab('personal')">← Back</button>
+      <button class="btn-primary" onclick="showTab('experience')">Next: Work →</button>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="form-panel" id="tab-experience">
+    <div class="form-card">
+      <h2>💼 Work Experience</h2>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:14px;">Add your jobs — most recent first. Up to 3 positions.</p>
+      <div id="jobs-container"></div>
+      <button class="add-btn" onclick="addJob()" aria-label="Add another job">+ Add Another Job</button>
+      <div class="ai-hint" style="margin-top:12px;" role="note">
+        <span class="hl">🤖 AI Prompt for Job Duties:</span><br>
+        <em>"Write 3–4 strong resume bullet points for my job as a [porter / lead food service worker / security guard / team lead] at [workplace name]. My daily duties include: [describe in simple words]. Use professional action verbs like: maintained, supervised, trained, monitored, coordinated, facilitated, enforced, prepared, operated, inspected. Keep it professional and simple."</em>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="btn-secondary" onclick="showTab('summary')">← Back</button>
+      <button class="btn-primary" onclick="showTab('education')">Next: Education →</button>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="form-panel" id="tab-education">
+    <div class="form-card">
+      <h2>🎓 Education &amp; Certification</h2>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:14px;">All five courses from the <strong>People Management Certificate Program</strong> are already filled in below. Add any additional education you have.</p>
+
+      <!-- PRE-LOADED CERTIFICATE -->
+      <div class="courses-preloaded">
+        <div class="courses-preloaded-label">✅ Pre-Loaded — People Management Certificate Program</div>
+        <div class="cert-header">
+          <div class="cert-header-title">🏆 People Management Certificate Program</div>
+          <div class="cert-header-sub">West Los Angeles College, Culver City, CA &nbsp;·&nbsp; Career &amp; College Prep Division &nbsp;·&nbsp; 2025–2026</div>
+        </div>
+        <div class="course-row">
+          <span class="course-num">VOC ED 440CE</span>
+          <div class="course-info">
+            <div class="course-name">Introduction to People Management</div>
+            <div class="course-skills">Foundations of supervision, management roles &amp; responsibilities, managing diverse teams</div>
+          </div>
+        </div>
+        <div class="course-row">
+          <span class="course-num">VOC ED 441CE</span>
+          <div class="course-info">
+            <div class="course-name">People Management: Emerging Leader</div>
+            <div class="course-skills">Leadership development, motivating teams, decision-making, conflict resolution, emerging leadership skills</div>
+          </div>
+        </div>
+        <div class="course-row">
+          <span class="course-num">VOC ED 442CE</span>
+          <div class="course-info">
+            <div class="course-name">People Management: Workplace Compliance</div>
+            <div class="course-skills">Labor law basics, workplace safety regulations, OSHA awareness, HR compliance, employee rights &amp; responsibilities</div>
+          </div>
+        </div>
+        <div class="course-row">
+          <span class="course-num">VOC ED 288CE</span>
+          <div class="course-info">
+            <div class="course-name">Computer Skills for Workplace</div>
+            <div class="course-skills">Keyboarding, basic computer applications, file management, workplace software, digital literacy</div>
+          </div>
+        </div>
+        <div class="course-row">
+          <span class="course-num">VOC ED 418CE</span>
+          <div class="course-info">
+            <div class="course-name">Effective Business Correspondence</div>
+            <div class="course-skills">Professional phone communication, office memos, professional email, fax &amp; mail services, AI workplace tools</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADDITIONAL EDUCATION -->
+      <p style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:8px;">Add More Education (optional)</p>
+      <div id="edu-container"></div>
+      <button class="add-btn" onclick="addEdu()" aria-label="Add high school or other education">+ Add High School, College, or Other Training</button>
+    </div>
+    <div class="action-bar">
+      <button class="btn-secondary" onclick="showTab('experience')">← Back</button>
+      <button class="btn-primary" onclick="showTab('skills')">Next: Skills →</button>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="form-panel" id="tab-skills">
+    <div class="form-card">
+      <h2>⭐ Skills</h2>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:14px;">
+        <span style="background:var(--gold-light);border:1.5px solid var(--gold);border-radius:10px;padding:2px 8px;font-size:12px;font-weight:800;color:#7a5000;">Gold = From Your Courses</span>
+        &nbsp;
+        <span style="background:var(--green-light);border:1.5px solid var(--green);border-radius:10px;padding:2px 8px;font-size:12px;font-weight:800;color:var(--green);">Green = Selected</span>
+        &nbsp; Tap any skill to add or remove it.
+      </p>
+
+      <!-- COURSE SKILLS — AUTO SELECTED -->
+      <div class="skills-section-label" style="color:var(--gold);">🏆 People Management Certificate Skills</div>
+      <div class="skills-grid" id="sg-cert"></div>
+
+      <!-- JANITORIAL -->
+      <div class="skills-section-label" style="color:var(--blue);">🧹 Janitorial &amp; Facilities</div>
+      <div class="skills-grid" id="sg-jan"></div>
+
+      <!-- HOSPITALITY -->
+      <div class="skills-section-label" style="color:var(--orange);">🍽️ Hospitality &amp; Food Service</div>
+      <div class="skills-grid" id="sg-hosp"></div>
+
+      <!-- SECURITY -->
+      <div class="skills-section-label" style="color:var(--purple);">🔒 Security &amp; Safety</div>
+      <div class="skills-grid" id="sg-sec"></div>
+
+      <!-- LEADERSHIP -->
+      <div class="skills-section-label" style="color:#7a1a3a;">👑 Leadership &amp; Training</div>
+      <div class="skills-grid" id="sg-lead"></div>
+
+      <!-- TEAMWORK / ADVOCACY -->
+      <div class="skills-section-label" style="color:var(--teal);">🤝 Teamwork &amp; Advocacy</div>
+      <div class="skills-grid" id="sg-team"></div>
+
+      <!-- COMMUNICATION -->
+      <div class="skills-section-label" style="color:var(--green);">📞 Communication</div>
+      <div class="skills-grid" id="sg-comm"></div>
+
+      <!-- TECH / AI -->
+      <div class="skills-section-label" style="color:var(--navy);">💻 Technology &amp; AI</div>
+      <div class="skills-grid" id="sg-tech"></div>
+
+      <!-- CUSTOM -->
+      <div class="skills-section-label" style="color:var(--muted);">➕ Add Your Own Skill</div>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <input type="text" id="f-custom-skill" placeholder="Forklift certified, CPR, bilingual..." style="flex:1;font-size:15px;" aria-label="Type a custom skill">
+        <button onclick="addCustomSkill()" style="padding:11px 16px;background:var(--blue);color:white;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:800;cursor:pointer;font-size:14px;" aria-label="Add custom skill">Add</button>
+      </div>
+      <div class="skills-grid" id="sg-custom"></div>
+
+      <div class="ai-hint" style="margin-top:8px;" role="note">
+        <span class="hl">🤖 AI Prompt for Skills:</span><br>
+        <em>"I work as a [your job] and I completed the People Management Certificate Program at West Los Angeles College. What are 5 professional skills I should highlight on my resume that match both my job and my certificate training? List the skill name and one short explanation for each."</em>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="btn-secondary" onclick="showTab('education')">← Back</button>
+      <button class="btn-primary" onclick="showTab('print')">Next: Print →</button>
+    </div>
+  </div>
+
+  <!-- PRINT TAB -->
+  <div class="form-panel" id="tab-print">
+    <div class="form-card">
+      <h2>🖨️ Save &amp; Print Your Resume</h2>
+      <p style="font-size:15px;margin-bottom:14px;">Your resume is ready! Here is how to save it as a file you can send to employers:</p>
+      <ol style="padding-left:20px;font-size:15px;line-height:2;">
+        <li>Click <strong>Print / Save as PDF</strong> below</li>
+        <li>In the print window, look for <strong>"Destination"</strong> or <strong>"Printer"</strong></li>
+        <li>Change it to <strong>"Save as PDF"</strong></li>
+        <li>Click <strong>Save</strong> — choose where to save on your phone or computer</li>
+        <li>You now have a PDF you can email to employers!</li>
+      </ol>
+      <div class="ai-hint" style="margin-top:14px;" role="note">
+        <span class="hl">🤖 AI Prompt — Final Review:</span><br>
+        <em>"Please review my resume and tell me: (1) Does it look complete and professional? (2) Is anything missing? (3) What is the strongest part of my resume? (4) What one thing should I improve? Then give me the improved version."</em>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="btn-secondary" onclick="showTab('skills')">← Back</button>
+      <button class="btn-primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    </div>
+  </div>
+
+</div><!-- end form col -->
+
+<!-- ══════ PREVIEW COLUMN ══════ -->
+<div class="preview-panel" aria-label="Resume live preview" aria-live="polite">
+  <div class="preview-label" aria-hidden="true">👁️ Live Preview — Updates as You Type</div>
+  <div class="template-selector" role="group" aria-label="Choose resume color theme">
+    <button class="tmpl-btn active" onclick="setTheme('navy',this)" aria-label="Navy theme">🔵 Navy</button>
+    <button class="tmpl-btn" onclick="setTheme('green',this)" aria-label="Green theme">🟢 Green</button>
+    <button class="tmpl-btn" onclick="setTheme('purple',this)" aria-label="Purple theme">🟣 Purple</button>
+    <button class="tmpl-btn" onclick="setTheme('teal',this)" aria-label="Teal theme">🩵 Teal</button>
+    <button class="tmpl-btn" onclick="setTheme('black',this)" aria-label="Classic black theme">⚫ Classic</button>
+  </div>
+  <div class="resume" id="resume-preview" aria-label="Resume document preview"></div>
+  <button class="print-btn" onclick="window.print()" aria-label="Print or save resume as PDF">🖨️ Print or Save as PDF</button>
+  <p class="print-note">In the print dialog → choose "Save as PDF" to save your resume as a file.</p>
+</div>
+
+</div><!-- end layout -->
+</main>
+
+<script>
+/* ═══════════════════════════════════
+   SKILLS DATA
+═══════════════════════════════════ */
+const skillGroups = {
+  cert: {
+    label:'People Management Certificate',
+    preselected: true,
+    skills:[
+      'People Management Principles','Team Supervision & Leadership',
+      'Emerging Leader Development','Workplace Compliance & Labor Law',
+      'OSHA & Workplace Safety Awareness','Employee Rights & Responsibilities',
+      'Conflict Resolution','Decision-Making in the Workplace',
+      'Motivating & Developing Teams','Professional Business Correspondence',
+      'Office Memo & Email Writing','Professional Phone Communication',
+      'Fax & Mail Services','Computer Applications for the Workplace',
+      'Digital Literacy & File Management','AI Workplace Tools (Claude, ChatGPT)',
+    ]
+  },
+  jan:{
+    label:'Janitorial & Facilities',
+    preselected:false,
+    skills:[
+      'Facility Sanitation & Maintenance','Chemical Safety & Hazardous Materials Handling',
+      'Floor Care Equipment Operation','Buffer & Burnisher Operation',
+      'Pressure Washer Operation','Industrial Vacuum & Carpet Care',
+      'OSHA Chemical Safety Compliance','Restroom Sanitation Standards',
+      'Biohazard Cleanup Procedures','Deep Cleaning & Disinfection',
+      'Preventive Maintenance','Supply & Inventory Management',
+      'Work Order Completion','Building Inspection & Quality Control',
+    ]
+  },
+  hosp:{
+    label:'Hospitality & Food Service',
+    preselected:false,
+    skills:[
+      'Food Safety & Hygiene Standards','ServSafe Awareness',
+      'Cross-Contamination Prevention','Food Temperature Control & Monitoring',
+      'Food Service Setup & Breakdown','Cafeteria & Kitchen Operations',
+      'Portion Control & Food Presentation','Catering & Event Service',
+      'Guest & Customer Service','Cash Handling & POS Systems',
+      'Health Department Compliance','Menu Knowledge & Allergen Awareness',
+      'Commercial Kitchen Equipment Operation','Inventory & Food Cost Control',
+    ]
+  },
+  sec:{
+    label:'Security & Safety',
+    preselected:false,
+    skills:[
+      'Facility Security Monitoring & Patrol','Incident Report Writing',
+      'Emergency Response & Evacuation Procedures','Access Control & Visitor Management',
+      'CCTV & Surveillance Monitoring','Conflict De-escalation',
+      'First Aid & CPR Awareness','Fire Safety & Extinguisher Use',
+      'Lockdown & Crisis Response','Security Log & Documentation',
+      'Workplace Violence Prevention','Safety Inspection & Hazard Reporting',
+    ]
+  },
+  lead:{
+    label:'Leadership & Training',
+    preselected:false,
+    skills:[
+      'Team Leadership & Crew Supervision','New Employee Onboarding & Training',
+      'Safety Training Facilitation','Workplace Procedure Training',
+      'Performance Coaching & Feedback','Scheduling & Shift Management',
+      'Workflow Planning & Task Delegation','Training Curriculum Facilitation',
+      'Mentoring & Staff Development','Union Education Session Facilitation',
+      'Quality Control & Standards Enforcement','Productivity Monitoring',
+    ]
+  },
+  team:{
+    label:'Teamwork & Advocacy',
+    preselected:false,
+    skills:[
+      'Union Representation (Shop Steward)','Workers\' Rights Knowledge & Advocacy',
+      'Collective Bargaining Awareness','Grievance Processing',
+      'Cross-Cultural Team Collaboration','Bilingual Communication (Spanish/English)',
+      'Bilingual Communication (Korean/English)','Bilingual Communication (Other)',
+      'Peer Mediation & Conflict Resolution','Community Outreach & Advocacy',
+      'Workplace Policy Interpretation','Cross-Departmental Coordination',
+    ]
+  },
+  comm:{
+    label:'Communication',
+    preselected:false,
+    skills:[
+      'Professional Telephone Etiquette','Phone Message Taking & Documentation',
+      'Voicemail Communication','Interoffice Memo Writing',
+      'Professional Email Correspondence','Business Letter Writing',
+      'Fax & Document Transmission','Envelope Addressing & Mailing',
+      'FedEx / UPS / USPS Shipping','Incident & Inspection Report Writing',
+      'Bilingual Communication (Written)','Public Speaking & Group Facilitation',
+    ]
+  },
+  tech:{
+    label:'Technology & AI',
+    preselected:false,
+    skills:[
+      'Basic Computer Applications (Microsoft Office)','Professional Email (Gmail / Outlook)',
+      'Internet Research & Navigation','Digital File Management',
+      'Smartphone & Tablet Use','Document Scanning & Upload',
+      'AI Writing Tools (Claude, ChatGPT, Gemini)','Video Conferencing (Zoom, Teams)',
+      'Google Workspace (Docs, Sheets, Drive)','Scheduling & Calendar Apps',
+    ]
+  }
+};
+
+/* ═══════════════════════════════════
+   STATE
+═══════════════════════════════════ */
+let selectedSkills = new Set();
+let jobCount = 0, eduCount = 0;
+let theme = 'navy';
+const themeColors = { navy:'#1a2e4a', green:'#1e8c4a', purple:'#6a2a90', teal:'#1a6b6b', black:'#111111' };
+
+/* ═══════════════════════════════════
+   INIT
+═══════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', () => {
+  // Render all skill grids
+  Object.entries(skillGroups).forEach(([key, group]) => {
+    const gridId = 'sg-' + key;
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    group.skills.forEach(skill => {
+      if (group.preselected) selectedSkills.add(skill);
+      const btn = document.createElement('button');
+      btn.className = 'skill-toggle' + (group.preselected ? ' course-skill on' : '');
+      btn.textContent = skill;
+      btn.setAttribute('aria-pressed', group.preselected ? 'true' : 'false');
+      btn.setAttribute('aria-label', 'Skill: ' + skill);
+      btn.onclick = () => toggleSkill(skill, btn);
+      grid.appendChild(btn);
+    });
+  });
+
+  addJob();
+  addEdu();
+  updatePreview();
+});
+
+/* ═══════════════════════════════════
+   TABS
+═══════════════════════════════════ */
+function showTab(id) {
+  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'")) {
+      b.classList.add('active'); b.setAttribute('aria-selected','true');
+    }
+  });
+  updatePreview();
+}
+
+/* ═══════════════════════════════════
+   JOBS
+═══════════════════════════════════ */
+function addJob() {
+  if (jobCount >= 3) return;
+  const n = jobCount++;
+  const div = document.createElement('div');
+  div.id = 'job-' + n;
+  div.className = 'job-block';
+  div.innerHTML = `
+    <button class="remove-btn" onclick="removeBlock('job-${n}')" aria-label="Remove this job">✕ Remove</button>
+    <div style="clear:both;margin-bottom:8px;font-size:13px;font-weight:800;color:var(--muted);">Position ${n+1}</div>
+    <div class="field-group"><label for="jt-${n}">Job Title</label>
+    <input type="text" id="jt-${n}" placeholder="Lead Porter / Food Service Worker / Security Guard / Team Lead" oninput="updatePreview()"></div>
+    <div class="field-group"><label for="jc-${n}">Employer / Company Name</label>
+    <input type="text" id="jc-${n}" placeholder="West Side Unified School District" oninput="updatePreview()"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div class="field-group"><label for="js-${n}">Start Date</label>
+      <input type="text" id="js-${n}" placeholder="Jan 2020" oninput="updatePreview()"></div>
+      <div class="field-group"><label for="je-${n}">End Date</label>
+      <input type="text" id="je-${n}" placeholder="Present" oninput="updatePreview()"></div>
+    </div>
+    <div class="field-group"><label for="jd-${n}">Job Duties (one per line)</label>
+    <textarea id="jd-${n}" rows="4"
+      placeholder="Supervised a team of 5 building services workers&#10;Maintained sanitation standards across all campus facilities&#10;Trained new employees on safety procedures and chemical handling&#10;Completed daily inspection logs and incident reports" oninput="updatePreview()"></textarea></div>
+  `;
+  document.getElementById('jobs-container').appendChild(div);
+  updatePreview();
+}
+
+function addEdu() {
+  if (eduCount >= 2) return;
+  const n = eduCount++;
+  const div = document.createElement('div');
+  div.id = 'edu-' + n;
+  div.className = 'job-block';
+  div.innerHTML = `
+    <button class="remove-btn" onclick="removeBlock('edu-${n}')" aria-label="Remove this education entry">✕ Remove</button>
+    <div style="clear:both;"></div>
+    <div class="field-group"><label for="es-${n}">School or Training Program</label>
+    <input type="text" id="es-${n}" placeholder="Thomas Jefferson High School / Los Angeles Trade-Tech / etc." oninput="updatePreview()"></div>
+    <div class="field-group"><label for="ed-${n}">Diploma, Degree, or Certificate</label>
+    <input type="text" id="ed-${n}" placeholder="High School Diploma / GED / Associate Degree" oninput="updatePreview()"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div class="field-group"><label for="ey-${n}">Year Completed</label>
+      <input type="text" id="ey-${n}" placeholder="2008" oninput="updatePreview()"></div>
+      <div class="field-group"><label for="ec-${n}">City, State</label>
+      <input type="text" id="ec-${n}" placeholder="Los Angeles, CA" oninput="updatePreview()"></div>
+    </div>
+  `;
+  document.getElementById('edu-container').appendChild(div);
+  updatePreview();
+}
+
+function removeBlock(id) {
+  const el = document.getElementById(id);
+  if (el) { el.remove(); updatePreview(); }
+}
+
+/* ═══════════════════════════════════
+   SKILLS
+═══════════════════════════════════ */
+function toggleSkill(name, btn) {
+  if (selectedSkills.has(name)) {
+    selectedSkills.delete(name);
+    btn.classList.remove('on');
+    btn.setAttribute('aria-pressed','false');
+  } else {
+    selectedSkills.add(name);
+    btn.classList.add('on');
+    btn.setAttribute('aria-pressed','true');
+  }
+  updatePreview();
+}
+
+function addCustomSkill() {
+  const inp = document.getElementById('f-custom-skill');
+  const val = inp.value.trim();
+  if (!val) return;
+  selectedSkills.add(val);
+  const btn = document.createElement('button');
+  btn.className = 'skill-toggle on';
+  btn.textContent = val;
+  btn.setAttribute('aria-pressed','true');
+  btn.setAttribute('aria-label','Custom skill: ' + val);
+  btn.onclick = () => toggleSkill(val, btn);
+  document.getElementById('sg-custom').appendChild(btn);
+  inp.value = '';
+  updatePreview();
+}
+
+/* ═══════════════════════════════════
+   THEME
+═══════════════════════════════════ */
+function setTheme(t, clickedBtn) {
+  theme = t;
+  document.querySelectorAll('.tmpl-btn').forEach(b => b.classList.remove('active'));
+  clickedBtn.classList.add('active');
+  updatePreview();
+}
+
+/* ═══════════════════════════════════
+   GET VALUE HELPERS
+═══════════════════════════════════ */
+function v(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+/* ═══════════════════════════════════
+   BUILD PREVIEW
+═══════════════════════════════════ */
+function updatePreview() {
+  const ac = themeColors[theme] || themeColors.navy;
+  const name  = v('f-name')  || '<span class="placeholder-text">Your Name</span>';
+  const title = v('f-title') || '';
+  const phone = v('f-phone'); const email = v('f-email');
+  const city  = v('f-city'); const linkedin = v('f-linkedin');
+  const summary = v('f-summary');
+
+  const contactParts = [
+    phone ? `📞 ${phone}` : '',
+    email ? `✉️ ${email}` : '',
+    city  ? `📍 ${city}`  : '',
+    linkedin ? `🔗 ${linkedin}` : '',
+  ].filter(Boolean);
+
+  // JOBS
+  let jobsHTML = '';
+  for (let i = 0; i < 3; i++) {
+    const jt = v('jt-'+i), jc = v('jc-'+i), js = v('js-'+i), je = v('je-'+i), jd = v('jd-'+i);
+    if (!jt && !jc) continue;
+    const bullets = jd.split('\n').filter(d=>d.trim()).map(d=>`<li>${d}</li>`).join('');
+    jobsHTML += `
+      <div class="resume-job">
+        <div class="resume-job-header">
+          <div>
+            <div class="resume-job-title">${jt||'—'}</div>
+            <div class="resume-job-company" style="color:${ac};">${jc||'—'}</div>
+          </div>
+          <div class="resume-job-dates">${js||''}${js&&je?' – ':''}${je||''}</div>
+        </div>
+        ${bullets?`<ul class="resume-job-bullets">${bullets}</ul>`:''}
+      </div>`;
+  }
+
+  // CERT BLOCK
+  const certBlock = `
+    <div class="resume-cert-block" style="border-color:${ac};background:#fafcff;">
+      <div class="resume-cert-title" style="color:${ac};">🏆 People Management Certificate Program</div>
+      <div class="resume-cert-sub">West Los Angeles College, Culver City, CA &nbsp;·&nbsp; Career &amp; College Prep Division &nbsp;·&nbsp; 2025–2026</div>
+      <ul class="resume-cert-courses">
+        <li><strong>VOC ED 440CE</strong> — Introduction to People Management</li>
+        <li><strong>VOC ED 441CE</strong> — People Management: Emerging Leader</li>
+        <li><strong>VOC ED 442CE</strong> — People Management: Workplace Compliance</li>
+        <li><strong>VOC ED 288CE</strong> — Computer Skills for Workplace</li>
+        <li><strong>VOC ED 418CE</strong> — Effective Business Correspondence</li>
+      </ul>
+    </div>`;
+
+  // ADDITIONAL EDU
+  let extraEdu = '';
+  for (let i = 0; i < 2; i++) {
+    const es = v('es-'+i), ed = v('ed-'+i), ey = v('ey-'+i), ec = v('ec-'+i);
+    if (!es) continue;
+    extraEdu += `
+      <div class="resume-edu-item">
+        <div class="resume-edu-school" style="color:${ac};">${es}</div>
+        <div class="resume-edu-detail">${ed}${ey?' | '+ey:''}${ec?' | '+ec:''}</div>
+      </div>`;
+  }
+
+  // SKILLS
+  const skillTags = [...selectedSkills].map(s => `<span class="resume-skill-tag">${s}</span>`).join('');
+
+  document.getElementById('resume-preview').innerHTML = `
+    <div>
+      <div class="resume-name" style="color:${ac};">${name}</div>
+      ${title?`<div class="resume-title" style="color:${ac};">${title}</div>`:''}
+      ${contactParts.length?`<div class="resume-contact">${contactParts.join(' &nbsp;|&nbsp; ')}</div>`:''}
+      <div class="resume-divider" style="background:${ac};"></div>
+    </div>
+
+    ${summary?`
+    <div class="resume-section">
+      <div class="resume-section-title" style="color:${ac};">Professional Summary</div>
+      <div class="resume-summary">${summary}</div>
+    </div>`:''}
+
+    ${jobsHTML?`
+    <div class="resume-section">
+      <div class="resume-section-title" style="color:${ac};">Work Experience</div>
+      ${jobsHTML}
+    </div>`:''}
+
+    <div class="resume-section">
+      <div class="resume-section-title" style="color:${ac};">Education &amp; Professional Certification</div>
+      ${certBlock}
+      ${extraEdu}
+    </div>
+
+    ${skillTags?`
+    <div class="resume-section">
+      <div class="resume-section-title" style="color:${ac};">Professional Skills</div>
+      <div class="resume-skills-wrap">${skillTags}</div>
+    </div>`:''}
+  `;
+}
+</script>
+</body>
+</html>
