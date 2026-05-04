@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workplace Skills Assessment / Evaluación de Habilidades — VOC ED 418CE | WLAC</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#1a2e4a; --gold:#c9922a; --gold-light:#fef3dc;
+    --blue:#2563a8; --blue-light:#ddeafc;
+    --green:#1e8c4a; --green-light:#d4f5e2;
+    --purple:#7b4ca8; --purple-light:#ede6fb;
+    --orange:#c05a10; --orange-light:#fde8d0;
+    --teal:#1a6b6b; --teal-light:#d0f0ee;
+    --text:#1e2c3a; --muted:#5a6a7a; --border:#d0dae8; --bg:#f0f4fb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);font-size:18px;line-height:1.7;min-height:100vh;}
+  .skip-nav{position:absolute;left:-9999px;}.skip-nav:focus{position:static;padding:8px;background:var(--navy);color:white;display:block;}
+  .gold-bar{height:6px;background:linear-gradient(90deg,var(--gold),#e8b84b,var(--gold));}
+
+  /* LANGUAGE TOGGLE BAR */
+  .lang-bar{background:#1a3a1a;padding:10px 20px;display:flex;justify-content:center;align-items:center;gap:12px;}
+  .lang-btn{padding:8px 22px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;border:2px solid transparent;border-radius:24px;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px;}
+  .lang-btn.active{background:var(--gold);color:#1a1a00;border-color:var(--gold);}
+  .lang-btn.inactive{background:transparent;color:rgba(255,255,255,0.65);border-color:rgba(255,255,255,0.3);}
+  .lang-btn:hover{border-color:var(--gold);color:white;}
+  .lang-divider{color:rgba(255,255,255,0.3);font-size:18px;}
+
+  .top-bar{background:var(--navy);padding:22px 24px 16px;text-align:center;}
+  .top-bar h1{font-family:'Playfair Display',serif;font-size:26px;color:white;line-height:1.25;}
+  .top-bar h1 span{color:var(--gold);}
+  .top-bar p{color:rgba(255,255,255,0.75);font-size:14px;margin-top:5px;}
+  .main{max-width:780px;margin:0 auto;padding:26px 18px 70px;}
+
+  .intro-card{background:white;border-radius:18px;padding:28px;border:1px solid var(--border);margin-bottom:26px;box-shadow:0 4px 14px rgba(0,0,0,0.07);}
+  .intro-card h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:14px;}
+  .intro-card p{font-size:17px;margin-bottom:12px;}
+  .honor-box{background:var(--gold-light);border:2px solid var(--gold);border-radius:12px;padding:16px 20px;margin:16px 0;}
+  .honor-box p{font-size:17px;margin:0;color:#6a4200;}
+  .category-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;}
+  .cat-chip{border-radius:10px;padding:11px 14px;font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px;line-height:1.3;}
+
+  .progress-section{background:white;border-radius:12px;padding:16px 20px;margin-bottom:20px;border:1px solid var(--border);}
+  .progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .progress-label{font-size:14px;font-weight:700;color:var(--muted);}
+  .progress-count{font-size:14px;font-weight:800;color:var(--navy);}
+  .progress-bar-wrap{background:var(--border);border-radius:8px;height:10px;overflow:hidden;}
+  .progress-bar{height:100%;background:var(--gold);border-radius:8px;transition:width 0.4s ease;}
+
+  .cat-label{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.8px;padding:4px 12px;border-radius:20px;color:white;margin-bottom:12px;}
+  .q-card{background:white;border-radius:16px;padding:24px;border:1px solid var(--border);box-shadow:0 3px 12px rgba(0,0,0,0.06);margin-bottom:20px;display:none;}
+  .q-card.active{display:block;animation:fadein 0.3s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .q-text{font-size:19px;font-weight:800;margin-bottom:20px;line-height:1.4;}
+  .rating-row{display:flex;flex-direction:column;gap:10px;}
+  .rating-btn{width:100%;padding:14px 17px;font-family:'Nunito',sans-serif;font-size:17px;font-weight:700;text-align:left;border:2px solid var(--border);border-radius:12px;background:white;color:var(--text);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:12px;}
+  .rating-btn:hover{background:var(--bg);transform:translateX(4px);}
+  .rating-btn.selected{border-color:var(--gold);background:var(--gold-light);color:#7a5000;}
+  .rating-btn .rb-icon{font-size:22px;flex-shrink:0;}
+  .rating-btn .rb-label{font-weight:800;}
+  .rating-btn .rb-desc{font-size:13px;font-weight:600;color:var(--muted);display:block;margin-top:2px;}
+  .nav-row{display:flex;gap:12px;margin-top:20px;}
+  .btn{padding:13px 26px;font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;border:none;border-radius:12px;cursor:pointer;transition:all 0.2s;flex:1;text-align:center;text-transform:uppercase;letter-spacing:0.5px;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.15);}
+  .btn-next{background:var(--navy);color:white;}
+  .btn-back{background:white;color:var(--text);border:2px solid var(--border);}
+
+  .results-section{display:none;}
+  .results-section.show{display:block;animation:fadein 0.4s ease;}
+  .results-header{background:var(--navy);border-radius:16px;padding:28px;text-align:center;margin-bottom:22px;color:white;}
+  .results-header h2{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:8px;}
+  .results-header p{font-size:16px;opacity:0.85;line-height:1.6;}
+  .results-emoji{font-size:58px;margin-bottom:12px;}
+  .honor-section{background:var(--gold-light);border:2px solid var(--gold);border-radius:16px;padding:22px;margin-bottom:22px;}
+  .honor-section h3{font-family:'Playfair Display',serif;font-size:21px;color:var(--navy);margin-bottom:10px;}
+  .honor-section p{font-size:16px;color:#6a4200;margin-bottom:12px;}
+  .honor-tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .honor-tag{background:white;border:2px solid var(--gold);border-radius:20px;padding:5px 14px;font-size:13px;font-weight:700;color:#7a5000;}
+  .skill-results{display:flex;flex-direction:column;gap:14px;margin-bottom:26px;}
+  .skill-card{background:white;border-radius:14px;padding:19px 21px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+  .skill-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+  .skill-name{font-size:17px;font-weight:800;}
+  .skill-score-label{font-size:14px;font-weight:700;color:var(--muted);}
+  .skill-bar-wrap{background:var(--border);border-radius:8px;height:13px;overflow:hidden;margin-bottom:11px;}
+  .skill-bar{height:100%;border-radius:8px;transition:width 1s ease;}
+  .skill-desc{font-size:15px;color:var(--text);line-height:1.6;}
+  .strength-tag{display:inline-block;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.8px;padding:3px 12px;border-radius:20px;color:white;margin-bottom:10px;}
+  .str-high{background:var(--green);}.str-medium{background:var(--gold);}.str-building{background:var(--blue);}
+  .rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:26px;}
+  .rec-card{background:white;border-radius:12px;padding:16px;border:2px solid var(--border);}
+  .rec-icon{font-size:26px;margin-bottom:7px;}
+  .rec-title{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:5px;}
+  .rec-desc{font-size:13px;color:var(--muted);line-height:1.5;}
+  .ai-box{background:#1a2e2d;color:#e0f5f3;border-radius:12px;padding:19px;margin-bottom:22px;}
+  .ai-box h3{font-size:16px;font-weight:800;margin-bottom:11px;color:#7ecdc8;}
+  .ai-prompt{font-family:'Courier New',monospace;font-size:14px;line-height:1.7;white-space:pre-wrap;}
+  .copy-btn{margin-top:11px;padding:9px 18px;background:var(--teal);color:white;border:none;border-radius:8px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;cursor:pointer;}
+  .copy-confirm{color:#7ecdc8;font-size:13px;font-weight:700;margin-left:10px;display:none;}
+  .resume-box{background:white;border-radius:14px;padding:20px;border:1px solid var(--border);margin-bottom:18px;}
+  .resume-box h3{font-size:17px;font-weight:800;color:var(--navy);margin-bottom:10px;}
+  .resume-skill-list{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+  .resume-skill-list li{background:var(--bg);border:2px solid var(--border);border-radius:20px;padding:5px 13px;font-size:13px;font-weight:700;}
+  .restart-btn{width:100%;padding:15px;font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;background:var(--navy);color:white;border:none;border-radius:12px;cursor:pointer;text-transform:uppercase;}
+  .restart-btn:hover{background:#2a4e7a;}
+  @media(max-width:520px){.category-grid,.rec-grid{grid-template-columns:1fr;}.q-text{font-size:16px;}}
+</style>
+</head>
+<body>
+<a class="skip-nav" href="#main">Skip to main content</a>
+<div class="gold-bar"></div>
+
+<!-- LANGUAGE TOGGLE -->
+<div class="lang-bar" role="navigation" aria-label="Language selection">
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true" aria-label="Switch to English">🇺🇸 English</button>
+  <span class="lang-divider" aria-hidden="true">|</span>
+  <button class="lang-btn inactive" id="btn-es" onclick="setLang('es')" aria-pressed="false" aria-label="Cambiar a Español">🇲🇽 Español</button>
+</div>
+
+<div class="top-bar">
+  <h1 id="page-title">🌟 Workplace <span>Skills Assessment</span></h1>
+  <p id="page-sub">VOC ED 418CE &nbsp;·&nbsp; West Los Angeles College &nbsp;·&nbsp; Spring 2026</p>
+</div>
+
+<main id="main" class="main">
+
+<div class="intro-card" id="intro-section">
+  <h2 id="intro-h2">Discover Your Strengths — You Already Have Them!</h2>
+  <div class="honor-box" role="note">
+    <p id="intro-honor"></p>
+  </div>
+  <p id="intro-p1"></p>
+  <p id="intro-cats-label"></p>
+  <div class="category-grid" role="list" id="cat-grid"></div>
+  <p style="font-size:16px;color:var(--muted);" id="intro-meta"></p>
+  <button class="btn btn-next" onclick="startAssessment()" style="margin-top:18px;width:100%;" id="start-btn">🚀 Start the Assessment</button>
+</div>
+
+<div class="progress-section" id="progress-section" style="display:none;" aria-live="polite">
+  <div class="progress-top">
+    <span class="progress-label" id="progress-cat-label">...</span>
+    <span class="progress-count" id="progress-count">...</span>
+  </div>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="27" aria-label="Progress">
+    <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+  </div>
+</div>
+
+<div id="questions-container" aria-live="polite"></div>
+
+<div class="results-section" id="results-section" role="main">
+  <div class="results-header">
+    <div class="results-emoji" id="results-emoji">🌟</div>
+    <h2 id="results-h2">Your Skills Assessment Results</h2>
+    <p id="results-intro"></p>
+  </div>
+  <div class="honor-section" role="note">
+    <h3 id="honor-h3">🏆 Your Vocational Skills Are Professional Credentials</h3>
+    <p id="honor-p"></p>
+    <div class="honor-tags" id="honor-tags-container"></div>
+  </div>
+  <div class="skill-results" id="skill-results-container"></div>
+  <h2 style="font-size:21px;font-weight:900;color:var(--navy);margin-bottom:14px;" id="rec-h2">📚 Your Personalized Recommendations</h2>
+  <div class="rec-grid" id="rec-grid"></div>
+  <div class="ai-box" role="note">
+    <h3 id="ai-box-h3">🤖 Your Personalized AI Prompt — Copy and Use It!</h3>
+    <div class="ai-prompt" id="ai-career-prompt">...</div>
+    <button class="copy-btn" onclick="copyPrompt()" id="copy-btn-label">📋 Copy This Prompt</button>
+    <span class="copy-confirm" id="copy-confirm">✅ Copied!</span>
+  </div>
+  <div class="resume-box">
+    <h3 id="resume-box-h3">📄 Skills You Can Add to Your Resume Right Now</h3>
+    <p style="font-size:15px;color:var(--muted);margin-top:6px;" id="resume-box-p"></p>
+    <ul class="resume-skill-list" id="resume-skills-list"></ul>
+    <p style="font-size:13px;color:var(--muted);margin-top:12px;font-style:italic;" id="resume-box-note"></p>
+  </div>
+  <button class="restart-btn" onclick="restartAssessment()" id="restart-btn">🔄 Take the Assessment Again</button>
+</div>
+
+</main>
+
+<script>
+/* ═══════════════════════════════════════
+   TRANSLATIONS
+═══════════════════════════════════════ */
+const T = {
+  en: {
+    pageTitle: '🌟 Workplace <span>Skills Assessment</span>',
+    pageSub: 'VOC ED 418CE &nbsp;·&nbsp; West Los Angeles College &nbsp;·&nbsp; Spring 2026',
+    introH2: 'Discover Your Strengths — You Already Have Them!',
+    introHonor: '💛 Before you begin: You already bring valuable, professional skills to this classroom. The work you do every day — keeping buildings safe and clean, serving food with care, protecting people, leading teams, representing coworkers — is skilled, important work. This assessment is designed to see and honor those skills, and to show you how this course will make you even stronger.',
+    introP1: 'Rate yourself honestly in 9 skill areas. There are no wrong answers.',
+    introCatsLabel: 'You will rate yourself in these 9 areas:',
+    introMeta: '27 questions · About 8 minutes · Your results will celebrate what you already know and show what to focus on next.',
+    startBtn: '🚀 Start the Assessment',
+    questionOf: (a,b) => `Question ${a} of ${b}`,
+    nextBtn: 'Next →',
+    seeResultsBtn: '🌟 See My Results',
+    backBtn: '← Back',
+    pleaseAnswer: 'Please choose an answer before continuing.',
+    resultsH2: 'Your Skills Assessment Results',
+    honorH3: '🏆 Your Vocational Skills Are Professional Credentials',
+    honorP: 'These are specialized, trained competencies that belong on your resume and deserve to be recognized. Many employers actively seek workers with this expertise:',
+    recH2: '📚 Your Personalized Recommendations',
+    aiBoxH3: '🤖 Your Personalized AI Prompt — Copy and Use It!',
+    copyBtn: '📋 Copy This Prompt',
+    copiedOk: '✅ Copied!',
+    resumeBoxH3: '📄 Skills You Can Add to Your Resume Right Now',
+    resumeBoxP: 'Based on your results, here are professional skills you can list on your resume today:',
+    resumeBoxNote: 'Use the Resume Builder tool (link from your instructor) to add these and your WLAC courses automatically.',
+    restartBtn: '🔄 Take the Assessment Again',
+    strengthHigh: '⭐ Strength', strengthMed: '📈 Growing', strengthLow: '🌱 Building',
+    ratingOptions: [
+      { value:4, icon:'💪', label:'Yes, definitely!', desc:'I do this well — I feel fully confident' },
+      { value:3, icon:'🙂', label:'Most of the time', desc:'I can do this, but sometimes I need support' },
+      { value:2, icon:'😐', label:'A little bit', desc:'I am still learning this skill' },
+      { value:1, icon:'📚', label:'Not yet — but I want to learn', desc:'This is new to me and I am ready to grow' },
+    ],
+    categories: [
+      { id:'janitorial',  name:'Janitorial & Facilities',    icon:'🧹', bar:'#2563a8' },
+      { id:'hospitality', name:'Hospitality & Food Service', icon:'🍽️', bar:'#c05a10' },
+      { id:'security',    name:'Security & Safety',          icon:'🔒', bar:'#7b4ca8' },
+      { id:'leadership',  name:'Leadership & Training',      icon:'👑', bar:'#7a1a3a' },
+      { id:'teamwork',    name:'Teamwork & Advocacy',        icon:'🤝', bar:'#3a5068' },
+      { id:'phone',       name:'Phone Communication',        icon:'📞', bar:'#1e8c4a' },
+      { id:'writing',     name:'Written Communication',      icon:'✍️', bar:'#1a6b6b' },
+      { id:'tech',        name:'Technology Skills',          icon:'💻', bar:'#c9922a' },
+      { id:'ai',          name:'AI & Digital Readiness',     icon:'🤖', bar:'#1a4f8a' },
+    ],
+    catColors:[
+      ['#e0eaf8','#1a4080'],['#fde8d0','#8a3a00'],['#ede6fb','#5a2d82'],
+      ['#fad8e4','#7a1a3a'],['#dce8f4','#2a4a6a'],['#d4f5e2','#1a5a30'],
+      ['#d0f0ee','#1a5a5a'],['#fef3dc','#7a5000'],['#ddeafc','#1a4f8a'],
+    ],
+    honorTags:[
+      'Facility Maintenance & Sanitation','Chemical Safety Procedures',
+      'Floor Care Equipment Operation','Food Safety & Hygiene Standards',
+      'Guest & Customer Service','Food Service Setup & Breakdown',
+      'Security Monitoring & Patrol','Incident Report Writing',
+      'Emergency Response & Evacuation','Team Leadership & Supervision',
+      'New Employee Training & Mentoring','Safety Training Facilitation',
+      'Union Representation (Shop Steward)','Workers\' Rights Knowledge & Advocacy',
+      'Cross-Cultural Teamwork','Inventory & Supply Management',
+      'Physical Endurance & Reliability'
+    ],
+    questions:[
+      { cat:'janitorial', text:'I know how to safely clean and sanitize different types of surfaces, equipment, and spaces at work.' },
+      { cat:'janitorial', text:'I understand how to properly handle, store, and dispose of cleaning chemicals and hazardous materials.' },
+      { cat:'janitorial', text:'I can set up, operate, and maintain floor care equipment such as buffers, mops, vacuums, and pressure washers.' },
+      { cat:'hospitality', text:'I know food safety and hygiene standards — proper handling, storage temperatures, and preventing cross-contamination.' },
+      { cat:'hospitality', text:'I can set up, serve, and break down food service stations efficiently and in compliance with health department standards.' },
+      { cat:'hospitality', text:'I know how to greet, assist, and serve customers or guests in a professional and welcoming way.' },
+      { cat:'security', text:'I know how to monitor a facility, identify safety risks, and respond appropriately to incidents or suspicious activity.' },
+      { cat:'security', text:'I can write a clear, accurate incident report after a safety event or security concern at work.' },
+      { cat:'security', text:'I know emergency procedures — evacuation, lockdown, fire safety — and can guide others calmly during a crisis.' },
+      { cat:'leadership', text:'I have experience as a team leader, lead worker, or supervisor — directing others and making sure the work gets done.' },
+      { cat:'leadership', text:'I have trained or mentored new employees — explaining procedures, demonstrating tasks, and answering their questions.' },
+      { cat:'leadership', text:'I have facilitated a meeting, a safety training, a union education session, or any other formal group training.' },
+      { cat:'teamwork', text:'I work well with coworkers from different backgrounds and communicate respectfully even when we disagree.' },
+      { cat:'teamwork', text:'I have represented coworkers as a union steward, worker representative, or spokesperson in a workplace situation.' },
+      { cat:'teamwork', text:'I understand workers\' rights and can explain workplace policies, union agreements, or employee protections to others.' },
+      { cat:'phone', text:'When the phone rings at work, I feel comfortable answering it in a professional way in English.' },
+      { cat:'phone', text:'I can take a complete, accurate phone message — including the caller\'s name, number, time of call, and reason.' },
+      { cat:'phone', text:'I know how to leave a professional voicemail so the other person has all the information they need.' },
+      { cat:'writing', text:'I can write a short, clear memo or note that my coworkers or supervisor can easily understand.' },
+      { cat:'writing', text:'I feel comfortable writing a professional email in English with a proper greeting, message body, and closing.' },
+      { cat:'writing', text:'I can accurately fill out workplace forms and written reports — such as incident reports, inspection checklists, or supply requests.' },
+      { cat:'tech', text:'I can send and receive email on a phone, computer, or tablet.' },
+      { cat:'tech', text:'I can use the internet to search for information I need at work or at home.' },
+      { cat:'tech', text:'I am comfortable using a smartphone to take photos, upload files, or complete simple digital tasks.' },
+      { cat:'ai', text:'I have used or am curious about AI tools like Claude or ChatGPT to help me write, translate, or answer questions.' },
+      { cat:'ai', text:'I feel ready and motivated to learn new digital tools and technology that can help me at work.' },
+      { cat:'ai', text:'I believe technology and AI tools can help me advance in my career and support my coworkers.' },
+    ],
+    descs:{
+      janitorial:{high:'You are a trained facilities professional. Your knowledge of cleaning standards, chemical safety, and equipment operation is a specialized competency that keeps workplaces healthy and safe — and belongs on your resume.',medium:'You have solid janitorial skills. This course will help you communicate those skills more effectively to supervisors and in writing.',low:'Janitorial skills grow through hands-on practice. This course will help you document and communicate your skills in clear, professional language.'},
+      hospitality:{high:'Your food service expertise — sanitation, service, and customer care — is a professional credential. Employers actively seek experienced workers like you.',medium:'You have good hospitality skills. Strengthening your written communication will help you advance into supervisory roles.',low:'Food service is a growing field with real career pathways. This course will give you the communication skills that open those doors.'},
+      security:{high:'Security work requires calm judgment, observation, and the ability to communicate under pressure. These are leadership-level skills valued across many industries.',medium:'Your security background gives you strong situational awareness. Building your report writing will make you even more promotable.',low:'In security, clear communication and documentation are as important as physical presence. This course builds those skills directly.'},
+      leadership:{high:'You are already a leader. Whether as a team lead, trainer, or union steward, you have real supervisory experience — that is advanced professional expertise.',medium:'You have leadership experience many people overlook. This course will help you communicate those skills with confidence.',low:'Leadership skills grow over time. The communication skills in this course help workers step into leadership roles and get recognized for them.'},
+      teamwork:{high:'Your ability to work with others, advocate for coworkers, and navigate workplace relationships is an advanced professional skill. Union stewards hold a deeply respected position.',medium:'You are a reliable team member. This course will strengthen the communication that makes your teamwork and advocacy even more effective.',low:'Teamwork improves when everyone communicates clearly. The tools in this course help you contribute more confidently to your team.'},
+      phone:{high:'You are confident on the phone at work. Keep using your professional greeting and message-taking skills — you already model what this course teaches.',medium:'You have solid phone skills. Practicing your greeting and voicemail will help you feel fully confident in any workplace call.',low:'Phone skills are a major focus of Module 1. Through role-play and AI coaching you will improve quickly!'},
+      writing:{high:'You are a confident workplace writer. Your memo, email, and report writing skills make you a stronger communicator at every level.',medium:'Your writing skills are growing. Focusing on memo and email format in Module 2 will make every message you send more professional.',low:'Writing professional documents in English is challenging, especially as an English learner. AI tools like Claude will help you improve quickly.'},
+      tech:{high:'You are comfortable with technology. You can apply AI tools right away and support classmates who are just starting.',medium:'You have growing tech skills. This course introduces digital tools step by step, designed to work on any phone.',low:'Technology skills can be learned at any age. Everything in this course works on a phone — no special equipment needed.'},
+      ai:{high:'You are ready to use AI tools right away. You will be a leader in this area starting this week.',medium:'You are open to AI tools. Go to claude.ai this week, type a question about your job, and see what happens!',low:'AI is brand new for most people. This course introduces it gently and you will quickly see how useful it is at work and at home.'},
+    },
+    recs:[
+      {icon:'📞',title:'Practice Phone Skills with AI',desc:'Use the AI Phone Activity (link from your instructor). Practice professional greetings and message-taking at your own pace.'},
+      {icon:'✍️',title:'Use AI as Your Writing Partner',desc:'Draft your memo or email, then paste it into Claude or ChatGPT and ask: "Is this professional? Please improve it."'},
+      {icon:'🤖',title:'Try AI This Week',desc:'Go to claude.ai — it is free and works on your phone. Type one question about your job. You will be surprised how useful it is.'},
+      {icon:'📄',title:'Build Your Resume Now',desc:'Ask your instructor for the Resume Builder link. Your WLAC courses are pre-loaded — just add your work history and vocational skills.'},
+      {icon:'👑',title:'Put Your Leadership on Your Resume',desc:'Led a team? Trained new workers? Served as a union steward? These are supervisor-level credentials. Make sure they are listed.'},
+      {icon:'🤝',title:'Your Advocacy Work Is Rare & Valuable',desc:'Workers who understand labor rights and represent coworkers have skills that most employers highly value.'},
+      {icon:'🧹',title:'Your Trade Skills Are Resume-Ready',desc:'Chemical safety, floor care, food safety, incident reporting — name these clearly and specifically on your resume.'},
+      {icon:'💬',title:'Practice English with AI Daily',desc:'Ask Claude: "Can we practice a workplace conversation in English? I want to improve my professional speaking."'},
+    ],
+    resumeSkillMap:{
+      janitorial:['Facility Sanitation & Maintenance','Chemical Safety & OSHA Compliance','Floor Care Equipment Operation','Hazardous Materials Handling & Disposal'],
+      hospitality:['Food Safety & Hygiene (ServSafe Aware)','Food Service Setup, Service & Breakdown','Guest & Customer Service','Kitchen & Cafeteria Operations'],
+      security:['Security Monitoring & Facility Patrol','Incident Report Writing','Emergency Response & Evacuation Procedures','Access Control & Visitor Management'],
+      leadership:['Team Leadership & Crew Supervision','New Employee Onboarding & Training','Safety Training Facilitation','Workflow Planning & Coordination'],
+      teamwork:['Union Representation (Shop Steward)','Workers\' Rights Advocacy','Cross-Cultural Team Collaboration','Conflict Resolution & Mediation'],
+      phone:['Professional Telephone Etiquette','Phone Message Taking','Voicemail Communication'],
+      writing:['Office Memo Writing','Professional Email Correspondence','Workplace Report Writing'],
+      tech:['Basic Computer Applications','Professional Email Use','Digital File Management','AI Workplace Tools (Claude, ChatGPT)'],
+      ai:['AI Tool Literacy (Claude, ChatGPT, Gemini)','Digital Readiness & Technology Adoption'],
+    },
+    aiPromptTemplate:(topSkills,growthArea)=>
+`I am an adult learner in a professional communication course at West Los Angeles College. I work in the service industry.
+
+My strongest workplace skills are: ${topSkills}.
+I am working on improving my: ${growthArea}.
+
+Please help me with three things:
+1. Write 3 strong resume bullet points for my top skills. Use action verbs like "maintained," "supervised," "trained," "facilitated."
+2. Give me 2 practical tips to improve my ${growthArea} at work.
+3. Tell me one AI tool I can use this week to grow professionally.
+
+Please use simple, clear English — I am an English learner.`,
+    resultsIntroTemplate:(top,bottom)=>`Your strongest area is ${top}. This course will especially help you grow in ${bottom}. Every skill below is something you bring to the workplace — let's build on all of them!`,
+  },
+
+  es: {
+    pageTitle: '🌟 Evaluación de <span>Habilidades Laborales</span>',
+    pageSub: 'VOC ED 418CE &nbsp;·&nbsp; West Los Angeles College &nbsp;·&nbsp; Primavera 2026',
+    introH2: '¡Descubre Tus Fortalezas — Ya Las Tienes!',
+    introHonor: '💛 Antes de comenzar: Usted ya trae habilidades valiosas y profesionales a esta clase. El trabajo que hace todos los días — mantener los edificios seguros y limpios, servir alimentos con cuidado, proteger personas, liderar equipos, representar a sus compañeros — es trabajo especializado e importante. Esta evaluación está diseñada para reconocer esas habilidades y mostrarle cómo este curso lo hará aún más fuerte.',
+    introP1: 'Evalúese honestamente en 9 áreas de habilidades. No hay respuestas incorrectas.',
+    introCatsLabel: 'Se evaluará en estas 9 áreas:',
+    introMeta: '27 preguntas · Aproximadamente 8 minutos · Sus resultados celebrarán lo que ya sabe y le mostrarán en qué enfocarse.',
+    startBtn: '🚀 Comenzar la Evaluación',
+    questionOf: (a,b) => `Pregunta ${a} de ${b}`,
+    nextBtn: 'Siguiente →',
+    seeResultsBtn: '🌟 Ver Mis Resultados',
+    backBtn: '← Atrás',
+    pleaseAnswer: 'Por favor elija una respuesta antes de continuar.',
+    resultsH2: 'Sus Resultados de la Evaluación de Habilidades',
+    honorH3: '🏆 Sus Habilidades Vocacionales Son Credenciales Profesionales',
+    honorP: 'Estas son competencias especializadas y entrenadas que pertenecen en su currículum vitae y merecen ser reconocidas. Muchos empleadores buscan activamente trabajadores con esta experiencia:',
+    recH2: '📚 Sus Recomendaciones Personalizadas',
+    aiBoxH3: '🤖 Su Mensaje de IA Personalizado — ¡Cópielo y Úselo!',
+    copyBtn: '📋 Copiar Este Mensaje',
+    copiedOk: '✅ ¡Copiado!',
+    resumeBoxH3: '📄 Habilidades Que Puede Agregar a Su Currículum Ahora Mismo',
+    resumeBoxP: 'Según sus resultados, estas son habilidades profesionales que puede incluir en su currículum hoy:',
+    resumeBoxNote: 'Use la herramienta Resume Builder (enlace de su instructor) para agregar estas habilidades y sus cursos de WLAC automáticamente.',
+    restartBtn: '🔄 Tomar la Evaluación de Nuevo',
+    strengthHigh: '⭐ Fortaleza', strengthMed: '📈 En Desarrollo', strengthLow: '🌱 Aprendiendo',
+    ratingOptions: [
+      { value:4, icon:'💪', label:'¡Sí, definitivamente!', desc:'Lo hago bien — me siento completamente seguro/a' },
+      { value:3, icon:'🙂', label:'La mayoría del tiempo', desc:'Puedo hacerlo, pero a veces necesito apoyo' },
+      { value:2, icon:'😐', label:'Un poco', desc:'Todavía estoy aprendiendo esta habilidad' },
+      { value:1, icon:'📚', label:'Todavía no — pero quiero aprender', desc:'Esto es nuevo para mí y estoy listo/a para crecer' },
+    ],
+    categories: [
+      { id:'janitorial',  name:'Servicios de Limpieza e Instalaciones', icon:'🧹', bar:'#2563a8' },
+      { id:'hospitality', name:'Hospitalidad y Servicio de Alimentos',  icon:'🍽️', bar:'#c05a10' },
+      { id:'security',    name:'Seguridad y Protección',                icon:'🔒', bar:'#7b4ca8' },
+      { id:'leadership',  name:'Liderazgo y Capacitación',              icon:'👑', bar:'#7a1a3a' },
+      { id:'teamwork',    name:'Trabajo en Equipo y Defensa Laboral',   icon:'🤝', bar:'#3a5068' },
+      { id:'phone',       name:'Comunicación Telefónica',               icon:'📞', bar:'#1e8c4a' },
+      { id:'writing',     name:'Comunicación Escrita',                  icon:'✍️', bar:'#1a6b6b' },
+      { id:'tech',        name:'Habilidades Tecnológicas',              icon:'💻', bar:'#c9922a' },
+      { id:'ai',          name:'IA y Preparación Digital',              icon:'🤖', bar:'#1a4f8a' },
+    ],
+    catColors:[
+      ['#e0eaf8','#1a4080'],['#fde8d0','#8a3a00'],['#ede6fb','#5a2d82'],
+      ['#fad8e4','#7a1a3a'],['#dce8f4','#2a4a6a'],['#d4f5e2','#1a5a30'],
+      ['#d0f0ee','#1a5a5a'],['#fef3dc','#7a5000'],['#ddeafc','#1a4f8a'],
+    ],
+    honorTags:[
+      'Mantenimiento y Saneamiento de Instalaciones','Procedimientos de Seguridad Química',
+      'Operación de Equipos de Limpieza de Pisos','Normas de Seguridad Alimentaria e Higiene',
+      'Servicio al Cliente y a Huéspedes','Preparación y Desmontaje del Servicio de Alimentos',
+      'Monitoreo y Patrullaje de Seguridad','Redacción de Reportes de Incidentes',
+      'Respuesta a Emergencias y Evacuación','Liderazgo y Supervisión de Equipos',
+      'Capacitación y Mentoría de Nuevos Empleados','Facilitación de Capacitaciones de Seguridad',
+      'Representación Sindical (Delegado/a)','Conocimiento y Defensa de Derechos Laborales',
+      'Trabajo en Equipo Multicultural','Gestión de Inventario y Suministros',
+      'Resistencia Física y Confiabilidad'
+    ],
+    questions:[
+      { cat:'janitorial', text:'Sé cómo limpiar y desinfectar de forma segura diferentes tipos de superficies, equipos y espacios en el trabajo.' },
+      { cat:'janitorial', text:'Entiendo cómo manejar, almacenar y desechar correctamente productos químicos de limpieza y materiales peligrosos.' },
+      { cat:'janitorial', text:'Puedo configurar, operar y mantener equipos para el cuidado de pisos como pulidoras, trapeadores, aspiradoras y lavadoras a presión.' },
+      { cat:'hospitality', text:'Conozco las normas de seguridad alimentaria e higiene — manejo adecuado, temperaturas de almacenamiento y prevención de contaminación cruzada.' },
+      { cat:'hospitality', text:'Puedo preparar, servir y recoger las estaciones de servicio de alimentos de manera eficiente y conforme a las normas del departamento de salud.' },
+      { cat:'hospitality', text:'Sé cómo recibir, ayudar y atender a clientes o visitantes de manera profesional y acogedora.' },
+      { cat:'security', text:'Sé cómo vigilar una instalación, identificar riesgos de seguridad y responder apropiadamente ante incidentes o actividad sospechosa.' },
+      { cat:'security', text:'Puedo redactar un reporte de incidente claro y preciso después de un evento de seguridad o una preocupación en el trabajo.' },
+      { cat:'security', text:'Conozco los procedimientos de emergencia — evacuación, confinamiento, seguridad contra incendios — y puedo guiar a otros con calma durante una crisis.' },
+      { cat:'leadership', text:'Tengo experiencia como líder de equipo, trabajador líder o supervisor — dirigiendo a otros y asegurando que el trabajo se complete.' },
+      { cat:'leadership', text:'He capacitado o asesorado a empleados nuevos — explicando procedimientos, demostrando tareas y respondiendo sus preguntas.' },
+      { cat:'leadership', text:'He facilitado una reunión, una capacitación de seguridad, una sesión educativa sindical u otro tipo de capacitación grupal formal.' },
+      { cat:'teamwork', text:'Trabajo bien con compañeros de diferentes orígenes y me comunico con respeto incluso cuando no estamos de acuerdo.' },
+      { cat:'teamwork', text:'He representado a mis compañeros de trabajo como delegado/a sindical, representante laboral o portavoz en una situación laboral.' },
+      { cat:'teamwork', text:'Entiendo los derechos de los trabajadores y puedo explicar las políticas del lugar de trabajo, los convenios sindicales o las protecciones laborales a otros.' },
+      { cat:'phone', text:'Cuando suena el teléfono en el trabajo, me siento cómodo/a contestándolo de manera profesional en inglés.' },
+      { cat:'phone', text:'Puedo tomar un mensaje telefónico completo y preciso — incluyendo el nombre del llamador, número, hora de la llamada y motivo.' },
+      { cat:'phone', text:'Sé cómo dejar un correo de voz profesional para que la otra persona tenga toda la información que necesita.' },
+      { cat:'writing', text:'Puedo escribir un memorándum o una nota corta y clara que mis compañeros o supervisor puedan entender fácilmente.' },
+      { cat:'writing', text:'Me siento cómodo/a escribiendo un correo electrónico profesional en inglés con un saludo, cuerpo del mensaje y cierre correctos.' },
+      { cat:'writing', text:'Puedo llenar con precisión formularios y reportes escritos del trabajo — como reportes de incidentes, listas de verificación de inspección o solicitudes de suministros.' },
+      { cat:'tech', text:'Puedo enviar y recibir correos electrónicos en un teléfono, computadora o tableta.' },
+      { cat:'tech', text:'Puedo usar el internet para buscar información que necesito en el trabajo o en casa.' },
+      { cat:'tech', text:'Me siento cómodo/a usando un teléfono inteligente para tomar fotos, subir archivos o completar tareas digitales simples.' },
+      { cat:'ai', text:'He usado o tengo curiosidad sobre herramientas de IA como Claude o ChatGPT para ayudarme a escribir, traducir o responder preguntas.' },
+      { cat:'ai', text:'Me siento listo/a y motivado/a para aprender nuevas herramientas digitales y tecnología que puedan ayudarme en el trabajo.' },
+      { cat:'ai', text:'Creo que la tecnología y las herramientas de IA pueden ayudarme a avanzar en mi carrera y apoyar a mis compañeros.' },
+    ],
+    descs:{
+      janitorial:{high:'Usted es un/a profesional capacitado/a en instalaciones. Su conocimiento de normas de limpieza, seguridad química y operación de equipos es una competencia especializada que mantiene los lugares de trabajo seguros y saludables — y pertenece en su currículum.',medium:'Tiene sólidas habilidades de limpieza. Este curso le ayudará a comunicar esas habilidades de manera más efectiva a sus supervisores y por escrito.',low:'Las habilidades de limpieza crecen con la práctica. Este curso le ayudará a documentar y comunicar sus habilidades en lenguaje claro y profesional.'},
+      hospitality:{high:'Su experiencia en servicio de alimentos — saneamiento, servicio y atención al cliente — es una credencial profesional. Los empleadores buscan activamente trabajadores con experiencia como usted.',medium:'Tiene buenas habilidades de hospitalidad. Fortalecer su comunicación escrita le ayudará a avanzar hacia roles de supervisión.',low:'El servicio de alimentos es un campo en crecimiento con caminos de carrera reales. Este curso le dará las habilidades de comunicación que abren esas puertas.'},
+      security:{high:'El trabajo de seguridad requiere juicio sereno, observación y capacidad de comunicarse bajo presión. Estas son habilidades de nivel de liderazgo valoradas en muchas industrias.',medium:'Su experiencia en seguridad le da una fuerte conciencia situacional. Desarrollar su redacción de reportes lo hará aún más valioso en su trabajo.',low:'En seguridad, la comunicación clara y la documentación son tan importantes como la presencia física. Este curso desarrolla directamente esas habilidades.'},
+      leadership:{high:'Usted ya es un/a líder. Ya sea como líder de equipo, capacitador/a o delegado/a sindical, tiene experiencia supervisora real — esa es una experiencia profesional avanzada que pertenece en su currículum.',medium:'Tiene experiencia de liderazgo que muchas personas no valoran. Este curso le ayudará a comunicar esas habilidades con confianza.',low:'Las habilidades de liderazgo crecen con el tiempo. Las habilidades de comunicación en este curso ayudan a los trabajadores a asumir roles de liderazgo y ser reconocidos por ello.'},
+      teamwork:{high:'Su capacidad de trabajar con otros, abogar por sus compañeros y navegar las relaciones laborales es una habilidad profesional avanzada. Los delegados sindicales ocupan una posición muy respetada.',medium:'Es un/a miembro confiable del equipo. Este curso fortalecerá la comunicación que hace su trabajo en equipo y su defensa aún más efectivos.',low:'El trabajo en equipo mejora cuando todos se comunican claramente. Las herramientas de este curso le ayudarán a contribuir con más confianza a su equipo.'},
+      phone:{high:'Se siente seguro/a contestando el teléfono en el trabajo. Siga usando su saludo profesional y sus habilidades para tomar mensajes — ya modela lo que este curso enseña.',medium:'Tiene buenas habilidades telefónicas. Practicar su saludo y correo de voz le ayudará a sentirse completamente seguro/a en cualquier llamada de trabajo.',low:'Las habilidades telefónicas son un enfoque principal del Módulo 1. ¡A través de la práctica y el entrenamiento con IA mejorará rápidamente!'},
+      writing:{high:'Es un/a escritor/a laboral seguro/a. Sus habilidades para escribir memorandos, correos electrónicos e informes lo hacen un comunicador más fuerte en todos los niveles.',medium:'Sus habilidades de escritura están creciendo. Enfocarse en el formato de memorandos y correos electrónicos en el Módulo 2 hará que cada mensaje que envíe sea más profesional.',low:'Escribir documentos profesionales en inglés es un desafío, especialmente si es su segunda lengua. Las herramientas de IA como Claude le ayudarán a mejorar rápidamente.'},
+      tech:{high:'Se siente cómodo/a con la tecnología. Puede aplicar herramientas de IA de inmediato y apoyar a sus compañeros que están comenzando.',medium:'Sus habilidades tecnológicas están creciendo. Este curso presenta las herramientas digitales paso a paso, diseñadas para funcionar en cualquier teléfono.',low:'Las habilidades tecnológicas se pueden aprender a cualquier edad. Todo en este curso funciona en un teléfono — no se necesita equipo especial.'},
+      ai:{high:'Está listo/a para usar herramientas de IA de inmediato. Será un/a líder en esta área comenzando esta semana.',medium:'Está abierto/a a las herramientas de IA. Vaya a claude.ai esta semana, escriba una pregunta sobre su trabajo y vea qué pasa.',low:'La IA es completamente nueva para la mayoría de las personas. Este curso la presenta de manera suave y práctica, y pronto verá lo útil que es.'},
+    },
+    recs:[
+      {icon:'📞',title:'Practique Habilidades Telefónicas con IA',desc:'Use la Actividad de IA de Teléfono (enlace de su instructor). Practique saludos profesionales y toma de mensajes a su propio ritmo.'},
+      {icon:'✍️',title:'Use IA como Su Asistente de Escritura',desc:'Escriba su memorándum o correo electrónico, luego péguelo en Claude o ChatGPT y pregunte: "¿Esto es profesional? Por favor mejóralo."'},
+      {icon:'🤖',title:'Pruebe la IA Esta Semana',desc:'Vaya a claude.ai — es gratis y funciona en su teléfono. Escriba una pregunta sobre su trabajo. Se sorprenderá de lo útil que es.'},
+      {icon:'📄',title:'Construya Su Currículum Ahora',desc:'Pida a su instructor el enlace del Resume Builder. Sus cursos de WLAC ya están pre-cargados — solo agregue su historial de trabajo.'},
+      {icon:'👑',title:'Ponga Su Liderazgo en Su Currículum',desc:'¿Lideró un equipo? ¿Capacitó a nuevos trabajadores? ¿Fue delegado/a sindical? Estas son credenciales de nivel de supervisor. Asegúrese de incluirlas.'},
+      {icon:'🤝',title:'Su Trabajo de Defensa Laboral Es Valioso',desc:'Los trabajadores que entienden los derechos laborales y representan a sus compañeros tienen habilidades que los empleadores valoran mucho.'},
+      {icon:'🧹',title:'Sus Habilidades Vocacionales Están Listas para el Currículum',desc:'Seguridad química, cuidado de pisos, seguridad alimentaria, reportes de incidentes — nómbrelas claramente y específicamente en su currículum.'},
+      {icon:'💬',title:'Practique Inglés con IA Todos los Días',desc:'Pregunte a Claude: "¿Podemos practicar una conversación de trabajo en inglés? Quiero mejorar mi comunicación profesional."'},
+    ],
+    resumeSkillMap:{
+      janitorial:['Mantenimiento y Saneamiento de Instalaciones','Seguridad Química y Cumplimiento de OSHA','Operación de Equipos de Cuidado de Pisos','Manejo y Desecho de Materiales Peligrosos'],
+      hospitality:['Seguridad Alimentaria e Higiene (Conciencia ServSafe)','Preparación, Servicio y Desmontaje de Alimentos','Servicio al Cliente y a Huéspedes','Operaciones de Cocina y Cafetería'],
+      security:['Monitoreo y Patrullaje de Seguridad de Instalaciones','Redacción de Reportes de Incidentes','Procedimientos de Emergencia y Evacuación','Control de Acceso y Gestión de Visitantes'],
+      leadership:['Liderazgo de Equipos y Supervisión','Incorporación y Capacitación de Nuevos Empleados','Facilitación de Capacitaciones de Seguridad','Planificación de Flujo de Trabajo y Coordinación'],
+      teamwork:['Representación Sindical (Delegado/a)','Defensa de Derechos Laborales','Colaboración en Equipos Multiculturales','Resolución de Conflictos y Mediación'],
+      phone:['Etiqueta Telefónica Profesional','Toma de Mensajes Telefónicos','Comunicación por Correo de Voz'],
+      writing:['Redacción de Memorandos de Oficina','Correspondencia Profesional por Correo Electrónico','Redacción de Reportes de Trabajo'],
+      tech:['Aplicaciones Básicas de Computadora','Uso Profesional del Correo Electrónico','Gestión de Archivos Digitales','Herramientas de IA para el Trabajo (Claude, ChatGPT)'],
+      ai:['Conocimiento de Herramientas de IA (Claude, ChatGPT, Gemini)','Preparación Digital y Adopción de Tecnología'],
+    },
+    aiPromptTemplate:(topSkills,growthArea)=>
+`Soy un/a estudiante adulto/a en un curso de comunicación profesional en West Los Angeles College. Trabajo en la industria de servicios.
+
+Mis habilidades laborales más fuertes son: ${topSkills}.
+Estoy trabajando para mejorar mi área de: ${growthArea}.
+
+Por favor ayúdeme con tres cosas:
+1. Escriba 3 puntos fuertes para mi currículum sobre mis mejores habilidades. Use verbos de acción como "mantuve," "supervisé," "capacité," "facilité."
+2. Deme 2 consejos prácticos para mejorar mi ${growthArea} en el trabajo.
+3. Dígame una herramienta de IA que pueda usar esta semana para crecer profesionalmente.
+
+Por favor use inglés simple y claro — soy un/a estudiante de inglés.`,
+    resultsIntroTemplate:(top,bottom)=>`Su área más fuerte es ${top}. Este curso le ayudará especialmente a crecer en ${bottom}. ¡Cada habilidad a continuación es algo que usted aporta al lugar de trabajo — construyamos sobre todas ellas!`,
+  }
+};
+
+/* ═══════════════════════════════════════
+   STATE
+═══════════════════════════════════════ */
+let lang = 'en';
+let answers = {}, currentQ = 0;
+let assessmentStarted = false;
+
+/* ═══════════════════════════════════════
+   LANGUAGE SWITCH
+═══════════════════════════════════════ */
+function setLang(l) {
+  lang = l;
+  document.getElementById('html-root').setAttribute('lang', l);
+  document.getElementById('btn-en').className = 'lang-btn ' + (l==='en'?'active':'inactive');
+  document.getElementById('btn-es').className = 'lang-btn ' + (l==='es'?'active':'inactive');
+  document.getElementById('btn-en').setAttribute('aria-pressed', l==='en');
+  document.getElementById('btn-es').setAttribute('aria-pressed', l==='es');
+  renderUI();
+  if (assessmentStarted && !document.getElementById('results-section').classList.contains('show')) {
+    renderQuestion(currentQ);
+  }
+}
+
+function renderUI() {
+  const t = T[lang];
+  document.getElementById('page-title').innerHTML = t.pageTitle;
+  document.getElementById('page-sub').innerHTML = t.pageSub;
+  document.getElementById('intro-h2').textContent = t.introH2;
+  document.getElementById('intro-honor').textContent = t.introHonor;
+  document.getElementById('intro-p1').textContent = t.introP1;
+  document.getElementById('intro-cats-label').textContent = t.introCatsLabel;
+  document.getElementById('intro-meta').textContent = t.introMeta;
+  document.getElementById('start-btn').textContent = t.startBtn;
+  // Cat grid
+  const grid = document.getElementById('cat-grid');
+  grid.innerHTML = t.categories.map((c,i) => {
+    const [bg,clr] = t.catColors[i];
+    return `<div class="cat-chip" style="background:${bg};color:${clr};" role="listitem">${c.icon} ${c.name}</div>`;
+  }).join('');
+  // Results UI labels (only if shown)
+  document.getElementById('results-h2').textContent = t.resultsH2;
+  document.getElementById('honor-h3').textContent = t.honorH3;
+  document.getElementById('honor-p').textContent = t.honorP;
+  document.getElementById('rec-h2').textContent = t.recH2;
+  document.getElementById('ai-box-h3').textContent = t.aiBoxH3;
+  document.getElementById('copy-btn-label').textContent = t.copyBtn;
+  document.getElementById('copy-confirm').textContent = t.copiedOk;
+  document.getElementById('resume-box-h3').textContent = t.resumeBoxH3;
+  document.getElementById('resume-box-p').textContent = t.resumeBoxP;
+  document.getElementById('resume-box-note').textContent = t.resumeBoxNote;
+  document.getElementById('restart-btn').textContent = t.restartBtn;
+}
+
+/* ═══════════════════════════════════════
+   ASSESSMENT
+═══════════════════════════════════════ */
+function startAssessment() {
+  assessmentStarted = true;
+  document.getElementById('intro-section').style.display = 'none';
+  document.getElementById('progress-section').style.display = 'block';
+  renderQuestion(0);
+}
+
+function renderQuestion(idx) {
+  currentQ = idx;
+  const t = T[lang];
+  const q = t.questions[idx];
+  const cat = t.categories.find(c => c.id === q.cat);
+  const pct = Math.round((idx / t.questions.length) * 100);
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-bar').parentElement.setAttribute('aria-valuenow', idx);
+  document.getElementById('progress-count').textContent = t.questionOf(idx+1, t.questions.length);
+  document.getElementById('progress-cat-label').textContent = `${cat.icon} ${cat.name}`;
+  document.getElementById('questions-container').innerHTML = `
+    <div class="q-card active" role="form" aria-label="${t.questionOf(idx+1, t.questions.length)}">
+      <span class="cat-label" style="background:${cat.bar};">${cat.icon} ${cat.name}</span>
+      <div class="q-text">${q.text}</div>
+      <div class="rating-row" role="radiogroup">
+        ${t.ratingOptions.map(opt => `
+          <button class="rating-btn ${answers[idx]===opt.value?'selected':''}"
+            onclick="selectAnswer(${idx},${opt.value},this)"
+            aria-pressed="${answers[idx]===opt.value}"
+            aria-label="${opt.label}">
+            <span class="rb-icon" aria-hidden="true">${opt.icon}</span>
+            <span><span class="rb-label">${opt.label}</span><span class="rb-desc">${opt.desc}</span></span>
+          </button>`).join('')}
+      </div>
+      <div class="nav-row">
+        ${idx>0?`<button class="btn btn-back" onclick="renderQuestion(${idx-1})">${t.backBtn}</button>`:''}
+        <button class="btn btn-next" onclick="nextQuestion(${idx})">
+          ${idx<t.questions.length-1?t.nextBtn:t.seeResultsBtn}
+        </button>
+      </div>
+    </div>`;
+}
+
+function selectAnswer(idx, value, btn) {
+  answers[idx] = value;
+  document.querySelectorAll('.rating-btn').forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed','false'); });
+  btn.classList.add('selected'); btn.setAttribute('aria-pressed','true');
+}
+
+function nextQuestion(idx) {
+  if (answers[idx]===undefined) { alert(T[lang].pleaseAnswer); return; }
+  const total = T[lang].questions.length;
+  if (idx < total-1) { renderQuestion(idx+1); } else { showResults(); }
+}
+
+/* ═══════════════════════════════════════
+   RESULTS
+═══════════════════════════════════════ */
+function showResults() {
+  const t = T[lang];
+  document.getElementById('questions-container').innerHTML = '';
+  document.getElementById('progress-section').style.display = 'none';
+
+  const raw = {};
+  t.categories.forEach(c => { raw[c.id]={total:0,count:0}; });
+  t.questions.forEach((q,i) => { if(answers[i]!==undefined){raw[q.cat].total+=answers[i];raw[q.cat].count++;} });
+
+  const catScores = t.categories.map(cat => {
+    const s=raw[cat.id]; const avg=s.count?s.total/s.count:0; const pct=Math.round((avg/4)*100);
+    return {...cat,avg,pct};
+  }).sort((a,b)=>b.pct-a.pct);
+
+  const overall = catScores.reduce((s,c)=>s+c.pct,0)/catScores.length;
+  document.getElementById('results-emoji').textContent = overall>=75?'🏆':overall>=55?'🌟':'💪';
+  document.getElementById('results-intro').textContent = t.resultsIntroTemplate(
+    catScores[0].icon+' '+catScores[0].name,
+    catScores[catScores.length-1].icon+' '+catScores[catScores.length-1].name
+  );
+
+  document.getElementById('honor-tags-container').innerHTML = t.honorTags.map(tag=>`<span class="honor-tag">${tag}</span>`).join('');
+
+  document.getElementById('skill-results-container').innerHTML = catScores.map(cat=>{
+    const level=cat.pct>=75?'high':cat.pct>=45?'medium':'low';
+    const tagLabel=level==='high'?t.strengthHigh:level==='medium'?t.strengthMed:t.strengthLow;
+    const tagClass=level==='high'?'str-high':level==='medium'?'str-medium':'str-building';
+    const desc=t.descs[cat.id][level];
+    return `<div class="skill-card">
+      <div class="skill-top"><span class="skill-name">${cat.icon} ${cat.name}</span><span class="skill-score-label">${cat.pct}%</span></div>
+      <span class="strength-tag ${tagClass}">${tagLabel}</span>
+      <div class="skill-bar-wrap" role="progressbar" aria-valuenow="${cat.pct}" aria-valuemin="0" aria-valuemax="100" aria-label="${cat.name}: ${cat.pct}%">
+        <div class="skill-bar" style="width:${cat.pct}%;background:${cat.bar};"></div>
+      </div>
+      <p class="skill-desc">${desc}</p>
+    </div>`;
+  }).join('');
+
+  const bottom=catScores.slice(-2).map(c=>c.id); const top=catScores[0].id;
+  let recs=[...t.recs];
+  if(bottom.includes('ai')||bottom.includes('tech'))recs.unshift(recs.splice(2,1)[0]);
+  if(bottom.includes('phone'))recs.unshift(recs.splice(0,1)[0]);
+  if(top==='leadership'||top==='teamwork')recs.unshift(recs.splice(4,1)[0]);
+  document.getElementById('rec-grid').innerHTML=recs.slice(0,4).map(r=>`
+    <div class="rec-card"><div class="rec-icon" aria-hidden="true">${r.icon}</div><div class="rec-title">${r.title}</div><div class="rec-desc">${r.desc}</div></div>`).join('');
+
+  const topSkills=catScores.slice(0,3).map(c=>c.name).join(', ');
+  const growthArea=catScores[catScores.length-1].name;
+  document.getElementById('ai-career-prompt').textContent=t.aiPromptTemplate(topSkills,growthArea);
+
+  const resumeSkills=catScores.filter(c=>c.pct>=45).flatMap(c=>t.resumeSkillMap[c.id]||[]);
+  document.getElementById('resume-skills-list').innerHTML=resumeSkills.map(s=>`<li>${s}</li>`).join('');
+
+  const rs=document.getElementById('results-section');
+  rs.classList.add('show');
+  rs.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function copyPrompt(){
+  const text=document.getElementById('ai-career-prompt').textContent;
+  navigator.clipboard.writeText(text).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);});
+  const ok=document.getElementById('copy-confirm');
+  ok.style.display='inline';setTimeout(()=>{ok.style.display='none';},2500);
+}
+
+function restartAssessment(){
+  answers={};currentQ=0;assessmentStarted=false;
+  document.getElementById('results-section').classList.remove('show');
+  document.getElementById('questions-container').innerHTML='';
+  document.getElementById('intro-section').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Init
+renderUI();
+</script>
+</body>
+</html>
