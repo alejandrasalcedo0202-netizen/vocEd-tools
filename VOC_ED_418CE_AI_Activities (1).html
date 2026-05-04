@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Workplace Activities / Actividades de IA — VOC ED 418CE | WLAC</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1a2e4a;--gold:#c9922a;--gold-light:#fef3dc;
+    --m1:#2563a8;--m1-light:#ddeafc;
+    --m2:#1e8c4a;--m2-light:#d4f5e2;
+    --m3:#7b4ca8;--m3-light:#ede6fb;
+    --ai:#1a6b6b;--ai-light:#d0f0ee;
+    --text:#1e2c3a;--muted:#5a6a7a;--border:#d0dae8;--bg:#f0f4fb;
+    --success:#1e8c4a;--success-bg:#d4f5e2;--error:#c0392b;--error-bg:#fde8e6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);font-size:17px;line-height:1.7;min-height:100vh;}
+  .skip-nav{position:absolute;left:-9999px;}.skip-nav:focus{position:static;padding:8px;background:var(--navy);color:white;display:block;}
+  .gold-bar{height:5px;background:linear-gradient(90deg,var(--gold),#e8b84b,var(--gold));}
+
+  /* LANG BAR */
+  .lang-bar{background:#1a3a1a;padding:9px 20px;display:flex;justify-content:center;align-items:center;gap:12px;}
+  .lang-btn{padding:7px 20px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;border:2px solid transparent;border-radius:22px;cursor:pointer;transition:all 0.2s;}
+  .lang-btn.active{background:var(--gold);color:#1a1a00;border-color:var(--gold);}
+  .lang-btn.inactive{background:transparent;color:rgba(255,255,255,0.65);border-color:rgba(255,255,255,0.3);}
+  .lang-btn:hover{border-color:var(--gold);color:white;}
+  .lang-divider{color:rgba(255,255,255,0.3);font-size:18px;}
+
+  .top-bar{background:var(--navy);padding:18px 22px 14px;text-align:center;}
+  .top-bar h1{font-family:'Playfair Display',serif;font-size:24px;color:white;line-height:1.2;}
+  .top-bar h1 span{color:var(--gold);}
+  .top-bar p{color:rgba(255,255,255,0.75);font-size:13px;margin-top:5px;}
+
+  /* TABS */
+  .tabs{display:flex;background:var(--navy);padding:0 10px;overflow-x:auto;}
+  .tab-btn{flex:1;min-width:100px;padding:11px 8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;border:none;background:transparent;color:rgba(255,255,255,0.5);cursor:pointer;border-bottom:4px solid transparent;text-align:center;line-height:1.3;transition:all 0.2s;}
+  .tab-btn.active{color:white;}
+  .tab-btn.t1.active{border-bottom-color:var(--m1);}
+  .tab-btn.t2.active{border-bottom-color:var(--m2);}
+  .tab-btn.t3.active{border-bottom-color:var(--m3);}
+  .tab-btn.tai.active{border-bottom-color:var(--gold);}
+  .tab-btn:hover{color:white;}
+
+  .panel{display:none;padding:22px 16px 56px;max-width:760px;margin:0 auto;}
+  .panel.active{display:block;animation:fadein 0.3s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  .activity-header{border-radius:14px;padding:20px 22px;margin-bottom:22px;position:relative;overflow:hidden;}
+  .activity-header.c1{background:var(--m1-light);border:2px solid var(--m1);}
+  .activity-header.c2{background:var(--m2-light);border:2px solid var(--m2);}
+  .activity-header.c3{background:var(--m3-light);border:2px solid var(--m3);}
+  .activity-header.cai{background:var(--ai-light);border:2px solid var(--ai);}
+  .mod-badge{display:inline-block;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1px;padding:4px 12px;border-radius:20px;color:white;margin-bottom:10px;}
+  .c1 .mod-badge{background:var(--m1);}.c2 .mod-badge{background:var(--m2);}.c3 .mod-badge{background:var(--m3);}.cai .mod-badge{background:var(--ai);}
+  .activity-header h2{font-family:'Playfair Display',serif;font-size:21px;font-weight:900;line-height:1.3;}
+  .c1 h2{color:var(--m1);}.c2 h2{color:var(--m2);}.c3 h2{color:var(--m3);}.cai h2{color:var(--ai);}
+  .activity-header p{font-size:16px;color:var(--text);margin-top:7px;}
+  .big-emoji{font-size:48px;position:absolute;right:16px;top:14px;opacity:0.18;}
+
+  .step-card{background:white;border-radius:14px;padding:20px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:16px;}
+  .step-label{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+  .c1 .step-label{color:var(--m1);}.c2 .step-label{color:var(--m2);}.c3 .step-label{color:var(--m3);}.cai .step-label{color:var(--ai);}
+
+  .progress-bar-wrap{background:var(--border);border-radius:8px;height:8px;overflow:hidden;margin-bottom:8px;}
+  .progress-bar{height:100%;border-radius:8px;transition:width 0.4s;}
+  .c1 .progress-bar{background:var(--m1);}.c2 .progress-bar{background:var(--m2);}.c3 .progress-bar{background:var(--m3);}
+
+  .ai-box{background:#0f2020;border-radius:12px;padding:16px 18px;margin:12px 0;position:relative;}
+  .ai-box-label{display:block;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:#7ecdc8;margin-bottom:7px;}
+  .ai-prompt-text{font-family:'Courier New',monospace;font-size:14px;line-height:1.7;color:#e0f5f3;white-space:pre-wrap;}
+  .copy-btn-abs{position:absolute;top:12px;right:12px;padding:6px 12px;background:var(--ai);color:white;border:none;border-radius:8px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;}
+  .copy-ok{color:#7ecdc8;font-size:12px;font-weight:700;display:none;position:absolute;top:46px;right:12px;}
+
+  .scenario-block{background:#f0f4fb;border-left:5px solid;padding:13px 16px;border-radius:0 10px 10px 0;margin:13px 0;font-size:16px;line-height:1.6;}
+  .c1 .scenario-block{border-left-color:var(--m1);}.c2 .scenario-block{border-left-color:var(--m2);}.c3 .scenario-block{border-left-color:var(--m3);}
+
+  .choices{display:flex;flex-direction:column;gap:9px;}
+  .choice-btn{width:100%;padding:13px 16px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:700;text-align:left;border:2px solid var(--border);border-radius:12px;background:white;color:var(--text);cursor:pointer;transition:all 0.2s;display:flex;align-items:flex-start;gap:10px;line-height:1.4;}
+  .choice-btn:hover:not(:disabled){background:var(--bg);transform:translateX(3px);}
+  .choice-btn .ci{font-size:18px;flex-shrink:0;margin-top:2px;}
+  .choice-btn.correct{background:var(--success-bg);border-color:var(--success);color:var(--success);}
+  .choice-btn.wrong{background:var(--error-bg);border-color:var(--error);color:var(--error);opacity:0.6;}
+  .choice-btn:disabled{cursor:default;}
+
+  .feedback{border-radius:12px;padding:14px 16px;margin:12px 0;font-size:16px;font-weight:700;display:none;animation:fadein 0.3s;line-height:1.5;}
+  .feedback.show{display:flex;gap:10px;align-items:flex-start;}
+  .feedback.good{background:var(--success-bg);color:var(--success);border:2px solid var(--success);}
+  .feedback.bad{background:var(--error-bg);color:var(--error);border:2px solid var(--error);}
+  .fb-icon{font-size:22px;flex-shrink:0;}
+  .fb-text strong{display:block;font-size:17px;font-weight:900;margin-bottom:3px;}
+  .fb-text{font-weight:600;}
+
+  .fill-input{width:100%;padding:11px 13px;font-family:'Nunito',sans-serif;font-size:16px;border:2px solid var(--border);border-radius:10px;background:#f8faff;color:var(--text);outline:none;transition:border-color 0.2s;margin-bottom:6px;}
+  .fill-input:focus{border-color:var(--m1);background:white;}
+  .fill-input.correct{border-color:var(--success);background:var(--success-bg);color:var(--success);}
+  .fill-input.wrong{border-color:var(--error);background:var(--error-bg);}
+
+  .pb-field{margin-bottom:12px;}
+  .pb-label{display:block;font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;}
+  .pb-select,.pb-input{width:100%;padding:10px 13px;font-family:'Nunito',sans-serif;font-size:15px;border:2px solid var(--border);border-radius:10px;background:#f8faff;color:var(--text);outline:none;}
+  .pb-select:focus,.pb-input:focus{border-color:var(--ai);background:white;}
+  .generated-prompt{background:#0f2020;border-radius:12px;padding:16px;margin-top:12px;}
+  .generated-prompt-text{font-family:'Courier New',monospace;font-size:14px;color:#e0f5f3;line-height:1.7;white-space:pre-wrap;}
+
+  .tip-box{background:var(--gold-light);border:2px solid var(--gold);border-radius:10px;padding:12px 15px;margin:12px 0;font-size:15px;line-height:1.6;}
+
+  .btn{padding:13px 22px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;border:none;border-radius:12px;cursor:pointer;transition:all 0.2s;width:100%;text-transform:uppercase;letter-spacing:0.5px;margin-top:8px;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,0,0,0.15);}
+  .btn-navy{background:var(--navy);color:white;}
+  .btn-ai{background:var(--ai);color:white;}
+
+  .score-card{background:white;border-radius:18px;padding:28px;text-align:center;border:3px solid;margin-top:14px;display:none;animation:fadein 0.4s ease;}
+  .score-card.show{display:block;}
+  .score-emoji{font-size:56px;margin-bottom:10px;}
+  .score-num{font-family:'Playfair Display',serif;font-size:50px;font-weight:900;}
+  .c1-sc .score-card{border-color:var(--m1);}.c1-sc .score-num{color:var(--m1);}
+  .c2-sc .score-card{border-color:var(--m2);}.c2-sc .score-num{color:var(--m2);}
+  .c3-sc .score-card{border-color:var(--m3);}.c3-sc .score-num{color:var(--m3);}
+  .score-msg{font-size:17px;font-weight:800;margin:12px 0;color:var(--text);line-height:1.4;}
+
+  .life-card{background:white;border-radius:14px;padding:20px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:14px;}
+  .life-card h3{font-size:18px;font-weight:800;margin-bottom:8px;}
+  .life-card p{font-size:15px;color:var(--muted);margin-bottom:12px;line-height:1.6;}
+
+  @media(max-width:480px){body{font-size:15px;}.activity-header h2{font-size:18px;}.btn{font-size:14px;}}
+</style>
+</head>
+<body>
+<a class="skip-nav" href="#main">Skip to main content</a>
+<div class="gold-bar"></div>
+
+<!-- LANGUAGE TOGGLE -->
+<div class="lang-bar" role="navigation" aria-label="Language selection">
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true">🇺🇸 English</button>
+  <span class="lang-divider" aria-hidden="true">|</span>
+  <button class="lang-btn inactive" id="btn-es" onclick="setLang('es')" aria-pressed="false">🇲🇽 Español</button>
+</div>
+
+<div class="top-bar">
+  <h1 id="page-title">🤖 AI <span>Workplace Activities</span></h1>
+  <p id="page-sub">VOC ED 418CE · West Los Angeles College · Spring 2026</p>
+</div>
+
+<div class="tabs" role="tablist" id="tabs-bar">
+  <button class="tab-btn t1 active" onclick="showTab(1)" role="tab" aria-selected="true" id="tab-lbl-1">📞 Module 1<br><small>AI &amp; Phone</small></button>
+  <button class="tab-btn t2" onclick="showTab(2)" role="tab" aria-selected="false" id="tab-lbl-2">📄 Module 2<br><small>AI &amp; Writing</small></button>
+  <button class="tab-btn t3" onclick="showTab(3)" role="tab" aria-selected="false" id="tab-lbl-3">📬 Module 3<br><small>AI &amp; Mail</small></button>
+  <button class="tab-btn tai" onclick="showTab(4)" role="tab" aria-selected="false" id="tab-lbl-4">🌟 AI Life<br><small>Beyond Work</small></button>
+</div>
+
+<main id="main">
+
+<!-- ══════ MODULE 1 ══════ -->
+<div class="panel c1 active" id="panel1">
+  <div class="activity-header c1">
+    <span class="mod-badge" id="m1-badge">Module 1 AI Activity</span>
+    <h2 id="m1-title">📞 AI Phone Coach: Build Your Professional Greeting</h2>
+    <p id="m1-desc">Use AI to create YOUR perfect professional phone greeting, then practice it. Three steps!</p>
+    <div class="big-emoji" aria-hidden="true">📞</div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-card" id="m1-step1">
+    <div class="step-label" id="m1-s1-label">Step 1 of 3 — Quick Check</div>
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:33%;"></div></div>
+    <p style="margin-bottom:14px;font-size:17px;" id="m1-s1-intro"></p>
+    <div class="choices" id="m1-choices"></div>
+    <div class="feedback" id="m1-feedback"></div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-card" id="m1-step2" style="display:none;">
+    <div class="step-label" id="m1-s2-label">Step 2 of 3 — Build YOUR Greeting with AI</div>
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:66%;"></div></div>
+    <p style="margin-bottom:14px;font-size:17px;" id="m1-s2-intro"></p>
+    <div id="m1-builder-form"></div>
+    <div class="generated-prompt" id="m1-prompt-box">
+      <div class="ai-box-label" id="m1-prompt-label">🤖 Your Personalized AI Prompt:</div>
+      <div class="generated-prompt-text" id="m1-prompt-text">...</div>
+    </div>
+    <button class="btn btn-ai" onclick="copyM1Prompt()" id="m1-copy-btn" style="margin-top:10px;">📋 Copy My AI Prompt</button>
+    <div id="m1-copy-ok" style="color:#1e8c4a;font-weight:700;font-size:14px;display:none;margin-top:5px;"></div>
+    <div class="tip-box" id="m1-tip-box" style="margin-top:14px;"></div>
+    <button class="btn btn-navy" onclick="goM1Step3()" id="m1-s2-next" style="margin-top:10px;"></button>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-card" id="m1-step3" style="display:none;">
+    <div class="step-label" id="m1-s3-label">Step 3 of 3 — Fill in the Blank</div>
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:100%;"></div></div>
+    <p style="margin-bottom:14px;font-size:17px;" id="m1-s3-intro"></p>
+    <div style="background:var(--m1-light);border-radius:10px;padding:13px 16px;margin-bottom:14px;font-size:17px;" id="m1-s3-sentence"></div>
+    <div class="pb-field"><label class="pb-label" id="m1-b1-lbl" for="m1-b1"></label>
+    <input class="fill-input" type="text" id="m1-b1" aria-label="Blank 1"></div>
+    <div class="pb-field"><label class="pb-label" id="m1-b2-lbl" for="m1-b2"></label>
+    <input class="fill-input" type="text" id="m1-b2" aria-label="Blank 2"></div>
+    <div class="pb-field"><label class="pb-label" id="m1-b3-lbl" for="m1-b3"></label>
+    <input class="fill-input" type="text" id="m1-b3" aria-label="Blank 3"></div>
+    <button class="btn btn-navy" onclick="checkM1Blanks()" id="m1-check-btn"></button>
+    <div class="feedback" id="m1-blanks-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════ MODULE 2 ══════ -->
+<div class="panel c2" id="panel2">
+  <div class="activity-header c2">
+    <span class="mod-badge" id="m2-badge">Module 2 AI Activity</span>
+    <h2 id="m2-title">✍️ AI Writing Partner: Email Checker</h2>
+    <p id="m2-desc">Read a workplace email. Decide if it is professional. Then use AI to improve it!</p>
+    <div class="big-emoji" aria-hidden="true">✍️</div>
+  </div>
+  <div class="step-card" id="m2-activity">
+    <div class="step-label" id="m2-activity-label">Activity: Is This Email Professional?</div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="m2-progress" style="width:0%;background:var(--m2);"></div></div>
+    <div style="font-size:14px;color:var(--muted);font-weight:700;margin-bottom:12px;" id="m2-counter"></div>
+    <div id="m2-q-block"></div>
+    <div class="feedback" id="m2-feedback"></div>
+  </div>
+  <div class="c2-sc"><div class="score-card" id="m2-score">
+    <div class="score-emoji" id="m2-emoji">🌟</div>
+    <div class="score-num" id="m2-num">0/4</div>
+    <div class="score-msg" id="m2-msg"></div>
+    <button class="btn btn-navy" onclick="resetM2()" id="m2-retry-btn" style="margin-top:14px;"></button>
+  </div></div>
+  <div class="step-card" id="m2-ai-builder" style="display:none;">
+    <div class="step-label" id="m2-ai-label" style="color:var(--m2);">🤖 Now Try It: Use AI to Improve an Email</div>
+    <p style="margin-bottom:12px;font-size:16px;" id="m2-ai-intro"></p>
+    <div class="ai-box">
+      <span class="ai-box-label" id="m2-ai-prompt-label">📋 Copy This AI Prompt:</span>
+      <div class="ai-prompt-text" id="m2-prompt-text"></div>
+      <button class="copy-btn-abs" onclick="copyBox(this)" id="m2-copy-lbl">Copy</button>
+      <span class="copy-ok" id="m2-copy-ok"></span>
+    </div>
+    <div class="tip-box" id="m2-tip-box" style="margin-top:12px;"></div>
+  </div>
+</div>
+
+<!-- ══════ MODULE 3 ══════ -->
+<div class="panel c3" id="panel3">
+  <div class="activity-header c3">
+    <span class="mod-badge" id="m3-badge">Module 3 AI Activity</span>
+    <h2 id="m3-title">📬 AI Decision Maker: Choose the Right Service</h2>
+    <p id="m3-desc">Read each situation. Choose the best delivery method. Then build your own AI prompt!</p>
+    <div class="big-emoji" aria-hidden="true">📬</div>
+  </div>
+  <div class="step-card" id="m3-activity">
+    <div class="step-label" id="m3-activity-label" style="color:var(--m3);">Scenario Quiz</div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="m3-progress" style="width:0%;background:var(--m3);"></div></div>
+    <div style="font-size:14px;color:var(--muted);font-weight:700;margin-bottom:12px;" id="m3-counter"></div>
+    <div id="m3-scenario-block"></div>
+    <div id="m3-options-block" class="choices"></div>
+    <div class="feedback" id="m3-feedback"></div>
+    <button class="btn btn-navy" id="m3-next-btn" style="display:none;margin-top:10px;" onclick="nextM3()"></button>
+  </div>
+  <div class="c3-sc"><div class="score-card" id="m3-score">
+    <div class="score-emoji" id="m3-emoji">🌟</div>
+    <div class="score-num" id="m3-num">0/5</div>
+    <div class="score-msg" id="m3-msg"></div>
+    <button class="btn btn-navy" onclick="resetM3()" id="m3-retry-btn" style="margin-top:14px;"></button>
+  </div></div>
+  <div class="step-card" id="m3-ai-builder" style="display:none;">
+    <div class="step-label" id="m3-ai-label" style="color:var(--m3);">🤖 Build Your Own AI Prompt</div>
+    <p style="margin-bottom:12px;font-size:16px;" id="m3-ai-intro"></p>
+    <div id="m3-builder-form"></div>
+    <div class="generated-prompt">
+      <div class="ai-box-label" id="m3-prompt-label">🤖 Your AI Prompt:</div>
+      <div class="generated-prompt-text" id="m3-prompt-text">...</div>
+    </div>
+    <button class="btn btn-ai" onclick="copyM3Prompt()" id="m3-copy-btn" style="margin-top:10px;"></button>
+    <div id="m3-copy-ok" style="color:#1e8c4a;font-weight:700;font-size:14px;display:none;margin-top:5px;"></div>
+  </div>
+</div>
+
+<!-- ══════ AI IN LIFE ══════ -->
+<div class="panel" id="panel4">
+  <div class="activity-header cai">
+    <span class="mod-badge" id="life-badge">Bonus Activity</span>
+    <h2 id="life-title">🌟 AI in Your Everyday Life — Beyond Work</h2>
+    <p id="life-desc">AI tools can help you in your personal life too! Here are 6 real ways to use AI outside of work.</p>
+    <div class="big-emoji" aria-hidden="true">🌟</div>
+  </div>
+  <div id="life-scenarios"></div>
+</div>
+
+</main>
+
+<script>
+/* ════════════════════════════════════════
+   ALL CONTENT IN BOTH LANGUAGES
+════════════════════════════════════════ */
+const T = {
+  en:{
+    pageTitle:'🤖 AI <span>Workplace Activities</span>',
+    pageSub:'VOC ED 418CE · West Los Angeles College · Spring 2026',
+    tabs:['📞 Module 1<br><small>AI & Phone</small>','📄 Module 2<br><small>AI & Writing</small>','📬 Module 3<br><small>AI & Mail</small>','🌟 AI Life<br><small>Beyond Work</small>'],
+    // MODULE 1
+    m1Badge:'Module 1 AI Activity',
+    m1Title:'📞 AI Phone Coach: Build Your Professional Greeting',
+    m1Desc:'Use AI to create YOUR perfect professional phone greeting, then practice it. Three steps!',
+    m1S1Label:'Step 1 of 3 — Quick Check: What Makes a Good Greeting?',
+    m1S1Intro:'Before we build your greeting with AI, let\'s make sure you know the three required parts. Which option below is the best professional greeting?',
+    m1Choices:[
+      {text:'"Hello? Who is this?"',correct:false},
+      {text:'"Yeah, hold on."',correct:false},
+      {text:'"Good afternoon, West Side Building Services, this is Maria speaking. How may I help you?"',correct:true},
+      {text:'"Building Services."',correct:false},
+    ],
+    m1CorrectFb:'✅ Correct! A professional greeting includes: (1) a time-of-day word, (2) the company name, (3) your name, and (4) an offer to help.',
+    m1WrongFb:'💡 Not quite. A professional greeting must include a time-of-day word, the company name, and your name. Option C is the correct answer.',
+    m1S2Label:'Step 2 of 3 — Build YOUR Greeting with AI',
+    m1S2Intro:'Fill in your information below. Your AI prompt will be built automatically. Then copy it into Claude or ChatGPT!',
+    m1JobLabel:'Your Job',
+    m1Jobs:['Porter / Building Services Worker','Food Service Worker','Security Guard','Cafeteria Supervisor','Lead Porter'],
+    m1CompanyLabel:'Your Company / School Name',
+    m1CompanyPlaceholder:'West Side Elementary School',
+    m1NameLabel:'Your First Name',
+    m1NamePlaceholder:'Maria',
+    m1PromptLabel:'🤖 Your Personalized AI Prompt:',
+    m1CopyBtn:'📋 Copy My AI Prompt',
+    m1CopiedOk:'✅ Copied! Now open Claude or ChatGPT and paste it.',
+    m1TipTitle:'📱 How to use it:',
+    m1TipSteps:['Tap Copy My AI Prompt above','Open claude.ai or chatgpt.com in a new browser tab','Paste the prompt and press Enter','Read the greeting AI gives you and practice saying it out loud!'],
+    m1S2Next:'Next: Practice It! →',
+    m1S3Label:'Step 3 of 3 — Fill in the Blank: Complete the Greeting',
+    m1S3Intro:'A professional phone greeting has 3 parts. Fill in each blank.',
+    m1S3Sentence:'"__________ afternoon, West Side Building Services, this is Maria __________. How may I __________ you?"',
+    m1B1Lbl:'Blank 1 — The greeting word (time of day):',
+    m1B2Lbl:'Blank 2 — What Maria says after her name:',
+    m1B3Lbl:'Blank 3 — What you offer to do:',
+    m1CheckBtn:'✅ Check My Answers',
+    m1AllCorrect:'🏆 All 3 blanks correct! You have mastered the professional phone greeting! Expected: "Good" | "speaking" | "help".',
+    m1SomeWrong:(n)=>`💪 ${n}/3 correct. Hint — Blank 1: "Good" | Blank 2: "speaking" | Blank 3: "help". Try again!`,
+    m1Greetings:['good','morning','afternoon','evening','hello'],
+    m1Words2:['speaking','here'],
+    m1Words3:['help','assist'],
+    // MODULE 2
+    m2Badge:'Module 2 AI Activity',
+    m2Title:'✍️ AI Writing Partner: Email Checker',
+    m2Desc:'Read a workplace email. Decide if it is professional. Then use AI to improve it!',
+    m2ActivityLabel:'Activity: Is This Email Professional? (4 Questions)',
+    m2CounterFn:(a,b)=>`Email ${a} of ${b}`,
+    m2Questions:[
+      {label:'Look at this email. What is WRONG with the greeting?',email:'FROM: carlos_r@mymail.com\nTO: supervisor@school.edu\nSUBJECT: hey\n\nhey!!! so listen, the cafeteria is out of cups LOL. we need more asap',
+       q:'What is wrong with this email greeting?',options:[{text:'"hey!!!" is too informal — professional emails use "Dear [Name]" or "Good morning, [Name]"',correct:true},{text:'The email is too short',correct:false},{text:'The FROM address is wrong',correct:false},{text:'Nothing is wrong',correct:false}],
+       explain:'"hey" and "!!!" are never appropriate in professional email. The correct greeting is: "Dear Ms. Torres," or "Good morning, Ms. Torres,"'},
+      {label:'Look at the SUBJECT LINE. Is it professional?',email:'SUBJECT: hey\nBODY: We need supplies.',
+       q:'Which subject line is more professional for an email about a supply shortage?',options:[{text:'"hey"',correct:false},{text:'"stuff"',correct:false},{text:'"Supply Shortage — Cafeteria — Urgent"',correct:true},{text:'(Leave it blank)',correct:false}],
+       explain:'A professional subject line tells the reader exactly what the email is about before they open it.'},
+      {label:'This email body is professional. What is MISSING at the end?',email:'Dear Ms. Torres,\n\nI am writing because we are out of cups in the cafeteria. We need at least 500 cups before Monday morning. Can you please approve this purchase?',
+       q:'What should come AFTER the body text?',options:[{text:'Nothing — just stop writing',correct:false},{text:'A professional closing and your name, like "Thank you, Carlos Reyes"',correct:true},{text:'A smiley face 😊',correct:false},{text:'"bye!"',correct:false}],
+       explain:'Every professional email ends with a polite closing AND your full name. Example: "Sincerely, Carlos Reyes" or "Thank you, Maria Torres."'},
+      {label:'Compare these two emails. Which is more professional?',email:'EMAIL A:\nhey boss. we ran out of cups. need more. thanks\n\nEMAIL B:\nDear Ms. Torres,\nI am writing to inform you that the cafeteria has run out of disposable cups. We will need at least 500 cups before Monday morning to serve students properly. Please let me know how I can submit this purchase request.\nThank you for your assistance.\nSincerely,\nCarlos Reyes, Lead Food Service Worker',
+       q:'Which email would you send to your supervisor?',options:[{text:'Email A — it is shorter and faster',correct:false},{text:'Email B — it is professional, clear, and respectful',correct:true},{text:'Both are equally good',correct:false},{text:'Neither — call instead',correct:false}],
+       explain:'Email B has: a formal greeting, clear explanation, specific details, a polite request, a professional closing, and a full name and title.'},
+    ],
+    m2CorrectLabel:'Correct!', m2WrongLabel:'Not quite.',
+    m2ScorePerfect:'Perfect! You know all the email etiquette rules!',
+    m2ScoreGood:'Great job! Review the ones you missed.',
+    m2ScoreLow:'Keep practicing! Review Module 2 vocabulary and try again.',
+    m2RetryBtn:'🔄 Try Again',
+    m2AiLabel:'🤖 Now Try It: Use AI to Improve an Email',
+    m2AiIntro:'Use the prompt below. Replace the [brackets] with your own information. Then paste it into Claude or ChatGPT.',
+    m2AiPromptLabel:'📋 Copy This AI Prompt:',
+    m2AiPrompt:`Here is an email I need to send at work:\n\nTO: [Supervisor's name]\nSUBJECT: [Topic — for example: "Schedule Change" or "Supply Request"]\nMESSAGE: [Write your message here in your own words]\n\nPlease do three things:\n1. Tell me: Is this email professional? What is good about it?\n2. Fix any grammar or spelling mistakes\n3. Rewrite it with a professional greeting, polite body, and professional closing\n\nUse simple English — I am an English learner.`,
+    m2CopyLbl:'Copy', m2CopiedOk:'✅ Copied!',
+    m2TipText:'💡 Tip: After AI rewrites your email, read it carefully. Would you change anything? The final email should sound like YOU — professional but still natural.',
+    // MODULE 3
+    m3Badge:'Module 3 AI Activity',
+    m3Title:'📬 AI Decision Maker: Choose the Right Service',
+    m3Desc:'Read each workplace situation. Choose the best way to send the document. Then build your own AI prompt!',
+    m3ActivityLabel:'Scenario Quiz: 5 Real Workplace Situations',
+    m3CounterFn:(a,b)=>`Scenario ${a} of ${b}`,
+    m3QuestionText:'❓ Which service do you choose?',
+    m3Scenarios:[
+      {text:'🏫 You are a porter. You need to tell the <strong>supply team in the same building</strong> that you are low on cleaning gloves. Not urgent.',
+       opts:[{icon:'📄',title:'Interoffice Memo',correct:true},{icon:'📦',title:'FedEx Overnight',correct:false},{icon:'📮',title:'USPS First-Class Mail',correct:false},{icon:'📠',title:'Fax',correct:false}],
+       explain:'An interoffice memo is best for communication inside the same building — it is free and fast!'},
+      {text:'🍽️ A signed contract must arrive at a company <strong>across town by 9:00 AM tomorrow morning</strong>.',
+       opts:[{icon:'📮',title:'USPS First-Class Mail',correct:false},{icon:'📦',title:'FedEx Overnight',correct:true},{icon:'📄',title:'Interoffice Memo',correct:false},{icon:'📠',title:'Fax',correct:false}],
+       explain:'FedEx Overnight guarantees next-morning delivery with a tracking number so you can confirm it arrived.'},
+      {text:'🔒 The main office across town needs a <strong>copy of an incident report right now</strong>. You have their fax number.',
+       opts:[{icon:'📠',title:'Fax',correct:true},{icon:'📦',title:'FedEx Overnight',correct:false},{icon:'📮',title:'USPS First-Class Mail',correct:false},{icon:'📄',title:'Interoffice Memo',correct:false}],
+       explain:'A fax sends a copy of a document instantly at very low cost — perfect when someone needs it right now!'},
+      {text:'🧹 Your team needs to send a <strong>15-pound supply box</strong> to another school. Delivery in <strong>2 to 3 days</strong> is fine.',
+       opts:[{icon:'📠',title:'Fax',correct:false},{icon:'📮',title:'USPS Priority Mail',correct:true},{icon:'📦',title:'FedEx Overnight',correct:false},{icon:'📄',title:'Interoffice Memo',correct:false}],
+       explain:'USPS Priority Mail is the most affordable choice for heavy packages when you have 2–3 days.'},
+      {text:'🍽️ You need to send a non-urgent letter to a parent. <strong>Saving money is most important.</strong>',
+       opts:[{icon:'📦',title:'FedEx Overnight',correct:false},{icon:'📮',title:'USPS First-Class Mail',correct:true},{icon:'📠',title:'Fax',correct:false},{icon:'📄',title:'Interoffice Memo',correct:false}],
+       explain:'USPS First-Class Mail is the most affordable option for non-urgent letters going outside the building.'},
+    ],
+    m3CorrectLabel:'Correct!', m3WrongLabel:'Not quite.',
+    m3ScorePerfect:'Perfect! You chose the right service every time!',
+    m3ScoreGood:'Excellent! You understand when to use each service.',
+    m3ScoreLow:'Keep practicing! Review the delivery comparison table in Module 3.',
+    m3NextBtn:'Next Scenario →', m3SeeScoreBtn:'🏁 See My Score',
+    m3RetryBtn:'🔄 Play Again',
+    m3AiLabel:'🤖 Build Your Own AI Prompt: Delivery Decisions',
+    m3AiIntro:'Not sure which service to use at work? Fill in your situation and let AI help you decide!',
+    m3DocLabel:'What are you sending?',
+    m3DocOptions:['a signed contract','a health inspection form','a supply request','a memo to another department','a heavy box of supplies','a copy of an incident report'],
+    m3DestLabel:'Where is it going?',
+    m3DestOptions:['another department in the same building','another office across town','a company in another city','the school district main office'],
+    m3UrgentLabel:'How urgent is it?',
+    m3UrgentOptions:['must arrive today','must arrive tomorrow morning','2 to 3 days is fine','no rush — 1 week is okay'],
+    m3BudgetLabel:'Budget?',
+    m3BudgetOptions:['I want to spend as little as possible','cost is not the most important thing','speed is more important than cost'],
+    m3PromptLabel:'🤖 Your AI Prompt:',
+    m3CopyBtn:'📋 Copy My Prompt',
+    m3CopiedOk:'✅ Copied! Paste into Claude or ChatGPT.',
+    m3PromptTemplate:(doc,dest,urgent,budget)=>`I need to send ${doc} to ${dest}. It needs to arrive by: ${urgent}. My budget: ${budget}.\n\nWhat is the best way to send this — fax, interoffice memo, USPS First-Class, USPS Priority Mail, or FedEx/UPS Overnight? Please recommend ONE option and explain why in 2 to 3 simple sentences. Use simple English — I am an English learner.`,
+    // LIFE
+    lifeBadge:'Bonus Activity',
+    lifeTitle:'🌟 AI in Your Everyday Life — Beyond Work',
+    lifeDesc:'AI tools can help you in your personal life too! Here are 6 real ways to use AI outside of work.',
+    lifeScenarios:[
+      {icon:'📄',color:'var(--m1)',title:'Understand a Confusing Letter',desc:'Did you receive a letter from a government office, your landlord, or school that is hard to understand? Paste it into AI and ask for help.',prompt:'I received this letter and I do not understand it. Please explain it to me in simple English. Tell me: (1) What does this letter mean? (2) Do I need to do anything? (3) Is there a deadline?\n\nHere is the letter: [paste the letter here]'},
+      {icon:'🏥',color:'var(--m2)',title:'Understand Medical Instructions',desc:'Not sure what your doctor or a prescription is telling you to do? AI can explain it in plain language.',prompt:'My doctor gave me these instructions: [paste here]. Please explain what this means in simple English. What do I need to do? Are there any warnings I should know about? (Note: AI is not a doctor — always follow your doctor\'s advice.)'},
+      {icon:'🏠',color:'var(--m3)',title:'Write a Letter to Your Landlord',desc:'Need to ask your landlord to fix something or request a document? AI can help you write a professional letter.',prompt:'Help me write a professional letter to my landlord. The situation is: [explain the problem]. Keep the letter polite but clear. Use simple English.'},
+      {icon:'📚',color:'var(--ai)',title:'Help Your Child with Homework',desc:'AI can explain school subjects in simple words so you can help your child at home.',prompt:'My child is in [grade level] and has homework about [subject and topic]. Please explain [the topic] in very simple words so I can help my child understand it. Then give 2 example problems with answers.'},
+      {icon:'💬',color:'var(--m1)',title:'Practice Speaking English',desc:'Use AI to have a conversation in English and improve your language skills every day.',prompt:'Let\'s practice English conversation. I work as a [your job]. Let\'s have a conversation about a typical day at my job. Please speak simply and correct any grammar mistakes I make, but be kind and encouraging. Start the conversation.'},
+      {icon:'🔍',color:'var(--m2)',title:'Find Community Resources Near You',desc:'AI can help you find free resources in your area — food, healthcare, English classes, and more.',prompt:'I live in [your city — for example: Culver City, California]. I am looking for: [free food assistance / free English classes / free health clinic / job training programs]. Please tell me what free resources are available near me. Give me names, addresses, and phone numbers if possible.'},
+    ],
+    lifePromptLabel:'📋 AI Prompt — Copy and Use:',
+    lifeCopyLbl:'Copy', lifeCopiedOk:'✅ Copied!',
+  },
+
+  es:{
+    pageTitle:'🤖 Actividades de <span>IA en el Trabajo</span>',
+    pageSub:'VOC ED 418CE · West Los Angeles College · Primavera 2026',
+    tabs:['📞 Módulo 1<br><small>IA y Teléfono</small>','📄 Módulo 2<br><small>IA y Escritura</small>','📬 Módulo 3<br><small>IA y Correo</small>','🌟 IA en la Vida<br><small>Más allá del trabajo</small>'],
+    m1Badge:'Actividad de IA — Módulo 1',
+    m1Title:'📞 Entrenador de IA: Construya Su Saludo Profesional',
+    m1Desc:'Use IA para crear SU saludo telefónico profesional perfecto, luego practíquelo. ¡Tres pasos!',
+    m1S1Label:'Paso 1 de 3 — Verificación Rápida',
+    m1S1Intro:'Antes de construir su saludo con IA, asegurémonos de que conoce las tres partes requeridas. ¿Cuál de las siguientes opciones es el mejor saludo profesional?',
+    m1Choices:[
+      {text:'"¿Aló? ¿Quién habla?"',correct:false},
+      {text:'"Sí, un momento."',correct:false},
+      {text:'"Buenas tardes, Servicios de Edificios West Side, le habla María. ¿En qué le puedo ayudar?"',correct:true},
+      {text:'"Servicios de Edificios."',correct:false},
+    ],
+    m1CorrectFb:'✅ ¡Correcto! Un saludo profesional incluye: (1) una palabra de saludo según la hora del día, (2) el nombre de la empresa, (3) su nombre, y (4) una oferta de ayuda.',
+    m1WrongFb:'💡 No exactamente. Un saludo profesional debe incluir una palabra de saludo según la hora, el nombre de la empresa y su nombre. La opción C es la respuesta correcta.',
+    m1S2Label:'Paso 2 de 3 — Construya SU Saludo con IA',
+    m1S2Intro:'Complete su información a continuación. Su mensaje de IA se construirá automáticamente. ¡Luego cópielo en Claude o ChatGPT!',
+    m1JobLabel:'Su Trabajo',
+    m1Jobs:['Portero / Trabajador de Servicios de Edificios','Trabajador de Servicio de Alimentos','Guardia de Seguridad','Supervisor/a de Cafetería','Portero Líder'],
+    m1CompanyLabel:'Nombre de Su Empresa / Escuela',
+    m1CompanyPlaceholder:'Escuela West Side',
+    m1NameLabel:'Su Nombre de Pila',
+    m1NamePlaceholder:'María',
+    m1PromptLabel:'🤖 Su Mensaje de IA Personalizado:',
+    m1CopyBtn:'📋 Copiar Mi Mensaje de IA',
+    m1CopiedOk:'✅ ¡Copiado! Ahora abra Claude o ChatGPT y péguelo.',
+    m1TipTitle:'📱 Cómo usarlo:',
+    m1TipSteps:['Toque "Copiar Mi Mensaje de IA" arriba','Abra claude.ai o chatgpt.com en una nueva pestaña del navegador','Pegue el mensaje y presione Enter','¡Lea el saludo que le da la IA y practique diciéndolo en voz alta!'],
+    m1S2Next:'Siguiente: ¡Practíquelo! →',
+    m1S3Label:'Paso 3 de 3 — Complete los Espacios en Blanco',
+    m1S3Intro:'Un saludo telefónico profesional tiene 3 partes. Complete cada espacio en blanco.',
+    m1S3Sentence:'"__________ tardes, Servicios de Edificios West Side, le habla María __________. ¿En qué le puedo __________?"',
+    m1B1Lbl:'Espacio 1 — La palabra de saludo (hora del día):',
+    m1B2Lbl:'Espacio 2 — Lo que dice María después de su nombre:',
+    m1B3Lbl:'Espacio 3 — Lo que ofrece hacer:',
+    m1CheckBtn:'✅ Verificar Mis Respuestas',
+    m1AllCorrect:'🏆 ¡Los 3 espacios correctos! ¡Ha dominado el saludo telefónico profesional! Respuestas: "Buenas" | "hablando" | "ayudar".',
+    m1SomeWrong:(n)=>`💪 ${n}/3 correctos. Pista — Espacio 1: "Buenas" | Espacio 2: "hablando" | Espacio 3: "ayudar". ¡Intente de nuevo!`,
+    m1Greetings:['buenas','good','morning','afternoon','evening','buenos','hola','hello'],
+    m1Words2:['hablando','speaking','here','aquí'],
+    m1Words3:['ayudar','help','assist','servir'],
+    m2Badge:'Actividad de IA — Módulo 2',
+    m2Title:'✍️ Asistente de Escritura IA: Revisor de Correos Electrónicos',
+    m2Desc:'Lea un correo electrónico de trabajo. Decida si es profesional. ¡Luego use IA para mejorarlo!',
+    m2ActivityLabel:'Actividad: ¿Es Este Correo Electrónico Profesional? (4 Preguntas)',
+    m2CounterFn:(a,b)=>`Correo ${a} de ${b}`,
+    m2Questions:[
+      {label:'Mire este correo electrónico. ¿Qué está MAL en el saludo?',email:'DE: carlos_r@mimail.com\nPARA: supervisor@escuela.edu\nASUNTO: hey\n\nhey!!! oye mira, a la cafetería le faltan vasos LOL. necesitamos más ya',
+       q:'¿Qué está mal en el saludo de este correo electrónico?',options:[{text:'"hey!!!" es demasiado informal — los correos profesionales usan "Estimada [Nombre]:" o "Buenos días, [Nombre]:"',correct:true},{text:'El correo es demasiado corto',correct:false},{text:'La dirección DE está incorrecta',correct:false},{text:'No hay nada malo',correct:false}],
+       explain:'"hey" y "!!!" nunca son apropiados en un correo electrónico profesional. El saludo correcto sería: "Estimada Sra. Torres:" o "Buenos días, Sra. Torres:"'},
+      {label:'Mire la LÍNEA DE ASUNTO. ¿Es profesional?',email:'ASUNTO: hey\nMENSAJE: Necesitamos suministros.',
+       q:'¿Cuál línea de asunto es más profesional para un correo sobre falta de suministros?',options:[{text:'"hey"',correct:false},{text:'"cosas"',correct:false},{text:'"Falta de Suministros — Cafetería — Urgente"',correct:true},{text:'(Dejarla en blanco)',correct:false}],
+       explain:'Una línea de asunto profesional le dice al lector exactamente de qué trata el correo antes de abrirlo.'},
+      {label:'Este cuerpo de correo es profesional. ¿Qué FALTA al final?',email:'Estimada Sra. Torres:\n\nLe escribo porque en la cafetería nos quedamos sin vasos desechables. Necesitamos al menos 500 vasos antes del lunes por la mañana. ¿Podría aprobar esta compra?',
+       q:'¿Qué debe ir DESPUÉS del cuerpo del mensaje?',options:[{text:'Nada — simplemente deje de escribir',correct:false},{text:'Un cierre profesional y su nombre, como "Gracias, Carlos Reyes"',correct:true},{text:'Un emoticón 😊',correct:false},{text:'"¡Adiós!"',correct:false}],
+       explain:'Todo correo electrónico profesional termina con un cierre cortés Y su nombre completo. Ejemplo: "Atentamente, Carlos Reyes" o "Gracias, María Torres."'},
+      {label:'Compare estos dos correos. ¿Cuál es más profesional?',email:'CORREO A:\nhey jefa. se nos acabaron los vasos. necesitamos más. gracias\n\nCORREO B:\nEstimada Sra. Torres:\nLe escribo para informarle que en la cafetería se acabaron los vasos desechables. Necesitaremos al menos 500 vasos antes del lunes por la mañana para servir a los estudiantes correctamente. Por favor hágame saber cómo puedo enviar esta solicitud de compra.\nGracias por su ayuda.\nAtentamente,\nCarlos Reyes, Trabajador Líder de Servicio de Alimentos',
+       q:'¿Cuál correo le enviaría a su supervisor/a?',options:[{text:'Correo A — es más corto y rápido de escribir',correct:false},{text:'Correo B — es profesional, claro y respetuoso',correct:true},{text:'Los dos son igualmente buenos',correct:false},{text:'Ninguno — mejor llame por teléfono',correct:false}],
+       explain:'El Correo B tiene: saludo formal, explicación clara, detalles específicos, solicitud cortés, cierre profesional y nombre completo con título.'},
+    ],
+    m2CorrectLabel:'¡Correcto!', m2WrongLabel:'No exactamente.',
+    m2ScorePerfect:'¡Perfecto! ¡Conoce todas las reglas de etiqueta de correo electrónico!',
+    m2ScoreGood:'¡Excelente trabajo! Revise los que no acertó.',
+    m2ScoreLow:'¡Siga practicando! Revise el vocabulario del Módulo 2 e intente de nuevo.',
+    m2RetryBtn:'🔄 Intentar de Nuevo',
+    m2AiLabel:'🤖 Ahora Pruébelo: Use IA para Mejorar un Correo Electrónico',
+    m2AiIntro:'Use el mensaje a continuación. Reemplace los [corchetes] con su propia información. Luego péguelo en Claude o ChatGPT.',
+    m2AiPromptLabel:'📋 Copie Este Mensaje de IA:',
+    m2AiPrompt:`Aquí está un correo electrónico que necesito enviar en el trabajo:\n\nPARA: [Nombre del supervisor/a]\nASUNTO: [Tema — por ejemplo: "Cambio de Horario" o "Solicitud de Suministros"]\nMENSAJE: [Escriba su mensaje aquí con sus propias palabras]\n\nPor favor haga tres cosas:\n1. Dígame: ¿Es este correo profesional? ¿Qué está bien?\n2. Corrija cualquier error de gramática u ortografía\n3. Vuelva a escribirlo con un saludo profesional, cuerpo cortés y cierre profesional\n\nUse inglés simple — soy un/a estudiante de inglés.`,
+    m2CopyLbl:'Copiar', m2CopiedOk:'✅ ¡Copiado!',
+    m2TipText:'💡 Consejo: Después de que la IA reescriba su correo, léalo con cuidado. ¿Cambiaría algo? El correo final debe sonar como USTED — profesional pero natural.',
+    m3Badge:'Actividad de IA — Módulo 3',
+    m3Title:'📬 Tomador de Decisiones IA: Elija el Servicio Correcto',
+    m3Desc:'Lea cada situación. Elija la mejor manera de enviar el documento. ¡Luego construya su propio mensaje de IA!',
+    m3ActivityLabel:'Cuestionario de Escenarios: 5 Situaciones Reales de Trabajo',
+    m3CounterFn:(a,b)=>`Escenario ${a} de ${b}`,
+    m3QuestionText:'❓ ¿Qué servicio elige?',
+    m3Scenarios:[
+      {text:'🏫 Es portero/a. Necesita decirle al <strong>equipo de suministros en el mismo edificio</strong> que le quedan pocos guantes de limpieza. No es urgente.',
+       opts:[{icon:'📄',title:'Memorándum Interno',correct:true},{icon:'📦',title:'FedEx Overnight',correct:false},{icon:'📮',title:'Correo Regular USPS',correct:false},{icon:'📠',title:'Fax',correct:false}],
+       explain:'¡Un memorándum interno es mejor para la comunicación dentro del mismo edificio — es gratis y rápido!'},
+      {text:'🍽️ Un contrato firmado debe llegar a una empresa <strong>al otro lado de la ciudad antes de las 9:00 AM de mañana</strong>.',
+       opts:[{icon:'📮',title:'Correo Regular USPS',correct:false},{icon:'📦',title:'FedEx Overnight',correct:true},{icon:'📄',title:'Memorándum Interno',correct:false},{icon:'📠',title:'Fax',correct:false}],
+       explain:'FedEx Overnight garantiza la entrega a la mañana siguiente con un número de seguimiento para confirmar que llegó.'},
+      {text:'🔒 La oficina principal necesita <strong>una copia de un reporte de incidente ahora mismo</strong>. Usted tiene su número de fax.',
+       opts:[{icon:'📠',title:'Fax',correct:true},{icon:'📦',title:'FedEx Overnight',correct:false},{icon:'📮',title:'Correo Regular USPS',correct:false},{icon:'📄',title:'Memorándum Interno',correct:false}],
+       explain:'¡Un fax envía una copia de un documento instantáneamente a muy bajo costo — perfecto cuando alguien lo necesita ahora mismo!'},
+      {text:'🧹 Su equipo necesita enviar una <strong>caja de suministros de 15 libras</strong> a otra escuela. La entrega en <strong>2 a 3 días</strong> está bien.',
+       opts:[{icon:'📠',title:'Fax',correct:false},{icon:'📮',title:'USPS Priority Mail',correct:true},{icon:'📦',title:'FedEx Overnight',correct:false},{icon:'📄',title:'Memorándum Interno',correct:false}],
+       explain:'USPS Priority Mail es la opción más asequible para paquetes pesados cuando tiene 2 a 3 días.'},
+      {text:'🍽️ Necesita enviar una carta no urgente a un padre de familia. <strong>Ahorrar dinero es lo más importante.</strong>',
+       opts:[{icon:'📦',title:'FedEx Overnight',correct:false},{icon:'📮',title:'USPS First-Class Mail',correct:true},{icon:'📠',title:'Fax',correct:false},{icon:'📄',title:'Memorándum Interno',correct:false}],
+       explain:'USPS First-Class Mail es la opción más económica para cartas no urgentes que van fuera del edificio.'},
+    ],
+    m3CorrectLabel:'¡Correcto!', m3WrongLabel:'No exactamente.',
+    m3ScorePerfect:'¡Perfecto! ¡Eligió el servicio correcto en cada ocasión!',
+    m3ScoreGood:'¡Excelente! Entiende cuándo usar cada servicio.',
+    m3ScoreLow:'¡Siga practicando! Revise la tabla de comparación de métodos de entrega en el Módulo 3.',
+    m3NextBtn:'Siguiente Escenario →', m3SeeScoreBtn:'🏁 Ver Mi Puntaje',
+    m3RetryBtn:'🔄 Jugar de Nuevo',
+    m3AiLabel:'🤖 Construya Su Propio Mensaje de IA: Decisiones de Envío',
+    m3AiIntro:'¿No está seguro/a qué servicio usar en el trabajo? ¡Complete su situación y deje que la IA le ayude a decidir!',
+    m3DocLabel:'¿Qué está enviando?',
+    m3DocOptions:['un contrato firmado','un formulario de inspección de salud','una solicitud de suministros','un memorándum a otro departamento','una caja pesada de suministros','una copia de un reporte de incidente'],
+    m3DestLabel:'¿A dónde va?',
+    m3DestOptions:['otro departamento en el mismo edificio','otra oficina al otro lado de la ciudad','una empresa en otra ciudad','la oficina principal del distrito escolar'],
+    m3UrgentLabel:'¿Qué tan urgente es?',
+    m3UrgentOptions:['debe llegar hoy','debe llegar mañana por la mañana','2 a 3 días está bien','no hay prisa — 1 semana está bien'],
+    m3BudgetLabel:'¿Presupuesto?',
+    m3BudgetOptions:['quiero gastar lo menos posible','el costo no es lo más importante','la velocidad es más importante que el costo'],
+    m3PromptLabel:'🤖 Su Mensaje de IA:',
+    m3CopyBtn:'📋 Copiar Mi Mensaje',
+    m3CopiedOk:'✅ ¡Copiado! Péguelo en Claude o ChatGPT.',
+    m3PromptTemplate:(doc,dest,urgent,budget)=>`Necesito enviar ${doc} a ${dest}. Necesita llegar: ${urgent}. Mi presupuesto: ${budget}.\n\n¿Cuál es la mejor manera de enviar esto — fax, memorándum interno, USPS First-Class, USPS Priority Mail o FedEx/UPS Overnight? Por favor recomiende UNA opción y explique por qué en 2 a 3 oraciones simples. Use inglés sencillo — soy un/a estudiante de inglés.`,
+    lifeBadge:'Actividad Adicional',
+    lifeTitle:'🌟 La IA en Su Vida Diaria — Más Allá del Trabajo',
+    lifeDesc:'¡Las herramientas de IA también pueden ayudarle en su vida personal! Aquí hay 6 maneras reales de usar la IA fuera del trabajo.',
+    lifeScenarios:[
+      {icon:'📄',color:'var(--m1)',title:'Entender una Carta Confusa',desc:'¿Recibió una carta de una oficina del gobierno, su arrendador o la escuela que es difícil de entender? Péguela en la IA y pida ayuda.',prompt:'Recibí esta carta y no la entiendo. Por favor explíquemela en español simple. Dígame: (1) ¿Qué significa esta carta? (2) ¿Necesito hacer algo? (3) ¿Hay una fecha límite?\n\nAquí está la carta: [pegue la carta aquí]'},
+      {icon:'🏥',color:'var(--m2)',title:'Entender Instrucciones Médicas',desc:'¿No está seguro/a de lo que le dice su médico o una receta? La IA puede explicarlo en palabras simples.',prompt:'Mi médico me dio estas instrucciones: [pegue aquí]. Por favor explique qué significa esto en español simple. ¿Qué necesito hacer? ¿Hay advertencias que debo saber? (Nota: La IA no es médico — siempre siga las instrucciones de su médico.)'},
+      {icon:'🏠',color:'var(--m3)',title:'Escribir una Carta a Su Arrendador',desc:'¿Necesita pedirle a su arrendador que arregle algo o solicitar un documento? La IA puede ayudarle a escribir una carta profesional.',prompt:'Ayúdeme a escribir una carta profesional a mi arrendador. La situación es: [explique el problema]. Mantenga la carta cortés pero clara. Use español simple.'},
+      {icon:'📚',color:'var(--ai)',title:'Ayudar a Su Hijo/a con la Tarea',desc:'La IA puede explicar las materias escolares en palabras simples para que pueda ayudar a su hijo/a en casa.',prompt:'Mi hijo/a está en [grado] y tiene tarea sobre [materia y tema]. Por favor explique [el tema] en palabras muy simples para que pueda ayudar a mi hijo/a a entenderlo. Luego dé 2 problemas de ejemplo con respuestas.'},
+      {icon:'💬',color:'var(--m1)',title:'Practicar Inglés',desc:'Use la IA para tener una conversación en inglés y mejorar sus habilidades de idioma todos los días.',prompt:'Practiquemos una conversación en inglés. Trabajo como [su trabajo]. Tengamos una conversación sobre un día típico en mi trabajo. Por favor hable simplemente y corrija cualquier error de gramática que cometa, pero sea amable y alentador/a. Comience la conversación.'},
+      {icon:'🔍',color:'var(--m2)',title:'Encontrar Recursos Comunitarios Cerca de Usted',desc:'La IA puede ayudarle a encontrar recursos gratuitos en su área — comida, salud, clases de inglés y más.',prompt:'Vivo en [su ciudad — por ejemplo: Culver City, California]. Estoy buscando: [asistencia de alimentos gratis / clases de inglés gratis / clínica de salud gratuita / programas de capacitación laboral]. Por favor dígame qué recursos gratuitos hay cerca de mí. Dé nombres, direcciones y números de teléfono si es posible.'},
+    ],
+    lifePromptLabel:'📋 Mensaje de IA — Copie y Use:',
+    lifeCopyLbl:'Copiar', lifeCopiedOk:'✅ ¡Copiado!',
+  }
+};
+
+/* ════════════════════════════════════════
+   STATE
+════════════════════════════════════════ */
+let lang='en';
+let m1Answered=false;
+let m2Index=0,m2Score=0,m2Answered=false;
+let m3Index=0,m3Score=0,m3Answered=false;
+
+/* ════════════════════════════════════════
+   LANGUAGE
+════════════════════════════════════════ */
+function setLang(l){
+  lang=l;
+  document.getElementById('html-root').setAttribute('lang',l);
+  document.getElementById('btn-en').className='lang-btn '+(l==='en'?'active':'inactive');
+  document.getElementById('btn-es').className='lang-btn '+(l==='es'?'active':'inactive');
+  document.getElementById('btn-en').setAttribute('aria-pressed',l==='en');
+  document.getElementById('btn-es').setAttribute('aria-pressed',l==='es');
+  renderAllUI();
+}
+
+function renderAllUI(){
+  const t=T[lang];
+  document.getElementById('page-title').innerHTML=t.pageTitle;
+  document.getElementById('page-sub').textContent=t.pageSub;
+  // Tabs
+  for(let i=1;i<=4;i++) document.getElementById('tab-lbl-'+i).innerHTML=t.tabs[i-1];
+  // Module 1
+  document.getElementById('m1-badge').textContent=t.m1Badge;
+  document.getElementById('m1-title').textContent=t.m1Title;
+  document.getElementById('m1-desc').textContent=t.m1Desc;
+  document.getElementById('m1-s1-label').textContent=t.m1S1Label;
+  document.getElementById('m1-s1-intro').textContent=t.m1S1Intro;
+  renderM1Choices();
+  document.getElementById('m1-s2-label').textContent=t.m1S2Label;
+  document.getElementById('m1-s2-intro').textContent=t.m1S2Intro;
+  renderM1Builder();
+  document.getElementById('m1-prompt-label').textContent=t.m1PromptLabel;
+  document.getElementById('m1-copy-btn').textContent=t.m1CopyBtn;
+  document.getElementById('m1-copy-ok').textContent=t.m1CopiedOk;
+  renderM1Tip();
+  document.getElementById('m1-s2-next').textContent=t.m1S2Next;
+  document.getElementById('m1-s3-label').textContent=t.m1S3Label;
+  document.getElementById('m1-s3-intro').textContent=t.m1S3Intro;
+  document.getElementById('m1-s3-sentence').textContent=t.m1S3Sentence;
+  document.getElementById('m1-b1-lbl').textContent=t.m1B1Lbl;
+  document.getElementById('m1-b2-lbl').textContent=t.m1B2Lbl;
+  document.getElementById('m1-b3-lbl').textContent=t.m1B3Lbl;
+  document.getElementById('m1-check-btn').textContent=t.m1CheckBtn;
+  // Module 2
+  document.getElementById('m2-badge').textContent=t.m2Badge;
+  document.getElementById('m2-title').textContent=t.m2Title;
+  document.getElementById('m2-desc').textContent=t.m2Desc;
+  document.getElementById('m2-activity-label').textContent=t.m2ActivityLabel;
+  document.getElementById('m2-retry-btn').textContent=t.m2RetryBtn;
+  document.getElementById('m2-ai-label').textContent=t.m2AiLabel;
+  document.getElementById('m2-ai-intro').textContent=t.m2AiIntro;
+  document.getElementById('m2-ai-prompt-label').textContent=t.m2AiPromptLabel;
+  document.getElementById('m2-prompt-text').textContent=t.m2AiPrompt;
+  document.getElementById('m2-copy-lbl').textContent=t.m2CopyLbl;
+  document.getElementById('m2-copy-ok').textContent=t.m2CopiedOk;
+  document.getElementById('m2-tip-box').textContent=t.m2TipText;
+  renderM2Q();
+  // Module 3
+  document.getElementById('m3-badge').textContent=t.m3Badge;
+  document.getElementById('m3-title').textContent=t.m3Title;
+  document.getElementById('m3-desc').textContent=t.m3Desc;
+  document.getElementById('m3-activity-label').textContent=t.m3ActivityLabel;
+  document.getElementById('m3-retry-btn').textContent=t.m3RetryBtn;
+  document.getElementById('m3-ai-label').textContent=t.m3AiLabel;
+  document.getElementById('m3-ai-intro').textContent=t.m3AiIntro;
+  document.getElementById('m3-prompt-label').textContent=t.m3PromptLabel;
+  document.getElementById('m3-copy-btn').textContent=t.m3CopyBtn;
+  document.getElementById('m3-copy-ok').textContent=t.m3CopiedOk;
+  renderM3Builder();
+  buildM3Prompt();
+  renderM3Q();
+  // Life
+  document.getElementById('life-badge').textContent=t.lifeBadge;
+  document.getElementById('life-title').textContent=t.lifeTitle;
+  document.getElementById('life-desc').textContent=t.lifeDesc;
+  renderLifeScenarios();
+}
+
+/* ════════════════════════════════════════
+   TAB SWITCHING
+════════════════════════════════════════ */
+function showTab(n){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false');});
+  document.getElementById('panel'+n).classList.add('active');
+  document.querySelectorAll('.tab-btn')[n-1].classList.add('active');
+  document.querySelectorAll('.tab-btn')[n-1].setAttribute('aria-selected','true');
+}
+
+/* ════════════════════════════════════════
+   COPY HELPERS
+════════════════════════════════════════ */
+function doCopy(text,okEl){
+  navigator.clipboard.writeText(text).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);});
+  okEl.style.display='inline';setTimeout(()=>{okEl.style.display='none';},2500);
+}
+function copyBox(btn){
+  const text=btn.previousElementSibling.textContent;
+  const ok=btn.nextElementSibling;
+  doCopy(text,ok);
+}
+
+/* ════════════════════════════════════════
+   MODULE 1
+════════════════════════════════════════ */
+function renderM1Choices(){
+  const t=T[lang];
+  m1Answered=false;
+  document.getElementById('m1-choices').innerHTML=t.m1Choices.map((c,i)=>`
+    <button class="choice-btn" onclick="answerM1(this,${c.correct})" aria-label="Option ${String.fromCharCode(65+i)}">
+      <span class="ci" aria-hidden="true">${String.fromCharCode(65+i)}</span> ${c.text}
+    </button>`).join('');
+  document.getElementById('m1-feedback').className='feedback';
+}
+
+function renderM1Builder(){
+  const t=T[lang];
+  document.getElementById('m1-builder-form').innerHTML=`
+    <div class="pb-field"><label class="pb-label" for="pb-job">${t.m1JobLabel}</label>
+    <select class="pb-select" id="pb-job" onchange="buildM1Prompt()" aria-label="${t.m1JobLabel}">
+      ${t.m1Jobs.map(j=>`<option value="${j}">${j}</option>`).join('')}
+    </select></div>
+    <div class="pb-field"><label class="pb-label" for="pb-company">${t.m1CompanyLabel}</label>
+    <input class="pb-input" type="text" id="pb-company" placeholder="${t.m1CompanyPlaceholder}" oninput="buildM1Prompt()" aria-label="${t.m1CompanyLabel}"></div>
+    <div class="pb-field"><label class="pb-label" for="pb-name">${t.m1NameLabel}</label>
+    <input class="pb-input" type="text" id="pb-name" placeholder="${t.m1NamePlaceholder}" oninput="buildM1Prompt()" aria-label="${t.m1NameLabel}"></div>`;
+  buildM1Prompt();
+}
+
+function renderM1Tip(){
+  const t=T[lang];
+  document.getElementById('m1-tip-box').innerHTML=`<strong style="color:#7a5000;">📱 ${t.m1TipTitle}</strong>
+    <ol style="margin-top:7px;padding-left:18px;font-size:15px;line-height:1.9;">
+      ${t.m1TipSteps.map(s=>`<li>${s}</li>`).join('')}
+    </ol>`;
+}
+
+function buildM1Prompt(){
+  const t=T[lang];
+  const job=document.getElementById('pb-job')?.value||t.m1Jobs[0];
+  const company=document.getElementById('pb-company')?.value||'['+t.m1CompanyPlaceholder+']';
+  const name=document.getElementById('pb-name')?.value||'['+t.m1NamePlaceholder+']';
+  const prompt=lang==='en'
+    ?`I work as a ${job} at ${company}. My name is ${name}.\n\nPlease help me write a professional phone greeting I can use when I answer the phone at work. The greeting should include:\n1. A polite time-of-day word (Good morning / Good afternoon / Good evening)\n2. The name of my company: ${company}\n3. My name: ${name}\n4. An offer to help the caller\n\nPlease give me 3 versions — short, medium, and longer. Use simple English — I am an English learner. Also explain which one is best for my job as a ${job}.`
+    :`Trabajo como ${job} en ${company}. Mi nombre es ${name}.\n\nPor favor ayúdeme a escribir un saludo telefónico profesional que pueda usar cuando contesto el teléfono en el trabajo. El saludo debe incluir:\n1. Una palabra de saludo según la hora (Buenos días / Buenas tardes / Buenas noches)\n2. El nombre de mi empresa: ${company}\n3. Mi nombre: ${name}\n4. Una oferta de ayuda al llamante\n\nDé 3 versiones — corta, mediana y más larga. Use inglés simple — soy un/a estudiante de inglés. También explique cuál es mejor para mi trabajo como ${job}.`;
+  const el=document.getElementById('m1-prompt-text');
+  if(el) el.textContent=prompt;
+}
+
+function copyM1Prompt(){
+  const text=document.getElementById('m1-prompt-text').textContent;
+  doCopy(text,document.getElementById('m1-copy-ok'));
+}
+
+function answerM1(btn,correct){
+  if(m1Answered)return; m1Answered=true;
+  const t=T[lang];
+  document.querySelectorAll('#m1-choices .choice-btn').forEach(b=>b.disabled=true);
+  const fb=document.getElementById('m1-feedback');
+  if(correct){btn.classList.add('correct');fb.className='feedback good show';fb.innerHTML=`<span class="fb-icon">✅</span><div class="fb-text">${t.m1CorrectFb}</div>`;}
+  else{btn.classList.add('wrong');document.querySelectorAll('#m1-choices .choice-btn').forEach((b,i)=>{if(t.m1Choices[i].correct)b.classList.add('correct');});
+    fb.className='feedback bad show';fb.innerHTML=`<span class="fb-icon">💡</span><div class="fb-text">${t.m1WrongFb}</div>`;}
+  setTimeout(()=>{document.getElementById('m1-step1').style.display='none';document.getElementById('m1-step2').style.display='block';buildM1Prompt();},2000);
+}
+
+function goM1Step3(){document.getElementById('m1-step2').style.display='none';document.getElementById('m1-step3').style.display='block';}
+
+function checkM1Blanks(){
+  const t=T[lang];
+  const b1=document.getElementById('m1-b1').value.trim().toLowerCase();
+  const b2=document.getElementById('m1-b2').value.trim().toLowerCase();
+  const b3=document.getElementById('m1-b3').value.trim().toLowerCase();
+  let correct=0;
+  if(t.m1Greetings.some(w=>b1.includes(w))){document.getElementById('m1-b1').classList.add('correct');correct++;}else document.getElementById('m1-b1').classList.add('wrong');
+  if(t.m1Words2.some(w=>b2.includes(w))){document.getElementById('m1-b2').classList.add('correct');correct++;}else document.getElementById('m1-b2').classList.add('wrong');
+  if(t.m1Words3.some(w=>b3.includes(w))){document.getElementById('m1-b3').classList.add('correct');correct++;}else document.getElementById('m1-b3').classList.add('wrong');
+  const fb=document.getElementById('m1-blanks-feedback');
+  if(correct===3){fb.className='feedback good show';fb.innerHTML=`<span class="fb-icon">🏆</span><div class="fb-text">${t.m1AllCorrect}</div>`;}
+  else{fb.className='feedback bad show';fb.innerHTML=`<span class="fb-icon">💪</span><div class="fb-text">${t.m1SomeWrong(correct)}</div>`;}
+}
+
+/* ════════════════════════════════════════
+   MODULE 2
+════════════════════════════════════════ */
+function renderM2Q(){
+  const t=T[lang];
+  if(m2Index>=t.m2Questions.length){showM2Score();return;}
+  m2Answered=false;
+  const q=t.m2Questions[m2Index];
+  document.getElementById('m2-counter').textContent=t.m2CounterFn(m2Index+1,t.m2Questions.length);
+  document.getElementById('m2-progress').style.width=(m2Index/t.m2Questions.length*100)+'%';
+  document.getElementById('m2-feedback').className='feedback';
+  document.getElementById('m2-score').classList.remove('show');
+  document.getElementById('m2-activity').style.display='block';
+  document.getElementById('m2-q-block').innerHTML=`
+    <p style="font-size:14px;font-weight:700;color:var(--muted);margin-bottom:10px;">${q.label}</p>
+    <div style="background:var(--m2-light);border:1px solid var(--m2);border-radius:10px;padding:13px;margin-bottom:13px;font-size:14px;font-family:'Courier New',monospace;white-space:pre-wrap;color:var(--text);">${q.email}</div>
+    <p style="font-weight:800;font-size:17px;margin-bottom:13px;">${q.q}</p>
+    <div class="choices">
+      ${q.options.map((o,i)=>`
+        <button class="choice-btn" onclick="answerM2(this,${o.correct})" aria-label="Option ${String.fromCharCode(65+i)}">
+          <span class="ci" aria-hidden="true">${String.fromCharCode(65+i)}</span> ${o.text}
+        </button>`).join('')}
+    </div>`;
+}
+
+function answerM2(btn,correct){
+  if(m2Answered)return; m2Answered=true;
+  const t=T[lang];
+  const q=t.m2Questions[m2Index];
+  document.querySelectorAll('#m2-q-block .choice-btn').forEach((b,i)=>{
+    b.disabled=true;
+    if(b===btn&&correct)b.classList.add('correct');
+    else if(b===btn&&!correct)b.classList.add('wrong');
+    else if(q.options[i]?.correct)b.classList.add('correct');
+  });
+  if(correct)m2Score++;
+  const fb=document.getElementById('m2-feedback');
+  fb.className='feedback '+(correct?'good':'bad')+' show';
+  fb.innerHTML=`<span class="fb-icon">${correct?'✅':'💡'}</span><div class="fb-text"><strong>${correct?t.m2CorrectLabel:t.m2WrongLabel}</strong> ${q.explain}</div>`;
+  setTimeout(()=>{m2Index++;renderM2Q();},2400);
+}
+
+function showM2Score(){
+  document.getElementById('m2-activity').style.display='none';
+  document.getElementById('m2-score').classList.add('show');
+  const t=T[lang];const pct=m2Score/4;
+  document.getElementById('m2-num').textContent=m2Score+'/4';
+  document.getElementById('m2-emoji').textContent=pct===1?'🏆':pct>=0.75?'🌟':'💪';
+  document.getElementById('m2-msg').textContent=pct===1?t.m2ScorePerfect:pct>=0.75?t.m2ScoreGood:t.m2ScoreLow;
+  setTimeout(()=>{document.getElementById('m2-ai-builder').style.display='block';},500);
+}
+
+function resetM2(){m2Index=0;m2Score=0;m2Answered=false;document.getElementById('m2-ai-builder').style.display='none';renderM2Q();}
+
+/* ════════════════════════════════════════
+   MODULE 3
+════════════════════════════════════════ */
+function renderM3Builder(){
+  const t=T[lang];
+  document.getElementById('m3-builder-form').innerHTML=`
+    <div class="pb-field"><label class="pb-label" for="m3-doc">${t.m3DocLabel}</label>
+    <select class="pb-select" id="m3-doc" onchange="buildM3Prompt()">${t.m3DocOptions.map(o=>`<option>${o}</option>`).join('')}</select></div>
+    <div class="pb-field"><label class="pb-label" for="m3-dest">${t.m3DestLabel}</label>
+    <select class="pb-select" id="m3-dest" onchange="buildM3Prompt()">${t.m3DestOptions.map(o=>`<option>${o}</option>`).join('')}</select></div>
+    <div class="pb-field"><label class="pb-label" for="m3-urgent">${t.m3UrgentLabel}</label>
+    <select class="pb-select" id="m3-urgent" onchange="buildM3Prompt()">${t.m3UrgentOptions.map(o=>`<option>${o}</option>`).join('')}</select></div>
+    <div class="pb-field"><label class="pb-label" for="m3-budget">${t.m3BudgetLabel}</label>
+    <select class="pb-select" id="m3-budget" onchange="buildM3Prompt()">${t.m3BudgetOptions.map(o=>`<option>${o}</option>`).join('')}</select></div>`;
+}
+
+function buildM3Prompt(){
+  const t=T[lang];
+  const doc=document.getElementById('m3-doc')?.value||t.m3DocOptions[0];
+  const dest=document.getElementById('m3-dest')?.value||t.m3DestOptions[0];
+  const urgent=document.getElementById('m3-urgent')?.value||t.m3UrgentOptions[0];
+  const budget=document.getElementById('m3-budget')?.value||t.m3BudgetOptions[0];
+  const el=document.getElementById('m3-prompt-text');
+  if(el) el.textContent=t.m3PromptTemplate(doc,dest,urgent,budget);
+}
+
+function copyM3Prompt(){
+  const text=document.getElementById('m3-prompt-text').textContent;
+  doCopy(text,document.getElementById('m3-copy-ok'));
+}
+
+function renderM3Q(){
+  const t=T[lang];
+  m3Answered=false;
+  if(m3Index>=t.m3Scenarios.length){showM3Score();return;}
+  const s=t.m3Scenarios[m3Index];
+  document.getElementById('m3-counter').textContent=t.m3CounterFn(m3Index+1,t.m3Scenarios.length);
+  document.getElementById('m3-progress').style.width=(m3Index/t.m3Scenarios.length*100)+'%';
+  document.getElementById('m3-feedback').className='feedback';
+  document.getElementById('m3-next-btn').style.display='none';
+  document.getElementById('m3-score').classList.remove('show');
+  document.getElementById('m3-activity').style.display='block';
+  document.getElementById('m3-scenario-block').innerHTML=`<div class="scenario-block" style="border-left-color:var(--m3);">${s.text}</div><p style="font-weight:800;font-size:17px;margin:10px 0 9px;">${t.m3QuestionText}</p>`;
+  const optsEl=document.getElementById('m3-options-block');
+  optsEl.innerHTML='';
+  s.opts.forEach(o=>{
+    const btn=document.createElement('button');
+    btn.className='choice-btn';
+    btn.innerHTML=`<span class="ci" aria-hidden="true">${o.icon}</span> ${o.title}`;
+    btn.setAttribute('aria-label',o.title);
+    btn.onclick=()=>answerM3(btn,o.correct,s.explain);
+    optsEl.appendChild(btn);
+  });
+}
+
+function answerM3(btn,correct,explain){
+  if(m3Answered)return; m3Answered=true;
+  const t=T[lang];
+  document.querySelectorAll('#m3-options-block .choice-btn').forEach(b=>b.disabled=true);
+  if(correct){btn.classList.add('correct');m3Score++;}
+  else{btn.classList.add('wrong');document.querySelectorAll('#m3-options-block .choice-btn').forEach((b,i)=>{if(t.m3Scenarios[m3Index].opts[i]?.correct)b.classList.add('correct');});}
+  const fb=document.getElementById('m3-feedback');
+  fb.className='feedback '+(correct?'good':'bad')+' show';
+  fb.innerHTML=`<span class="fb-icon">${correct?'✅':'💡'}</span><div class="fb-text"><strong>${correct?t.m3CorrectLabel:t.m3WrongLabel}</strong> ${explain}</div>`;
+  const nb=document.getElementById('m3-next-btn');
+  nb.style.display='block';
+  nb.textContent=m3Index+1<t.m3Scenarios.length?t.m3NextBtn:t.m3SeeScoreBtn;
+}
+
+function nextM3(){m3Index++;renderM3Q();}
+
+function showM3Score(){
+  document.getElementById('m3-activity').style.display='none';
+  document.getElementById('m3-score').classList.add('show');
+  const t=T[lang];const pct=m3Score/5;
+  document.getElementById('m3-num').textContent=m3Score+'/5';
+  document.getElementById('m3-emoji').textContent=pct===1?'🏆':pct>=0.8?'🌟':pct>=0.6?'💪':'📚';
+  document.getElementById('m3-msg').textContent=pct===1?t.m3ScorePerfect:pct>=0.8?t.m3ScoreGood:t.m3ScoreLow;
+  setTimeout(()=>{document.getElementById('m3-ai-builder').style.display='block';renderM3Builder();buildM3Prompt();},500);
+}
+
+function resetM3(){m3Index=0;m3Score=0;m3Answered=false;document.getElementById('m3-ai-builder').style.display='none';renderM3Q();}
+
+/* ════════════════════════════════════════
+   LIFE SCENARIOS
+════════════════════════════════════════ */
+function renderLifeScenarios(){
+  const t=T[lang];
+  document.getElementById('life-scenarios').innerHTML=t.lifeScenarios.map((s,i)=>`
+    <div class="life-card">
+      <div style="font-size:28px;margin-bottom:7px;" aria-hidden="true">${s.icon}</div>
+      <h3 style="color:${s.color};">${s.title}</h3>
+      <p>${s.desc}</p>
+      <div class="ai-box" role="note" aria-label="${s.title}">
+        <span class="ai-box-label">${t.lifePromptLabel}</span>
+        <div class="ai-prompt-text" id="life-${i}">${s.prompt}</div>
+        <button class="copy-btn-abs" onclick="copyLife(${i})">${t.lifeCopyLbl}</button>
+        <span class="copy-ok" id="life-ok-${i}">${t.lifeCopiedOk}</span>
+      </div>
+    </div>`).join('');
+}
+
+function copyLife(i){doCopy(document.getElementById('life-'+i).textContent,document.getElementById('life-ok-'+i));}
+
+/* INIT */
+renderAllUI();
+</script>
+</body>
+</html>
