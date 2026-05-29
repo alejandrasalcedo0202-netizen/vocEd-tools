@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en" id="root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Professional Story | VOC ED 418CE — West Los Angeles College</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1a2e4a;--gold:#c9922a;--gold-light:#fef3dc;
+    --blue:#2563a8;--blue-light:#ddeafc;
+    --green:#1e8c4a;--green-light:#d4f5e2;
+    --purple:#7b4ca8;--purple-light:#ede6fb;
+    --teal:#1a6b6b;--teal-light:#d0f0ee;
+    --text:#1e2c3a;--muted:#5a6a7a;--border:#d0dae8;--bg:#f0f4fb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:17px;line-height:1.7;}
+  .skip{position:absolute;left:-9999px}.skip:focus{position:static;padding:8px;background:var(--navy);color:white;display:block;}
+
+  .lang-bar{background:#0f2a0f;padding:9px 20px;display:flex;justify-content:center;align-items:center;gap:12px;}
+  .lang-btn{padding:7px 20px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;border:2px solid transparent;border-radius:22px;cursor:pointer;transition:all 0.2s;}
+  .lang-btn.on{background:var(--gold);color:#111;border-color:var(--gold);}
+  .lang-btn.off{background:transparent;color:rgba(255,255,255,0.65);border-color:rgba(255,255,255,0.3);}
+  .lang-div{color:rgba(255,255,255,0.3);font-size:18px;}
+  .gold-bar{height:5px;background:linear-gradient(90deg,var(--gold),#e8b84b,var(--gold));}
+  .hero{background:var(--navy);padding:28px 24px 22px;text-align:center;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:27px;color:white;line-height:1.2;}
+  .hero h1 span{color:var(--gold);}
+  .hero p{color:rgba(255,255,255,0.75);font-size:15px;margin-top:6px;}
+  .badge{display:inline-block;background:var(--gold);color:#111;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.8px;padding:4px 14px;border-radius:20px;margin-bottom:10px;}
+
+  /* STEP PROGRESS */
+  .step-nav{max-width:780px;margin:0 auto;padding:20px 18px 0;}
+  .step-track{display:flex;align-items:center;gap:0;}
+  .step-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;border:3px solid var(--border);background:white;color:var(--muted);flex-shrink:0;transition:all 0.3s;cursor:default;}
+  .step-dot.done{background:var(--green);border-color:var(--green);color:white;}
+  .step-dot.active{background:var(--navy);border-color:var(--navy);color:white;transform:scale(1.15);}
+  .step-line{flex:1;height:3px;background:var(--border);transition:background 0.3s;}
+  .step-line.done{background:var(--green);}
+  .step-labels{display:flex;justify-content:space-between;margin-top:6px;padding:0 4px;}
+  .step-label-txt{font-size:11px;font-weight:800;color:var(--muted);text-align:center;width:60px;line-height:1.3;}
+  .step-label-txt.active{color:var(--navy);}
+
+  .main{max-width:780px;margin:0 auto;padding:20px 18px 60px;}
+  .screen{display:none;animation:fadein 0.35s ease;}
+  .screen.show{display:block;}
+  @keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+  /* CARDS */
+  .step-card{background:white;border-radius:16px;padding:24px;border:1px solid var(--border);box-shadow:0 3px 12px rgba(0,0,0,0.06);margin-bottom:16px;}
+  .step-card h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:8px;line-height:1.3;}
+  .step-card .step-sub{font-size:16px;color:var(--muted);margin-bottom:18px;line-height:1.6;}
+  .step-num-badge{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:white;border-radius:20px;padding:4px 14px;font-size:13px;font-weight:800;margin-bottom:14px;}
+
+  /* CHOICE CHIPS */
+  .chip-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;}
+  .chip{padding:10px 18px;border:2px solid var(--border);border-radius:24px;background:white;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;cursor:pointer;color:var(--muted);transition:all 0.2s;line-height:1.4;}
+  .chip:hover{border-color:var(--blue);color:var(--blue);}
+  .chip.selected{border-color:var(--navy);background:var(--navy);color:white;}
+  .chip.multi.selected{border-color:var(--green);background:var(--green-light);color:var(--green);}
+
+  /* INPUT */
+  .field-group{margin-bottom:16px;}
+  .field-label{display:block;font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:5px;}
+  input[type=text], select, textarea{width:100%;padding:12px 14px;font-family:'Nunito',sans-serif;font-size:16px;border:2px solid var(--border);border-radius:10px;background:#f8faff;color:var(--text);outline:none;transition:border-color 0.2s;}
+  input[type=text]:focus, select:focus, textarea:focus{border-color:var(--blue);background:white;}
+  textarea{min-height:80px;resize:vertical;}
+
+  /* BUTTONS */
+  .btn{padding:13px 24px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;border:none;border-radius:12px;cursor:pointer;transition:all 0.22s;text-transform:uppercase;letter-spacing:0.5px;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.15);}
+  .btn-full{width:100%;margin-top:10px;}
+  .btn-navy{background:var(--navy);color:white;}
+  .btn-gold{background:var(--gold);color:#111;}
+  .btn-green{background:var(--green);color:white;}
+  .btn-outline{background:white;color:var(--text);border:2px solid var(--border);}
+
+  /* PITCH PREVIEW */
+  .pitch-card{background:var(--navy);border-radius:16px;padding:26px;color:white;margin-bottom:18px;}
+  .pitch-card h3{color:var(--gold);font-size:18px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .pitch-text{font-size:18px;line-height:1.85;font-style:italic;border-left:4px solid var(--gold);padding-left:16px;}
+  .pitch-timer{display:flex;align-items:center;gap:10px;margin-top:14px;background:rgba(255,255,255,0.1);border-radius:10px;padding:10px 14px;}
+  .timer-label{font-size:14px;color:rgba(255,255,255,0.75);font-weight:700;}
+  .timer-btn{padding:8px 16px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;border:2px solid var(--gold);border-radius:8px;background:transparent;color:var(--gold);cursor:pointer;}
+  .timer-btn:hover{background:var(--gold);color:#111;}
+  .timer-display{font-size:20px;font-weight:900;color:white;min-width:50px;text-align:center;}
+
+  /* PROFILE CARD */
+  .profile-card{background:white;border:3px solid var(--gold);border-radius:20px;padding:28px;margin-bottom:22px;text-align:center;}
+  .profile-avatar{font-size:64px;margin-bottom:12px;}
+  .profile-name{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);font-weight:900;}
+  .profile-title{font-size:16px;color:var(--muted);margin-top:4px;font-weight:700;}
+  .profile-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0;}
+  .profile-tag{background:var(--navy);color:white;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:700;}
+  .profile-goal{background:var(--gold-light);border:2px solid var(--gold);border-radius:10px;padding:12px 16px;margin-top:12px;font-size:15px;color:#6a4200;font-weight:700;}
+
+  /* AI BOX */
+  .ai-box{background:#0f2020;border-radius:12px;padding:18px;margin-bottom:16px;}
+  .ai-label{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:#7ecdc8;margin-bottom:8px;display:block;}
+  .ai-text{font-family:'Courier New',monospace;font-size:14px;color:#e0f5f3;line-height:1.7;white-space:pre-wrap;}
+  .copy-btn{margin-top:10px;padding:8px 16px;background:var(--teal);color:white;border:none;border-radius:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;}
+  .copy-ok{color:#7ecdc8;font-size:13px;font-weight:700;margin-left:8px;display:none;}
+
+  .tip-box{background:var(--gold-light);border:2px solid var(--gold);border-radius:10px;padding:13px 16px;margin:14px 0;font-size:15px;color:#6a4200;line-height:1.6;}
+  .celebration{text-align:center;padding:30px 20px;background:var(--navy);border-radius:16px;color:white;margin-bottom:22px;}
+  .celebration .big{font-size:64px;margin-bottom:10px;}
+  .celebration h2{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:8px;}
+  .celebration p{font-size:16px;opacity:0.85;}
+
+  /* TIMER ACTIVE STATE */
+  .timer-active{color:var(--gold)!important;}
+
+  @media(max-width:500px){.step-label-txt{font-size:9px;width:46px;}.chip{font-size:14px;padding:8px 14px;}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="gold-bar"></div>
+
+<div class="lang-bar" role="navigation" aria-label="Language">
+  <button class="lang-btn on" id="btn-en" onclick="setLang('en')" aria-pressed="true">🇺🇸 English</button>
+  <span class="lang-div">|</span>
+  <button class="lang-btn off" id="btn-es" onclick="setLang('es')" aria-pressed="false">🇲🇽 Español</button>
+</div>
+
+<div class="hero">
+  <div class="badge" id="h-badge">VOC ED 418CE · West Los Angeles College</div>
+  <h1 id="h-title">🌟 <span>My Professional Story</span></h1>
+  <p id="h-sub">Build your 30-second professional introduction — then practice it!</p>
+</div>
+
+<!-- STEP PROGRESS -->
+<div class="step-nav" aria-label="Progress" role="navigation">
+  <div class="step-track">
+    <div class="step-dot active" id="dot-1" aria-label="Step 1">1</div>
+    <div class="step-line" id="line-1"></div>
+    <div class="step-dot" id="dot-2" aria-label="Step 2">2</div>
+    <div class="step-line" id="line-2"></div>
+    <div class="step-dot" id="dot-3" aria-label="Step 3">3</div>
+    <div class="step-line" id="line-3"></div>
+    <div class="step-dot" id="dot-4" aria-label="Step 4">4</div>
+    <div class="step-line" id="line-4"></div>
+    <div class="step-dot" id="dot-5" aria-label="Step 5">5</div>
+  </div>
+  <div class="step-labels" id="step-labels"></div>
+</div>
+
+<main id="main" class="main">
+
+<!-- ══ STEP 1: WHO AM I ══ -->
+<div class="screen show" id="s1">
+  <div class="step-card">
+    <div class="step-num-badge" id="s1-badge">Step 1 of 5</div>
+    <h2 id="s1-title">Who Are You?</h2>
+    <p class="step-sub" id="s1-sub">Choose the option that best describes you right now. You will use this to build your professional introduction.</p>
+
+    <div class="field-group">
+      <label class="field-label" for="name-input" id="name-lbl">Your First Name (for your profile card)</label>
+      <input type="text" id="name-input" placeholder="Maria" aria-label="Your first name">
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" id="exp-lbl">How many years have you worked in your field?</label>
+      <div class="chip-grid" id="exp-chips" role="radiogroup"></div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" id="ind-lbl">What is your main work field?</label>
+      <div class="chip-grid" id="ind-chips" role="radiogroup"></div>
+    </div>
+
+    <button class="btn btn-navy btn-full" onclick="goStep(2)" id="s1-next">Next →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 2: STRENGTHS ══ -->
+<div class="screen" id="s2">
+  <div class="step-card">
+    <div class="step-num-badge" id="s2-badge">Step 2 of 5</div>
+    <h2 id="s2-title">What Are Your Strengths?</h2>
+    <p class="step-sub" id="s2-sub">Choose your top 3 strengths. These are qualities employers look for in a supervisor or team lead.</p>
+    <div class="chip-grid" id="strength-chips" role="group"></div>
+    <p style="font-size:14px;color:var(--muted);" id="s2-count-lbl">0 of 3 selected</p>
+    <button class="btn btn-navy btn-full" onclick="goStep(3)" id="s2-next">Next →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 3: ACCOMPLISHMENTS ══ -->
+<div class="screen" id="s3">
+  <div class="step-card">
+    <div class="step-num-badge" id="s3-badge">Step 3 of 5</div>
+    <h2 id="s3-title">What Have You Accomplished?</h2>
+    <p class="step-sub" id="s3-sub">Choose up to 3 things you are proud of from your work experience.</p>
+    <div class="chip-grid" id="accomp-chips" role="group"></div>
+    <p style="font-size:14px;color:var(--muted);" id="s3-count-lbl">0 of 3 selected</p>
+    <button class="btn btn-navy btn-full" onclick="goStep(4)" id="s3-next">Next →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 4: GOAL ══ -->
+<div class="screen" id="s4">
+  <div class="step-card">
+    <div class="step-num-badge" id="s4-badge">Step 4 of 5</div>
+    <h2 id="s4-title">What Are You Looking For?</h2>
+    <p class="step-sub" id="s4-sub">Choose the career goal that best describes what you want next. This will be the ending of your professional introduction.</p>
+    <div class="chip-grid" id="goal-chips" role="radiogroup"></div>
+
+    <div class="field-group" style="margin-top:16px;">
+      <label class="field-label" id="course-lbl">Which describes your WLAC training?</label>
+      <div class="chip-grid" id="training-chips" role="radiogroup"></div>
+    </div>
+
+    <button class="btn btn-navy btn-full" onclick="buildPitch()" id="s4-next">Build My Introduction! 🚀</button>
+  </div>
+</div>
+
+<!-- ══ STEP 5: PITCH ══ -->
+<div class="screen" id="s5">
+  <div class="step-card">
+    <div class="step-num-badge" id="s5-badge">Step 5 of 5</div>
+    <h2 id="s5-title">Your 30-Second Professional Introduction</h2>
+    <p class="step-sub" id="s5-sub">This is YOUR story — built from your answers. Read it out loud, practice it, and make it your own!</p>
+
+    <!-- Profile Card -->
+    <div class="profile-card" id="profile-card" role="region" aria-label="Your professional profile card">
+      <div class="profile-avatar" id="profile-avatar">🌟</div>
+      <div class="profile-name" id="profile-name">Your Name</div>
+      <div class="profile-title" id="profile-title">Professional Title</div>
+      <div class="profile-tags" id="profile-tags"></div>
+      <div class="profile-goal" id="profile-goal-display"></div>
+    </div>
+
+    <!-- Pitch Text -->
+    <div class="pitch-card" role="region" aria-label="Your professional introduction script">
+      <h3 id="pitch-h3">🎤 Your Introduction Script</h3>
+      <div class="pitch-text" id="pitch-text"></div>
+      <div class="pitch-timer">
+        <div class="timer-label" id="timer-lbl">⏱ Practice Timer:</div>
+        <button class="timer-btn" onclick="startTimer()" id="timer-start-btn">▶ Start</button>
+        <div class="timer-display" id="timer-display">0:00</div>
+        <button class="timer-btn" onclick="resetTimer()" id="timer-reset-btn">↺ Reset</button>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="tip-box" id="tips-box"></div>
+
+    <!-- AI Prompts -->
+    <div class="ai-box" role="note">
+      <span class="ai-label" id="ai1-label">🤖 AI Practice Prompt 1 — Practice Your Introduction</span>
+      <div class="ai-text" id="ai1-text"></div>
+      <button class="copy-btn" onclick="copyAI(1)" id="ai1-copy">📋 Copy</button>
+      <span class="copy-ok" id="ai1-ok">✅ Copied!</span>
+    </div>
+
+    <div class="ai-box" role="note" style="margin-top:12px;">
+      <span class="ai-label" id="ai2-label">🤖 AI Practice Prompt 2 — Interview Practice</span>
+      <div class="ai-text" id="ai2-text"></div>
+      <button class="copy-btn" onclick="copyAI(2)" id="ai2-copy">📋 Copy</button>
+      <span class="copy-ok" id="ai2-ok">✅ Copied!</span>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <button class="btn btn-outline" onclick="goStep(1)" id="s5-restart" style="flex:1;"></button>
+      <button class="btn btn-gold" onclick="window.print()" id="s5-print" style="flex:1;"></button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+/* ══════════════════════════════════════════════
+   ALL CONTENT IN BOTH LANGUAGES
+══════════════════════════════════════════════ */
+const T = {
+  en:{
+    hBadge:'VOC ED 418CE · West Los Angeles College',
+    hTitle:'🌟 <span>My Professional Story</span>',
+    hSub:'Build your 30-second professional introduction — then practice it!',
+    stepLabels:['Who\nI Am','My\nStrengths','My\nAccomplishments','My\nGoal','My\nStory'],
+    s1Badge:'Step 1 of 5 — Who Are You?',
+    s1Title:'Who Are You?',
+    s1Sub:'Choose the options that best describe you. You will use this to build your professional introduction.',
+    nameLbl:'Your First Name (for your profile card)',
+    namePh:'Maria',
+    expLbl:'How many years have you worked in your field?',
+    experiences:['1–3 years','4–7 years','8–12 years','13–20 years','20+ years'],
+    indLbl:'What is your main work field?',
+    industries:['🧹 Custodial / Building Services','🔒 Security','🍽️ Food Service / Cafeteria','🏥 Healthcare / Caregiver','📋 Administrative / Office Work','🌐 Other'],
+    s1Next:'Next: My Strengths →',
+    s2Badge:'Step 2 of 5 — Your Strengths',
+    s2Title:'What Are Your Strengths?',
+    s2Sub:'Choose your TOP 3 strengths. These are the qualities that make you a valuable employee and future supervisor.',
+    s2CountFn:(n)=>`${n} of 3 selected`,
+    s2Next:'Next: My Accomplishments →',
+    strengths:['Dependable and reliable','Bilingual (Spanish / English)','Bilingual (other language)','Strong team player','Detail-oriented and thorough','I work well independently','Patient and calm under pressure','Quick learner','Strong work ethic','Good communicator','Leadership skills','Problem-solver'],
+    s3Badge:'Step 3 of 5 — Your Accomplishments',
+    s3Title:'What Have You Accomplished?',
+    s3Sub:'Choose up to 3 things from your work experience that you are proud of.',
+    s3CountFn:(n)=>`${n} of 3 selected`,
+    s3Next:'Next: My Goal →',
+    accomplishments:['Trained or mentored new employees','Led or supervised a team','Maintained safe and clean facilities for years','Served as a union steward or worker representative','Completed specialized safety training (CPR, OSHA, etc.)','Received recognition or positive feedback from supervisors','Consistently met quality and performance standards','Worked in the same company for 5+ years (loyalty)','Handled difficult situations calmly and professionally','Learned new skills and tools on the job','Helped coworkers when they needed support','Completed college or professional training programs'],
+    s4Badge:'Step 4 of 5 — Your Career Goal',
+    s4Title:'What Are You Looking For?',
+    s4Sub:'Choose the career goal that best matches what you want next.',
+    s4Next:'Build My Introduction! 🚀',
+    goals:['A supervisor or lead position in my current workplace','A supervisor position at a new employer','A position in school district or government service','A position in healthcare administration or support','An administrative or office role','Advancement in my current role with more responsibilities','Any opportunity that uses my experience and new skills'],
+    courseLbl:'Which describes your WLAC training?',
+    trainings:['I completed the People Management Certificate Program (5 courses)','I completed some of the certificate courses','I am currently completing my final course'],
+    s5Badge:'Step 5 of 5 — Your Professional Introduction',
+    s5Title:'Your 30-Second Professional Introduction',
+    s5Sub:'This is YOUR story — built from your answers. Read it out loud, practice it, and make it your own!',
+    pitchH3:'🎤 Your Introduction Script',
+    timerLbl:'⏱ Practice Timer:',
+    timerStart:'▶ Start',
+    timerReset:'↺ Reset',
+    tipsTitle:'💡 Tips for Delivering Your Introduction:',
+    tips:['Speak slowly and clearly — you do not need to rush','Make eye contact with the person you are talking to','Practice 3–5 times before your interview','It is okay to have notes the first few times','Smile — your confidence is part of your introduction!'],
+    ai1Label:'🤖 AI Practice Prompt 1 — Practice Your Introduction',
+    ai2Label:'🤖 AI Practice Prompt 2 — Interview Practice',
+    s5Restart:'🔄 Start Over',
+    s5Print:'🖨️ Print My Card',
+    profileGoalPrefix:'Career Goal:',
+    avatarMap:{'🧹 Custodial / Building Services':'🧹','🔒 Security':'🔒','🍽️ Food Service / Cafeteria':'🍽️','🏥 Healthcare / Caregiver':'🏥','📋 Administrative / Office Work':'📋','🌐 Other':'🌟'},
+    copyBtn:'📋 Copy',
+    copiedOk:'✅ Copied!',
+  },
+  es:{
+    hBadge:'VOC ED 418CE · West Los Angeles College',
+    hTitle:'🌟 <span>Mi Historia Profesional</span>',
+    hSub:'¡Construya su introducción profesional de 30 segundos y practíquela!',
+    stepLabels:['Quién\nSoy','Mis\nFortalezas','Mis\nLogros','Mi\nMeta','Mi\nHistoria'],
+    s1Badge:'Paso 1 de 5 — ¿Quién Es Usted?',
+    s1Title:'¿Quién Es Usted?',
+    s1Sub:'Elija las opciones que mejor lo/la describan. Las usará para construir su introducción profesional.',
+    nameLbl:'Su Nombre de Pila (para su tarjeta de perfil)',
+    namePh:'María',
+    expLbl:'¿Cuántos años ha trabajado en su campo?',
+    experiences:['1–3 años','4–7 años','8–12 años','13–20 años','20+ años'],
+    indLbl:'¿Cuál es su principal campo de trabajo?',
+    industries:['🧹 Custodia / Servicios de Edificios','🔒 Seguridad','🍽️ Servicio de Alimentos / Cafetería','🏥 Salud / Cuidado de Personas','📋 Trabajo Administrativo / de Oficina','🌐 Otro'],
+    s1Next:'Siguiente: Mis Fortalezas →',
+    s2Badge:'Paso 2 de 5 — Sus Fortalezas',
+    s2Title:'¿Cuáles Son Sus Fortalezas?',
+    s2Sub:'Elija sus TOP 3 fortalezas. Estas son las cualidades que lo/la hacen un/a empleado/a valioso/a y futuro/a supervisor/a.',
+    s2CountFn:(n)=>`${n} de 3 seleccionadas`,
+    s2Next:'Siguiente: Mis Logros →',
+    strengths:['Confiable y responsable','Bilingüe (español / inglés)','Bilingüe (otro idioma)','Buen/a jugador/a de equipo','Orientado/a a los detalles','Trabajo bien de forma independiente','Paciente y tranquilo/a bajo presión','Aprendo rápido','Fuerte ética de trabajo','Buen/a comunicador/a','Habilidades de liderazgo','Resolutivo/a de problemas'],
+    s3Badge:'Paso 3 de 5 — Sus Logros',
+    s3Title:'¿Qué Ha Logrado?',
+    s3Sub:'Elija hasta 3 cosas de su experiencia laboral de las que esté orgulloso/a.',
+    s3CountFn:(n)=>`${n} de 3 seleccionadas`,
+    s3Next:'Siguiente: Mi Meta →',
+    accomplishments:['Capacitó o asesoró a nuevos empleados','Lideró o supervisó un equipo','Mantuvo instalaciones seguras y limpias durante años','Se desempeñó como delegado/a sindical o representante laboral','Completó capacitación especializada de seguridad (CPR, OSHA, etc.)','Recibió reconocimiento o comentarios positivos de supervisores','Cumplió constantemente con los estándares de calidad y desempeño','Trabajó en la misma empresa por 5+ años (lealtad)','Manejó situaciones difíciles con calma y profesionalismo','Aprendió nuevas habilidades y herramientas en el trabajo','Apoyó a compañeros cuando necesitaban ayuda','Completó programas universitarios o de capacitación profesional'],
+    s4Badge:'Paso 4 de 5 — Su Meta Profesional',
+    s4Title:'¿Qué Está Buscando?',
+    s4Sub:'Elija la meta profesional que mejor corresponda a lo que quiere a continuación.',
+    s4Next:'¡Construir Mi Introducción! 🚀',
+    goals:['Un puesto de supervisor/a o líder en mi lugar de trabajo actual','Un puesto de supervisor/a en un nuevo empleador','Un puesto en el distrito escolar o servicio gubernamental','Un puesto en administración o apoyo de salud','Un rol administrativo u de oficina','Avanzar en mi rol actual con más responsabilidades','Cualquier oportunidad que use mi experiencia y nuevas habilidades'],
+    courseLbl:'¿Cuál describe su formación en WLAC?',
+    trainings:['Completé el Programa de Certificado de Gestión de Personas (5 cursos)','Completé algunos de los cursos del certificado','Actualmente estoy completando mi último curso'],
+    s5Badge:'Paso 5 de 5 — Su Introducción Profesional',
+    s5Title:'Su Introducción Profesional de 30 Segundos',
+    s5Sub:'Esta es SU historia — construida a partir de sus respuestas. ¡Léala en voz alta, practíquela y hágala suya!',
+    pitchH3:'🎤 Su Guión de Introducción',
+    timerLbl:'⏱ Temporizador de Práctica:',
+    timerStart:'▶ Iniciar',
+    timerReset:'↺ Reiniciar',
+    tipsTitle:'💡 Consejos para Dar Su Introducción:',
+    tips:['Hable despacio y con claridad — no necesita apresurarse','Haga contacto visual con la persona con quien habla','Practique 3–5 veces antes de su entrevista','Está bien tener notas las primeras veces','¡Sonría — su confianza es parte de su introducción!'],
+    ai1Label:'🤖 Mensaje de IA 1 — Practique Su Introducción',
+    ai2Label:'🤖 Mensaje de IA 2 — Práctica de Entrevista',
+    s5Restart:'🔄 Comenzar de Nuevo',
+    s5Print:'🖨️ Imprimir Mi Tarjeta',
+    profileGoalPrefix:'Meta Profesional:',
+    avatarMap:{'🧹 Custodia / Servicios de Edificios':'🧹','🔒 Seguridad':'🔒','🍽️ Servicio de Alimentos / Cafetería':'🍽️','🏥 Salud / Cuidado de Personas':'🏥','📋 Trabajo Administrativo / de Oficina':'📋','🌐 Otro':'🌟'},
+    copyBtn:'📋 Copiar',
+    copiedOk:'✅ ¡Copiado!',
+  }
+};
+
+/* ══════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════ */
+let lang = 'en';
+let state = { name:'', exp:'', industry:'', strengths:[], accomplishments:[], goal:'', training:'' };
+let timerInterval = null;
+let timerSecs = 0;
+
+/* ══════════════════════════════════════════════
+   LANGUAGE
+══════════════════════════════════════════════ */
+function setLang(l){
+  lang = l;
+  document.getElementById('root').setAttribute('lang',l);
+  document.getElementById('btn-en').className='lang-btn '+(l==='en'?'on':'off');
+  document.getElementById('btn-es').className='lang-btn '+(l==='es'?'on':'off');
+  document.getElementById('btn-en').setAttribute('aria-pressed',l==='en');
+  document.getElementById('btn-es').setAttribute('aria-pressed',l==='es');
+  renderAll();
+}
+
+function tl(key){ return T[lang][key]; }
+
+function renderAll(){
+  const t = T[lang];
+  document.getElementById('h-badge').textContent = t.hBadge;
+  document.getElementById('h-title').innerHTML = t.hTitle;
+  document.getElementById('h-sub').textContent = t.hSub;
+  renderStepLabels();
+  renderStep1(); renderStep2(); renderStep3(); renderStep4();
+  updateUI();
+}
+
+function renderStepLabels(){
+  const labels = T[lang].stepLabels;
+  document.getElementById('step-labels').innerHTML = labels.map((l,i)=>
+    `<div class="step-label-txt ${i===0?'active':''}" id="slbl-${i+1}">${l.replace('\n','<br>')}</div>`
+  ).join('');
+}
+
+function updateStepProgress(step){
+  for(let i=1;i<=5;i++){
+    const dot=document.getElementById('dot-'+i);
+    const lbl=document.getElementById('slbl-'+i);
+    dot.className='step-dot '+(i<step?'done':i===step?'active':'');
+    if(lbl){lbl.className='step-label-txt '+(i===step?'active':'');}
+  }
+  for(let i=1;i<=4;i++){
+    const line=document.getElementById('line-'+i);
+    line.className='step-line '+(i<step?'done':'');
+  }
+}
+
+function renderStep1(){
+  const t=T[lang];
+  document.getElementById('s1-badge').textContent=t.s1Badge;
+  document.getElementById('s1-title').textContent=t.s1Title;
+  document.getElementById('s1-sub').textContent=t.s1Sub;
+  document.getElementById('name-lbl').textContent=t.nameLbl;
+  document.getElementById('name-input').placeholder=t.namePh;
+  document.getElementById('exp-lbl').textContent=t.expLbl;
+  document.getElementById('ind-lbl').textContent=t.indLbl;
+  document.getElementById('s1-next').textContent=t.s1Next;
+  renderChips('exp-chips', t.experiences, 'exp', false);
+  renderChips('ind-chips', t.industries, 'industry', false);
+}
+function renderStep2(){
+  const t=T[lang];
+  document.getElementById('s2-badge').textContent=t.s2Badge;
+  document.getElementById('s2-title').textContent=t.s2Title;
+  document.getElementById('s2-sub').textContent=t.s2Sub;
+  document.getElementById('s2-next').textContent=t.s2Next;
+  renderChips('strength-chips', t.strengths, 'strengths', true);
+  updateCount('s2-count-lbl', state.strengths.length, t.s2CountFn);
+}
+function renderStep3(){
+  const t=T[lang];
+  document.getElementById('s3-badge').textContent=t.s3Badge;
+  document.getElementById('s3-title').textContent=t.s3Title;
+  document.getElementById('s3-sub').textContent=t.s3Sub;
+  document.getElementById('s3-next').textContent=t.s3Next;
+  renderChips('accomp-chips', t.accomplishments, 'accomplishments', true);
+  updateCount('s3-count-lbl', state.accomplishments.length, t.s3CountFn);
+}
+function renderStep4(){
+  const t=T[lang];
+  document.getElementById('s4-badge').textContent=t.s4Badge;
+  document.getElementById('s4-title').textContent=t.s4Title;
+  document.getElementById('s4-sub').textContent=t.s4Sub;
+  document.getElementById('s4-next').textContent=t.s4Next;
+  document.getElementById('course-lbl').textContent=t.courseLbl;
+  renderChips('goal-chips', t.goals, 'goal', false);
+  renderChips('training-chips', t.trainings, 'training', false);
+}
+function updateUI(){
+  // Labels that may need updating after lang change
+  const t=T[lang];
+  document.getElementById('s5-badge').textContent=t.s5Badge;
+  document.getElementById('s5-title').textContent=t.s5Title;
+  document.getElementById('s5-sub').textContent=t.s5Sub;
+  document.getElementById('pitch-h3').textContent=t.pitchH3;
+  document.getElementById('timer-lbl').textContent=t.timerLbl;
+  document.getElementById('timer-start-btn').textContent=t.timerStart;
+  document.getElementById('timer-reset-btn').textContent=t.timerReset;
+  document.getElementById('ai1-label').textContent=t.ai1Label;
+  document.getElementById('ai2-label').textContent=t.ai2Label;
+  document.getElementById('s5-restart').textContent=t.s5Restart;
+  document.getElementById('s5-print').textContent=t.s5Print;
+  document.querySelectorAll('.copy-btn').forEach((b,i)=>{
+    if(i===0) b.id='ai1-copy', b.textContent=t.copyBtn;
+    else b.textContent=t.copyBtn;
+  });
+}
+
+function renderChips(containerId, items, stateKey, multi){
+  const container=document.getElementById(containerId);
+  container.innerHTML=items.map(item=>{
+    const isSelected=multi?state[stateKey].includes(item):state[stateKey]===item;
+    return `<button class="chip ${multi?'multi':''} ${isSelected?'selected':''}"
+      onclick="selectChip('${stateKey}',${multi},'${item.replace(/'/g,"\\'")}',this)"
+      aria-pressed="${isSelected}" aria-label="${item}">${item}</button>`;
+  }).join('');
+}
+
+function selectChip(key, multi, value, btn){
+  if(multi){
+    if(state[key].includes(value)){ state[key]=state[key].filter(v=>v!==value); btn.classList.remove('selected'); btn.setAttribute('aria-pressed','false'); }
+    else if(state[key].length<3){ state[key].push(value); btn.classList.add('selected'); btn.setAttribute('aria-pressed','true'); }
+    const t=T[lang];
+    if(key==='strengths') updateCount('s2-count-lbl',state.strengths.length,t.s2CountFn);
+    if(key==='accomplishments') updateCount('s3-count-lbl',state.accomplishments.length,t.s3CountFn);
+  } else {
+    state[key]=value;
+    const parent=btn.closest('.chip-grid');
+    parent.querySelectorAll('.chip').forEach(c=>{c.classList.remove('selected');c.setAttribute('aria-pressed','false');});
+    btn.classList.add('selected'); btn.setAttribute('aria-pressed','true');
+  }
+}
+
+function updateCount(id, n, fn){ const el=document.getElementById(id); if(el) el.textContent=fn(n); }
+
+function goStep(step){
+  // Collect name
+  if(step===2) state.name = document.getElementById('name-input').value.trim() || T[lang].namePh;
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('show'));
+  document.getElementById('s'+step).classList.add('show');
+  updateStepProgress(step);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ══════════════════════════════════════════════
+   BUILD PITCH
+══════════════════════════════════════════════ */
+function buildPitch(){
+  state.name = document.getElementById('name-input').value.trim() || T[lang].namePh;
+  const t = T[lang];
+
+  // Profile card
+  const avatarMap = t.avatarMap;
+  const avatar = avatarMap[state.industry] || '🌟';
+  document.getElementById('profile-avatar').textContent = avatar;
+  document.getElementById('profile-name').textContent = state.name;
+  document.getElementById('profile-title').textContent = state.industry.replace(/^[^\s]+\s/,'');
+  document.getElementById('profile-tags').innerHTML = [
+    state.exp, ...state.strengths.slice(0,2)
+  ].filter(Boolean).map(s=>`<span class="profile-tag">${s}</span>`).join('');
+  document.getElementById('profile-goal-display').textContent = t.profileGoalPrefix + ' ' + (state.goal || '—');
+
+  // Build pitch text
+  const name = state.name;
+  const industry = state.industry.replace(/^[^\s]+\s/,'');
+  const exp = state.exp;
+  const str1 = state.strengths[0] || '';
+  const str2 = state.strengths[1] || '';
+  const str3 = state.strengths[2] || '';
+  const acc1 = state.accomplishments[0] || '';
+  const acc2 = state.accomplishments[1] || '';
+  const goal = state.goal || '';
+  const training = state.training || t.trainings[0];
+  const isBilingual = state.strengths.some(s=>s.toLowerCase().includes('bilingual')||s.toLowerCase().includes('bilingüe'));
+
+  let pitch = '';
+  if(lang==='en'){
+    pitch = `My name is ${name}. I have ${exp} of experience in ${industry}. `;
+    if(str1) pitch += `I am known for being ${str1.toLowerCase()}`;
+    if(str2) pitch += `, ${str2.toLowerCase()}`;
+    if(str3) pitch += `, and ${str3.toLowerCase()}`;
+    pitch += `. `;
+    if(acc1) pitch += `Throughout my career, I have ${acc1.toLowerCase()}`;
+    if(acc2) pitch += `, and I have also ${acc2.toLowerCase()}`;
+    pitch += `. I recently completed the People Management Certificate Program at West Los Angeles College — five professional courses in leadership, workplace compliance, computer skills, and professional communication. `;
+    if(isBilingual) pitch += `I am bilingual and able to support both English and Spanish-speaking colleagues and clients. `;
+    pitch += `I am looking for ${goal.toLowerCase()}, where I can bring my years of hands-on experience and newly developed professional skills to make a real contribution.`;
+  } else {
+    pitch = `Mi nombre es ${name}. Tengo ${exp} de experiencia en ${industry}. `;
+    if(str1) pitch += `Soy conocido/a por ser ${str1.toLowerCase()}`;
+    if(str2) pitch += `, ${str2.toLowerCase()}`;
+    if(str3) pitch += `, y ${str3.toLowerCase()}`;
+    pitch += `. `;
+    if(acc1) pitch += `A lo largo de mi carrera, he ${acc1.toLowerCase()}`;
+    if(acc2) pitch += `, y también he ${acc2.toLowerCase()}`;
+    pitch += `. Recientemente completé el Programa de Certificado de Gestión de Personas en West Los Angeles College — cinco cursos profesionales en liderazgo, cumplimiento laboral, habilidades informáticas y comunicación profesional. `;
+    if(isBilingual) pitch += `Soy bilingüe y puedo apoyar tanto a colegas y clientes de habla inglesa como española. `;
+    pitch += `Estoy buscando ${goal.toLowerCase()}, donde pueda aportar mis años de experiencia práctica y habilidades profesionales recién desarrolladas para hacer una contribución real.`;
+  }
+
+  document.getElementById('pitch-text').textContent = pitch;
+
+  // Tips
+  document.getElementById('tips-box').innerHTML =
+    `<strong>${t.tipsTitle}</strong><ul style="margin-top:8px;padding-left:20px;line-height:1.9;">${t.tips.map(tip=>`<li>${tip}</li>`).join('')}</ul>`;
+
+  // AI Prompts
+  const ai1 = lang==='en'
+    ? `I am practicing my professional introduction for a job interview. Here is my 30-second introduction:\n\n"${pitch}"\n\nPlease do three things:\n1. Tell me what is strong about this introduction\n2. Suggest one improvement to make it even more professional\n3. Rewrite it with your suggested improvement included\n\nUse simple English — I am an English learner.`
+    : `Estoy practicando mi introducción profesional para una entrevista de trabajo. Aquí está mi introducción de 30 segundos:\n\n"${pitch}"\n\nPor favor haga tres cosas:\n1. Dígame qué es fuerte en esta introducción\n2. Sugiera una mejora para hacerla aún más profesional\n3. Vuelva a escribirla con su mejora sugerida incluida\n\nUse inglés simple — soy un/a estudiante de inglés.`;
+
+  const ai2 = lang==='en'
+    ? `I am preparing for a job interview for a supervisor or lead position in ${industry}. I have ${exp} of experience.\n\nPlease conduct a short practice interview with me. Ask me 3 common interview questions one at a time. After each of my answers, give me brief feedback on how to improve. Start with the first question now.\n\nUse simple English — I am an English learner.`
+    : `Me estoy preparando para una entrevista de trabajo para un puesto de supervisor/a o líder en ${industry}. Tengo ${exp} de experiencia.\n\nPor favor conduzca una breve entrevista de práctica conmigo. Hágame 3 preguntas comunes de entrevista de una en una. Después de cada una de mis respuestas, deme una breve retroalimentación sobre cómo mejorar. Comience con la primera pregunta ahora.\n\nUse inglés simple — soy un/a estudiante de inglés.`;
+
+  document.getElementById('ai1-text').textContent = ai1;
+  document.getElementById('ai2-text').textContent = ai2;
+
+  goStep(5);
+}
+
+/* ══════════════════════════════════════════════
+   TIMER
+══════════════════════════════════════════════ */
+function startTimer(){
+  if(timerInterval) return;
+  const t=T[lang];
+  timerSecs=0;
+  timerInterval=setInterval(()=>{
+    timerSecs++;
+    const m=Math.floor(timerSecs/60);
+    const s=timerSecs%60;
+    document.getElementById('timer-display').textContent=m+':'+(s<10?'0':'')+s;
+    const display=document.getElementById('timer-display');
+    if(timerSecs>=30&&timerSecs<=40){display.style.color='#7ecdc8';}
+    else if(timerSecs>40){display.style.color='#f87171';}
+    else{display.style.color='white';}
+  },1000);
+}
+
+function resetTimer(){
+  clearInterval(timerInterval);
+  timerInterval=null; timerSecs=0;
+  document.getElementById('timer-display').textContent='0:00';
+  document.getElementById('timer-display').style.color='white';
+}
+
+/* ══════════════════════════════════════════════
+   COPY
+══════════════════════════════════════════════ */
+function copyAI(n){
+  const text=document.getElementById('ai'+n+'-text').textContent;
+  navigator.clipboard.writeText(text).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);});
+  const ok=document.getElementById('ai'+n+'-ok');
+  ok.style.display='inline'; setTimeout(()=>{ok.style.display='none';},2500);
+}
+
+// INIT
+renderAll();
+updateStepProgress(1);
+</script>
+</body>
+</html>
