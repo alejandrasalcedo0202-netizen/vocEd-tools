@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" id="root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Supervisor Challenge | VOC ED 418CE — West Los Angeles College</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1a2e4a;--gold:#c9922a;--gold-light:#fef3dc;
+    --blue:#2563a8;--blue-light:#ddeafc;
+    --green:#1e8c4a;--green-light:#d4f5e2;
+    --purple:#7b4ca8;--purple-light:#ede6fb;
+    --teal:#1a6b6b;--teal-light:#d0f0ee;
+    --orange:#c05a10;--orange-light:#fde8d0;
+    --text:#1e2c3a;--muted:#5a6a7a;--border:#d0dae8;--bg:#f0f4fb;
+    --success:#1e8c4a;--success-bg:#d4f5e2;
+    --error:#c0392b;--error-bg:#fde8e6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:17px;line-height:1.7;}
+  .skip{position:absolute;left:-9999px}.skip:focus{position:static;padding:8px;background:var(--navy);color:white;display:block;}
+
+  /* LANG BAR */
+  .lang-bar{background:#0f2a0f;padding:9px 20px;display:flex;justify-content:center;align-items:center;gap:12px;}
+  .lang-btn{padding:7px 20px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;border:2px solid transparent;border-radius:22px;cursor:pointer;transition:all 0.2s;}
+  .lang-btn.on{background:var(--gold);color:#111;border-color:var(--gold);}
+  .lang-btn.off{background:transparent;color:rgba(255,255,255,0.65);border-color:rgba(255,255,255,0.3);}
+  .lang-div{color:rgba(255,255,255,0.3);font-size:18px;}
+
+  /* HEADER */
+  .gold-bar{height:5px;background:linear-gradient(90deg,var(--gold),#e8b84b,var(--gold));}
+  .hero{background:var(--navy);padding:28px 24px 22px;text-align:center;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:28px;color:white;line-height:1.2;}
+  .hero h1 span{color:var(--gold);}
+  .hero p{color:rgba(255,255,255,0.75);font-size:15px;margin-top:6px;}
+  .badge{display:inline-block;background:var(--gold);color:#111;font-family:'Nunito',sans-serif;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.8px;padding:4px 14px;border-radius:20px;margin-bottom:10px;}
+
+  /* SCREENS */
+  .screen{display:none;max-width:780px;margin:0 auto;padding:24px 18px 60px;}
+  .screen.show{display:block;animation:fadein 0.35s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+  /* INDUSTRY PICKER */
+  .industry-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
+  .ind-card{background:white;border:3px solid var(--border);border-radius:16px;padding:22px 18px;cursor:pointer;transition:all 0.22s;text-align:center;}
+  .ind-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.12);}
+  .ind-card.selected{border-color:var(--gold);background:var(--gold-light);}
+  .ind-icon{font-size:42px;margin-bottom:10px;display:block;}
+  .ind-title{font-size:17px;font-weight:900;color:var(--navy);margin-bottom:4px;}
+  .ind-desc{font-size:13px;color:var(--muted);line-height:1.5;}
+
+  /* ROUND HEADER */
+  .round-header{background:var(--navy);border-radius:14px;padding:18px 22px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;}
+  .round-title{font-family:'Playfair Display',serif;font-size:20px;color:white;line-height:1.3;}
+  .round-badge{background:var(--gold);color:#111;border-radius:20px;padding:5px 16px;font-size:13px;font-weight:900;}
+  .score-bar{background:white;border-radius:12px;padding:14px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);}
+  .score-item{text-align:center;}
+  .score-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);display:block;}
+  .score-val{font-size:22px;font-weight:900;color:var(--navy);}
+
+  /* PROGRESS */
+  .prog-wrap{background:var(--border);border-radius:8px;height:8px;overflow:hidden;margin-bottom:18px;}
+  .prog-bar{height:100%;background:var(--gold);border-radius:8px;transition:width 0.4s ease;}
+
+  /* SCENARIO */
+  .scenario-card{background:white;border-radius:14px;padding:22px;border:1px solid var(--border);box-shadow:0 3px 10px rgba(0,0,0,0.06);margin-bottom:16px;}
+  .scene-label{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+  .situation-box{background:var(--bg);border-left:5px solid var(--navy);border-radius:0 10px 10px 0;padding:14px 17px;margin-bottom:18px;font-size:16px;line-height:1.7;}
+  .q-text{font-size:19px;font-weight:800;margin-bottom:16px;line-height:1.4;color:var(--navy);}
+  .choices{display:flex;flex-direction:column;gap:9px;}
+  .choice{width:100%;padding:14px 17px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:700;text-align:left;border:2px solid var(--border);border-radius:12px;background:white;color:var(--text);cursor:pointer;transition:all 0.2s;display:flex;align-items:flex-start;gap:10px;line-height:1.4;}
+  .choice:hover:not(:disabled){background:var(--bg);transform:translateX(4px);}
+  .choice.correct{background:var(--success-bg);border-color:var(--success);color:var(--success);}
+  .choice.wrong{background:var(--error-bg);border-color:var(--error);color:var(--error);opacity:0.7;}
+  .choice:disabled{cursor:default;}
+  .choice-letter{font-size:16px;font-weight:900;color:var(--muted);flex-shrink:0;margin-top:1px;min-width:22px;}
+
+  /* FEEDBACK */
+  .feedback{border-radius:12px;padding:14px 17px;margin:12px 0;font-size:16px;font-weight:600;display:none;animation:fadein 0.3s;line-height:1.55;}
+  .feedback.show{display:flex;gap:10px;align-items:flex-start;}
+  .feedback.good{background:var(--success-bg);color:var(--success);border:2px solid var(--success);}
+  .feedback.bad{background:var(--error-bg);color:var(--error);border:2px solid var(--error);}
+  .fb-icon{font-size:22px;flex-shrink:0;}
+  .fb-text strong{display:block;font-size:17px;font-weight:900;margin-bottom:3px;}
+
+  /* BUTTONS */
+  .btn{padding:13px 24px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;border:none;border-radius:12px;cursor:pointer;transition:all 0.22s;text-transform:uppercase;letter-spacing:0.5px;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.15);}
+  .btn-full{width:100%;margin-top:10px;}
+  .btn-navy{background:var(--navy);color:white;}
+  .btn-gold{background:var(--gold);color:#111;}
+  .btn-green{background:var(--green);color:white;}
+
+  /* ROUND INTRO */
+  .round-intro{background:white;border-radius:16px;padding:28px;border:2px solid var(--border);text-align:center;margin-bottom:20px;}
+  .round-intro .big-icon{font-size:56px;margin-bottom:14px;}
+  .round-intro h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px;}
+  .round-intro p{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto 18px;}
+
+  /* FINAL SCORE */
+  .final-card{background:var(--navy);border-radius:20px;padding:36px;text-align:center;margin-bottom:22px;color:white;}
+  .final-emoji{font-size:70px;margin-bottom:14px;}
+  .final-score{font-family:'Playfair Display',serif;font-size:58px;font-weight:900;color:var(--gold);}
+  .final-label{font-size:16px;opacity:0.8;margin-top:4px;}
+  .final-title{font-size:22px;font-weight:800;margin:16px 0 8px;}
+  .final-msg{font-size:16px;opacity:0.9;line-height:1.6;max-width:560px;margin:0 auto;}
+  .cert-box{background:var(--gold-light);border:3px solid var(--gold);border-radius:16px;padding:24px;margin:20px 0;text-align:center;}
+  .cert-box h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:8px;}
+  .cert-box p{font-size:15px;color:#6a4200;line-height:1.6;}
+  .skills-earned{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px;}
+  .skill-tag{background:var(--navy);color:white;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:700;}
+  .ai-box{background:#0f2020;border-radius:12px;padding:18px;margin-top:20px;}
+  .ai-label{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:#7ecdc8;margin-bottom:8px;display:block;}
+  .ai-text{font-family:'Courier New',monospace;font-size:14px;color:#e0f5f3;line-height:1.7;white-space:pre-wrap;}
+  .copy-btn{margin-top:10px;padding:8px 16px;background:var(--teal);color:white;border:none;border-radius:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;}
+  .copy-ok{color:#7ecdc8;font-size:13px;font-weight:700;margin-left:8px;display:none;}
+
+  @media(max-width:500px){.industry-grid{grid-template-columns:1fr;}.round-header{flex-direction:column;gap:10px;text-align:center;}.score-bar{flex-wrap:wrap;gap:12px;justify-content:center;}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="gold-bar"></div>
+
+<div class="lang-bar" role="navigation" aria-label="Language">
+  <button class="lang-btn on" id="btn-en" onclick="setLang('en')" aria-pressed="true">🇺🇸 English</button>
+  <span class="lang-div">|</span>
+  <button class="lang-btn off" id="btn-es" onclick="setLang('es')" aria-pressed="false">🇲🇽 Español</button>
+</div>
+
+<div class="hero">
+  <div class="badge" id="h-badge">VOC ED 418CE · West Los Angeles College</div>
+  <h1 id="h-title">🏆 The <span>Supervisor Challenge</span></h1>
+  <p id="h-sub">Step into your new role. Use everything you have learned!</p>
+</div>
+
+<main id="main">
+
+<!-- ══ SCREEN: WELCOME ══ -->
+<div class="screen show" id="s-welcome">
+  <div class="round-intro" style="margin-top:24px;">
+    <div class="big-icon">🎉</div>
+    <h2 id="w-title">Congratulations — You Just Got Promoted!</h2>
+    <p id="w-desc">You have been selected as the new Supervisor. Today is your first day in your new role. You will face four real workplace challenges using everything you learned in this course — phone skills, writing, mail and delivery, and leadership. Are you ready?</p>
+    <div style="background:var(--gold-light);border:2px solid var(--gold);border-radius:10px;padding:14px 18px;margin-bottom:18px;font-size:15px;text-align:left;">
+      <strong id="w-how-label" style="color:#7a5000;">📋 How It Works:</strong>
+      <ul id="w-how-list" style="margin-top:8px;padding-left:20px;color:#6a4200;line-height:1.9;"></ul>
+    </div>
+    <button class="btn btn-gold btn-full" onclick="showScreen('s-industry')" id="w-start-btn">🚀 Start the Challenge!</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN: INDUSTRY ══ -->
+<div class="screen" id="s-industry">
+  <div style="text-align:center;margin-bottom:18px;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);" id="ind-title">Choose Your Workplace</h2>
+    <p style="color:var(--muted);font-size:16px;" id="ind-desc">Select the industry that matches your job. Your scenarios will be tailored to your workplace!</p>
+  </div>
+  <div class="industry-grid" id="industry-grid" role="radiogroup" aria-label="Choose your workplace"></div>
+  <button class="btn btn-navy btn-full" onclick="startRound1()" id="ind-next-btn" style="margin-top:20px;display:none;" aria-label="Start Round 1"></button>
+</div>
+
+<!-- ══ SCREEN: ROUND INTRO ══ -->
+<div class="screen" id="s-round-intro">
+  <div class="round-intro">
+    <div class="big-icon" id="ri-icon">📞</div>
+    <h2 id="ri-title">Round 1</h2>
+    <p id="ri-desc">Description</p>
+    <div style="display:flex;justify-content:center;gap:16px;margin-bottom:18px;" id="ri-skills"></div>
+    <button class="btn btn-navy" onclick="startQuestions()" id="ri-btn">Let's Go! →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN: QUESTION ══ -->
+<div class="screen" id="s-question">
+  <div class="score-bar" aria-label="Score and progress">
+    <div class="score-item">
+      <span class="score-label" id="sq-round-lbl">Round</span>
+      <span class="score-val" id="sq-round">1/4</span>
+    </div>
+    <div class="score-item">
+      <span class="score-label" id="sq-q-lbl">Question</span>
+      <span class="score-val" id="sq-q">1/3</span>
+    </div>
+    <div class="score-item">
+      <span class="score-label" id="sq-score-lbl">Score</span>
+      <span class="score-val" id="sq-score">0</span>
+    </div>
+    <div class="score-item">
+      <span class="score-label" id="sq-streak-lbl">Streak 🔥</span>
+      <span class="score-val" id="sq-streak">0</span>
+    </div>
+  </div>
+  <div class="prog-wrap"><div class="prog-bar" id="prog-bar" style="width:0%"></div></div>
+  <div class="scenario-card">
+    <div class="scene-label" id="sq-scene-label">📍 Scenario</div>
+    <div class="situation-box" id="sq-situation"></div>
+    <div class="q-text" id="sq-question"></div>
+    <div class="choices" id="sq-choices" role="radiogroup"></div>
+    <div class="feedback" id="sq-feedback"></div>
+    <button class="btn btn-navy btn-full" id="sq-next-btn" style="display:none;" onclick="nextQ()"></button>
+  </div>
+</div>
+
+<!-- ══ SCREEN: FINAL ══ -->
+<div class="screen" id="s-final">
+  <div class="final-card">
+    <div class="final-emoji" id="f-emoji">🏆</div>
+    <div class="final-score" id="f-score">0</div>
+    <div class="final-label" id="f-label">points out of 120</div>
+    <div class="final-title" id="f-title">Challenge Complete!</div>
+    <div class="final-msg" id="f-msg"></div>
+  </div>
+  <div class="cert-box">
+    <h3 id="f-cert-title">🎓 Skills You Demonstrated Today</h3>
+    <p id="f-cert-desc"></p>
+    <div class="skills-earned" id="f-skills"></div>
+  </div>
+  <div class="ai-box" role="note">
+    <span class="ai-label" id="f-ai-label">🤖 Your Personalized AI Practice Prompt</span>
+    <div class="ai-text" id="f-ai-prompt"></div>
+    <button class="copy-btn" onclick="copyFinalPrompt()" id="f-copy-btn">📋 Copy Prompt</button>
+    <span class="copy-ok" id="f-copy-ok">✅ Copied!</span>
+  </div>
+  <button class="btn btn-gold btn-full" onclick="restart()" id="f-restart-btn" style="margin-top:16px;"></button>
+</div>
+
+</main>
+
+<script>
+/* ══════════════════════════════════════════════
+   TRANSLATIONS
+══════════════════════════════════════════════ */
+const T = {
+  en:{
+    hBadge:'VOC ED 418CE · West Los Angeles College',
+    hTitle:'🏆 The <span>Supervisor Challenge</span>',
+    hSub:'Step into your new role. Use everything you have learned!',
+    wTitle:'Congratulations — You Just Got Promoted!',
+    wDesc:'You have been selected as the new Supervisor. Today is your first day in your new role. You will face four real workplace challenges using everything you learned in this course — phone skills, writing, mail and delivery, and leadership. Are you ready?',
+    wHowLabel:'📋 How It Works:',
+    wHowList:['Choose your workplace industry','Face 3 scenarios per round (12 total)','Choose the best response to each situation','Earn points for every correct answer','See your score and receive a personalized AI prompt at the end'],
+    wStartBtn:'🚀 Start the Challenge!',
+    indTitle:'Choose Your Workplace',
+    indDesc:'Select the industry that matches your job. Your scenarios will be tailored to your workplace!',
+    indNextBtn:'Start Round 1 →',
+    industries:[
+      {id:'custodial',icon:'🧹',title:'Custodial & Building Services',desc:'Janitor, Day Porter, Building Maintenance, Custodian'},
+      {id:'security', icon:'🔒',title:'Security & Safety',desc:'Security Officer, Guard, Safety Monitor, Dispatcher'},
+      {id:'food',     icon:'🍽️',title:'Food Service & Hospitality',desc:'Food Service Worker, Deli Clerk, Cafeteria, Catering'},
+      {id:'care',     icon:'🏥',title:'Healthcare & Caregiver',desc:'Caregiver, Patient Support, Home Care, Medical Services'},
+    ],
+    rounds:[
+      {icon:'📞',title:'Round 1 — Phone Power',desc:'You are the supervisor now. Handle these phone calls professionally.',skills:['Professional Greetings','Message Taking','Voicemail']},
+      {icon:'✍️',title:'Round 2 — Writing in Charge',desc:'As supervisor, you must write clear memos and professional emails to your team.',skills:['Office Memos','Professional Email','Subject Lines']},
+      {icon:'📬',title:'Round 3 — Send It Right',desc:'Documents need to be sent. Choose the fastest, most appropriate method.',skills:['Fax','USPS','FedEx / UPS','Interoffice Mail']},
+      {icon:'👑',title:'Round 4 — Leadership Challenge',desc:'Supervisor decisions. These situations need your best judgment.',skills:['Team Communication','Problem Solving','Professional Judgment']},
+    ],
+    riBtn:'Let\'s Go! →',
+    sqRoundLbl:'Round',
+    sqQLbl:'Question',
+    sqScoreLbl:'Score',
+    sqStreakLbl:'Streak 🔥',
+    correct:'Correct!',
+    wrong:'Not quite.',
+    fCertTitle:'🎓 Skills You Demonstrated Today',
+    fAiLabel:'🤖 Your Personalized AI Practice Prompt',
+    fCopyBtn:'📋 Copy Prompt',
+    fCopiedOk:'✅ Copied!',
+    fRestartBtn:'🔄 Play Again',
+    fLabelOf:'points out of 120',
+    fTitle:'Challenge Complete!',
+    fMsgs:{
+      high:'Outstanding! You handled every challenge like a seasoned supervisor. Your communication skills — phone, writing, mail, and leadership — are sharp and professional. You are ready for that promotion!',
+      mid:'Great work! You showed strong supervisor instincts across most scenarios. Review the rounds where you lost points and you will be even stronger. Keep practicing — you are very close!',
+      low:'Good effort! Being a supervisor is a skill you build over time. This course has given you the foundation. Use the AI prompt below to keep practicing the scenarios you found most challenging.',
+    },
+    fCertDesc:'You completed all 4 rounds of The Supervisor Challenge, demonstrating professional communication skills across phone, writing, mail services, and workplace leadership.',
+    fSkillTags:['Professional Phone Communication','Office Memo Writing','Email Etiquette','Delivery Method Selection','Workplace Leadership','Problem Solving'],
+    nextBtn:'Next Question →',
+    seeScore:'🏁 See My Score',
+    sceneLbl:'📍 Your Situation as Supervisor',
+  },
+  es:{
+    hBadge:'VOC ED 418CE · West Los Angeles College',
+    hTitle:'🏆 El <span>Desafío del Supervisor</span>',
+    hSub:'¡Asuma su nuevo rol! ¡Use todo lo que aprendió!',
+    wTitle:'¡Felicitaciones — Acaba de Ser Promovido/a!',
+    wDesc:'Ha sido seleccionado/a como el/la nuevo/a Supervisor/a. Hoy es su primer día en su nuevo rol. Enfrentará cuatro desafíos laborales reales usando todo lo que aprendió en este curso — habilidades telefónicas, escritura, correo y entrega, y liderazgo. ¿Está listo/a?',
+    wHowLabel:'📋 Cómo Funciona:',
+    wHowList:['Elija su industria laboral','Enfrente 3 escenarios por ronda (12 en total)','Elija la mejor respuesta a cada situación','Gane puntos por cada respuesta correcta','Vea su puntaje y reciba un mensaje de IA personalizado al final'],
+    wStartBtn:'🚀 ¡Comenzar el Desafío!',
+    indTitle:'Elija Su Lugar de Trabajo',
+    indDesc:'Seleccione la industria que corresponde a su trabajo. ¡Sus escenarios estarán adaptados a su lugar de trabajo!',
+    indNextBtn:'Comenzar Ronda 1 →',
+    industries:[
+      {id:'custodial',icon:'🧹',title:'Custodia y Servicios de Edificios',desc:'Portero/a, Conserje, Mantenimiento, Custodio/a'},
+      {id:'security', icon:'🔒',title:'Seguridad y Protección',desc:'Oficial de Seguridad, Guardia, Monitor de Seguridad'},
+      {id:'food',     icon:'🍽️',title:'Servicio de Alimentos y Hospitalidad',desc:'Trabajador/a de Cafetería, Mostrador, Catering'},
+      {id:'care',     icon:'🏥',title:'Salud y Cuidado de Personas',desc:'Cuidador/a, Apoyo a Pacientes, Cuidado en el Hogar'},
+    ],
+    rounds:[
+      {icon:'📞',title:'Ronda 1 — Poder Telefónico',desc:'Usted es el/la supervisor/a ahora. Maneje estas llamadas telefónicas de manera profesional.',skills:['Saludos Profesionales','Toma de Mensajes','Buzón de Voz']},
+      {icon:'✍️',title:'Ronda 2 — Escritura al Mando',desc:'Como supervisor/a, debe escribir memorandos claros y correos profesionales a su equipo.',skills:['Memorandos de Oficina','Correo Profesional','Líneas de Asunto']},
+      {icon:'📬',title:'Ronda 3 — Envíelo Correctamente',desc:'Los documentos necesitan ser enviados. Elija el método más rápido y apropiado.',skills:['Fax','USPS','FedEx / UPS','Correo Interno']},
+      {icon:'👑',title:'Ronda 4 — Desafío de Liderazgo',desc:'Decisiones de supervisor/a. Estas situaciones necesitan su mejor juicio.',skills:['Comunicación de Equipo','Resolución de Problemas','Juicio Profesional']},
+    ],
+    riBtn:'¡Vamos! →',
+    sqRoundLbl:'Ronda',
+    sqQLbl:'Pregunta',
+    sqScoreLbl:'Puntaje',
+    sqStreakLbl:'Racha 🔥',
+    correct:'¡Correcto!',
+    wrong:'No exactamente.',
+    fCertTitle:'🎓 Habilidades que Demostró Hoy',
+    fAiLabel:'🤖 Su Mensaje de IA Personalizado para Practicar',
+    fCopyBtn:'📋 Copiar Mensaje',
+    fCopiedOk:'✅ ¡Copiado!',
+    fRestartBtn:'🔄 Jugar de Nuevo',
+    fLabelOf:'puntos de 120',
+    fTitle:'¡Desafío Completado!',
+    fMsgs:{
+      high:'¡Sobresaliente! Manejó cada desafío como un/a supervisor/a experimentado/a. Sus habilidades de comunicación — teléfono, escritura, correo y liderazgo — son sólidas y profesionales. ¡Está listo/a para esa promoción!',
+      mid:'¡Buen trabajo! Mostró buenos instintos de supervisor/a en la mayoría de los escenarios. Revise las rondas donde perdió puntos y será aún más fuerte. ¡Siga practicando — está muy cerca!',
+      low:'¡Buen esfuerzo! Ser supervisor/a es una habilidad que se construye con el tiempo. Este curso le ha dado la base. Use el mensaje de IA a continuación para seguir practicando.',
+    },
+    fCertDesc:'Completó las 4 rondas del Desafío del Supervisor, demostrando habilidades de comunicación profesional en teléfono, escritura, servicios de correo y liderazgo.',
+    fSkillTags:['Comunicación Telefónica Profesional','Redacción de Memorandos','Etiqueta de Correo Electrónico','Selección de Método de Envío','Liderazgo en el Lugar de Trabajo','Resolución de Problemas'],
+    nextBtn:'Siguiente Pregunta →',
+    seeScore:'🏁 Ver Mi Puntaje',
+    sceneLbl:'📍 Su Situación como Supervisor/a',
+  }
+};
+
+/* ══════════════════════════════════════════════
+   QUESTIONS — 4 ROUNDS × 3 Qs × 4 INDUSTRIES
+══════════════════════════════════════════════ */
+const QS = {
+  custodial:{
+    r1:[ // PHONE
+      {sit:'en':"It is 7:30 AM. You are the lead porter at a school district office building. A parent calls asking if the main entrance is open and when cleaning of the lobby will be finished.",
+       sit_es:'Son las 7:30 AM. Usted es el/la portero/a líder de un edificio escolar. Un padre llama preguntando si la entrada principal está abierta y cuándo terminará la limpieza del vestíbulo.',
+       q:'en':"What is the BEST way to answer this call?",
+       q_es:'¿Cuál es la MEJOR manera de contestar esta llamada?',
+       opts_en:['Just say "Hello?" and wait','Say: "Good morning, District Building Services, this is [your name] speaking. How may I help you?"','Put the caller on hold immediately without saying anything','Say "We are busy cleaning right now, call back later"'],
+       opts_es:['Solo decir "¿Aló?" y esperar','Decir: "Buenos días, Servicios del Edificio, le habla [su nombre]. ¿En qué le puedo ayudar?"','Poner al llamante en espera inmediatamente sin decir nada','Decir "Estamos limpiando ahora, llame más tarde"'],
+       correct:1,
+       fb_en:"A professional greeting includes: a time-of-day word, your department name, your name, and an offer to help. This is Module 1 in action!",
+       fb_es:"Un saludo profesional incluye: una palabra de saludo según la hora, el nombre de su departamento, su nombre y una oferta de ayuda. ¡Esto es el Módulo 1 en acción!"},
+      {sit_en:'Your supervisor is in a meeting and cannot be reached. A vendor calls to say the supply delivery will arrive at 3:00 PM today instead of 9:00 AM. They need confirmation.',
+       sit_es:'Su supervisor está en una reunión y no puede ser contactado. Un proveedor llama para decir que la entrega de suministros llegará a las 3:00 PM hoy en lugar de las 9:00 AM. Necesitan confirmación.',
+       q_en:'What should you do?',q_es:'¿Qué debe hacer?',
+       opts_en:['Tell the vendor "I don\'t know, call back later"','Hang up — it is not your responsibility','Take a complete message: vendor name, callback number, new delivery time, and that they need confirmation. Leave it for your supervisor.','Just say "OK" and hang up'],
+       opts_es:['Decirle al proveedor "No sé, llame más tarde"','Colgar — no es su responsabilidad','Tomar un mensaje completo: nombre del proveedor, número de devolución de llamada, nueva hora de entrega y que necesitan confirmación. Dejárselo a su supervisor.','Solo decir "OK" y colgar'],
+       correct:2,
+       fb_en:"Taking a complete message is a core Module 1 skill. A message always includes: who called, why they called, their callback number, and what action is needed.",
+       fb_es:"Tomar un mensaje completo es una habilidad básica del Módulo 1. Un mensaje siempre incluye: quién llamó, por qué llamó, su número de devolución de llamada y qué acción se necesita."},
+      {sit_en:'You need to leave a voicemail for the building manager about a broken floor buffer that is affecting your team\'s ability to finish the morning cleaning route.',
+       sit_es:'Necesita dejar un mensaje de voz para el gerente del edificio sobre una pulidora de pisos rota que está afectando la capacidad de su equipo para terminar la ruta de limpieza matutina.',
+       q_en:'Which voicemail is most professional?',q_es:'¿Cuál mensaje de voz es más profesional?',
+       opts_en:['Just say "Hi, the machine is broken" and hang up','Say: "Hi, this is [name], lead porter, calling on [date] at [time]. Our floor buffer in Building A is out of service and is delaying our morning route. Please call me back at [number] when you are available. Thank you."','Don\'t leave a voicemail — just text from your personal phone','Say "Call me back" without explaining the issue'],
+       opts_es:['Solo decir "Hola, la máquina está rota" y colgar','Decir: "Hola, soy [nombre], portero/a líder, llamando el [fecha] a las [hora]. Nuestra pulidora de pisos en el Edificio A está fuera de servicio y está retrasando nuestra ruta matutina. Por favor llámeme al [número] cuando esté disponible. Gracias."','No dejar un mensaje de voz — solo enviar un texto de su teléfono personal','Decir "Llámeme" sin explicar el problema'],
+       correct:1,
+       fb_en:"A professional voicemail includes your name, your title, the date and time, a clear description of the issue, your callback number, and a polite closing. Module 1 complete!",
+       fb_es:"Un mensaje de voz profesional incluye su nombre, su título, la fecha y hora, una descripción clara del problema, su número de devolución de llamada y un cierre cortés."},
+    ],
+    r2:[ // WRITING
+      {sit_en:'Your team of 5 day porters starts at 6:00 AM. There is a health inspection tomorrow morning at 8:00 AM. All common areas, restrooms, and the main entrance must be finished before 7:45 AM.',
+       sit_es:'Su equipo de 5 porteros comienza a las 6:00 AM. Hay una inspección de salud mañana por la mañana a las 8:00 AM. Todas las áreas comunes, baños y la entrada principal deben estar terminados antes de las 7:45 AM.',
+       q_en:'Which subject line is best for the memo you will send to your team today?',
+       q_es:'¿Cuál línea de asunto es mejor para el memorándum que enviará a su equipo hoy?',
+       opts_en:['SUBJECT: Tomorrow','SUBJECT: Health Inspection Tomorrow, Wednesday — All Areas Must Be Complete by 7:45 AM','SUBJECT: Important!!!!! Read This!!!!','SUBJECT: hi team'],
+       opts_es:['ASUNTO: Mañana','ASUNTO: Inspección de Salud Mañana, Miércoles — Todas las Áreas Deben Completarse Antes de las 7:45 AM','ASUNTO: ¡¡¡¡¡Importante!!!!! ¡¡¡¡¡Lean Esto!!!!!','ASUNTO: hola equipo'],
+       correct:1,
+       fb_en:"A professional subject line is specific, clear, and includes the key details. The reader should know exactly what the memo is about before they open it. Module 2 skill!",
+       fb_es:"Una línea de asunto profesional es específica, clara e incluye los detalles clave. El lector debe saber exactamente de qué trata el memorándum antes de abrirlo."},
+      {sit_en:'A team member has been arriving 15 minutes late three times this week. You need to address this professionally in writing before it becomes a bigger issue.',
+       sit_es:'Un miembro del equipo ha llegado 15 minutos tarde tres veces esta semana. Necesita abordar esto profesionalmente por escrito antes de que se convierta en un problema mayor.',
+       q_en:'Which opening for your memo is most professional?',
+       q_es:'¿Cuál apertura para su memorándum es más profesional?',
+       opts_en:['"Hey — you have been late a lot. Stop it."','"I am writing this memo to formally note that I have observed three instances of late arrival this week. I would like to schedule a brief meeting to discuss how I can best support you in maintaining your schedule."','"This is a warning letter because you keep being late."','"I noticed you were late. Please try to be on time."'],
+       opts_es:['"Oye — has llegado tarde muchas veces. Para."','"Escribo este memorándum para hacer constar formalmente que he observado tres instancias de llegada tarde esta semana. Me gustaría programar una breve reunión para hablar sobre cómo puedo apoyarle mejor para mantener su horario."','"Esta es una carta de advertencia porque sigue llegando tarde."','"Noté que llegaste tarde. Por favor trata de llegar a tiempo."'],
+       correct:1,
+       fb_en:"Professional memos address difficult topics with respect and without blame. Note the facts, not your feelings, and offer a solution. This is exactly what employers look for in a supervisor.",
+       fb_es:"Los memorandos profesionales abordan temas difíciles con respeto y sin culpa. Anote los hechos, no sus sentimientos, y ofrezca una solución."},
+      {sit_en:'Your building manager asks you to email the cleaning supply vendor to request a price quote for 10 cases of disinfectant cleaner. The vendor\'s name is ABC Supply Co.',
+       sit_es:'Su gerente de edificio le pide que envíe un correo electrónico al proveedor de suministros de limpieza para solicitar una cotización de precios para 10 cajas de limpiador desinfectante. El nombre del proveedor es ABC Supply Co.',
+       q_en:'Which email is the most professional?',
+       q_es:'¿Cuál correo electrónico es el más profesional?',
+       opts_en:['Subject: supplies\nHey, how much for 10 boxes of cleaner? Let me know. Thanks','Subject: Price Quote Request — Disinfectant Cleaner (10 Cases)\nDear ABC Supply Co. Team,\nI am writing to request a price quote for 10 cases of disinfectant cleaner for our facility. Please reply with your current pricing and estimated delivery time. Thank you for your assistance.\nSincerely, [Your Name], Lead Porter','Subject: URGENT NEED PRICE NOW\nwe need cleaner price asap!!!','No email needed — just call and ask'],
+       opts_es:['Asunto: suministros\nHola, ¿cuánto cuestan 10 cajas de limpiador? Avísame. Gracias','Asunto: Solicitud de Cotización — Limpiador Desinfectante (10 Cajas)\nEstimado Equipo de ABC Supply Co.:\nEscribo para solicitar una cotización de precios para 10 cajas de limpiador desinfectante para nuestras instalaciones. Por favor responda con sus precios actuales y tiempo estimado de entrega. Gracias por su ayuda.\nAtentamente, [Su Nombre], Portero/a Líder','Asunto: URGENTE NECESITO PRECIO YA\n¡¡¡necesitamos precio de limpiador ya!!!','No se necesita correo electrónico — solo llame y pregunte'],
+       correct:1,
+       fb_en:"Notice the difference: a clear subject line, a formal greeting, a specific request, polite closing, and your name and title. That is a professional email — Module 2!",
+       fb_es:"Note la diferencia: una línea de asunto clara, un saludo formal, una solicitud específica, cierre cortés y su nombre y título. Eso es un correo electrónico profesional."},
+    ],
+    r3:[ // MAIL/DELIVERY
+      {sit_en:'A signed maintenance contract must be delivered to the school district main office located 12 miles away. It must arrive by 9:00 AM tomorrow morning.',
+       sit_es:'Un contrato de mantenimiento firmado debe entregarse a la oficina principal del distrito escolar ubicada a 12 millas de distancia. Debe llegar antes de las 9:00 AM de mañana por la mañana.',
+       q_en:'Which delivery method do you choose?',q_es:'¿Qué método de entrega elige?',
+       opts_en:['USPS First-Class Mail (1–5 days)','Interoffice mail (same building only)','FedEx Overnight or UPS Next Day Air — guaranteed next-morning delivery with tracking','Walk it over yourself tomorrow morning'],
+       opts_es:['Correo Regular USPS (1–5 días)','Correo interno (solo en el mismo edificio)','FedEx Overnight o UPS Next Day Air — entrega garantizada a la mañana siguiente con seguimiento','Llevarlo usted mismo/a mañana por la mañana'],
+       correct:2,
+       fb_en:"When a document is urgent and must arrive by a guaranteed time, FedEx Overnight or UPS Next Day Air is the professional choice. It includes tracking so you can confirm delivery. Module 3!",
+       fb_es:"Cuando un documento es urgente y debe llegar a una hora garantizada, FedEx Overnight o UPS Next Day Air es la elección profesional. Incluye seguimiento para confirmar la entrega."},
+      {sit_en:'You need to send an updated cleaning schedule to three different departments in the same building — Facilities, Administration, and Security. It is not urgent.',
+       sit_es:'Necesita enviar un horario de limpieza actualizado a tres departamentos diferentes en el mismo edificio — Instalaciones, Administración y Seguridad. No es urgente.',
+       q_en:'Which is the fastest and most cost-effective method?',q_es:'¿Cuál es el método más rápido y económico?',
+       opts_en:['FedEx Overnight to each department','Interoffice memo placed in each department\'s mailbox — free and same-day','USPS First-Class mail to each department','Email only — do not use any paper'],
+       opts_es:['FedEx Overnight a cada departamento','Memorándum interno colocado en el buzón de cada departamento — gratis y el mismo día','Correo Regular USPS a cada departamento','Solo correo electrónico — no use papel'],
+       correct:1,
+       fb_en:"For communication within the same building, interoffice memos are the fastest and most cost-effective choice. Free, immediate, and professional!",
+       fb_es:"Para la comunicación dentro del mismo edificio, los memorandos internos son la opción más rápida y económica. ¡Gratis, inmediata y profesional!"},
+      {sit_en:'The school district needs a copy of your team\'s daily cleaning log right now. They need it to prepare for a surprise inspection happening in 2 hours. Their fax number is on file.',
+       sit_es:'El distrito escolar necesita una copia del registro diario de limpieza de su equipo ahora mismo. Lo necesitan para prepararse para una inspección sorpresa que ocurrirá en 2 horas. Tienen su número de fax registrado.',
+       q_en:'What is the fastest way to send this document?',q_es:'¿Cuál es la forma más rápida de enviar este documento?',
+       opts_en:['USPS Priority Mail (1–3 days)','FedEx Overnight (arrives tomorrow)','Fax — sends an instant copy in seconds at very low cost','Drive it over yourself in 2 hours'],
+       opts_es:['USPS Priority Mail (1–3 días)','FedEx Overnight (llega mañana)','Fax — envía una copia instantánea en segundos a muy bajo costo','Llevarlo usted mismo/a en 2 horas'],
+       correct:2,
+       fb_en:"A fax is perfect for urgent document sharing when you need the other party to have an exact copy immediately. In 2 hours, only a fax gets it there in time!",
+       fb_es:"Un fax es perfecto para compartir documentos urgentes cuando necesita que la otra parte tenga una copia exacta de inmediato. ¡En 2 horas, solo un fax lo entrega a tiempo!"},
+    ],
+    r4:[ // LEADERSHIP
+      {sit_en:'One of your team members tells you that another team member has been skipping restroom cleaning on the third floor and just marking it as done on the checklist. You are the supervisor.',
+       sit_es:'Uno de sus miembros del equipo le dice que otro miembro del equipo ha estado saltándose la limpieza de los baños del tercer piso y solo marcándolo como hecho en la lista de verificación.',
+       q_en:'What is the best first step as supervisor?',q_es:'¿Cuál es el mejor primer paso como supervisor/a?',
+       opts_en:['Immediately fire the employee','Do nothing — it is probably just a misunderstanding','Talk privately with the employee who reported it to get specific details, then inspect the third floor yourself before speaking with the employee in question','Announce to the whole team that someone has been dishonest'],
+       opts_es:['Despedir al empleado inmediatamente','No hacer nada — probablemente es solo un malentendido','Hablar en privado con el empleado que lo reportó para obtener detalles específicos, luego inspeccionar el tercer piso usted mismo/a antes de hablar con el empleado en cuestión','Anunciar a todo el equipo que alguien ha sido deshonesto'],
+       correct:2,
+       fb_en:"Great supervisors gather facts before acting. Talking privately, verifying the situation yourself, and then addressing the issue professionally protects everyone and maintains team trust.",
+       fb_es:"Los grandes supervisores recopilan hechos antes de actuar. Hablar en privado, verificar la situación usted mismo/a y luego abordar el problema profesionalmente protege a todos y mantiene la confianza del equipo."},
+      {sit_en:'A new employee on your team is struggling. They are slow, nervous, and unsure about the correct order for cleaning tasks. They have been on the job for one week.',
+       sit_es:'Un nuevo empleado en su equipo está teniendo dificultades. Es lento, nervioso e inseguro sobre el orden correcto para las tareas de limpieza. Llevan una semana en el trabajo.',
+       q_en:'What is the most effective supervisor response?',q_es:'¿Cuál es la respuesta de supervisor/a más efectiva?',
+       opts_en:['Tell them to figure it out on their own — sink or swim','Pair them with an experienced team member for additional training and check in with them at the end of each shift for the first two weeks','Write them up immediately for being slow','Ignore the situation and hope they improve'],
+       opts_es:['Decirles que lo descubran solos — que se las arreglen','Emparejarlos con un miembro experimentado del equipo para capacitación adicional y comunicarse con ellos al final de cada turno durante las primeras dos semanas','Reportarlos de inmediato por ser lentos','Ignorar la situación y esperar que mejoren'],
+       correct:1,
+       fb_en:"Good supervisors invest in new employees. Pairing them with a mentor and checking in regularly is the most effective way to onboard someone successfully — and it builds team loyalty.",
+       fb_es:"Los buenos supervisores invierten en los nuevos empleados. Emparejarlos con un mentor y comunicarse regularmente es la manera más efectiva de incorporar a alguien con éxito."},
+      {sit_en:'Your team has an important deep-clean scheduled for Saturday. Two team members just told you they cannot come in. You need all 5 people to complete the job on time.',
+       sit_es:'Su equipo tiene una limpieza profunda importante programada para el sábado. Dos miembros del equipo le acaban de decir que no pueden venir. Necesita las 5 personas para completar el trabajo a tiempo.',
+       q_en:'As supervisor, what do you do?',q_es:'Como supervisor/a, ¿qué hace?',
+       opts_en:['Cancel the deep-clean entirely','Blame the two employees in front of the team','Contact your manager immediately to report the staffing issue, ask if you can offer overtime to other team members, and document the situation in writing','Do nothing and hope it works out'],
+       opts_es:['Cancelar la limpieza profunda por completo','Culpar a los dos empleados frente al equipo','Comunicarse con su gerente de inmediato para reportar el problema de personal, preguntar si puede ofrecer horas extra a otros miembros del equipo y documentar la situación por escrito','No hacer nada y esperar que resulte bien'],
+       correct:2,
+       fb_en:"Professional supervisors communicate problems upward quickly, propose solutions, and document everything. This is exactly the kind of supervisor behavior that gets noticed and rewarded.",
+       fb_es:"Los supervisores profesionales comunican los problemas hacia arriba rápidamente, proponen soluciones y documentan todo. Este es exactamente el tipo de comportamiento de supervisor que se nota y se recompensa."},
+    ],
+  }
+};
+
+// Duplicate questions for other industries (same core skills, different workplace context)
+['security','food','care'].forEach(ind => {
+  QS[ind] = JSON.parse(JSON.stringify(QS.custodial));
+  const overrides = {
+    security:{
+      sit_en_prefix:'You are the Security Supervisor at a hospital.',
+      sit_es_prefix:'Usted es el/la Supervisor/a de Seguridad en un hospital.',
+      r1_sit_en:['A visitor calls the security desk asking if Parking Lot B is currently open and safe to use.','Your shift supervisor is unavailable. A manager from the emergency department calls to report a safety concern near the south entrance.','You need to leave a voicemail for the facilities manager about a broken security camera on the third floor.'],
+      r1_sit_es:['Un visitante llama al escritorio de seguridad preguntando si el Estacionamiento B está actualmente abierto y seguro.','Su supervisor de turno no está disponible. Un gerente del departamento de emergencias llama para reportar una preocupación de seguridad cerca de la entrada sur.','Necesita dejar un mensaje de voz para el gerente de instalaciones sobre una cámara de seguridad rota en el tercer piso.'],
+      r2_sit_en:['You need to write a memo to your security team about new visitor badge procedures starting Monday.','A security officer has submitted three late incident reports this week. You need to address this professionally.','Your manager asks you to email the vendor about renewing your security camera maintenance contract.'],
+      r2_sit_es:['Necesita escribir un memorándum a su equipo de seguridad sobre los nuevos procedimientos de identificación de visitantes que comienzan el lunes.','Un oficial de seguridad ha presentado tres reportes de incidentes tardíos esta semana. Necesita abordar esto profesionalmente.','Su gerente le pide que envíe un correo electrónico al proveedor sobre la renovación del contrato de mantenimiento de cámaras de seguridad.'],
+    },
+    food:{
+      r1_sit_en:['A parent calls asking what time the school cafeteria opens and if hot meals are available today.','The food delivery vendor calls when your supervisor is out — the produce delivery will be 3 hours late.','You need to leave a voicemail for the district food services manager about a broken commercial oven.'],
+      r1_sit_es:['Un padre llama preguntando a qué hora abre la cafetería escolar y si hay comidas calientes disponibles hoy.','El proveedor de entrega de alimentos llama cuando su supervisor está fuera — la entrega de productos llegará 3 horas tarde.','Necesita dejar un mensaje de voz para el gerente de servicios de alimentos del distrito sobre un horno comercial roto.'],
+    },
+    care:{
+      r1_sit_en:['A family member of a client calls asking about their loved one\'s daily schedule and if meals are included in care today.','Your agency coordinator is unavailable. A doctor\'s office calls to confirm a client\'s appointment for tomorrow at 10:00 AM.','You need to leave a voicemail for your supervisor about a client who is refusing their medication and needs a care plan update.'],
+      r1_sit_es:['Un familiar de un cliente llama preguntando sobre el horario diario de su ser querido y si las comidas están incluidas en el cuidado hoy.','Su coordinadora de agencia no está disponible. El consultorio de un médico llama para confirmar la cita de un cliente mañana a las 10:00 AM.','Necesita dejar un mensaje de voz para su supervisor sobre un cliente que se niega a tomar su medicamento y necesita una actualización del plan de cuidado.'],
+    }
+  };
+  // Apply sit overrides for Round 1
+  if(overrides[ind]) {
+    const ov = overrides[ind];
+    if(ov.r1_sit_en) {
+      QS[ind].r1.forEach((q,i) => {
+        q.sit_en = ov.r1_sit_en[i] || q.sit_en;
+        q.sit_es = (ov.r1_sit_es && ov.r1_sit_es[i]) ? ov.r1_sit_es[i] : q.sit_es;
+      });
+    }
+  }
+});
+
+/* ══════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════ */
+let lang = 'en';
+let industry = null;
+let currentRound = 0; // 0-based
+let currentQ = 0;
+let score = 0;
+let streak = 0;
+let answered = false;
+const ROUNDS = ['r1','r2','r3','r4'];
+const POINTS_CORRECT = 10;
+
+/* ══════════════════════════════════════════════
+   LANGUAGE
+══════════════════════════════════════════════ */
+function setLang(l){
+  lang = l;
+  document.getElementById('root').setAttribute('lang',l);
+  document.getElementById('btn-en').className = 'lang-btn ' + (l==='en'?'on':'off');
+  document.getElementById('btn-es').className = 'lang-btn ' + (l==='es'?'on':'off');
+  document.getElementById('btn-en').setAttribute('aria-pressed', l==='en');
+  document.getElementById('btn-es').setAttribute('aria-pressed', l==='es');
+  renderUI();
+}
+
+function t(key){ return T[lang][key]; }
+
+function renderUI(){
+  const t = T[lang];
+  document.getElementById('h-badge').textContent = t.hBadge;
+  document.getElementById('h-title').innerHTML = t.hTitle;
+  document.getElementById('h-sub').textContent = t.hSub;
+  document.getElementById('w-title').textContent = t.wTitle;
+  document.getElementById('w-desc').textContent = t.wDesc;
+  document.getElementById('w-how-label').textContent = t.wHowLabel;
+  document.getElementById('w-how-list').innerHTML = t.wHowList.map(i=>`<li>${i}</li>`).join('');
+  document.getElementById('w-start-btn').textContent = t.wStartBtn;
+  document.getElementById('ind-title').textContent = t.indTitle;
+  document.getElementById('ind-desc').textContent = t.indDesc;
+  document.getElementById('ind-next-btn').textContent = t.indNextBtn;
+  renderIndustryGrid();
+}
+
+/* ══════════════════════════════════════════════
+   SCREENS
+══════════════════════════════════════════════ */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('show'));
+  document.getElementById(id).classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ══════════════════════════════════════════════
+   INDUSTRY
+══════════════════════════════════════════════ */
+function renderIndustryGrid(){
+  const t = T[lang];
+  const grid = document.getElementById('industry-grid');
+  grid.innerHTML = t.industries.map((ind,i)=>`
+    <div class="ind-card ${industry===ind.id?'selected':''}" onclick="selectIndustry('${ind.id}',this)"
+      role="radio" aria-checked="${industry===ind.id}" tabindex="0" aria-label="${ind.title}">
+      <span class="ind-icon" aria-hidden="true">${ind.icon}</span>
+      <div class="ind-title">${ind.title}</div>
+      <div class="ind-desc">${ind.desc}</div>
+    </div>`).join('');
+}
+
+function selectIndustry(id, el){
+  industry = id;
+  document.querySelectorAll('.ind-card').forEach(c=>{c.classList.remove('selected');c.setAttribute('aria-checked','false');});
+  el.classList.add('selected');
+  el.setAttribute('aria-checked','true');
+  document.getElementById('ind-next-btn').style.display = 'block';
+}
+
+/* ══════════════════════════════════════════════
+   ROUNDS
+══════════════════════════════════════════════ */
+function startRound1(){ currentRound=0; currentQ=0; score=0; streak=0; showRoundIntro(); }
+
+function showRoundIntro(){
+  const t = T[lang];
+  const r = t.rounds[currentRound];
+  document.getElementById('ri-icon').textContent = r.icon;
+  document.getElementById('ri-title').textContent = r.title;
+  document.getElementById('ri-desc').textContent = r.desc;
+  document.getElementById('ri-btn').textContent = t.riBtn;
+  document.getElementById('ri-skills').innerHTML = r.skills.map(s=>
+    `<span style="background:var(--navy);color:white;border-radius:20px;padding:4px 14px;font-size:13px;font-weight:700;">${s}</span>`).join('');
+  showScreen('s-round-intro');
+}
+
+function startQuestions(){ currentQ=0; renderQ(); showScreen('s-question'); }
+
+function renderQ(){
+  const t = T[lang];
+  answered = false;
+  const rKey = ROUNDS[currentRound];
+  const qs = QS[industry][rKey];
+  const q = qs[currentQ];
+  const totalQ = (currentRound*3) + currentQ + 1;
+  const pct = Math.round(((totalQ-1)/12)*100);
+
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('sq-round-lbl').textContent = t.sqRoundLbl;
+  document.getElementById('sq-q-lbl').textContent = t.sqQLbl;
+  document.getElementById('sq-score-lbl').textContent = t.sqScoreLbl;
+  document.getElementById('sq-streak-lbl').textContent = t.sqStreakLbl;
+  document.getElementById('sq-round').textContent = (currentRound+1)+'/4';
+  document.getElementById('sq-q').textContent = (currentQ+1)+'/3';
+  document.getElementById('sq-score').textContent = score;
+  document.getElementById('sq-streak').textContent = streak;
+  document.getElementById('sq-scene-label').textContent = t.sceneLbl;
+  document.getElementById('sq-situation').innerHTML = lang==='en' ? q.sit_en : q.sit_es;
+  document.getElementById('sq-question').textContent = lang==='en' ? q.q_en : q.q_es;
+  document.getElementById('sq-feedback').className = 'feedback';
+  document.getElementById('sq-next-btn').style.display = 'none';
+
+  const opts = lang==='en' ? q.opts_en : q.opts_es;
+  const letters = ['A','B','C','D'];
+  document.getElementById('sq-choices').innerHTML = opts.map((o,i)=>`
+    <button class="choice" onclick="answerQ(this,${i},${q.correct})" aria-label="Option ${letters[i]}: ${o}">
+      <span class="choice-letter">${letters[i]}</span> ${o}
+    </button>`).join('');
+}
+
+function answerQ(btn, chosen, correct){
+  if(answered) return;
+  answered = true;
+  const t = T[lang];
+  const rKey = ROUNDS[currentRound];
+  const q = QS[industry][rKey][currentQ];
+  document.querySelectorAll('.choice').forEach(b=>b.disabled=true);
+  const isCorrect = chosen === correct;
+  if(isCorrect){ btn.classList.add('correct'); score+=POINTS_CORRECT; streak++; }
+  else{
+    btn.classList.add('wrong'); streak=0;
+    document.querySelectorAll('.choice')[correct].classList.add('correct');
+  }
+  const fb = document.getElementById('sq-feedback');
+  fb.className = 'feedback '+(isCorrect?'good':'bad')+' show';
+  const fbText = lang==='en' ? q.fb_en : q.fb_es;
+  fb.innerHTML = `<span class="fb-icon">${isCorrect?'✅':'💡'}</span>
+    <div class="fb-text"><strong>${isCorrect?t.correct:t.wrong}</strong> ${fbText}</div>`;
+  document.getElementById('sq-score').textContent = score;
+  document.getElementById('sq-streak').textContent = streak;
+  const nb = document.getElementById('sq-next-btn');
+  nb.style.display='block';
+  const isLastQ = currentQ===2;
+  const isLastRound = currentRound===3;
+  nb.textContent = (!isLastQ || !isLastRound) ? t.nextBtn : t.seeScore;
+}
+
+function nextQ(){
+  if(currentQ < 2){ currentQ++; renderQ(); return; }
+  if(currentRound < 3){ currentRound++; currentQ=0; showRoundIntro(); return; }
+  showFinal();
+}
+
+/* ══════════════════════════════════════════════
+   FINAL
+══════════════════════════════════════════════ */
+function showFinal(){
+  const t = T[lang];
+  const pct = score/120;
+  document.getElementById('f-emoji').textContent = pct>=0.85?'🏆':pct>=0.65?'🌟':'💪';
+  document.getElementById('f-score').textContent = score+'/120';
+  document.getElementById('f-label').textContent = t.fLabelOf;
+  document.getElementById('f-title').textContent = t.fTitle;
+  document.getElementById('f-msg').textContent = pct>=0.85?t.fMsgs.high:pct>=0.65?t.fMsgs.mid:t.fMsgs.low;
+  document.getElementById('f-cert-title').textContent = t.fCertTitle;
+  document.getElementById('f-cert-desc').textContent = t.fCertDesc;
+  document.getElementById('f-skills').innerHTML = t.fSkillTags.map(s=>`<span class="skill-tag">${s}</span>`).join('');
+  document.getElementById('f-ai-label').textContent = t.fAiLabel;
+  document.getElementById('f-copy-btn').textContent = t.fCopyBtn;
+  document.getElementById('f-copy-ok').textContent = t.fCopiedOk;
+  document.getElementById('f-restart-btn').textContent = t.fRestartBtn;
+
+  const ind = T[lang].industries.find(i=>i.id===industry);
+  const indName = ind ? ind.title : 'Building Services';
+  const prompt = lang==='en'
+    ? `I am studying to become a supervisor in ${indName}. I just completed a training challenge covering professional phone communication, office memo writing, professional email, mail and delivery decisions, and workplace leadership.\n\nMy score was ${score} out of 120 points.\n\nPlease help me practice the skills I found most challenging. Give me one realistic workplace scenario for a ${indName} supervisor, and ask me how I would handle it using professional communication skills. After I respond, give me feedback and explain the best approach. Use simple English — I am an English learner.`
+    : `Estoy estudiando para convertirme en supervisor/a en ${indName}. Acabo de completar un desafío de capacitación que cubría comunicación telefónica profesional, redacción de memorandos, correo electrónico profesional, decisiones de correo y entrega, y liderazgo en el lugar de trabajo.\n\nMi puntaje fue ${score} de 120 puntos.\n\nPor favor ayúdeme a practicar las habilidades que encontré más desafiantes. Deme un escenario laboral realista para un/a supervisor/a de ${indName} y pregúnteme cómo lo manejaría usando habilidades de comunicación profesional. Después de que responda, deme retroalimentación y explique el mejor enfoque. Use inglés simple — soy un/a estudiante de inglés.`;
+
+  document.getElementById('f-ai-prompt').textContent = prompt;
+  showScreen('s-final');
+}
+
+function copyFinalPrompt(){
+  const text = document.getElementById('f-ai-prompt').textContent;
+  navigator.clipboard.writeText(text).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);});
+  const ok = document.getElementById('f-copy-ok');
+  ok.style.display='inline'; setTimeout(()=>{ok.style.display='none';},2500);
+}
+
+function restart(){ industry=null; score=0; streak=0; currentRound=0; currentQ=0; renderUI(); showScreen('s-welcome'); }
+
+// INIT
+renderUI();
+</script>
+</body>
+</html>
