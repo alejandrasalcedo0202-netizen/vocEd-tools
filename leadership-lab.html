@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en" id="root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Leadership Lab | VOC ED 418CE — West Los Angeles College</title>
+<style>
+:root{
+  --navy:#1a2e4a;--gold:#c9922a;--gold-lt:#fef3dc;
+  --blue:#2563a8;--blue-lt:#ddeafc;
+  --green:#1e8c4a;--green-lt:#d4f5e2;
+  --purple:#7b4ca8;--purple-lt:#ede6fb;
+  --teal:#1a6b6b;--teal-lt:#d0f0ee;
+  --orange:#c05a10;--orange-lt:#fde8d0;
+  --red:#c0392b;--red-lt:#fde8e6;
+  --text:#1e2c3a;--muted:#5a6a7a;--border:#d0dae8;--bg:#f0f4fb;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);font-size:17px;line-height:1.7;min-height:100vh;}
+
+/* LANG */
+.lang-bar{background:#0d1f0d;padding:9px 20px;display:flex;justify-content:center;align-items:center;gap:12px;}
+.lbtn{padding:7px 20px;font-family:Arial,sans-serif;font-size:14px;font-weight:900;border:2px solid transparent;border-radius:22px;cursor:pointer;transition:all 0.2s;}
+.lbtn.on{background:var(--gold);color:#111;border-color:var(--gold);}
+.lbtn.off{background:transparent;color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.3);}
+
+/* HEADER */
+.gold-bar{height:5px;background:linear-gradient(90deg,var(--gold),#e8b84b,var(--gold));}
+.hero{background:var(--navy);padding:26px 22px 20px;text-align:center;}
+.hero h1{font-size:26px;color:white;font-weight:900;line-height:1.2;}
+.hero h1 span{color:var(--gold);}
+.hero p{color:rgba(255,255,255,0.75);font-size:15px;margin-top:5px;}
+.badge{display:inline-block;background:var(--gold);color:#111;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.8px;padding:4px 14px;border-radius:20px;margin-bottom:10px;}
+
+/* STATION NAV */
+.station-nav{background:white;border-bottom:2px solid var(--border);overflow-x:auto;}
+.station-nav-inner{display:flex;max-width:860px;margin:0 auto;}
+.snav-btn{flex:1;min-width:110px;padding:13px 8px;font-family:Arial,sans-serif;font-size:13px;font-weight:800;border:none;background:transparent;color:var(--muted);cursor:pointer;border-bottom:4px solid transparent;text-align:center;line-height:1.3;transition:all 0.2s;}
+.snav-btn.done{color:var(--green);}
+.snav-btn.active{color:var(--navy);border-bottom-color:var(--gold);}
+
+/* SCREENS */
+.screen{display:none;max-width:860px;margin:0 auto;padding:24px 16px 70px;}
+.screen.show{display:block;}
+
+/* CARDS */
+.card{background:white;border-radius:16px;padding:26px;border:1px solid var(--border);box-shadow:0 3px 12px rgba(0,0,0,0.06);margin-bottom:18px;}
+.card h2{font-size:21px;font-weight:900;color:var(--navy);margin-bottom:10px;line-height:1.3;}
+.card p{font-size:16px;color:var(--muted);line-height:1.6;margin-bottom:12px;}
+
+/* SECTION HERO */
+.section-hero{border-radius:14px;padding:22px 24px;margin-bottom:22px;position:relative;overflow:hidden;}
+.section-hero h2{font-size:22px;font-weight:900;line-height:1.3;margin-bottom:8px;}
+.section-hero p{font-size:16px;line-height:1.6;margin:0;}
+.sh-big{font-size:52px;position:absolute;right:18px;top:12px;opacity:0.15;}
+.s1-hero{background:var(--blue-lt);border:2px solid var(--blue);}
+.s1-hero h2{color:var(--blue);}
+.s2-hero{background:var(--orange-lt);border:2px solid var(--orange);}
+.s2-hero h2{color:var(--orange);}
+.s3-hero{background:var(--purple-lt);border:2px solid var(--purple);}
+.s3-hero h2{color:var(--purple);}
+.s4-hero{background:var(--green-lt);border:2px solid var(--green);}
+.s4-hero h2{color:var(--green);}
+
+/* QUIZ */
+.prog-wrap{background:var(--border);border-radius:8px;height:8px;overflow:hidden;margin-bottom:16px;}
+.prog-bar{height:100%;border-radius:8px;transition:width 0.4s;}
+.q-num{font-size:13px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;}
+.q-text{font-size:19px;font-weight:900;color:var(--navy);margin-bottom:16px;line-height:1.4;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{width:100%;padding:13px 16px;font-family:Arial,sans-serif;font-size:16px;font-weight:700;text-align:left;border:2px solid var(--border);border-radius:12px;background:white;color:var(--text);cursor:pointer;transition:all 0.2s;display:flex;align-items:flex-start;gap:10px;line-height:1.4;}
+.opt:hover:not(:disabled){background:var(--bg);transform:translateX(3px);}
+.opt.selected{border-color:var(--gold);background:var(--gold-lt);color:#7a5000;}
+.opt.correct{background:var(--green-lt);border-color:var(--green);color:var(--green);}
+.opt.wrong{background:var(--red-lt);border-color:var(--red);color:var(--red);opacity:0.7;}
+.opt:disabled{cursor:default;}
+.opt-letter{font-size:15px;font-weight:900;color:var(--muted);flex-shrink:0;min-width:20px;margin-top:1px;}
+
+/* FEEDBACK */
+.fb{border-radius:12px;padding:13px 16px;margin-top:12px;font-size:15px;font-weight:600;display:none;line-height:1.55;}
+.fb.show{display:flex;gap:10px;align-items:flex-start;}
+.fb.good{background:var(--green-lt);color:var(--green);border:2px solid var(--green);}
+.fb.bad{background:var(--red-lt);color:var(--red);border:2px solid var(--red);}
+.fb.info{background:var(--blue-lt);color:var(--blue);border:2px solid var(--blue);}
+.fb-icon{font-size:20px;flex-shrink:0;}
+.fb strong{display:block;font-size:16px;font-weight:900;margin-bottom:3px;}
+
+/* BUTTONS */
+.btn{padding:13px 22px;font-family:Arial,sans-serif;font-size:16px;font-weight:900;border:none;border-radius:12px;cursor:pointer;transition:all 0.2s;text-transform:uppercase;letter-spacing:0.5px;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,0,0,0.15);}
+.btn-full{width:100%;margin-top:12px;display:block;text-align:center;}
+.btn-navy{background:var(--navy);color:white;}
+.btn-gold{background:var(--gold);color:#111;}
+.btn-green{background:var(--green);color:white;}
+.btn-outline{background:white;color:var(--text);border:2px solid var(--border);}
+
+/* STYLE RESULT CARD */
+.style-card{border-radius:18px;padding:28px;text-align:center;margin-bottom:18px;}
+.style-icon{font-size:64px;margin-bottom:12px;}
+.style-name{font-size:26px;font-weight:900;margin-bottom:8px;}
+.style-tagline{font-size:17px;margin-bottom:16px;opacity:0.9;}
+.style-bars{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;text-align:left;}
+.style-bar-item label{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;display:block;margin-bottom:4px;}
+.bar-track{background:rgba(255,255,255,0.3);border-radius:8px;height:10px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:8px;background:rgba(255,255,255,0.85);transition:width 1s ease;}
+
+.strength-list{background:rgba(255,255,255,0.2);border-radius:12px;padding:16px;margin-top:14px;text-align:left;}
+.strength-list h4{font-size:15px;font-weight:900;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.6px;}
+.strength-list ul{padding-left:18px;font-size:15px;line-height:1.9;}
+.growth-tip{background:rgba(0,0,0,0.12);border-radius:10px;padding:12px 16px;margin-top:12px;font-size:15px;text-align:left;line-height:1.6;}
+
+/* SCENARIO CARDS */
+.scenario-box{background:var(--bg);border-left:5px solid var(--orange);border-radius:0 10px 10px 0;padding:14px 17px;margin-bottom:16px;font-size:16px;line-height:1.7;}
+.scenario-tag{display:inline-block;background:var(--orange);color:white;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.8px;padding:3px 12px;border-radius:20px;margin-bottom:8px;}
+
+/* KNOW-HOW */
+.kh-correct-box{background:var(--green-lt);border:2px solid var(--green);border-radius:10px;padding:12px 16px;margin-top:10px;font-size:15px;color:var(--green);display:none;}
+.kh-correct-box.show{display:block;}
+
+/* 30-DAY PLAN */
+.week-section{margin-bottom:20px;}
+.week-title{font-size:16px;font-weight:900;color:var(--navy);background:var(--blue-lt);border-radius:8px;padding:10px 14px;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.action-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:white;border:2px solid var(--border);border-radius:10px;margin-bottom:8px;cursor:pointer;transition:all 0.2s;}
+.action-item:hover{border-color:var(--blue);}
+.action-item.checked{background:var(--green-lt);border-color:var(--green);}
+.action-check{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;margin-top:2px;transition:all 0.2s;}
+.action-item.checked .action-check{background:var(--green);border-color:var(--green);color:white;}
+.action-text{font-size:15px;font-weight:700;line-height:1.5;}
+.action-why{font-size:13px;color:var(--muted);margin-top:2px;line-height:1.4;}
+
+/* PASSPORT */
+.passport{background:var(--navy);border-radius:18px;padding:28px;color:white;margin-bottom:20px;}
+.passport-header{text-align:center;border-bottom:2px solid rgba(255,255,255,0.2);padding-bottom:18px;margin-bottom:18px;}
+.passport-title{font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:4px;}
+.passport-name{font-size:28px;font-weight:900;line-height:1.2;}
+.passport-sub{font-size:15px;opacity:0.75;margin-top:4px;}
+.passport-section{margin-bottom:16px;}
+.passport-section-title{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:8px;}
+.passport-style-badge{display:inline-block;border:2px solid var(--gold);border-radius:10px;padding:8px 16px;font-size:16px;font-weight:900;}
+.passport-item{display:flex;align-items:flex-start;gap:8px;font-size:15px;margin-bottom:6px;opacity:0.9;}
+.passport-item::before{content:'\u25b8';color:var(--gold);flex-shrink:0;margin-top:2px;}
+.commit-text{background:rgba(255,255,255,0.1);border-radius:10px;padding:14px;font-size:15px;font-style:italic;line-height:1.6;border-left:4px solid var(--gold);}
+
+/* AI BOX */
+.ai-box{background:#0f2020;border-radius:12px;padding:18px;margin-top:16px;}
+.ai-lbl{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:#7ecdc8;margin-bottom:8px;display:block;}
+.ai-txt{font-family:'Courier New',monospace;font-size:14px;color:#e0f5f3;line-height:1.7;white-space:pre-wrap;}
+.copy-btn{margin-top:10px;padding:8px 16px;background:var(--teal);color:white;border:none;border-radius:8px;font-family:Arial,sans-serif;font-size:13px;font-weight:900;cursor:pointer;}
+.copy-ok{color:#7ecdc8;font-size:13px;font-weight:700;margin-left:8px;display:none;}
+
+/* SCORE CHIPS */
+.score-chip{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#111;border-radius:20px;padding:5px 14px;font-size:14px;font-weight:900;margin-bottom:12px;}
+
+/* WELCOME */
+.welcome-big{font-size:62px;text-align:center;margin-bottom:14px;}
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0;}
+.module-card{border-radius:12px;padding:16px;border:2px solid var(--border);}
+.module-card h3{font-size:15px;font-weight:900;margin-bottom:5px;}
+.module-card p{font-size:13px;color:var(--muted);margin:0;line-height:1.5;}
+.m1{background:var(--blue-lt);border-color:var(--blue);}
+.m1 h3{color:var(--blue);}
+.m2{background:var(--orange-lt);border-color:var(--orange);}
+.m2 h3{color:var(--orange);}
+.m3{background:var(--purple-lt);border-color:var(--purple);}
+.m3 h3{color:var(--purple);}
+.m4{background:var(--green-lt);border-color:var(--green);}
+.m4 h3{color:var(--green);}
+
+@media(max-width:500px){
+  .module-grid,.style-bars{grid-template-columns:1fr;}
+  .hero h1{font-size:22px;}
+}
+</style>
+</head>
+<body>
+<div class="gold-bar"></div>
+<div class="lang-bar" role="navigation" aria-label="Language">
+  <button class="lbtn on" id="btn-en" onclick="setLang('en')" aria-pressed="true">&#127482;&#127480; English</button>
+  <span style="color:rgba(255,255,255,0.3);font-size:18px;">|</span>
+  <button class="lbtn off" id="btn-es" onclick="setLang('es')" aria-pressed="false">&#127474;&#127485; Espa&#241;ol</button>
+</div>
+<div class="hero">
+  <div class="badge" id="h-badge">VOC ED 418CE &middot; West Los Angeles College</div>
+  <h1 id="h-title">&#129514; The <span>Leadership Lab</span></h1>
+  <p id="h-sub">Four stations. One goal: become the leader you were born to be.</p>
+</div>
+
+<div class="station-nav" role="navigation" aria-label="Stations">
+  <div class="station-nav-inner">
+    <button class="snav-btn active" id="snav-0" onclick="goStation(0)">&#127775; Welcome</button>
+    <button class="snav-btn" id="snav-1" onclick="goStation(1)">&#127381; Station 1<br><small>Your Style</small></button>
+    <button class="snav-btn" id="snav-2" onclick="goStation(2)">&#128172; Station 2<br><small>Hard Talks</small></button>
+    <button class="snav-btn" id="snav-3" onclick="goStation(3)">&#129504; Station 3<br><small>Know-How</small></button>
+    <button class="snav-btn" id="snav-4" onclick="goStation(4)">&#128203; Station 4<br><small>30-Day Plan</small></button>
+    <button class="snav-btn" id="snav-5" onclick="goStation(5)">&#127891; Passport</button>
+  </div>
+</div>
+
+<main>
+
+<!-- ===== WELCOME ===== -->
+<div class="screen show" id="st-0">
+  <div class="card" style="text-align:center;margin-top:20px;">
+    <div class="welcome-big">&#129514;</div>
+    <h2 id="w-title">Welcome to The Leadership Lab!</h2>
+    <p id="w-desc">You have already proven you can do the work. Today is about becoming the leader who leads the work. You will move through four stations, and at the end you will walk away with your very own Leadership Passport — a personalized tool you can use on day one of your new role.</p>
+    <div class="module-grid" role="list">
+      <div class="module-card m1" role="listitem"><h3 id="w-m1h">&#127381; Station 1 &mdash; Your Leadership Style</h3><p id="w-m1p">Discover what kind of leader you naturally are. Find your strengths and growth areas.</p></div>
+      <div class="module-card m2" role="listitem"><h3 id="w-m2h">&#128172; Station 2 &mdash; Difficult Conversations</h3><p id="w-m2p">Practice the hardest part of leadership: saying the right thing in tough situations.</p></div>
+      <div class="module-card m3" role="listitem"><h3 id="w-m3h">&#129504; Station 3 &mdash; Supervisor Know-How</h3><p id="w-m3p">Test your knowledge of supervisor rights, responsibilities, and real HR situations.</p></div>
+      <div class="module-card m4" role="listitem"><h3 id="w-m4h">&#128203; Station 4 &mdash; My 30-Day Plan</h3><p id="w-m4p">Build a personalized action plan for your first 30 days as a supervisor or team lead.</p></div>
+    </div>
+    <button class="btn btn-gold btn-full" onclick="goStation(1)" id="w-start">&#128640; Let's Begin!</button>
+  </div>
+</div>
+
+<!-- ===== STATION 1: LEADERSHIP STYLE ===== -->
+<div class="screen" id="st-1">
+  <div class="section-hero s1-hero">
+    <div class="sh-big">&#127381;</div>
+    <h2 id="s1-title">Station 1 &mdash; Your Leadership Style</h2>
+    <p id="s1-desc">Answer 10 questions honestly. There are no right or wrong answers. At the end you will discover your natural leadership style and what makes you a great supervisor.</p>
+  </div>
+  <div class="card">
+    <div class="prog-wrap"><div class="prog-bar" id="s1-prog" style="width:0%;background:var(--blue);"></div></div>
+    <div class="q-num" id="s1-qnum">Question 1 of 10</div>
+    <div class="q-text" id="s1-qtext"></div>
+    <div class="opts" id="s1-opts" role="radiogroup"></div>
+    <button class="btn btn-navy btn-full" id="s1-next" style="display:none;" onclick="nextStyleQ()"></button>
+  </div>
+  <div class="card" id="s1-result" style="display:none;"></div>
+</div>
+
+<!-- ===== STATION 2: DIFFICULT CONVERSATIONS ===== -->
+<div class="screen" id="st-2">
+  <div class="section-hero s2-hero">
+    <div class="sh-big">&#128172;</div>
+    <h2 id="s2-title">Station 2 &mdash; Difficult Conversations</h2>
+    <p id="s2-desc">Every supervisor faces hard conversations. Read each situation and choose the best response. This is the skill that separates good supervisors from great ones.</p>
+  </div>
+  <div class="card">
+    <div class="prog-wrap"><div class="prog-bar" id="s2-prog" style="width:0%;background:var(--orange);"></div></div>
+    <div class="score-chip" id="s2-score-chip">&#127942; Score: 0/5</div>
+    <div class="q-num" id="s2-qnum">Scenario 1 of 5</div>
+    <div class="scenario-tag" id="s2-tag">Performance</div>
+    <div class="scenario-box" id="s2-sit"></div>
+    <div class="q-text" id="s2-qtext"></div>
+    <div class="opts" id="s2-opts" role="radiogroup"></div>
+    <div class="fb" id="s2-fb"></div>
+    <button class="btn btn-navy btn-full" id="s2-next" style="display:none;" onclick="nextConvoQ()"></button>
+  </div>
+  <div class="card" id="s2-result" style="display:none;"></div>
+</div>
+
+<!-- ===== STATION 3: KNOW-HOW ===== -->
+<div class="screen" id="st-3">
+  <div class="section-hero s3-hero">
+    <div class="sh-big">&#129504;</div>
+    <h2 id="s3-title">Station 3 &mdash; Supervisor Know-How</h2>
+    <p id="s3-desc">Being a supervisor means knowing your rights AND your responsibilities. Test your knowledge of 8 real situations that supervisors face.</p>
+  </div>
+  <div class="card">
+    <div class="prog-wrap"><div class="prog-bar" id="s3-prog" style="width:0%;background:var(--purple);"></div></div>
+    <div class="score-chip" id="s3-score-chip">&#127942; Score: 0/8</div>
+    <div class="q-num" id="s3-qnum">Question 1 of 8</div>
+    <div class="q-text" id="s3-qtext"></div>
+    <div class="opts" id="s3-opts" role="radiogroup"></div>
+    <div class="fb" id="s3-fb"></div>
+    <div class="kh-correct-box" id="s3-correct-box"></div>
+    <button class="btn btn-navy btn-full" id="s3-next" style="display:none;" onclick="nextKhQ()"></button>
+  </div>
+  <div class="card" id="s3-result" style="display:none;"></div>
+</div>
+
+<!-- ===== STATION 4: 30-DAY PLAN ===== -->
+<div class="screen" id="st-4">
+  <div class="section-hero s4-hero">
+    <div class="sh-big">&#128203;</div>
+    <h2 id="s4-title">Station 4 &mdash; My 30-Day Supervisor Plan</h2>
+    <p id="s4-desc">Check the actions you commit to taking in your first 30 days as a supervisor or team lead. The more you check, the stronger your start. You will see your selected actions on your Leadership Passport at the end!</p>
+  </div>
+  <div id="s4-weeks"></div>
+  <div class="card" style="text-align:center;">
+    <p style="font-size:16px;color:var(--muted);margin-bottom:14px;" id="s4-checked-lbl">0 actions selected</p>
+    <button class="btn btn-green btn-full" onclick="goStation(5)" id="s4-next">&#127891; Build My Leadership Passport!</button>
+  </div>
+</div>
+
+<!-- ===== PASSPORT ===== -->
+<div class="screen" id="st-5">
+  <div class="card" style="text-align:center;margin-bottom:16px;">
+    <div style="font-size:52px;margin-bottom:10px;">&#127891;</div>
+    <h2 id="p-congrats">Congratulations!</h2>
+    <p id="p-congrats-sub" style="font-size:17px;color:var(--muted);">You have completed The Leadership Lab. Here is your personal Leadership Passport. Print it and keep it with you.</p>
+    <button onclick="window.print()" class="btn btn-gold" style="margin-top:12px;" id="p-print-btn">&#128424; Print My Passport</button>
+  </div>
+  <div class="passport" id="passport-body" role="region" aria-label="Your Leadership Passport">
+    <div class="passport-header">
+      <div class="passport-title" id="p-doc-title">&#129514; LEADERSHIP PASSPORT &mdash; The Leadership Lab</div>
+      <div class="passport-name" id="p-name-display">West Los Angeles College</div>
+      <div class="passport-sub" id="p-sub-display">VOC ED 418CE &mdash; People Management Certificate Program &mdash; 2026</div>
+    </div>
+
+    <div class="passport-section">
+      <div class="passport-section-title" id="p-style-title">MY LEADERSHIP STYLE</div>
+      <div class="passport-style-badge" id="p-style-badge">&#127942; Loading...</div>
+      <div style="margin-top:10px;font-size:15px;opacity:0.85;" id="p-style-tagline"></div>
+    </div>
+
+    <div class="passport-section">
+      <div class="passport-section-title" id="p-strengths-title">MY TOP STRENGTHS</div>
+      <div id="p-strengths-list"></div>
+    </div>
+
+    <div class="passport-section">
+      <div class="passport-section-title" id="p-plan-title">MY 30-DAY COMMITMENTS</div>
+      <div id="p-plan-list"></div>
+    </div>
+
+    <div class="passport-section">
+      <div class="passport-section-title" id="p-commit-title">MY LEADERSHIP COMMITMENT</div>
+      <div class="commit-text" id="p-commit-text"></div>
+    </div>
+  </div>
+
+  <div class="ai-box" role="note">
+    <span class="ai-lbl" id="p-ai-lbl">&#129302; Your Personalized AI Leadership Coach Prompt</span>
+    <div class="ai-txt" id="p-ai-text"></div>
+    <button class="copy-btn" onclick="copyPassportPrompt()" id="p-copy-btn">&#128203; Copy Prompt</button>
+    <span class="copy-ok" id="p-copy-ok">&#10003; Copied!</span>
+  </div>
+</div>
+
+</main>
+
+<script>
+/* ========================================
+   TRANSLATIONS
+======================================== */
+var T = {
+  en:{
+    hBadge:'VOC ED 418CE \u00b7 West Los Angeles College',
+    hTitle:'\u{1F9EA} The <span>Leadership Lab</span>',
+    hSub:'Four stations. One goal: become the leader you were born to be.',
+    snavLabels:['\u2728 Welcome','\u{1F381} Station 1\nYour Style','\u{1F4AC} Station 2\nHard Talks','\u{1F9E0} Station 3\nKnow-How','\u{1F4CB} Station 4\n30-Day Plan','\u{1F393} Passport'],
+    wTitle:'Welcome to The Leadership Lab!',
+    wDesc:'You have already proven you can do the work. Today is about becoming the leader who leads the work. You will move through four stations and walk away with your very own Leadership Passport.',
+    wM1h:'\u{1F381} Station 1 \u2014 Your Leadership Style',wM1p:'Discover what kind of leader you naturally are. Find your strengths and growth areas.',
+    wM2h:'\u{1F4AC} Station 2 \u2014 Difficult Conversations',wM2p:'Practice the hardest part of leadership: saying the right thing in tough situations.',
+    wM3h:'\u{1F9E0} Station 3 \u2014 Supervisor Know-How',wM3p:'Test your knowledge of supervisor rights, responsibilities, and real HR situations.',
+    wM4h:'\u{1F4CB} Station 4 \u2014 My 30-Day Plan',wM4p:'Build a personalized action plan for your first 30 days as a supervisor or team lead.',
+    wStart:'\u{1F680} Let\u2019s Begin!',
+    s1Title:'Station 1 \u2014 Your Leadership Style',
+    s1Desc:'Answer 10 questions honestly. There are no right or wrong answers. At the end you will discover your natural leadership style.',
+    s1QNum:(a,b)=>'Question '+a+' of '+b,
+    s1Next:'Next Question \u2192',
+    s1SeeResult:'See My Leadership Style! \u{1F381}',
+    s2Title:'Station 2 \u2014 Difficult Conversations',
+    s2Desc:'Every supervisor faces hard conversations. Choose the best response to each situation.',
+    s2QNum:(a,b)=>'Scenario '+a+' of '+b,
+    s2Next:'Next Scenario \u2192',
+    s2SeeResult:'See My Results! \u{1F3C6}',
+    s2Score:(a,b)=>'\u{1F3C6} Score: '+a+'/'+b,
+    correct:'\u2713 Correct!',wrong:'Not quite.',
+    s3Title:'Station 3 \u2014 Supervisor Know-How',
+    s3Desc:'Test your knowledge of 8 real situations that supervisors face every day.',
+    s3QNum:(a,b)=>'Question '+a+' of '+b,
+    s3Next:'Next Question \u2192',
+    s3SeeResult:'See My Score! \u{1F3C6}',
+    s3Score:(a,b)=>'\u{1F3C6} Score: '+a+'/'+b,
+    s4Title:'Station 4 \u2014 My 30-Day Supervisor Plan',
+    s4Desc:'Check the actions you commit to in your first 30 days as a supervisor or team lead. These will appear on your Leadership Passport.',
+    s4Checked:(n)=>n+' action'+(n===1?'':'s')+' selected',
+    s4Next:'\u{1F393} Build My Leadership Passport!',
+    pCongrats:'Congratulations!',
+    pCongratsub:'You have completed The Leadership Lab. Here is your personal Leadership Passport. Print it and keep it with you.',
+    pPrint:'\u{1F5A8} Print My Passport',
+    pDocTitle:'\u{1F9EA} LEADERSHIP PASSPORT \u2014 The Leadership Lab',
+    pNameDisplay:'West Los Angeles College',
+    pSubDisplay:'VOC ED 418CE \u2014 People Management Certificate Program \u2014 2026',
+    pStyleTitle:'MY LEADERSHIP STYLE',
+    pStrengthsTitle:'MY TOP STRENGTHS AS A SUPERVISOR',
+    pPlanTitle:'MY 30-DAY COMMITMENTS',
+    pCommitTitle:'MY LEADERSHIP COMMITMENT',
+    pAiLbl:'\u{1F916} Your Personalized AI Leadership Coach Prompt',
+    pCopyBtn:'\u{1F4CB} Copy Prompt',
+    pCopyOk:'\u2705 Copied!',
+    styleResultTitle:'Your Leadership Style Is:',
+    convoResultTitle:'Difficult Conversations Results',
+    khResultTitle:'Supervisor Know-How Results',
+    continueToS2:'Continue to Station 2: Difficult Conversations \u2192',
+    continueToS3:'Continue to Station 3: Supervisor Know-How \u2192',
+    continueToS4:'Continue to Station 4: My 30-Day Plan \u2192',
+    continueToPassport:'Continue to My Leadership Passport \u2192',
+  },
+  es:{
+    hBadge:'VOC ED 418CE \u00b7 West Los Angeles College',
+    hTitle:'\u{1F9EA} El <span>Laboratorio de Liderazgo</span>',
+    hSub:'Cuatro estaciones. Una meta: convertirse en el l\u00edder que naci\u00f3 para ser.',
+    snavLabels:['\u2728 Bienvenido/a','\u{1F381} Estaci\u00f3n 1\nSu Estilo','\u{1F4AC} Estaci\u00f3n 2\nConversaciones','\u{1F9E0} Estaci\u00f3n 3\nConocimiento','\u{1F4CB} Estaci\u00f3n 4\nPlan 30 D\u00edas','\u{1F393} Pasaporte'],
+    wTitle:'\u00a1Bienvenido/a al Laboratorio de Liderazgo!',
+    wDesc:'Ya ha demostrado que puede hacer el trabajo. Hoy se trata de convertirse en el/la l\u00edder que dirige el trabajo. Pasar\u00e1 por cuatro estaciones y se ir\u00e1 con su propio Pasaporte de Liderazgo.',
+    wM1h:'\u{1F381} Estaci\u00f3n 1 \u2014 Su Estilo de Liderazgo',wM1p:'Descubra qu\u00e9 tipo de l\u00edder es naturalmente. Encuentre sus fortalezas y \u00e1reas de crecimiento.',
+    wM2h:'\u{1F4AC} Estaci\u00f3n 2 \u2014 Conversaciones Dif\u00edciles',wM2p:'Practique la parte m\u00e1s dif\u00edcil del liderazgo: decir lo correcto en situaciones dif\u00edciles.',
+    wM3h:'\u{1F9E0} Estaci\u00f3n 3 \u2014 Conocimiento del Supervisor/a',wM3p:'Ponga a prueba su conocimiento de derechos, responsabilidades y situaciones reales de RR.HH.',
+    wM4h:'\u{1F4CB} Estaci\u00f3n 4 \u2014 Mi Plan de 30 D\u00edas',wM4p:'Construya un plan de acci\u00f3n personalizado para sus primeros 30 d\u00edas como supervisor/a.',
+    wStart:'\u{1F680} \u00a1Empecemos!',
+    s1Title:'Estaci\u00f3n 1 \u2014 Su Estilo de Liderazgo',
+    s1Desc:'Responda 10 preguntas honestamente. No hay respuestas correctas o incorrectas. Al final descubrir\u00e1 su estilo natural de liderazgo.',
+    s1QNum:(a,b)=>'Pregunta '+a+' de '+b,
+    s1Next:'Siguiente Pregunta \u2192',
+    s1SeeResult:'\u00a1Ver Mi Estilo de Liderazgo! \u{1F381}',
+    s2Title:'Estaci\u00f3n 2 \u2014 Conversaciones Dif\u00edciles',
+    s2Desc:'Todo supervisor/a enfrenta conversaciones dif\u00edciles. Elija la mejor respuesta a cada situaci\u00f3n.',
+    s2QNum:(a,b)=>'Escenario '+a+' de '+b,
+    s2Next:'Siguiente Escenario \u2192',
+    s2SeeResult:'\u00a1Ver Mis Resultados! \u{1F3C6}',
+    s2Score:(a,b)=>'\u{1F3C6} Puntaje: '+a+'/'+b,
+    correct:'\u2713 \u00a1Correcto!',wrong:'No exactamente.',
+    s3Title:'Estaci\u00f3n 3 \u2014 Conocimiento del Supervisor/a',
+    s3Desc:'Ponga a prueba su conocimiento de 8 situaciones reales que los supervisores enfrentan todos los d\u00edas.',
+    s3QNum:(a,b)=>'Pregunta '+a+' de '+b,
+    s3Next:'Siguiente Pregunta \u2192',
+    s3SeeResult:'\u00a1Ver Mi Puntaje! \u{1F3C6}',
+    s3Score:(a,b)=>'\u{1F3C6} Puntaje: '+a+'/'+b,
+    s4Title:'Estaci\u00f3n 4 \u2014 Mi Plan de 30 D\u00edas como Supervisor/a',
+    s4Desc:'Marque las acciones que se compromete a tomar en sus primeros 30 d\u00edas como supervisor/a. Estas aparecer\u00e1n en su Pasaporte de Liderazgo.',
+    s4Checked:(n)=>n+' acci\u00f3n'+(n===1?'':'es')+' seleccionada'+(n===1?'':'s'),
+    s4Next:'\u{1F393} \u00a1Construir Mi Pasaporte de Liderazgo!',
+    pCongrats:'\u00a1Felicitaciones!',
+    pCongratsub:'Complet\u00f3 el Laboratorio de Liderazgo. Aqu\u00ed est\u00e1 su Pasaporte de Liderazgo personal. Impr\u00edmalo y gu\u00e1rdelo con usted.',
+    pPrint:'\u{1F5A8} Imprimir Mi Pasaporte',
+    pDocTitle:'\u{1F9EA} PASAPORTE DE LIDERAZGO \u2014 El Laboratorio de Liderazgo',
+    pNameDisplay:'West Los Angeles College',
+    pSubDisplay:'VOC ED 418CE \u2014 Programa de Certificado de Gesti\u00f3n de Personas \u2014 2026',
+    pStyleTitle:'MI ESTILO DE LIDERAZGO',
+    pStrengthsTitle:'MIS PRINCIPALES FORTALEZAS COMO SUPERVISOR/A',
+    pPlanTitle:'MIS COMPROMISOS DE 30 D\u00cdAS',
+    pCommitTitle:'MI COMPROMISO DE LIDERAZGO',
+    pAiLbl:'\u{1F916} Su Mensaje de IA Coach de Liderazgo Personalizado',
+    pCopyBtn:'\u{1F4CB} Copiar Mensaje',
+    pCopyOk:'\u2705 \u00a1Copiado!',
+    styleResultTitle:'Su Estilo de Liderazgo Es:',
+    convoResultTitle:'Resultados de Conversaciones Dif\u00edciles',
+    khResultTitle:'Resultados de Conocimiento del Supervisor/a',
+    continueToS2:'Continuar a la Estaci\u00f3n 2: Conversaciones Dif\u00edciles \u2192',
+    continueToS3:'Continuar a la Estaci\u00f3n 3: Conocimiento del Supervisor/a \u2192',
+    continueToS4:'Continuar a la Estaci\u00f3n 4: Mi Plan de 30 D\u00edas \u2192',
+    continueToPassport:'Continuar a Mi Pasaporte de Liderazgo \u2192',
+  }
+};
+
+/* ========================================
+   STATION 1: LEADERSHIP STYLE QUIZ
+   Scores map to 4 styles: Coach, Commander, Collaborator, Champion
+======================================== */
+var S1Q = {
+  en:[
+    {q:'A new employee is struggling with their tasks. What is your first instinct?',opts:['Give them clear, direct instructions and set a deadline','Sit with them, ask questions, and help them figure it out','Ask the rest of the team to support and help them','Encourage them and remind them they were chosen for a reason'],scores:[1,0,2,3]},
+    {q:'Your team is falling behind on a big cleaning project. What do you do?',opts:['Create a detailed schedule and assign specific tasks to each person','Call a team meeting to brainstorm solutions together','Step in and work alongside the team to speed things up','Give the team an encouraging pep talk to boost their energy'],scores:[1,2,0,3]},
+    {q:'A team member comes to you with a personal problem affecting their work. You:',opts:['Listen carefully and offer resources or support','Review their performance record and decide on next steps','Involve the rest of the team so everyone can support them','Remind them of how strong they are and that you believe in them'],scores:[0,1,2,3]},
+    {q:'When you make a decision, you prefer to:',opts:['Decide quickly and move forward — the team needs direction','Talk it through with the team and make the decision together','Take time to mentor someone on the team so they can help decide','Make the decision that will most motivate and inspire the team'],scores:[1,2,0,3]},
+    {q:'What is your greatest strength as a leader?',opts:['I develop people and help them grow','I get things done and hit goals','I build strong, trusting relationships','I motivate people and keep energy high'],scores:[0,1,2,3]},
+    {q:'A conflict breaks out between two team members. You:',opts:['Meet with each person privately first to hear both sides','Call a team meeting and address it openly together','Mediate the conversation directly and guide them to a solution','Remind both of them how important they are to the team'],scores:[0,2,1,3]},
+    {q:'Your supervisor asks you to introduce a new procedure your team does not like. You:',opts:['Explain the reason clearly and implement it with firm timelines','Involve the team in figuring out the best way to implement it','Meet one-on-one with each team member to help them adjust','Focus on the benefits and help the team see the positive side'],scores:[1,2,0,3]},
+    {q:'After a team success, you:',opts:['Analyze what went well so the team can replicate it next time','Celebrate loudly and make sure everyone feels recognized','Identify which team members grew the most and mentor them further','Use the moment to build team pride and fuel the next challenge'],scores:[1,2,0,3]},
+    {q:'Your team has a new opportunity to improve how they work. You:',opts:['Present a clear plan and lead the implementation','Facilitate a brainstorm so the team designs the change together','Coach team members individually on how to improve','Share your excitement and challenge the team to rise to it'],scores:[1,2,0,3]},
+    {q:'A team member says "I do not think I can do this job." You respond:',opts:['"Let me show you exactly how. We will practice together."','"Tell me more. What specifically feels difficult?"','"Let\'s ask the team — someone here has been through this."','"I chose you because I know you can. I believe in you completely."'],scores:[0,0,2,3]},
+  ],
+  es:[
+    {q:'Un nuevo empleado est\u00e1 teniendo dificultades con sus tareas. \u00bfCu\u00e1l es su primer instinto?',opts:['Darle instrucciones claras y directas y establecer un plazo','Sentarse con \u00e9l/ella, hacer preguntas y ayudarle a resolverlo','Pedir al resto del equipo que le apoye y ayude','Animarle y recordarle que fue elegido/a por una raz\u00f3n'],scores:[1,0,2,3]},
+    {q:'Su equipo est\u00e1 atrasado en un gran proyecto de limpieza. \u00bfQu\u00e9 hace?',opts:['Crear un horario detallado y asignar tareas espec\u00edficas a cada persona','Convocar una reuni\u00f3n del equipo para buscar soluciones juntos','Involucrarse y trabajar junto al equipo para acelerar el proceso','Dar un discurso motivador al equipo para aumentar su energ\u00eda'],scores:[1,2,0,3]},
+    {q:'Un miembro del equipo le trae un problema personal que afecta su trabajo. Usted:',opts:['Escucha con cuidado y ofrece recursos o apoyo','Revisa su historial de desempe\u00f1o y decide los pr\u00f3ximos pasos','Involucra al resto del equipo para que todos puedan apoyarle','Le recuerda lo fuerte que es y que cree en \u00e9l/ella'],scores:[0,1,2,3]},
+    {q:'Cuando toma una decisi\u00f3n, prefiere:',opts:['Decidir r\u00e1pido y seguir adelante \u2014 el equipo necesita direcci\u00f3n','Conversarlo con el equipo y tomar la decisi\u00f3n juntos','Tomar tiempo para asesorar a alguien del equipo que pueda ayudar a decidir','Tomar la decisi\u00f3n que m\u00e1s motivar\u00e1 e inspirar\u00e1 al equipo'],scores:[1,2,0,3]},
+    {q:'\u00bfCu\u00e1l es su mayor fortaleza como l\u00edder?',opts:['Desarrollo a las personas y les ayudo a crecer','Logro los objetivos y completo el trabajo','Construyo relaciones s\u00f3lidas y de confianza','Motivo a las personas y mantengo la energ\u00eda alta'],scores:[0,1,2,3]},
+    {q:'Surge un conflicto entre dos miembros del equipo. Usted:',opts:['Se re\u00fabne con cada persona en privado primero para escuchar ambos lados','Convoca una reuni\u00f3n del equipo y lo aborda abiertamente juntos','Media la conversaci\u00f3n directamente y les gu\u00eda hacia una soluci\u00f3n','Recuerda a ambos lo importantes que son para el equipo'],scores:[0,2,1,3]},
+    {q:'Su supervisor le pide que introduzca un nuevo procedimiento que a su equipo no le gusta. Usted:',opts:['Explica la raz\u00f3n claramente e implementa con plazos firmes','Involucra al equipo para encontrar la mejor manera de implementarlo','Se re\u00fabne individualmente con cada miembro del equipo para ayudarle a adaptarse','Se enfoca en los beneficios y ayuda al equipo a ver el lado positivo'],scores:[1,2,0,3]},
+    {q:'Despu\u00e9s de un \u00e9xito del equipo, usted:',opts:['Analiza qu\u00e9 sali\u00f3 bien para que el equipo pueda repetirlo','Celebra en grande y asegura que todos se sientan reconocidos','Identifica qu\u00e9 miembros crecieron m\u00e1s y les da m\u00e1s asesor\u00eda','Usa el momento para construir orgullo de equipo y impulsar el pr\u00f3ximo desaf\u00edo'],scores:[1,2,0,3]},
+    {q:'Su equipo tiene una nueva oportunidad de mejorar c\u00f3mo trabaja. Usted:',opts:['Presenta un plan claro y lidera la implementaci\u00f3n','Facilita una lluvia de ideas para que el equipo dise\u00f1e el cambio juntos','Asesora a los miembros del equipo individualmente sobre c\u00f3mo mejorar','Comparte su entusiasmo y desaf\u00eda al equipo a estar a la altura'],scores:[1,2,0,3]},
+    {q:'Un miembro del equipo dice "Creo que no puedo hacer este trabajo." Usted responde:',opts:['"D\u00e9jame mostrarte exactamente c\u00f3mo. Practicaremos juntos."','"Cu\u00e9ntame m\u00e1s. \u00bfQu\u00e9 es espec\u00edficamente lo que se siente dif\u00edcil?"','"Preguntemos al equipo \u2014 alguien aqu\u00ed ha pasado por esto."','"Te eleg\u00ed porque s\u00e9 que puedes. Creo completamente en ti."'],scores:[0,0,2,3]},
+  ]
+};
+
+var STYLES = {
+  en:[
+    {id:'coach',name:'\u{1F9D1}\u200D\u{1F3EB} The Coach',tagline:'You grow people. You develop talent wherever you find it.',color:'#1e6b3a',bg:'linear-gradient(135deg,#1e6b3a,#2ea05a)',
+     strengths:['Patient and supportive with struggling team members','Excellent at developing skills and growing people\'s confidence','You give feedback that makes people better, not smaller','You invest in people for the long run, not just the short term'],
+     growth:'Challenge yourself to act decisively when the situation calls for quick direction. Great coaches also know when to take the lead.',
+     commitment:'I commit to developing every person on my team. I will listen more than I speak and help my team grow stronger every day.'},
+    {id:'commander',name:'\u{1F6E1} The Commander',tagline:'You get things done. Your team always knows where they stand.',color:'#1a2e6b',bg:'linear-gradient(135deg,#1a2e6b,#2a4e9a)',
+     strengths:['Clear and decisive — your team knows exactly what to do','You hold high standards and drive results consistently','You are organized and plan well under pressure','You take responsibility and own outcomes for your team'],
+     growth:'Remember that results come through people. Slow down to check in with how your team feels, not just how they perform.',
+     commitment:'I commit to leading with clarity, setting high standards, and owning every outcome my team produces. I will be the kind of leader my team can count on.'},
+    {id:'collab',name:'\u{1F91D} The Collaborator',tagline:'You build teams. Your team is stronger because of you.',color:'#1a6b6b',bg:'linear-gradient(135deg,#1a6b6b,#2a9a9a)',
+     strengths:['You build trust and strong relationships on your team','People feel heard and valued when they work with you','You resolve conflict calmly and bring people together','You make sure every voice is included in decisions'],
+     growth:'Practice making faster decisions when your team needs direction. Not every decision needs a group discussion — sometimes people need a leader to just lead.',
+     commitment:'I commit to building a team where everyone feels valued, heard, and respected. I will create an environment where people do their best work.'},
+    {id:'champion',name:'\u{1F3C6} The Champion',tagline:'You inspire people. Your team believes they can do anything.',color:'#7a3a00',bg:'linear-gradient(135deg,#7a3a00,#c9922a)',
+     strengths:['You create energy and keep morale high even in hard times','Your team knows you believe in them — and that makes them believe in themselves','You celebrate wins loudly and make people feel proud','You communicate with passion that moves people to act'],
+     growth:'Back up your motivation with structure. Make sure your team has clear expectations, not just inspiration. Great champions also build systems.',
+     commitment:'I commit to being the leader who makes my team believe they can. I will celebrate wins, push through challenges, and never stop championing my people.'},
+  ],
+  es:[
+    {id:'coach',name:'\u{1F9D1}\u200D\u{1F3EB} El/La Coach',tagline:'Usted desarrolla personas. Cultiva talento dondequiera que lo encuentra.',color:'#1e6b3a',bg:'linear-gradient(135deg,#1e6b3a,#2ea05a)',
+     strengths:['Paciente y comprensivo/a con los miembros del equipo que tienen dificultades','Excelente para desarrollar habilidades y hacer crecer la confianza de las personas','Da retroalimentaci\u00f3n que mejora a las personas, no las hace sentir peque\u00f1as','Invierte en las personas a largo plazo, no solo a corto plazo'],
+     growth:'Des\u00e1fi\u00e9se a actuar con decisi\u00f3n cuando la situaci\u00f3n requiera direcci\u00f3n r\u00e1pida. Los grandes coaches tambi\u00e9n saben cu\u00e1ndo tomar el liderazgo.',
+     commitment:'Me comprometo a desarrollar a cada persona de mi equipo. Escuchar\u00e9 m\u00e1s de lo que hablar\u00e9 y ayudar\u00e9 a mi equipo a crecer m\u00e1s fuerte cada d\u00eda.'},
+    {id:'commander',name:'\u{1F6E1} El/La Comandante',tagline:'Usted logra resultados. Su equipo siempre sabe d\u00f3nde est\u00e1n.',color:'#1a2e6b',bg:'linear-gradient(135deg,#1a2e6b,#2a4e9a)',
+     strengths:['Claro/a y decisivo/a \u2014 su equipo sabe exactamente qu\u00e9 hacer','Mantiene altos est\u00e1ndares y genera resultados consistentemente','Est\u00e1 organizado/a y planifica bien bajo presi\u00f3n','Asume responsabilidad y acepta los resultados de su equipo'],
+     growth:'Recuerde que los resultados vienen a trav\u00e9s de las personas. T\u00f3mese tiempo para revisar c\u00f3mo se siente su equipo, no solo c\u00f3mo se desempe\u00f1a.',
+     commitment:'Me comprometo a liderar con claridad, establecer altos est\u00e1ndares y asumir cada resultado que produce mi equipo. Ser\u00e9 el/la l\u00edder en quien mi equipo puede confiar.'},
+    {id:'collab',name:'\u{1F91D} El/La Colaborador/a',tagline:'Usted construye equipos. Su equipo es m\u00e1s fuerte gracias a usted.',color:'#1a6b6b',bg:'linear-gradient(135deg,#1a6b6b,#2a9a9a)',
+     strengths:['Construye confianza y relaciones s\u00f3lidas en su equipo','Las personas se sienten escuchadas y valoradas cuando trabajan con usted','Resuelve conflictos con calma y une a las personas','Se asegura de que cada voz sea incluida en las decisiones'],
+     growth:'Practique tomar decisiones m\u00e1s r\u00e1pidas cuando su equipo necesita direcci\u00f3n. No toda decisi\u00f3n necesita una discusi\u00f3n grupal \u2014 a veces las personas necesitan que el l\u00edder simplemente lidere.',
+     commitment:'Me comprometo a construir un equipo donde todos se sientan valorados, escuchados y respetados. Crear\u00e9 un ambiente donde las personas hagan su mejor trabajo.'},
+    {id:'champion',name:'\u{1F3C6} El/La Campe\u00f3n/Campeona',tagline:'Usted inspira a las personas. Su equipo cree que puede lograr cualquier cosa.',color:'#7a3a00',bg:'linear-gradient(135deg,#7a3a00,#c9922a)',
+     strengths:['Crea energ\u00eda y mantiene la moral alta incluso en tiempos dif\u00edciles','Su equipo sabe que usted cree en ellos \u2014 y eso hace que ellos crean en s\u00ed mismos','Celebra los \u00e9xitos en grande y hace sentir orgullosas a las personas','Se comunica con pasi\u00f3n que mueve a las personas a actuar'],
+     growth:'Respalde su motivaci\u00f3n con estructura. Aseg\u00farese de que su equipo tenga expectativas claras, no solo inspiraci\u00f3n. Los grandes campeones tambi\u00e9n construyen sistemas.',
+     commitment:'Me comprometo a ser el/la l\u00edder que hace que mi equipo crea que puede. Celebrar\u00e9 los \u00e9xitos, superar\u00e9 los desaf\u00edos y nunca dejar\u00e9 de ser el/la defensor/a de mi gente.'},
+  ]
+};
+
+/* ========================================
+   STATION 2: DIFFICULT CONVERSATIONS
+======================================== */
+var S2Q = {
+  en:[
+    {tag:'Performance Issue',sit:'Carlos is one of your best workers, but lately he has been slow, distracted, and making mistakes. He seems stressed about something outside of work.',
+     q:'You need to address his performance. What is the best approach?',
+     opts:['Call him out in front of the team so he knows it is serious','Send him a written warning without talking to him first','Ask to meet privately, start by asking how he is doing, and then address the performance concern with care','Wait and hope he improves on his own'],
+     correct:2,
+     en_fb:'The best supervisors address performance with empathy AND accountability. Meeting privately, checking in first, and then addressing the issue is professional, effective, and respectful.'},
+    {tag:'Conflict Between Team Members',sit:'Two team members, Ana and Beatriz, are not speaking to each other after a disagreement. The tension is affecting the whole team\'s work.',
+     q:'As supervisor, what do you do?',
+     opts:['Ignore it and hope it goes away on its own','Tell both of them to "act professional and get over it"','Meet with each person privately, listen to their perspective, then bring them together to find a solution','Choose a side and support the person you believe is right'],
+     correct:2,
+     en_fb:'As a supervisor, you must mediate conflict quickly. Meeting individually first, then together, is the professional standard. Taking sides or ignoring conflict always makes it worse.'},
+    {tag:'Safety Concern',sit:'You notice that a team member is regularly skipping a safety step when using cleaning chemicals — not wearing gloves. You have mentioned it casually before but nothing has changed.',
+     q:'What do you do now?',
+     opts:['Let it go — it is their choice if they want to take the risk','Have a firm, direct conversation: explain the safety rule, why it matters, and make clear this is a formal expectation, not a suggestion','Tell their coworkers to remind them','Write them up without talking to them first'],
+     correct:1,
+     en_fb:'Safety is non-negotiable. After a casual reminder has not worked, a supervisor must have a formal, direct conversation. Document it as well. A safety violation that causes injury becomes your responsibility as supervisor.'},
+    {tag:'Giving Positive Feedback',sit:'Rosa has been going above and beyond for three weeks. She has been training new staff, finishing early, and keeping the team organized. She has not been recognized yet.',
+     q:'What is the best thing to do?',
+     opts:['Do nothing — she is just doing her job','Wait until the annual performance review to mention it','Recognize her specifically and publicly in front of the team, and tell her supervisor about her contributions','Send her a quick text from your personal phone'],
+     correct:2,
+     en_fb:'Positive recognition is one of the most powerful tools a supervisor has. Recognizing someone specifically, publicly, and in detail encourages them and the whole team. Waiting six months to mention it wastes the opportunity.'},
+    {tag:'Asking for Resources',sit:'Your team needs better supplies to do their job safely — the mop heads are worn out, some chemicals are running low, and two team members are sharing one set of gloves. You need to tell management.',
+     q:'How do you bring this up to your supervisor?',
+     opts:['"Our supplies are terrible. Nobody cares about us."','"I was wondering if maybe possibly we could think about getting some supplies at some point?"','Request a brief meeting, come prepared with a specific list of what is needed and why, and explain how it affects team safety and performance','"The team is complaining about the supplies."'],
+     correct:2,
+     en_fb:'Advocating for your team is one of the most important things a supervisor does. Coming prepared, being specific, and connecting the request to safety and performance is the professional way to get results. Complaining without a plan rarely works.'},
+  ],
+  es:[
+    {tag:'Problema de Desempe\u00f1o',sit:'Carlos es uno de sus mejores trabajadores, pero \u00faltimamente ha sido lento, distra\u00eddo y ha cometido errores. Parece estresado por algo fuera del trabajo.',
+     q:'Necesita abordar su desempe\u00f1o. \u00bfCu\u00e1l es el mejor enfoque?',
+     opts:['Llamarle la atenci\u00f3n frente al equipo para que sepa que es serio','Enviarle una advertencia escrita sin hablar con \u00e9l primero','Pedir una reuni\u00f3n privada, comenzar preguntando c\u00f3mo est\u00e1, y luego abordar el problema de desempe\u00f1o con cuidado','Esperar y esperar que mejore solo'],
+     correct:2,
+     en_fb:'Los mejores supervisores abordan el desempe\u00f1o con empat\u00eda Y responsabilidad. Reunirse en privado, consultar primero y luego abordar el problema es profesional, efectivo y respetuoso.'},
+    {tag:'Conflicto Entre Miembros del Equipo',sit:'Dos miembros del equipo, Ana y Beatriz, no se hablan despu\u00e9s de un desacuerdo. La tensi\u00f3n est\u00e1 afectando el trabajo de todo el equipo.',
+     q:'Como supervisor/a, \u00bfqu\u00e9 hace?',
+     opts:['Ignorarlo y esperar que se resuelva solo','Decirle a las dos que "act\u00faen profesionalmente y sup\u00e9renlo"','Reunirse con cada persona en privado, escuchar su perspectiva, luego reunirlas para encontrar una soluci\u00f3n','Elegir un lado y apoyar a la persona que cree que tiene raz\u00f3n'],
+     correct:2,
+     en_fb:'Como supervisor/a, debe mediar el conflicto r\u00e1pidamente. Reunirse individualmente primero, luego juntos, es el est\u00e1ndar profesional. Tomar partido o ignorar el conflicto siempre lo empeora.'},
+    {tag:'Preocupaci\u00f3n de Seguridad',sit:'Nota que un miembro del equipo se salta regularmente un paso de seguridad al usar productos qu\u00edmicos de limpieza \u2014 no usa guantes. Lo ha mencionado de manera informal antes pero nada ha cambiado.',
+     q:'\u00bfQu\u00e9 hace ahora?',
+     opts:['Dejarlo pasar \u2014 es su elecci\u00f3n si quiere correr el riesgo','Tener una conversaci\u00f3n firme y directa: explicar la regla de seguridad, por qu\u00e9 es importante, y dejar claro que esta es una expectativa formal, no una sugerencia','Decirle a sus compa\u00f1eros que le recuerden','Reportarlo sin hablar con \u00e9l/ella primero'],
+     correct:1,
+     en_fb:'La seguridad no es negociable. Despu\u00e9s de que un recordatorio informal no funcion\u00f3, el supervisor/a debe tener una conversaci\u00f3n formal y directa. Tam\u00e9n doc\u00famentiela. Una violaci\u00f3n de seguridad que cause una lesi\u00f3n se convierte en su responsabilidad.'},
+    {tag:'Dar Retroalimentaci\u00f3n Positiva',sit:'Rosa ha estado haciendo m\u00e1s de lo que le corresponde durante tres semanas. Ha estado capacitando al personal nuevo, terminando temprano y manteniendo al equipo organizado. A\u00fan no ha sido reconocida.',
+     q:'\u00bfCu\u00e1l es la mejor acci\u00f3n?',
+     opts:['No hacer nada \u2014 solo est\u00e1 haciendo su trabajo','Esperar hasta la evaluaci\u00f3n anual de desempe\u00f1o para mencionarlo','Reconocerla espec\u00edficamente y p\u00fablicamente frente al equipo, e informar a su supervisor sobre sus contribuciones','Enviarle un mensaje r\u00e1pido de su tel\u00e9fono personal'],
+     correct:2,
+     en_fb:'El reconocimiento positivo es una de las herramientas m\u00e1s poderosas que tiene un supervisor/a. Reconocer a alguien espec\u00edficamente, p\u00fablicamente y con detalle alienta a esa persona y a todo el equipo.'},
+    {tag:'Pedir Recursos',sit:'Su equipo necesita mejores suministros para hacer su trabajo de manera segura \u2014 las cabezas de trapeador est\u00e1n gastadas, algunos productos qu\u00edmicos est\u00e1n bajos y dos miembros del equipo comparten un par de guantes.',
+     q:'\u00bfC\u00f3mo lo plantea a su supervisor?',
+     opts:['"\u00c9l no nos da nada. No le importamos."','"Me preguntaba si tal vez posiblemente podr\u00edamos pensar en conseguir algunos suministros en alg\u00fan momento."','Solicitar una reuni\u00f3n breve, venir preparado con una lista espec\u00edfica de lo que se necesita y por qu\u00e9, y explicar c\u00f3mo afecta la seguridad y el desempe\u00f1o del equipo','"El equipo est\u00e1 quej\u00e1ndose de los suministros."'],
+     correct:2,
+     en_fb:'Abogar por su equipo es una de las cosas m\u00e1s importantes que hace un supervisor/a. Venir preparado, ser espec\u00edfico y conectar la solicitud con la seguridad y el desempe\u00f1o es la forma profesional de obtener resultados.'},
+  ]
+};
+
+/* ========================================
+   STATION 3: KNOW-HOW QUIZ
+======================================== */
+var S3Q = {
+  en:[
+    {q:'As a supervisor, can you ask an employee WHY they called in sick?',opts:['Yes — you have the right to know the reason','No — you can confirm the absence but you cannot ask for a medical reason','Yes, but only if they are sick more than once','No — you cannot ask anything at all'],correct:1,
+     explain:'You can confirm that an employee will be absent and when they will return. But asking for a specific medical reason or diagnosis can violate their privacy rights. Consult your HR department for proper absence procedures.'},
+    {q:'An employee tells you they are being harassed by a coworker. As supervisor, what MUST you do?',opts:['Tell them to handle it themselves','Take it seriously, document what they told you, and report it to HR immediately','Ask other team members if they saw anything before doing anything','Tell the accused coworker to stop'],correct:1,
+     explain:'When an employee reports harassment, you are legally and professionally required to take it seriously and report it to HR immediately. Ignoring or delaying a harassment report can expose both you and your employer to serious liability.'},
+    {q:'You want to give an employee a verbal warning for performance issues. What should you always do?',opts:['Say it out loud in a team meeting so everyone knows the standard','Deliver it privately, explain the specific issue and expectation, and DOCUMENT it in writing afterward','Just tell them once and hope they remember','Let HR handle all performance conversations'],correct:1,
+     explain:'Verbal warnings must still be documented in writing after the conversation. The documentation protects the employee (so they have a record), you (so you can show you addressed it), and the company.'},
+    {q:'One of your team members asks to switch shifts with another employee. As supervisor, you should:',opts:['Approve all switches automatically to avoid conflict','Refuse all switches — it creates too much confusion','Review whether the switch works for operations, ensure both employees agree, and document the change','Let the employees figure it out themselves'],correct:2,
+     explain:'Shift switches need supervisor approval to ensure coverage and fairness. Document every approved switch so there is no confusion about who is responsible for each shift.'},
+    {q:'Your employer has a rule that says no personal phone use during work hours. One employee has their phone out constantly. You:',opts:['Ignore it — everyone does it','Take their phone away','Have a private conversation reminding them of the policy, explain the reason, and document it','Announce the rule in a team meeting and single them out'],correct:2,
+     explain:'Policy enforcement must be consistent and private. A private reminder with documentation is the correct first step. Public call-outs or ignoring it entirely are both problematic.'},
+    {q:'A new employee tells you they need a religious accommodation to take a specific day off each week. You should:',opts:['Deny it — the schedule is the schedule','Tell them to find someone to cover and figure it out themselves','Take the request seriously, consult HR about accommodation requirements, and work toward a solution','Only accommodate it if other team members agree'],correct:2,
+     explain:'Religious accommodations are protected by law. You must take the request seriously and work with HR to find a reasonable solution. Denying it without going through the proper process can create legal liability.'},
+    {q:'You notice that one of your best employees seems to be looking for a new job — updating their resume and going to interviews. What should you do?',opts:['Fire them before they can quit','Confront them and demand to know their plans','Have a genuine conversation about their goals and what would make them want to stay. Advocate for their growth with your leadership.','Tell other team members so they can prepare'],correct:2,
+     explain:'The best supervisors retain talent by creating environments people want to stay in. A genuine conversation about their goals and advocating for their advancement is more effective than confrontation or doing nothing.'},
+    {q:'You made a mistake that affected your team\'s work. As a supervisor, what do you do?',opts:['Blame external circumstances so you do not lose credibility','Say nothing and hope no one noticed','Acknowledge the mistake directly to your team, explain what happened, and share what you will do differently next time','Only tell your supervisor, not your team'],correct:2,
+     explain:'Great supervisors model accountability. Acknowledging mistakes builds trust, not weakness. Your team respects you MORE when you own your errors and demonstrate how to handle them with integrity.'},
+  ],
+  es:[
+    {q:'Como supervisor/a, \u00bfpuede preguntarle a un empleado POR QU\u00c9 llam\u00f3 enfermo?',opts:['S\u00ed \u2014 tiene el derecho de saber la raz\u00f3n','No \u2014 puede confirmar la ausencia pero no puede pedir una raz\u00f3n m\u00e9dica','S\u00ed, pero solo si se enferma m\u00e1s de una vez','No \u2014 no puede preguntar nada en absoluto'],correct:1,
+     explain:'Puede confirmar que un empleado estar\u00e1 ausente y cu\u00e1ndo regresar\u00e1. Pero pedir una raz\u00f3n m\u00e9dica espec\u00edfica puede violar sus derechos de privacidad. Consulte a RR.HH. para los procedimientos de ausencia correctos.'},
+    {q:'Un empleado le dice que un compa\u00f1ero lo est\u00e1 acosando. Como supervisor/a, \u00bfqu\u00e9 DEBE hacer?',opts:['Decirle que lo maneje solo','Tomarlo en serio, documentar lo que le dijeron y reportarlo a RR.HH. de inmediato','Preguntar a otros miembros del equipo si vieron algo antes de hacer nada','Decirle al compa\u00f1ero acusado que pare'],correct:1,
+     explain:'Cuando un empleado reporta acoso, est\u00e1 legal y profesionalmente obligado a tomarlo en serio y reportarlo a RR.HH. de inmediato. Ignorar un reporte de acoso puede exponerle a usted y a su empleador a una responsabilidad legal seria.'},
+    {q:'Quiere darle a un empleado una advertencia verbal por problemas de desempe\u00f1o. \u00bfQu\u00e9 debe hacer siempre?',opts:['Decirlo en voz alta en una reuni\u00f3n del equipo para que todos conozcan el est\u00e1ndar','Entregarlo en privado, explicar el problema y la expectativa espec\u00edfica, y DOCUMENTARLO por escrito despu\u00e9s','Solo decirlo una vez y esperar que lo recuerden','Dejar que RR.HH. maneje todas las conversaciones de desempe\u00f1o'],correct:1,
+     explain:'Las advertencias verbales deben documentarse por escrito despu\u00e9s de la conversaci\u00f3n. La documentaci\u00f3n protege al empleado, a usted y a la empresa.'},
+    {q:'Uno de sus miembros del equipo pide cambiar turnos con otro empleado. Como supervisor/a, debe:',opts:['Aprobar todos los cambios autom\u00e1ticamente para evitar conflictos','Rechazar todos los cambios \u2014 crea demasiada confusi\u00f3n','Revisar si el cambio funciona para las operaciones, asegurarse de que ambos empleados est\u00e9n de acuerdo y documentar el cambio','Dejar que los empleados lo resuelvan solos'],correct:2,
+     explain:'Los cambios de turno necesitan aprobaci\u00f3n del supervisor/a para garantizar cobertura y equidad. Documente cada cambio aprobado para que no haya confusi\u00f3n sobre qui\u00e9n es responsable de cada turno.'},
+    {q:'Su empleador tiene una regla que proh\u00edbe el uso personal del tel\u00e9fono durante las horas de trabajo. Un empleado tiene su tel\u00e9fono fuera constantemente. Usted:',opts:['Lo ignora \u2014 todos lo hacen','Le quita el tel\u00e9fono','Tiene una conversaci\u00f3n privada record\u00e1ndole la pol\u00edtica, explica la raz\u00f3n y la documenta','Anuncia la regla en una reuni\u00f3n del equipo y los se\u00f1ala'],correct:2,
+     explain:'La aplicaci\u00f3n de pol\u00edticas debe ser consistente y privada. Un recordatorio privado con documentaci\u00f3n es el primer paso correcto.'},
+    {q:'Un nuevo empleado le dice que necesita una acomodaci\u00f3n religiosa para tomar un d\u00eda libre espec\u00edfico cada semana. Usted debe:',opts:['Negarla \u2014 el horario es el horario','Decirle que encuentre a alguien que le cubra y que lo resuelva solo','Tomar la solicitud en serio, consultar a RR.HH. sobre los requisitos de acomodaci\u00f3n y trabajar hacia una soluci\u00f3n','Solo acomodarla si otros miembros del equipo est\u00e1n de acuerdo'],correct:2,
+     explain:'Las acomodaciones religiosas est\u00e1n protegidas por la ley. Debe tomar la solicitud en serio y trabajar con RR.HH. para encontrar una soluci\u00f3n razonable.'},
+    {q:'Nota que uno de sus mejores empleados parece estar buscando un nuevo trabajo. \u00bfQu\u00e9 debe hacer?',opts:['Despedirlos antes de que puedan renunciar','Confrontarlos y exigir conocer sus planes','Tener una conversaci\u00f3n genuina sobre sus metas y qu\u00e9 les har\u00eda querer quedarse. Abogar por su crecimiento con su liderazgo.','Decirle a otros miembros del equipo para que puedan prepararse'],correct:2,
+     explain:'Los mejores supervisores retienen el talento creando ambientes en los que las personas quieren quedarse. Una conversaci\u00f3n genuina sobre sus metas y abogar por su avance es m\u00e1s efectivo que la confrontaci\u00f3n.'},
+    {q:'Cometio un error que afect\u00f3 el trabajo de su equipo. Como supervisor/a, \u00bfqu\u00e9 hace?',opts:['Culpar a circunstancias externas para no perder credibilidad','No decir nada y esperar que nadie lo note','Reconocer el error directamente con su equipo, explicar lo que sucedi\u00f3 y compartir lo que har\u00e1 diferente la pr\u00f3xima vez','Solo decirle a su supervisor, no a su equipo'],correct:2,
+     explain:'Los grandes supervisores modelan la responsabilidad. Reconocer los errores genera confianza, no debilidad. Su equipo le respeta M\u00c1S cuando asume sus errores y demuestra c\u00f3mo manejarlos con integridad.'},
+  ]
+};
+
+/* ========================================
+   STATION 4: 30-DAY PLAN
+======================================== */
+var S4WEEKS = {
+  en:[
+    {title:'\u{1F4C5} Week 1: Listen, Learn & Build Trust',color:'#2563a8',items:[
+      {a:'Meet individually with each team member for 10 minutes. Ask: "What is working? What could be better?"',w:'You cannot lead people you do not know. One-on-ones build the trust and information you need from day one.'},
+      {a:'Learn every team member\'s name, their role, and how long they have been with the company.',w:'Leaders who know their team show respect. This simple act builds immediate loyalty.'},
+      {a:'Walk through every area you supervise and learn the current procedures and standards.',w:'You cannot improve what you do not understand. Your first week is for observing, not changing.'},
+      {a:'Introduce yourself to the supervisors and managers in other departments you will work with.',w:'Building cross-department relationships early makes everything easier later.'},
+      {a:'Ask your own supervisor: "What does success look like in my first 30 days?"',w:'Starting with clear expectations from above means you are aligned from day one.'},
+    ]},
+    {title:'\u{1F4C5} Week 2: Set Standards & Build the Team',color:'#1e8c4a',items:[
+      {a:'Hold your first team meeting. Share your commitment to the team and ask for their input on what they need from you.',w:'How you show up in your first team meeting sets the tone for your entire leadership style.'},
+      {a:'Review the safety rules and procedures with your team. Make sure everyone knows the non-negotiables.',w:'Safety is the first responsibility of a supervisor. Getting aligned on safety standards in week two prevents problems all year.'},
+      {a:'Identify the strongest performers on your team. Plan how you will recognize and develop them.',w:'Your top performers are your most valuable asset. If you do not nurture them, someone else will.'},
+      {a:'Identify the team members who need the most support. Create a simple plan to help them improve.',w:'A team is only as strong as its most struggling member. Early intervention prevents bigger problems later.'},
+      {a:'Learn how to submit supply requests, maintenance requests, and incident reports for your area.',w:'Knowing your administrative tools means you can advocate for your team\'s needs effectively.'},
+    ]},
+    {title:'\u{1F4C5} Week 3: Improve One Thing',color:'#7b4ca8',items:[
+      {a:'Identify ONE process on your team that could be done more efficiently. Propose an improvement to your supervisor.',w:'Small improvements show leadership. Do not try to change everything at once \u2014 choose one thing and do it well.'},
+      {a:'Give specific, positive recognition to at least two team members this week.',w:'Recognition is free and it is the highest-return investment a supervisor makes. Start this habit early.'},
+      {a:'Have your first formal one-on-one check-in with each team member. Ask about their goals.',w:'When you know what your team members want for their career, you can help them get there. This builds fierce loyalty.'},
+      {a:'If there are any conflicts or tensions on the team, address them this week. Do not let problems fester.',w:'Unaddressed conflict grows. Week three is when patterns become habits. Address issues now.'},
+      {a:'Document any significant events, conversations, or incidents from your first three weeks.',w:'Documentation protects you and your team. Supervisors who document consistently have fewer problems.'},
+    ]},
+    {title:'\u{1F4C5} Week 4: Reflect, Plan & Commit',color:'#c05a10',items:[
+      {a:'Schedule a check-in with your supervisor to discuss your first month: what went well, what you are learning, and what you need.',w:'This check-in shows your supervisor that you are reflective, growth-oriented, and proactive \u2014 exactly what a leader looks like.'},
+      {a:'Write down three things you have learned about your team that surprised you.',w:'Reflection turns experience into wisdom. Leaders who do not reflect make the same mistakes twice.'},
+      {a:'Identify what kind of training or development YOU need to be a stronger supervisor.',w:'The best leaders are also the best learners. Knowing what you need to grow is a sign of self-awareness, not weakness.'},
+      {a:'Recommit to the team members who needed support. Review their progress.',w:'Following through on commitments is what separates supervisors people trust from supervisors people tolerate.'},
+      {a:'Celebrate one team win from your first month \u2014 publicly and with sincere gratitude.',w:'How a leader marks milestones tells the team what matters. End your first month by showing your team they matter.'},
+    ]},
+  ],
+  es:[
+    {title:'\u{1F4C5} Semana 1: Escuchar, Aprender y Construir Confianza',color:'#2563a8',items:[
+      {a:'Re\u00fanase individualmente con cada miembro del equipo por 10 minutos. Pregunte: "\u00bfQu\u00e9 est\u00e1 funcionando? \u00bfQu\u00e9 podr\u00eda mejorar?"',w:'No puede liderar a personas que no conoce. Las reuniones individuales construyen la confianza e informaci\u00f3n que necesita desde el primer d\u00eda.'},
+      {a:'Aprenda el nombre de cada miembro del equipo, su rol y cu\u00e1nto tiempo llevan en la empresa.',w:'Los l\u00edderes que conocen a su equipo muestran respeto. Este simple acto construye lealtad inmediata.'},
+      {a:'Recorra cada \u00e1rea que supervisa y aprenda los procedimientos y est\u00e1ndares actuales.',w:'No puede mejorar lo que no entiende. Su primera semana es para observar, no para cambiar.'},
+      {a:'Pres\u00e9ntese a los supervisores y gerentes de otros departamentos con los que trabajar\u00e1.',w:'Construir relaciones entre departamentos temprano hace todo m\u00e1s f\u00e1cil despu\u00e9s.'},
+      {a:'Preg\u00fantele a su propio supervisor: "\u00bfC\u00f3mo es el \u00e9xito en mis primeros 30 d\u00edas?"',w:'Comenzar con expectativas claras desde arriba significa que est\u00e1 alineado/a desde el primer d\u00eda.'},
+    ]},
+    {title:'\u{1F4C5} Semana 2: Establecer Est\u00e1ndares y Construir el Equipo',color:'#1e8c4a',items:[
+      {a:'Realice su primera reuni\u00f3n del equipo. Comparta su compromiso con el equipo y pida su opini\u00f3n sobre lo que necesitan de usted.',w:'C\u00f3mo se presenta en su primera reuni\u00f3n del equipo establece el tono para todo su estilo de liderazgo.'},
+      {a:'Revise las reglas y procedimientos de seguridad con su equipo. Aseg\u00farese de que todos conozcan los elementos no negociables.',w:'La seguridad es la primera responsabilidad de un supervisor/a. Alinearse en los est\u00e1ndares de seguridad en la semana dos previene problemas durante todo el a\u00f1o.'},
+      {a:'Identifique a los miembros m\u00e1s fuertes de su equipo. Planifique c\u00f3mo los reconocer\u00e1 y desarrollar\u00e1.',w:'Sus mejores trabajadores son su activo m\u00e1s valioso. Si no los nutre, alguien m\u00e1s lo har\u00e1.'},
+      {a:'Identifique a los miembros del equipo que necesitan m\u00e1s apoyo. Cree un plan simple para ayudarlos a mejorar.',w:'Un equipo es tan fuerte como su miembro m\u00e1s d\u00e9bil. La intervenci\u00f3n temprana previene problemas mayores m\u00e1s adelante.'},
+      {a:'Aprenda c\u00f3mo enviar solicitudes de suministros, solicitudes de mantenimiento e informes de incidentes para su \u00e1rea.',w:'Conocer sus herramientas administrativas significa que puede abogar por las necesidades de su equipo de manera efectiva.'},
+    ]},
+    {title:'\u{1F4C5} Semana 3: Mejorar Una Cosa',color:'#7b4ca8',items:[
+      {a:'Identifique UN proceso en su equipo que podr\u00eda hacerse de manera m\u00e1s eficiente. Proponga una mejora a su supervisor.',w:'Las peque\u00f1as mejoras demuestran liderazgo. No intente cambiar todo a la vez \u2014 elija una cosa y h\u00e1gala bien.'},
+      {a:'D\u00e9 reconocimiento espec\u00edfico y positivo a al menos dos miembros del equipo esta semana.',w:'El reconocimiento es gratuito y es la inversi\u00f3n de mayor retorno que hace un supervisor/a. Comience este h\u00e1bito temprano.'},
+      {a:'Tenga su primera reuni\u00f3n individual formal con cada miembro del equipo. Pregunte sobre sus metas.',w:'Cuando sabe lo que quieren sus miembros del equipo para su carrera, puede ayudarlos a llegar all\u00ed. Esto construye una lealtad feroz.'},
+      {a:'Si hay conflictos o tensiones en el equipo, ab\u00f3rdelos esta semana. No deje que los problemas empeoren.',w:'El conflicto no resuelto crece. La semana tres es cuando los patrones se convierten en h\u00e1bitos. Aborde los problemas ahora.'},
+      {a:'Documente cualquier evento, conversaci\u00f3n o incidente significativo de sus primeras tres semanas.',w:'La documentaci\u00f3n lo/la protege a usted y a su equipo. Los supervisores que documentan consistentemente tienen menos problemas.'},
+    ]},
+    {title:'\u{1F4C5} Semana 4: Reflexionar, Planificar y Comprometerse',color:'#c05a10',items:[
+      {a:'Programe una reuni\u00f3n de seguimiento con su supervisor para hablar sobre su primer mes: qu\u00e9 sali\u00f3 bien, qu\u00e9 est\u00e1 aprendiendo y qu\u00e9 necesita.',w:'Esta reuni\u00f3n le muestra a su supervisor que es reflexivo/a, orientado/a al crecimiento y proactivo/a.'},
+      {a:'Escriba tres cosas que aprendi\u00f3 sobre su equipo que le sorprendieron.',w:'La reflexi\u00f3n convierte la experiencia en sabidur\u00eda. Los l\u00edderes que no reflexionan cometen los mismos errores dos veces.'},
+      {a:'Identifique qu\u00e9 tipo de capacitaci\u00f3n o desarrollo NECESITA USTED para ser un/a supervisor/a m\u00e1s fuerte.',w:'Los mejores l\u00edderes tambi\u00e9n son los mejores aprendices. Saber lo que necesita para crecer es una se\u00f1al de autoconciencia, no de debilidad.'},
+      {a:'Reaf\u00edrme su compromiso con los miembros del equipo que necesitaban apoyo. Revise su progreso.',w:'Cumplir los compromisos es lo que separa a los supervisores en quienes las personas conf\u00edan de los supervisores que las personas toleran.'},
+      {a:'Celebre un \u00e9xito del equipo de su primer mes \u2014 p\u00fablicamente y con sincera gratitud.',w:'C\u00f3mo un l\u00edder marca los hitos le dice al equipo qu\u00e9 es importante. Termine su primer mes mostr\u00e1ndole a su equipo que importan.'},
+    ]},
+  ]
+};
+
+/* ========================================
+   STATE
+======================================== */
+var lang='en', station=0;
+var s1Q=0, s1Answers=[], s1Style=null;
+var s2Q=0, s2Score=0, s2Answered=false;
+var s3Q=0, s3Score=0, s3Answered=false;
+var s4Checked=[];
+var stationDone=[false,false,false,false,false];
+
+/* ========================================
+   LANGUAGE
+======================================== */
+function setLang(l){
+  lang=l;
+  document.getElementById('root').setAttribute('lang',l);
+  document.getElementById('btn-en').className='lbtn '+(l==='en'?'on':'off');
+  document.getElementById('btn-es').className='lbtn '+(l==='es'?'on':'off');
+  renderUI();
+}
+function d(k){return T[lang][k];}
+
+function renderUI(){
+  var td=T[lang];
+  document.getElementById('h-badge').textContent=td.hBadge;
+  document.getElementById('h-title').innerHTML=td.hTitle;
+  document.getElementById('h-sub').textContent=td.hSub;
+  document.getElementById('w-title').textContent=td.wTitle;
+  document.getElementById('w-desc').textContent=td.wDesc;
+  document.getElementById('w-m1h').textContent=td.wM1h;document.getElementById('w-m1p').textContent=td.wM1p;
+  document.getElementById('w-m2h').textContent=td.wM2h;document.getElementById('w-m2p').textContent=td.wM2p;
+  document.getElementById('w-m3h').textContent=td.wM3h;document.getElementById('w-m3p').textContent=td.wM3p;
+  document.getElementById('w-m4h').textContent=td.wM4h;document.getElementById('w-m4p').textContent=td.wM4p;
+  document.getElementById('w-start').textContent=td.wStart;
+  document.getElementById('s1-title').textContent=td.s1Title;document.getElementById('s1-desc').textContent=td.s1Desc;
+  document.getElementById('s2-title').textContent=td.s2Title;document.getElementById('s2-desc').textContent=td.s2Desc;
+  document.getElementById('s3-title').textContent=td.s3Title;document.getElementById('s3-desc').textContent=td.s3Desc;
+  document.getElementById('s4-title').textContent=td.s4Title;document.getElementById('s4-desc').textContent=td.s4Desc;
+  document.getElementById('p-congrats').textContent=td.pCongrats;
+  document.getElementById('p-congrats-sub').textContent=td.pCongratsub;
+  document.getElementById('p-print-btn').textContent=td.pPrint;
+  document.getElementById('p-doc-title').textContent=td.pDocTitle;
+  document.getElementById('p-name-display').textContent=td.pNameDisplay;
+  document.getElementById('p-sub-display').textContent=td.pSubDisplay;
+  document.getElementById('p-style-title').textContent=td.pStyleTitle;
+  document.getElementById('p-strengths-title').textContent=td.pStrengthsTitle;
+  document.getElementById('p-plan-title').textContent=td.pPlanTitle;
+  document.getElementById('p-commit-title').textContent=td.pCommitTitle;
+  document.getElementById('p-ai-lbl').textContent=td.pAiLbl;
+  document.getElementById('p-copy-btn').textContent=td.pCopyBtn;
+  document.getElementById('p-copy-ok').textContent=td.pCopyOk;
+  renderS1Q();
+  renderS2Q();
+  renderS3Q();
+  renderS4();
+  updateSnavDone();
+}
+
+/* ========================================
+   STATION NAV
+======================================== */
+function goStation(n){
+  station=n;
+  var screens=document.querySelectorAll('.screen');
+  for(var i=0;i<screens.length;i++)screens[i].classList.remove('show');
+  document.getElementById('st-'+n).classList.add('show');
+  var snavs=document.querySelectorAll('.snav-btn');
+  for(var i=0;i<snavs.length;i++){snavs[i].classList.remove('active');}
+  snavs[n].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(n===5)buildPassport();
+}
+
+function updateSnavDone(){
+  var snavs=document.querySelectorAll('.snav-btn');
+  for(var i=1;i<snavs.length;i++){
+    if(stationDone[i-1])snavs[i].classList.add('done');
+  }
+}
+
+/* ========================================
+   STATION 1: STYLE QUIZ
+======================================== */
+function renderS1Q(){
+  var qs=S1Q[lang];
+  if(s1Q>=qs.length){showStyleResult();return;}
+  var q=qs[s1Q];
+  document.getElementById('s1-prog').style.width=Math.round((s1Q/qs.length)*100)+'%';
+  document.getElementById('s1-qnum').textContent=d('s1QNum')(s1Q+1,qs.length);
+  document.getElementById('s1-qtext').textContent=q.q;
+  var optsEl=document.getElementById('s1-opts');
+  optsEl.innerHTML='';
+  q.opts.forEach(function(opt,i){
+    var btn=document.createElement('button');
+    btn.className='opt';
+    btn.innerHTML='<span class="opt-letter">'+['A','B','C','D'][i]+'</span> '+opt;
+    btn.setAttribute('aria-label',['A','B','C','D'][i]+': '+opt);
+    var score=q.scores[i];
+    btn.onclick=function(){selectStyleOpt(score,btn,optsEl);};
+    optsEl.appendChild(btn);
+  });
+  var nb=document.getElementById('s1-next');
+  nb.style.display='none';
+  nb.textContent=s1Q<qs.length-1?d('s1Next'):d('s1SeeResult');
+}
+
+function selectStyleOpt(score,btn,container){
+  container.querySelectorAll('.opt').forEach(function(b){b.classList.remove('selected');b.setAttribute('aria-pressed','false');});
+  btn.classList.add('selected');btn.setAttribute('aria-pressed','true');
+  s1Answers[s1Q]=score;
+  document.getElementById('s1-next').style.display='block';
+}
+
+function nextStyleQ(){
+  if(s1Answers[s1Q]===undefined){alert(lang==='en'?'Please choose an answer.':'Por favor elija una respuesta.');return;}
+  s1Q++;
+  renderS1Q();
+}
+
+function showStyleResult(){
+  // Tally style scores
+  var scores=[0,0,0,0]; // coach, commander, collab, champion
+  s1Answers.forEach(function(s){if(s!==undefined)scores[s]++;});
+  var max=Math.max.apply(null,scores);
+  var idx=scores.indexOf(max);
+  var styles=STYLES[lang];
+  var style=styles[idx];
+  s1Style=style;
+  stationDone[0]=true;
+  updateSnavDone();
+
+  var resEl=document.getElementById('s1-result');
+  resEl.style.display='block';
+  resEl.innerHTML='<h3 style="font-size:17px;font-weight:900;color:var(--navy);margin-bottom:14px;">'+d('styleResultTitle')+'</h3>'+
+    '<div class="style-card" style="background:'+style.bg+';">'+
+    '<div class="style-icon">'+style.name.split(' ')[0]+'</div>'+
+    '<div class="style-name" style="color:white;">'+style.name.replace(/^\S+\s/,'')+'</div>'+
+    '<div class="style-tagline" style="color:rgba(255,255,255,0.9);">'+style.tagline+'</div>'+
+    '<div class="strength-list">'+
+      '<h4 style="color:white;">'+(lang==='en'?'Your Strengths:':'Sus Fortalezas:')+'</h4>'+
+      '<ul>'+style.strengths.map(function(s){return '<li style="color:rgba(255,255,255,0.9);">'+s+'</li>';}).join('')+'</ul>'+
+    '</div>'+
+    '<div class="growth-tip"><strong style="color:white;">'+(lang==='en'?'\u{1F4A1} Growth Opportunity:':'\u{1F4A1} Oportunidad de Crecimiento:')+'</strong> <span style="color:rgba(255,255,255,0.9);">'+style.growth+'</span></div>'+
+    '</div>'+
+    '<button class="btn btn-navy btn-full" onclick="goStation(2)">'+d('continueToS2')+'</button>';
+
+  document.getElementById('s1-prog').style.width='100%';
+  document.getElementById('s1-qnum').textContent=lang==='en'?'Complete! \u2713':'Completado! \u2713';
+  document.getElementById('s1-opts').innerHTML='';
+  document.getElementById('s1-next').style.display='none';
+}
+
+/* ========================================
+   STATION 2: DIFFICULT CONVERSATIONS
+======================================== */
+function renderS2Q(){
+  var qs=S2Q[lang];
+  s2Answered=false;
+  if(s2Q>=qs.length){return;}
+  var q=qs[s2Q];
+  document.getElementById('s2-prog').style.width=Math.round((s2Q/qs.length)*100)+'%';
+  document.getElementById('s2-qnum').textContent=d('s2QNum')(s2Q+1,qs.length);
+  document.getElementById('s2-tag').textContent=q.tag;
+  document.getElementById('s2-sit').innerHTML=q.sit;
+  document.getElementById('s2-qtext').textContent=q.q;
+  document.getElementById('s2-fb').className='fb';
+  document.getElementById('s2-next').style.display='none';
+  document.getElementById('s2-score-chip').textContent=d('s2Score')(s2Score,qs.length);
+  var optsEl=document.getElementById('s2-opts');
+  optsEl.innerHTML='';
+  q.opts.forEach(function(opt,i){
+    var btn=document.createElement('button');
+    btn.className='opt';
+    btn.innerHTML='<span class="opt-letter">'+['A','B','C','D'][i]+'</span> '+opt;
+    var cor=q.correct;
+    (function(idx){btn.onclick=function(){answerConvo(btn,idx,cor,q,optsEl);};})(i);
+    optsEl.appendChild(btn);
+  });
+}
+
+function answerConvo(btn,chosen,correct,q,container){
+  if(s2Answered)return;s2Answered=true;
+  var isRight=chosen===correct;
+  container.querySelectorAll('.opt').forEach(function(b,i){
+    b.disabled=true;
+    if(i===correct)b.classList.add('correct');
+    else if(b===btn&&!isRight)b.classList.add('wrong');
+  });
+  if(isRight)s2Score++;
+  document.getElementById('s2-score-chip').textContent=d('s2Score')(s2Score,S2Q[lang].length);
+  var fb=document.getElementById('s2-fb');
+  fb.className='fb '+(isRight?'good':'bad')+' show';
+  var fbText=lang==='en'?q.en_fb:q.en_fb;
+  fb.innerHTML='<span class="fb-icon">'+(isRight?'\u2713':'\u{1F4A1}')+'</span><div class="fb-text"><strong>'+(isRight?d('correct'):d('wrong'))+'</strong> '+fbText+'</div>';
+  var nb=document.getElementById('s2-next');
+  nb.style.display='block';
+  nb.textContent=s2Q<S2Q[lang].length-1?d('s2Next'):d('s2SeeResult');
+}
+
+function nextConvoQ(){
+  s2Q++;
+  if(s2Q>=S2Q[lang].length){showConvoResult();}
+  else{renderS2Q();}
+}
+
+function showConvoResult(){
+  stationDone[1]=true;updateSnavDone();
+  var pct=s2Score/S2Q[lang].length;
+  var msg=pct===1?(lang==='en'?'Perfect! You handled every difficult conversation professionally. Your team is lucky to have you as their supervisor.':'\u00a1Perfecto! Manej\u00f3 cada conversaci\u00f3n dif\u00edcil de manera profesional. Su equipo tiene suerte de tenerlo/la como supervisor/a.'):
+          pct>=0.6?(lang==='en'?'Great work! You have strong instincts for difficult conversations. Review the scenarios you missed and practice them with the AI prompt below.':'\u00a1Buen trabajo! Tiene buenos instintos para las conversaciones dif\u00edciles. Revise los escenarios que no acert\u00f3 y pract\u00edquelos.'):
+          (lang==='en'?'Difficult conversations are the hardest part of leadership \u2014 and they get easier with practice. Review each scenario and use the AI prompt below to keep practicing.':'Las conversaciones dif\u00edciles son la parte m\u00e1s dif\u00edcil del liderazgo \u2014 y se facilitan con la pr\u00e1ctica.');
+  var resEl=document.getElementById('s2-result');
+  resEl.style.display='block';
+  resEl.innerHTML='<div style="text-align:center;"><div style="font-size:52px;margin-bottom:10px;">'+(pct===1?'\u{1F3C6}':pct>=0.6?'\u{1F31F}':'\u{1F4AA}')+'</div>'+
+    '<h3 style="font-size:20px;font-weight:900;color:var(--navy);margin-bottom:8px;">'+d('convoResultTitle')+'</h3>'+
+    '<div style="font-size:28px;font-weight:900;color:var(--orange);margin-bottom:8px;">'+s2Score+'/'+S2Q[lang].length+'</div>'+
+    '<p style="font-size:16px;color:var(--muted);max-width:480px;margin:0 auto 18px;">'+msg+'</p>'+
+    '<button class="btn btn-navy btn-full" onclick="goStation(3)">'+d('continueToS3')+'</button></div>';
+  document.getElementById('s2-prog').style.width='100%';
+}
+
+/* ========================================
+   STATION 3: KNOW-HOW
+======================================== */
+function renderS3Q(){
+  var qs=S3Q[lang];
+  s3Answered=false;
+  if(s3Q>=qs.length)return;
+  var q=qs[s3Q];
+  document.getElementById('s3-prog').style.width=Math.round((s3Q/qs.length)*100)+'%';
+  document.getElementById('s3-qnum').textContent=d('s3QNum')(s3Q+1,qs.length);
+  document.getElementById('s3-qtext').textContent=q.q;
+  document.getElementById('s3-fb').className='fb';
+  document.getElementById('s3-next').style.display='none';
+  document.getElementById('s3-correct-box').className='kh-correct-box';
+  document.getElementById('s3-score-chip').textContent=d('s3Score')(s3Score,qs.length);
+  var optsEl=document.getElementById('s3-opts');
+  optsEl.innerHTML='';
+  q.opts.forEach(function(opt,i){
+    var btn=document.createElement('button');
+    btn.className='opt';
+    btn.innerHTML='<span class="opt-letter">'+['A','B','C','D'][i]+'</span> '+opt;
+    var cor=q.correct;
+    (function(idx){btn.onclick=function(){answerKh(btn,idx,cor,q,optsEl);};})(i);
+    optsEl.appendChild(btn);
+  });
+}
+
+function answerKh(btn,chosen,correct,q,container){
+  if(s3Answered)return;s3Answered=true;
+  var isRight=chosen===correct;
+  container.querySelectorAll('.opt').forEach(function(b,i){
+    b.disabled=true;
+    if(i===correct)b.classList.add('correct');
+    else if(b===btn&&!isRight)b.classList.add('wrong');
+  });
+  if(isRight)s3Score++;
+  document.getElementById('s3-score-chip').textContent=d('s3Score')(s3Score,S3Q[lang].length);
+  var fb=document.getElementById('s3-fb');
+  fb.className='fb '+(isRight?'good':'bad')+' show';
+  fb.innerHTML='<span class="fb-icon">'+(isRight?'\u2713':'\u{1F4A1}')+'</span><div class="fb-text"><strong>'+(isRight?d('correct'):d('wrong'))+'</strong></div>';
+  var box=document.getElementById('s3-correct-box');
+  box.className='kh-correct-box show';
+  box.innerHTML='<strong>'+(lang==='en'?'\u{1F4DA} Why:':'\u{1F4DA} Por qu\u00e9:')+'</strong> '+q.explain;
+  var nb=document.getElementById('s3-next');
+  nb.style.display='block';
+  nb.textContent=s3Q<S3Q[lang].length-1?d('s3Next'):d('s3SeeResult');
+}
+
+function nextKhQ(){
+  s3Q++;
+  if(s3Q>=S3Q[lang].length){showKhResult();}
+  else{renderS3Q();}
+}
+
+function showKhResult(){
+  stationDone[2]=true;updateSnavDone();
+  var pct=s3Score/S3Q[lang].length;
+  var msg=pct>=0.87?(lang==='en'?'Outstanding! You have a strong knowledge of supervisor responsibilities and worker rights. You are ready to lead with both confidence and integrity.':'\u00a1Sobresaliente! Tiene un s\u00f3lido conocimiento de las responsabilidades del supervisor y los derechos de los trabajadores.'):
+          pct>=0.62?(lang==='en'?'Good work! You have solid supervisor knowledge. Review the questions you missed \u2014 these are real situations you will face.':'\u00a1Buen trabajo! Tiene un s\u00f3lido conocimiento del supervisor/a. Revise las preguntas que no acert\u00f3.'):
+          (lang==='en'?'This is exactly the kind of knowledge that supervisors need to protect themselves and their teams. Review every explanation carefully.':'Este es exactamente el tipo de conocimiento que los supervisores necesitan para protegerse a s\u00ed mismos y a sus equipos. Revise cada explicaci\u00f3n con cuidado.');
+  var resEl=document.getElementById('s3-result');
+  resEl.style.display='block';
+  resEl.innerHTML='<div style="text-align:center;"><div style="font-size:52px;margin-bottom:10px;">'+(pct>=0.87?'\u{1F3C6}':pct>=0.62?'\u{1F31F}':'\u{1F4AA}')+'</div>'+
+    '<h3 style="font-size:20px;font-weight:900;color:var(--navy);margin-bottom:8px;">'+d('khResultTitle')+'</h3>'+
+    '<div style="font-size:28px;font-weight:900;color:var(--purple);margin-bottom:8px;">'+s3Score+'/'+S3Q[lang].length+'</div>'+
+    '<p style="font-size:16px;color:var(--muted);max-width:480px;margin:0 auto 18px;">'+msg+'</p>'+
+    '<button class="btn btn-navy btn-full" onclick="goStation(4)">'+d('continueToS4')+'</button></div>';
+  document.getElementById('s3-prog').style.width='100%';
+}
+
+/* ========================================
+   STATION 4: 30-DAY PLAN
+======================================== */
+function renderS4(){
+  var weeks=S4WEEKS[lang];
+  var container=document.getElementById('s4-weeks');
+  container.innerHTML='';
+  weeks.forEach(function(week,wi){
+    var wdiv=document.createElement('div');
+    wdiv.className='week-section';
+    wdiv.innerHTML='<div class="week-title" style="border-left:4px solid '+week.color+';background:transparent;color:'+week.color+';">'+week.title+'</div>';
+    week.items.forEach(function(item,ii){
+      var key=wi+'-'+ii;
+      var isChecked=s4Checked.indexOf(key)>-1;
+      var adiv=document.createElement('div');
+      adiv.className='action-item card'+(isChecked?' checked':'');
+      adiv.style.marginBottom='8px';
+      adiv.innerHTML='<div class="action-check">'+(isChecked?'\u2713':'')+'</div>'+
+        '<div><div class="action-text">'+item.a+'</div><div class="action-why">\u{1F4A1} '+item.w+'</div></div>';
+      adiv.onclick=function(){toggleAction(key,adiv);};
+      wdiv.appendChild(adiv);
+    });
+    container.appendChild(wdiv);
+  });
+  updateS4Count();
+}
+
+function toggleAction(key,el){
+  var idx=s4Checked.indexOf(key);
+  if(idx>-1){s4Checked.splice(idx,1);el.classList.remove('checked');el.querySelector('.action-check').textContent='';}
+  else{s4Checked.push(key);el.classList.add('checked');el.querySelector('.action-check').textContent='\u2713';}
+  updateS4Count();
+}
+
+function updateS4Count(){
+  document.getElementById('s4-checked-lbl').textContent=d('s4Checked')(s4Checked.length);
+  if(s4Checked.length>0)stationDone[3]=true;
+  updateSnavDone();
+}
+
+/* ========================================
+   PASSPORT
+======================================== */
+function buildPassport(){
+  stationDone[4]=true;updateSnavDone();
+  var style=s1Style||STYLES[lang][0];
+  document.getElementById('p-style-badge').textContent=style.name;
+  document.getElementById('p-style-tagline').textContent=style.tagline;
+
+  var strList=document.getElementById('p-strengths-list');
+  strList.innerHTML='';
+  style.strengths.slice(0,3).forEach(function(s){
+    var div=document.createElement('div');div.className='passport-item';div.textContent=s;strList.appendChild(div);
+  });
+
+  var planList=document.getElementById('p-plan-list');
+  planList.innerHTML='';
+  var weeks=S4WEEKS[lang];
+  var shown=0;
+  s4Checked.slice(0,8).forEach(function(key){
+    var parts=key.split('-');
+    var wi=parseInt(parts[0]),ii=parseInt(parts[1]);
+    if(weeks[wi]&&weeks[wi].items[ii]){
+      var div=document.createElement('div');div.className='passport-item';
+      div.textContent=weeks[wi].items[ii].a;planList.appendChild(div);shown++;
+    }
+  });
+  if(shown===0){
+    var div=document.createElement('div');div.className='passport-item';
+    div.textContent=lang==='en'?'Complete Station 4 to add your 30-day commitments here.':'Complete la Estaci\u00f3n 4 para agregar sus compromisos aqu\u00ed.';
+    planList.appendChild(div);
+  }
+
+  document.getElementById('p-commit-text').textContent=style.commitment;
+
+  var aiText=lang==='en'
+    ?'I recently completed the People Management Certificate Program at West Los Angeles College.\n\nMy leadership style is '+style.name.replace(/^\S+\s/,'')+'. '+style.tagline+'\n\nI am preparing to step into a supervisor or team lead position in the service industry.\n\nPlease be my AI leadership coach. Ask me ONE coaching question at a time to help me:\n1. Understand my leadership style more deeply\n2. Practice difficult workplace conversations\n3. Build my confidence as a new supervisor\n4. Develop my team effectively\n\nAfter each of my answers, give me brief feedback and then ask the next coaching question. Use simple English \u2014 I am an English learner.'
+    :'Recientemente complet\u00e9 el Programa de Certificado de Gesti\u00f3n de Personas en West Los Angeles College.\n\nMi estilo de liderazgo es '+style.name.replace(/^\S+\s/,'')+'. '+style.tagline+'\n\nMe estoy preparando para asumir un puesto de supervisor/a o l\u00edder de equipo en la industria de servicios.\n\nPor favor sea mi coach de liderazgo de IA. H\u00e1game UNA pregunta de coaching a la vez para ayudarme a:\n1. Entender mi estilo de liderazgo m\u00e1s profundamente\n2. Practicar conversaciones dif\u00edciles en el lugar de trabajo\n3. Construir mi confianza como nuevo/a supervisor/a\n4. Desarrollar mi equipo de manera efectiva\n\nDespues de cada una de mis respuestas, d\u00e9me retroalimentaci\u00f3n breve y luego haga la siguiente pregunta de coaching. Use ingl\u00e9s simple \u2014 soy un/a estudiante de ingl\u00e9s.';
+
+  document.getElementById('p-ai-text').textContent=aiText;
+}
+
+function copyPassportPrompt(){
+  var text=document.getElementById('p-ai-text').textContent;
+  if(navigator.clipboard){navigator.clipboard.writeText(text).catch(function(){fbCopy(text);});}
+  else{fbCopy(text);}
+  var ok=document.getElementById('p-copy-ok');
+  ok.style.display='inline';setTimeout(function(){ok.style.display='none';},2500);
+}
+function fbCopy(t){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}
+
+// INIT
+renderUI();
+goStation(0);
+</script>
+</body>
+</html>
