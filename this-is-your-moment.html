@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en" id="root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>This Is Your Moment | VOC ED 418CE — West Los Angeles College</title>
+<style>
+:root{
+  --navy:#1a2e4a;--gold:#c9922a;--gold-lt:#fef3dc;
+  --blue:#2563a8;--blue-lt:#ddeafc;
+  --green:#1e8c4a;--green-lt:#d4f5e2;
+  --purple:#7b4ca8;--purple-lt:#ede6fb;
+  --teal:#1a6b6b;--teal-lt:#d0f0ee;
+  --rose:#a83060;--rose-lt:#fde6f0;
+  --text:#1e2c3a;--muted:#5a6a7a;--border:#d0dae8;--bg:#f8f4ee;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:17px;line-height:1.7;}
+
+/* LANG */
+.lang-bar{background:#0d1a0d;padding:9px 20px;display:flex;justify-content:center;align-items:center;gap:12px;}
+.lbtn{padding:7px 20px;font-family:Arial,sans-serif;font-size:14px;font-weight:900;border:2px solid transparent;border-radius:22px;cursor:pointer;transition:all 0.2s;}
+.lbtn.on{background:var(--gold);color:#111;border-color:var(--gold);}
+.lbtn.off{background:transparent;color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.3);}
+
+/* HERO */
+.gold-bar{height:6px;background:linear-gradient(90deg,var(--navy),var(--gold),#e8c97a,var(--gold),var(--navy));}
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#2a4a6a 100%);padding:32px 22px 26px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'⭐';font-size:120px;position:absolute;right:-20px;top:-20px;opacity:0.06;}
+.hero::after{content:'🌟';font-size:100px;position:absolute;left:-10px;bottom:-20px;opacity:0.06;}
+.badge{display:inline-block;background:var(--gold);color:#111;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.8px;padding:4px 14px;border-radius:20px;margin-bottom:12px;}
+.hero h1{font-size:28px;color:white;font-weight:900;line-height:1.2;margin-bottom:8px;}
+.hero h1 span{color:var(--gold);}
+.hero p{color:rgba(255,255,255,0.8);font-size:16px;max-width:540px;margin:0 auto;}
+
+/* COUNTDOWN NAV */
+.cd-nav{background:white;border-bottom:2px solid var(--border);padding:14px 0;}
+.cd-inner{max-width:700px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:0;padding:0 16px;}
+.cd-step{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;}
+.cd-dot{width:44px;height:44px;border-radius:50%;border:3px solid var(--border);background:white;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:var(--muted);transition:all 0.3s;cursor:default;}
+.cd-dot.active{background:var(--gold);border-color:var(--gold);color:#111;transform:scale(1.15);box-shadow:0 4px 14px rgba(201,146,42,0.4);}
+.cd-dot.done{background:var(--green);border-color:var(--green);color:white;}
+.cd-label{font-size:11px;font-weight:800;color:var(--muted);text-align:center;line-height:1.2;max-width:60px;}
+.cd-label.active{color:var(--gold);}
+.cd-line{flex:1;height:3px;background:var(--border);margin:0 4px;margin-bottom:16px;transition:background 0.3s;}
+.cd-line.done{background:var(--green);}
+
+/* SCREENS */
+.screen{display:none;max-width:700px;margin:0 auto;padding:24px 16px 70px;}
+.screen.show{display:block;animation:fadein 0.4s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* STEP HERO */
+.step-hero{border-radius:16px;padding:24px;margin-bottom:22px;text-align:center;position:relative;overflow:hidden;}
+.step-hero .num{font-size:72px;font-weight:900;opacity:0.12;position:absolute;right:16px;top:-10px;line-height:1;}
+.step-hero h2{font-size:22px;font-weight:900;margin-bottom:6px;}
+.step-hero p{font-size:16px;opacity:0.85;max-width:480px;margin:0 auto;}
+.sh-5{background:linear-gradient(135deg,var(--blue-lt),#c8dcf8);border:2px solid var(--blue);}
+.sh-5 h2{color:var(--blue);}
+.sh-4{background:linear-gradient(135deg,var(--green-lt),#c0ecd4);border:2px solid var(--green);}
+.sh-4 h2{color:var(--green);}
+.sh-3{background:linear-gradient(135deg,var(--purple-lt),#ddd4f5);border:2px solid var(--purple);}
+.sh-3 h2{color:var(--purple);}
+.sh-2{background:linear-gradient(135deg,var(--rose-lt),#f5c8dc);border:2px solid var(--rose);}
+.sh-2 h2{color:var(--rose);}
+.sh-1{background:linear-gradient(135deg,var(--gold-lt),#f5e4c0);border:2px solid var(--gold);}
+.sh-1 h2{color:#7a5000;}
+
+/* CARD */
+.card{background:white;border-radius:16px;padding:24px;border:1px solid var(--border);box-shadow:0 3px 12px rgba(0,0,0,0.06);margin-bottom:16px;}
+
+/* CHIP GRID */
+.chip-wrap{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:16px;}
+.chip{padding:9px 16px;border:2px solid var(--border);border-radius:24px;background:white;font-family:Arial,sans-serif;font-size:15px;font-weight:700;cursor:pointer;color:var(--muted);transition:all 0.2s;line-height:1.3;}
+.chip:hover{border-color:var(--gold);color:var(--navy);}
+.chip.sel{border-color:var(--navy);background:var(--navy);color:white;}
+.chip.sel-green{border-color:var(--green);background:var(--green-lt);color:var(--green);}
+.chip.sel-purple{border-color:var(--purple);background:var(--purple-lt);color:var(--purple);}
+.chip.sel-rose{border-color:var(--rose);background:var(--rose-lt);color:var(--rose);}
+.chip.sel-gold{border-color:var(--gold);background:var(--gold-lt);color:#7a5000;}
+.count-lbl{font-size:14px;font-weight:800;color:var(--muted);margin-bottom:12px;}
+
+/* TEXT INPUT */
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;}
+textarea,input[type=text]{width:100%;padding:12px 14px;font-family:Arial,sans-serif;font-size:16px;border:2px solid var(--border);border-radius:10px;background:#f8faff;color:var(--text);outline:none;transition:border-color 0.2s;resize:vertical;}
+textarea:focus,input[type=text]:focus{border-color:var(--gold);background:white;}
+textarea{min-height:80px;}
+
+/* PROMISE CARDS */
+.promise-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.promise-card{background:white;border:2px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;transition:all 0.22s;display:flex;gap:12px;align-items:flex-start;}
+.promise-card:hover{border-color:var(--gold);transform:translateX(4px);}
+.promise-card.sel{border-color:var(--gold);background:var(--gold-lt);}
+.promise-icon{font-size:28px;flex-shrink:0;}
+.promise-text{font-size:16px;font-weight:700;color:var(--navy);line-height:1.4;}
+.promise-sub{font-size:14px;color:var(--muted);margin-top:3px;line-height:1.4;}
+
+/* BUTTONS */
+.btn{padding:13px 22px;font-family:Arial,sans-serif;font-size:16px;font-weight:900;border:none;border-radius:12px;cursor:pointer;transition:all 0.2s;text-transform:uppercase;letter-spacing:0.5px;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,0,0,0.15);}
+.btn-full{width:100%;margin-top:12px;display:block;text-align:center;}
+.btn-navy{background:var(--navy);color:white;}
+.btn-gold{background:var(--gold);color:#111;}
+.btn-green{background:var(--green);color:white;}
+
+/* TROPHY CASE */
+.trophy-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:22px;}
+.trophy-card{background:var(--navy);border-radius:12px;padding:16px 12px;text-align:center;}
+.trophy-icon{font-size:34px;margin-bottom:6px;}
+.trophy-name{font-size:13px;font-weight:800;color:var(--gold);line-height:1.3;}
+.trophy-desc{font-size:12px;color:rgba(255,255,255,0.7);margin-top:4px;line-height:1.3;}
+
+/* WELCOME */
+.welcome-big{font-size:68px;text-align:center;margin-bottom:16px;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.welcome-card{background:white;border-radius:18px;padding:30px;border:2px solid var(--gold);box-shadow:0 6px 24px rgba(201,146,42,0.15);text-align:center;margin-top:20px;}
+.welcome-card h2{font-size:24px;font-weight:900;color:var(--navy);margin-bottom:12px;line-height:1.3;}
+.welcome-card p{font-size:17px;color:var(--muted);margin-bottom:8px;line-height:1.7;}
+.steps-preview{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+.step-preview{border-radius:10px;padding:12px 14px;text-align:left;border:2px solid var(--border);}
+.sp-num{font-size:22px;font-weight:900;display:block;margin-bottom:3px;}
+.sp-txt{font-size:14px;font-weight:700;color:var(--muted);line-height:1.3;}
+
+/* ACHIEVEMENT CARD */
+.achievement-card{background:linear-gradient(135deg,var(--navy) 0%,#1e3a5a 100%);border-radius:20px;padding:32px;color:white;margin-bottom:22px;position:relative;overflow:hidden;}
+.achievement-card::before{content:'✨';font-size:200px;position:absolute;right:-40px;bottom:-40px;opacity:0.04;}
+.ach-badge{text-align:center;margin-bottom:22px;}
+.ach-badge-icon{font-size:62px;display:block;margin-bottom:8px;}
+.ach-badge-title{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:4px;}
+.ach-name{font-size:26px;font-weight:900;line-height:1.2;}
+.ach-sub{font-size:14px;opacity:0.75;margin-top:4px;}
+.ach-divider{border:none;border-top:1px solid rgba(255,255,255,0.2);margin:20px 0;}
+.ach-section{margin-bottom:18px;}
+.ach-section-title{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:10px;}
+.ach-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.ach-chip{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:4px 12px;font-size:13px;font-weight:700;color:rgba(255,255,255,0.9);}
+.ach-item{display:flex;gap:8px;font-size:15px;margin-bottom:8px;opacity:0.9;line-height:1.5;}
+.ach-item::before{content:'✦';color:var(--gold);flex-shrink:0;margin-top:2px;}
+.promise-display{background:rgba(255,255,255,0.1);border-radius:12px;padding:16px;border-left:4px solid var(--gold);font-size:16px;font-style:italic;line-height:1.7;}
+.gratitude-row{display:flex;gap:10px;flex-wrap:wrap;}
+.gratitude-item{background:rgba(255,255,255,0.1);border-radius:10px;padding:10px 14px;font-size:14px;flex:1;min-width:140px;}
+.gratitude-item .g-name{font-weight:900;color:var(--gold);font-size:15px;}
+.gratitude-item .g-msg{opacity:0.85;margin-top:3px;font-size:13px;line-height:1.4;}
+.ach-footer{text-align:center;margin-top:20px;opacity:0.7;font-size:13px;border-top:1px solid rgba(255,255,255,0.15);padding-top:16px;}
+
+/* AI BOX */
+.ai-box{background:#0f2020;border-radius:12px;padding:18px;margin-top:16px;}
+.ai-lbl{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:#7ecdc8;margin-bottom:8px;display:block;}
+.ai-txt{font-family:'Courier New',monospace;font-size:14px;color:#e0f5f3;line-height:1.7;white-space:pre-wrap;}
+.copy-btn{margin-top:10px;padding:8px 16px;background:var(--teal);color:white;border:none;border-radius:8px;font-family:Arial,sans-serif;font-size:13px;font-weight:900;cursor:pointer;}
+.copy-ok{color:#7ecdc8;font-size:13px;font-weight:700;margin-left:8px;display:none;}
+
+/* CONFETTI */
+.confetti-wrap{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;overflow:hidden;}
+.confetti-piece{position:absolute;width:10px;height:10px;border-radius:50%;animation:fall linear forwards;}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+@media(max-width:500px){
+  .trophy-grid{grid-template-columns:1fr 1fr;}
+  .steps-preview{grid-template-columns:1fr;}
+  .hero h1{font-size:22px;}
+  .cd-label{font-size:9px;}
+}
+@media print{
+  .lang-bar,.hero,.cd-nav,.btn,.ai-box,.print-hint{display:none!important;}
+  .screen{padding:0!important;}
+  .achievement-card{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+<div class="gold-bar"></div>
+<div class="lang-bar" role="navigation" aria-label="Language">
+  <button class="lbtn on" id="btn-en" onclick="setLang('en')" aria-pressed="true">&#127482;&#127480; English</button>
+  <span style="color:rgba(255,255,255,0.3);font-size:18px;">|</span>
+  <button class="lbtn off" id="btn-es" onclick="setLang('es')" aria-pressed="false">&#127474;&#127485; Espa&#241;ol</button>
+</div>
+<div class="hero">
+  <div class="badge" id="h-badge">VOC ED 418CE &middot; West Los Angeles College</div>
+  <h1 id="h-title">&#10024; <span>This Is Your Moment</span></h1>
+  <p id="h-sub">A personal celebration of how far you have come. This one is just for you.</p>
+</div>
+
+<!-- COUNTDOWN NAV -->
+<div class="cd-nav">
+  <div class="cd-inner">
+    <div class="cd-step">
+      <div class="cd-dot active" id="cdot-0">&#127775;</div>
+      <div class="cd-label active" id="cdlbl-0">Start</div>
+    </div>
+    <div class="cd-line" id="cline-1"></div>
+    <div class="cd-step">
+      <div class="cd-dot" id="cdot-1">5</div>
+      <div class="cd-label" id="cdlbl-1">Skills</div>
+    </div>
+    <div class="cd-line" id="cline-2"></div>
+    <div class="cd-step">
+      <div class="cd-dot" id="cdot-2">4</div>
+      <div class="cd-label" id="cdlbl-2">Wins</div>
+    </div>
+    <div class="cd-line" id="cline-3"></div>
+    <div class="cd-step">
+      <div class="cd-dot" id="cdot-3">3</div>
+      <div class="cd-label" id="cdlbl-3">Lessons</div>
+    </div>
+    <div class="cd-line" id="cline-4"></div>
+    <div class="cd-step">
+      <div class="cd-dot" id="cdot-4">2</div>
+      <div class="cd-label" id="cdlbl-4">People</div>
+    </div>
+    <div class="cd-line" id="cline-5"></div>
+    <div class="cd-step">
+      <div class="cd-dot" id="cdot-5">1</div>
+      <div class="cd-label" id="cdlbl-5">Promise</div>
+    </div>
+    <div class="cd-line" id="cline-6"></div>
+    <div class="cd-step">
+      <div class="cd-dot" id="cdot-6">&#127891;</div>
+      <div class="cd-label" id="cdlbl-6">Card</div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- WELCOME -->
+<div class="screen show" id="s-0">
+  <div class="welcome-card">
+    <div class="welcome-big">&#127881;</div>
+    <h2 id="w-title">You Did It. Now Let's Celebrate.</h2>
+    <p id="w-desc1">This is the final activity of VOC ED 418CE. Before you receive your certificate and your resume on the last day of class, take a few minutes to honor yourself — your hard work, your growth, and everything you are bringing into your future.</p>
+    <p id="w-desc2">This activity is just for you. There are no right or wrong answers. At the end, you will receive a personalized Achievement Card that you can print and keep forever.</p>
+
+    <div class="steps-preview" role="list">
+      <div class="step-preview" style="background:var(--blue-lt);border-color:var(--blue);" role="listitem">
+        <span class="sp-num" style="color:var(--blue);">5&#128293;</span>
+        <span class="sp-txt" id="sp1">5 Skills I Mastered in This Course</span>
+      </div>
+      <div class="step-preview" style="background:var(--green-lt);border-color:var(--green);" role="listitem">
+        <span class="sp-num" style="color:var(--green);">4&#127942;</span>
+        <span class="sp-txt" id="sp2">4 Wins I Am Proud Of</span>
+      </div>
+      <div class="step-preview" style="background:var(--purple-lt);border-color:var(--purple);" role="listitem">
+        <span class="sp-num" style="color:var(--purple);">3&#128161;</span>
+        <span class="sp-txt" id="sp3">3 Things I Know Now That I Didn't Before</span>
+      </div>
+      <div class="step-preview" style="background:var(--rose-lt);border-color:var(--rose);" role="listitem">
+        <span class="sp-num" style="color:var(--rose);">2&#10084;&#65039;</span>
+        <span class="sp-txt" id="sp4">2 People Who Believed in Me</span>
+      </div>
+      <div class="step-preview" style="background:var(--gold-lt);border-color:var(--gold);grid-column:1/-1;" role="listitem">
+        <span class="sp-num" style="color:#7a5000;">1&#128081;</span>
+        <span class="sp-txt" id="sp5">1 Promise to My Future Self</span>
+      </div>
+    </div>
+
+    <div class="trophy-grid" role="list" aria-label="Activities you completed">
+      <div class="trophy-card" role="listitem">
+        <div class="trophy-icon">&#127942;</div>
+        <div class="trophy-name" id="t1n">The Supervisor Challenge</div>
+        <div class="trophy-desc" id="t1d">Phone, writing, mail &amp; leadership</div>
+      </div>
+      <div class="trophy-card" role="listitem">
+        <div class="trophy-icon">&#127775;</div>
+        <div class="trophy-name" id="t2n">My Professional Story</div>
+        <div class="trophy-desc" id="t2d">Built your 30-second introduction</div>
+      </div>
+      <div class="trophy-card" role="listitem">
+        <div class="trophy-icon">&#129514;</div>
+        <div class="trophy-name" id="t3n">The Leadership Lab</div>
+        <div class="trophy-desc" id="t3d">Discovered your leadership style</div>
+      </div>
+    </div>
+
+    <div class="field" style="text-align:left;">
+      <label id="name-lbl">Your First Name (for your Achievement Card)</label>
+      <input type="text" id="name-input" placeholder="Maria" aria-label="Your first name">
+    </div>
+
+    <button class="btn btn-gold btn-full" onclick="goStep(1)" id="w-start">&#128640; Let's Celebrate! Start Countdown</button>
+  </div>
+</div>
+
+<!-- STEP 5: SKILLS -->
+<div class="screen" id="s-1">
+  <div class="step-hero sh-5">
+    <div class="num">5</div>
+    <h2 id="s1-title">&#128293; 5 — Skills I Mastered</h2>
+    <p id="s1-desc">Choose 5 professional skills you developed or strengthened in this course. These belong on your resume and in your future supervisor interviews.</p>
+  </div>
+  <div class="card">
+    <p class="count-lbl" id="s1-count">0 of 5 selected</p>
+    <div class="chip-wrap" id="s1-chips" role="group"></div>
+    <button class="btn btn-navy btn-full" onclick="goStep(2)" id="s1-next">Next: 4 Wins &#8594;</button>
+  </div>
+</div>
+
+<!-- STEP 4: WINS -->
+<div class="screen" id="s-2">
+  <div class="step-hero sh-4">
+    <div class="num">4</div>
+    <h2 id="s2-title">&#127942; 4 — Wins I Am Proud Of</h2>
+    <p id="s2-desc">Choose 4 things you accomplished — in this course, at work, or in your life. Every single one of these counts.</p>
+  </div>
+  <div class="card">
+    <p class="count-lbl" id="s2-count">0 of 4 selected</p>
+    <div class="chip-wrap" id="s2-chips" role="group"></div>
+    <button class="btn btn-navy btn-full" onclick="goStep(3)" id="s2-next">Next: 3 Lessons &#8594;</button>
+  </div>
+</div>
+
+<!-- STEP 3: LESSONS -->
+<div class="screen" id="s-3">
+  <div class="step-hero sh-3">
+    <div class="num">3</div>
+    <h2 id="s3-title">&#128161; 3 — Things I Know Now</h2>
+    <p id="s3-desc">What are 3 things you know now that you did not know when this course started? Choose from the list or write your own.</p>
+  </div>
+  <div class="card">
+    <p class="count-lbl" id="s3-count">0 of 3 selected or written</p>
+    <div class="chip-wrap" id="s3-chips" role="group"></div>
+    <div style="margin-top:14px;">
+      <label class="field" style="display:block;">
+        <span style="font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:6px;" id="s3-own-lbl">Or write your own lesson (optional)</span>
+        <textarea id="s3-own" rows="2" placeholder="Something I learned that changed how I think about work..."></textarea>
+      </label>
+    </div>
+    <button class="btn btn-navy btn-full" onclick="goStep(4)" id="s3-next">Next: 2 People &#8594;</button>
+  </div>
+</div>
+
+<!-- STEP 2: PEOPLE -->
+<div class="screen" id="s-4">
+  <div class="step-hero sh-2">
+    <div class="num">2</div>
+    <h2 id="s4-title">&#10084;&#65039; 2 — People Who Believed in Me</h2>
+    <p id="s4-desc">Name 2 people who supported you — a family member, coworker, friend, mentor, or your instructor. Write a short message to each one.</p>
+  </div>
+  <div class="card">
+    <div class="field">
+      <label id="p1-lbl">Person 1 — Name</label>
+      <input type="text" id="p1-name" placeholder="e.g. My daughter, My coworker Maria, My supervisor...">
+    </div>
+    <div class="field">
+      <label id="p1-msg-lbl">What would you say to them?</label>
+      <textarea id="p1-msg" rows="2" placeholder="Thank you for..."></textarea>
+    </div>
+    <hr style="border:none;border-top:1px dashed var(--border);margin:16px 0;">
+    <div class="field">
+      <label id="p2-lbl">Person 2 — Name</label>
+      <input type="text" id="p2-name" placeholder="e.g. My instructor, My husband, My friend...">
+    </div>
+    <div class="field">
+      <label id="p2-msg-lbl">What would you say to them?</label>
+      <textarea id="p2-msg" rows="2" placeholder="Thank you for..."></textarea>
+    </div>
+    <button class="btn btn-navy btn-full" onclick="goStep(5)" id="s4-next">Next: My Promise &#8594;</button>
+  </div>
+</div>
+
+<!-- STEP 1: PROMISE -->
+<div class="screen" id="s-5">
+  <div class="step-hero sh-1">
+    <div class="num">1</div>
+    <h2 id="s5-title">&#128081; 1 — My Promise to My Future Self</h2>
+    <p id="s5-desc">Choose the promise that speaks to your heart — or write your own. This will appear on your Achievement Card.</p>
+  </div>
+  <div class="card">
+    <div class="promise-grid" id="promise-grid" role="radiogroup"></div>
+    <div class="field" style="margin-top:14px;">
+      <label id="s5-own-lbl" style="font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:6px;">Or write your own promise</label>
+      <textarea id="s5-own" rows="2" placeholder="I promise myself that..."></textarea>
+    </div>
+    <button class="btn btn-gold btn-full" onclick="buildCard()" id="s5-build">&#127891; Build My Achievement Card!</button>
+  </div>
+</div>
+
+<!-- ACHIEVEMENT CARD -->
+<div class="screen" id="s-6">
+  <div class="card print-hint" style="background:var(--gold-lt);border-color:var(--gold);text-align:center;padding:14px;">
+    <p id="print-hint-txt" style="font-size:15px;font-weight:700;color:#7a5000;">&#128424; Print your Achievement Card to keep it forever &mdash; or save a screenshot to your phone!</p>
+    <button onclick="window.print()" class="btn btn-gold" style="margin-top:8px;" id="print-btn">&#128424; Print My Card</button>
+  </div>
+
+  <div class="achievement-card" id="achievement-card" role="region" aria-label="Your Personal Achievement Card">
+    <div class="ach-badge">
+      <span class="ach-badge-icon">&#127881;</span>
+      <div class="ach-badge-title" id="ac-badge-title">PERSONAL ACHIEVEMENT CARD</div>
+      <div class="ach-name" id="ac-name">Your Name</div>
+      <div class="ach-sub" id="ac-sub">VOC ED 418CE &mdash; Effective Business Correspondence &mdash; West Los Angeles College &mdash; 2026</div>
+    </div>
+
+    <hr class="ach-divider">
+
+    <div class="ach-section">
+      <div class="ach-section-title" id="ac-s1-title">&#128293; 5 SKILLS I MASTERED</div>
+      <div class="ach-chips" id="ac-skills"></div>
+    </div>
+
+    <div class="ach-section">
+      <div class="ach-section-title" id="ac-s2-title">&#127942; 4 WINS I AM PROUD OF</div>
+      <div id="ac-wins"></div>
+    </div>
+
+    <div class="ach-section">
+      <div class="ach-section-title" id="ac-s3-title">&#128161; 3 THINGS I KNOW NOW</div>
+      <div id="ac-lessons"></div>
+    </div>
+
+    <div class="ach-section">
+      <div class="ach-section-title" id="ac-s4-title">&#10084;&#65039; 2 PEOPLE WHO BELIEVED IN ME</div>
+      <div class="gratitude-row" id="ac-people"></div>
+    </div>
+
+    <div class="ach-section">
+      <div class="ach-section-title" id="ac-s5-title">&#128081; MY PROMISE TO MY FUTURE SELF</div>
+      <div class="promise-display" id="ac-promise"></div>
+    </div>
+
+    <div class="ach-footer" id="ac-footer">
+      West Los Angeles College &mdash; Career &amp; College Prep Division &mdash; People Management Certificate Program &mdash; 2026
+    </div>
+  </div>
+
+  <div class="ai-box" role="note">
+    <span class="ai-lbl" id="ai-lbl">&#129302; Your Personalized AI Career Coach Prompt — Take This With You!</span>
+    <div class="ai-txt" id="ai-txt"></div>
+    <button class="copy-btn" onclick="copyAI()" id="copy-btn">&#128203; Copy</button>
+    <span class="copy-ok" id="copy-ok">&#10003; Copied!</span>
+  </div>
+
+  <button class="btn btn-navy btn-full" onclick="restart()" id="restart-btn" style="margin-top:14px;"></button>
+</div>
+
+</main>
+<div class="confetti-wrap" id="confetti-wrap"></div>
+
+<script>
+/* ===== TRANSLATIONS ===== */
+var T = {
+  en:{
+    hBadge:'VOC ED 418CE \u00b7 West Los Angeles College',
+    hTitle:'\u2728 <span>This Is Your Moment</span>',
+    hSub:'A personal celebration of how far you have come. This one is just for you.',
+    wTitle:'You Did It. Now Let\u2019s Celebrate.',
+    wDesc1:'This is the final activity of VOC ED 418CE. Before you receive your certificate and your resume on the last day of class, take a few minutes to honor yourself \u2014 your hard work, your growth, and everything you are bringing into your future.',
+    wDesc2:'There are no right or wrong answers. At the end, you will receive a personalized Achievement Card you can print and keep forever.',
+    sp1:'5 Skills I Mastered',sp2:'4 Wins I Am Proud Of',sp3:'3 Things I Know Now',sp4:'2 People Who Believed in Me',sp5:'1 Promise to My Future Self',
+    t1n:'The Supervisor Challenge',t1d:'Phone, writing, mail & leadership',
+    t2n:'My Professional Story',t2d:'Built your 30-second introduction',
+    t3n:'The Leadership Lab',t3d:'Discovered your leadership style',
+    nameLbl:'Your First Name (for your Achievement Card)',namePh:'Maria',
+    wStart:'\u{1F680} Let\u2019s Celebrate! Start Countdown',
+    s1Title:'\u{1F525} 5 \u2014 Skills I Mastered',
+    s1Desc:'Choose 5 professional skills you developed or strengthened in this course. These belong on your resume and in your future supervisor interviews.',
+    s1Count:(n)=>n+' of 5 selected',s1Next:'Next: 4 Wins \u2192',
+    skills:['Professional phone communication','Writing business memos','Writing professional emails','Leaving and taking voicemail messages','Choosing the right delivery method (fax, USPS, FedEx)','Using interoffice mail','Knowing when to use fax vs email vs courier','Speaking professionally in the workplace','Writing clear subject lines','Understanding AI workplace tools','Using Google Workspace (Docs, Gmail, Drive)','Conducting myself professionally at work','Setting professional boundaries','Listening and responding to coworkers respectfully','Running a professional meeting','Writing a professional introduction (elevator pitch)','Understanding my leadership style','Having difficult conversations at work','Advocating for my team','Documenting workplace incidents and decisions'],
+    s2Title:'\u{1F3C6} 4 \u2014 Wins I Am Proud Of',
+    s2Desc:'Choose 4 things you accomplished \u2014 in this course, at work, or in your life. Every single one counts.',
+    s2Count:(n)=>n+' of 4 selected',s2Next:'Next: 3 Lessons \u2192',
+    wins:['I completed this entire course','I showed up to class even when it was not easy','I built a professional resume for the first time','I practiced speaking professionally in English','I discovered my leadership style','I built my 30-second professional introduction','I learned skills I can use at work right away','I used AI tools for the first time','I completed the People Management Certificate Program','I supported my coworkers as a team member or union steward','I never gave up even when the material was challenging','I proved to myself that I can learn new things','I applied what I learned to my real job','I improved my writing skills','I stepped outside my comfort zone'],
+    s3Title:'\u{1F4A1} 3 \u2014 Things I Know Now',
+    s3Desc:'Choose up to 3 things you know now that you did not know when this course started.',
+    s3Count:(n)=>n+' selected (max 3)',s3Next:'Next: 2 People \u2192',
+    s3OwnLbl:'Or write your own lesson (optional)',s3OwnPh:'Something I learned that changed how I think about work...',
+    lessons:['How to write a professional email with a proper subject line, greeting, and closing','How to write a 5-part office memo','How to take and leave a professional voicemail message','When to send a fax, when to use USPS, and when to use FedEx or UPS','How to use interoffice mail to communicate within my building','How to use AI tools like Claude or ChatGPT to help me at work','How to introduce myself professionally in 30 seconds','What my natural leadership style is and how to use it','How to have a difficult conversation as a supervisor','What my rights and responsibilities are as a supervisor','How to advocate for my team professionally','How to document and protect myself at work','That my years of experience are valuable and deserve to be on a resume','That I am more capable than I thought','That learning never stops \u2014 and I am a lifelong learner'],
+    s4Title:'\u2764\uFE0F 2 \u2014 People Who Believed in Me',
+    s4Desc:'Name 2 people who supported you. Write a short message to each one.',
+    p1Lbl:'Person 1 \u2014 Name',p1Ph:'e.g. My daughter, My coworker, My supervisor...',
+    p1MsgLbl:'What would you say to them?',p1MsgPh:'Thank you for...',
+    p2Lbl:'Person 2 \u2014 Name',p2Ph:'e.g. My instructor, My husband, My friend...',
+    p2MsgLbl:'What would you say to them?',p2MsgPh:'Thank you for...',
+    s4Next:'Next: My Promise \u2192',
+    s5Title:'\u{1F451} 1 \u2014 My Promise to My Future Self',
+    s5Desc:'Choose the promise that speaks to your heart \u2014 or write your own.',
+    s5OwnLbl:'Or write your own promise',s5OwnPh:'I promise myself that...',
+    s5Build:'\u{1F393} Build My Achievement Card!',
+    promises:[
+      {icon:'\u{1F4BC}',text:'I will keep growing.',sub:'I will look for the next opportunity and not stop learning when this class ends.'},
+      {icon:'\u{1F3C6}',text:'I will step into my leadership.',sub:'I will use what I learned to lead, mentor, and advocate for my team with confidence.'},
+      {icon:'\u{1F4DD}',text:'I will use my resume.',sub:'I will share my resume and actively apply for the roles I deserve.'},
+      {icon:'\u{1F4AA}',text:'I will believe in myself.',sub:'I will remember this moment whenever I doubt myself \u2014 and keep going anyway.'},
+      {icon:'\u2764\uFE0F',text:'I will lift others up.',sub:'I will share what I learned and help the people around me grow too.'},
+      {icon:'\u{1F31F}',text:'I will honor the work I have done.',sub:'I will be proud of how far I have come and use it as the foundation for where I am going.'},
+    ],
+    acBadgeTitle:'PERSONAL ACHIEVEMENT CARD',
+    acSub:'VOC ED 418CE \u2014 Effective Business Correspondence \u2014 West Los Angeles College \u2014 2026',
+    acS1Title:'\u{1F525} 5 SKILLS I MASTERED',
+    acS2Title:'\u{1F3C6} 4 WINS I AM PROUD OF',
+    acS3Title:'\u{1F4A1} 3 THINGS I KNOW NOW',
+    acS4Title:'\u2764\uFE0F 2 PEOPLE WHO BELIEVED IN ME',
+    acS5Title:'\u{1F451} MY PROMISE TO MY FUTURE SELF',
+    acFooter:'West Los Angeles College \u2014 Career & College Prep Division \u2014 People Management Certificate Program \u2014 2026',
+    printHint:'\u{1F5A8} Print your Achievement Card to keep it forever \u2014 or save a screenshot to your phone!',
+    printBtn:'\u{1F5A8} Print My Card',
+    aiLbl:'\u{1F916} Your Personalized AI Career Coach Prompt \u2014 Take This With You!',
+    copyBtn:'\u{1F4CB} Copy',copiedOk:'\u2705 Copied!',
+    restartBtn:'\u{1F504} Start Over',
+    cdLabels:['Start','Skills','Wins','Lessons','People','Promise','Card'],
+  },
+  es:{
+    hBadge:'VOC ED 418CE \u00b7 West Los Angeles College',
+    hTitle:'\u2728 <span>Este Es Tu Momento</span>',
+    hSub:'Una celebraci\u00f3n personal de lo lejos que has llegado. Esta es solo para ti.',
+    wTitle:'\u00a1Lo Lograste! Ahora Vamos a Celebrar.',
+    wDesc1:'Esta es la actividad final de VOC ED 418CE. Antes de recibir tu certificado y tu curr\u00edculum en el \u00faltimo d\u00eda de clase, toma unos minutos para honrarte a ti mismo/a \u2014 tu esfuerzo, tu crecimiento y todo lo que llevas a tu futuro.',
+    wDesc2:'No hay respuestas correctas ni incorrectas. Al final recibir\u00e1s una Tarjeta de Logro personalizada que puedes imprimir y guardar para siempre.',
+    sp1:'5 Habilidades que Domin\u00e9',sp2:'4 Logros de los que Estoy Orgulloso/a',sp3:'3 Cosas que S\u00e9 Ahora',sp4:'2 Personas que Creyeron en M\u00ed',sp5:'1 Promesa a Mi Yo del Futuro',
+    t1n:'El Desaf\u00edo del Supervisor',t1d:'Tel\u00e9fono, escritura, correo y liderazgo',
+    t2n:'Mi Historia Profesional',t2d:'Construiste tu introducci\u00f3n de 30 segundos',
+    t3n:'El Laboratorio de Liderazgo',t3d:'Descubriste tu estilo de liderazgo',
+    nameLbl:'Tu Nombre de Pila (para tu Tarjeta de Logro)',namePh:'Mar\u00eda',
+    wStart:'\u{1F680} \u00a1Vamos a Celebrar! Comenzar Cuenta Regresiva',
+    s1Title:'\u{1F525} 5 \u2014 Habilidades que Domin\u00e9',
+    s1Desc:'Elige 5 habilidades profesionales que desarrollaste o fortaleciste en este curso. Estas pertenecen a tu curr\u00edculum y a tus futuras entrevistas de supervisor/a.',
+    s1Count:(n)=>n+' de 5 seleccionadas',s1Next:'Siguiente: 4 Logros \u2192',
+    skills:['Comunicaci\u00f3n telef\u00f3nica profesional','Redacci\u00f3n de memor\u00e1ndums de negocios','Redacci\u00f3n de correos electr\u00f3nicos profesionales','Dejar y tomar mensajes de voz profesionales','Elegir el m\u00e9todo de entrega correcto (fax, USPS, FedEx)','Usar el correo interno','Saber cu\u00e1ndo usar fax vs. correo vs. mensajer\u00eda','Comunicarme profesionalmente en el trabajo','Escribir l\u00edneas de asunto claras','Usar herramientas de IA en el trabajo','Usar Google Workspace (Docs, Gmail, Drive)','Conducirme profesionalmente en el trabajo','Establecer l\u00edmites profesionales','Escuchar y responder a compa\u00f1eros con respeto','Dirigir una reuni\u00f3n profesional','Escribir una introducci\u00f3n profesional (discurso de presentaci\u00f3n)','Entender mi estilo de liderazgo','Tener conversaciones dif\u00edciles en el trabajo','Abogar por mi equipo','Documentar incidentes y decisiones laborales'],
+    s2Title:'\u{1F3C6} 4 \u2014 Logros de los que Estoy Orgulloso/a',
+    s2Desc:'Elige 4 cosas que lograste \u2014 en este curso, en el trabajo o en tu vida. Cada una cuenta.',
+    s2Count:(n)=>n+' de 4 seleccionados',s2Next:'Siguiente: 3 Lecciones \u2192',
+    wins:['Complet\u00e9 este curso completo','Asist\u00ed a clase incluso cuando no fue f\u00e1cil','Constru\u00ed un curr\u00edculum profesional por primera vez','Practic\u00e9 hablar profesionalmente en ingl\u00e9s','Descubr\u00ed mi estilo de liderazgo','Constru\u00ed mi introducci\u00f3n profesional de 30 segundos','Aprend\u00ed habilidades que puedo usar en el trabajo de inmediato','Us\u00e9 herramientas de IA por primera vez','Complet\u00e9 el Programa de Certificado de Gesti\u00f3n de Personas','Apoy\u00e9 a mis compa\u00f1eros como miembro del equipo o delegado sindical','Nunca me rend\u00ed aunque el material fue desafiante','Me demostr\u00e9 a m\u00ed mismo/a que puedo aprender cosas nuevas','Apliqu\u00e9 lo que aprend\u00ed a mi trabajo real','Mejor\u00e9 mis habilidades de escritura','Sali\u00ed de mi zona de confort'],
+    s3Title:'\u{1F4A1} 3 \u2014 Cosas que S\u00e9 Ahora',
+    s3Desc:'Elige hasta 3 cosas que sabes ahora que no sab\u00edas cuando comenz\u00f3 este curso.',
+    s3Count:(n)=>n+' seleccionadas (m\u00e1x. 3)',s3Next:'Siguiente: 2 Personas \u2192',
+    s3OwnLbl:'O escribe tu propia lecci\u00f3n (opcional)',s3OwnPh:'Algo que aprend\u00ed que cambi\u00f3 c\u00f3mo pienso sobre el trabajo...',
+    lessons:['C\u00f3mo escribir un correo electr\u00f3nico profesional con l\u00ednea de asunto, saludo y cierre correctos','C\u00f3mo escribir un memor\u00e1ndum de oficina de 5 partes','C\u00f3mo tomar y dejar un mensaje de voz profesional','Cu\u00e1ndo enviar un fax, cu\u00e1ndo usar USPS y cu\u00e1ndo usar FedEx o UPS','C\u00f3mo usar el correo interno para comunicarme en mi edificio','C\u00f3mo usar herramientas de IA como Claude o ChatGPT para ayudarme en el trabajo','C\u00f3mo presentarme profesionalmente en 30 segundos','Cu\u00e1l es mi estilo natural de liderazgo y c\u00f3mo usarlo','C\u00f3mo tener una conversaci\u00f3n dif\u00edcil como supervisor/a','Cu\u00e1les son mis derechos y responsabilidades como supervisor/a','C\u00f3mo abogar por mi equipo de manera profesional','C\u00f3mo documentarme y protegerme en el trabajo','Que mis a\u00f1os de experiencia son valiosos y merecen estar en un curr\u00edculum','Que soy m\u00e1s capaz de lo que pensaba','Que el aprendizaje nunca termina \u2014 y soy un/a aprendiz de por vida'],
+    s4Title:'\u2764\uFE0F 2 \u2014 Personas que Creyeron en M\u00ed',
+    s4Desc:'Nombra a 2 personas que te apoyaron. Escr\u00edbeles un breve mensaje.',
+    p1Lbl:'Persona 1 \u2014 Nombre',p1Ph:'Ej. Mi hija, Mi compa\u00f1era Mar\u00eda, Mi supervisor/a...',
+    p1MsgLbl:'\u00bfQu\u00e9 les dir\u00edas?',p1MsgPh:'Gracias por...',
+    p2Lbl:'Persona 2 \u2014 Nombre',p2Ph:'Ej. Mi instructora, Mi esposo, Mi amigo/a...',
+    p2MsgLbl:'\u00bfQu\u00e9 les dir\u00edas?',p2MsgPh:'Gracias por...',
+    s4Next:'Siguiente: Mi Promesa \u2192',
+    s5Title:'\u{1F451} 1 \u2014 Mi Promesa a Mi Yo del Futuro',
+    s5Desc:'Elige la promesa que le habla a tu coraz\u00f3n \u2014 o escribe la tuya propia.',
+    s5OwnLbl:'O escribe tu propia promesa',s5OwnPh:'Me prometo a m\u00ed mismo/a que...',
+    s5Build:'\u{1F393} \u00a1Construir Mi Tarjeta de Logro!',
+    promises:[
+      {icon:'\u{1F4BC}',text:'Seguir\u00e9 creciendo.',sub:'Buscar\u00e9 la pr\u00f3xima oportunidad y no dejar\u00e9 de aprender cuando termine esta clase.'},
+      {icon:'\u{1F3C6}',text:'Asumir\u00e9 mi liderazgo.',sub:'Usar\u00e9 lo que aprend\u00ed para liderar, asesorar y abogar por mi equipo con confianza.'},
+      {icon:'\u{1F4DD}',text:'Usar\u00e9 mi curr\u00edculum.',sub:'Compartir\u00e9 mi curr\u00edculum y solicitar\u00e9 activamente los puestos que merezco.'},
+      {icon:'\u{1F4AA}',text:'Creer\u00e9 en m\u00ed mismo/a.',sub:'Recordar\u00e9 este momento cada vez que dude de m\u00ed mismo/a \u2014 y seguir\u00e9 de todos modos.'},
+      {icon:'\u2764\uFE0F',text:'Levantar\u00e9 a otros.',sub:'Compartir\u00e9 lo que aprend\u00ed y ayudar\u00e9 a las personas a mi alrededor a crecer tambi\u00e9n.'},
+      {icon:'\u{1F31F}',text:'Honrar\u00e9 el trabajo que he hecho.',sub:'Estar\u00e9 orgulloso/a de lo lejos que he llegado y lo usar\u00e9 como base para a d\u00f3nde voy.'},
+    ],
+    acBadgeTitle:'TARJETA DE LOGRO PERSONAL',
+    acSub:'VOC ED 418CE \u2014 Correspondencia Comercial Efectiva \u2014 West Los Angeles College \u2014 2026',
+    acS1Title:'\u{1F525} 5 HABILIDADES QUE DOMIN\u00c9',
+    acS2Title:'\u{1F3C6} 4 LOGROS DE LOS QUE ESTOY ORGULLOSO/A',
+    acS3Title:'\u{1F4A1} 3 COSAS QUE S\u00c9 AHORA',
+    acS4Title:'\u2764\uFE0F 2 PERSONAS QUE CREYERON EN M\u00cd',
+    acS5Title:'\u{1F451} MI PROMESA A MI YO DEL FUTURO',
+    acFooter:'West Los Angeles College \u2014 Career & College Prep Division \u2014 Programa de Certificado de Gesti\u00f3n de Personas \u2014 2026',
+    printHint:'\u{1F5A8} Imprime tu Tarjeta de Logro para guardarla para siempre \u2014 \u00a1o guarda una captura de pantalla en tu tel\u00e9fono!',
+    printBtn:'\u{1F5A8} Imprimir Mi Tarjeta',
+    aiLbl:'\u{1F916} Tu Mensaje de IA Coach de Carrera Personalizado \u2014 \u00a1Ll\u00e9valo Contigo!',
+    copyBtn:'\u{1F4CB} Copiar',copiedOk:'\u2705 \u00a1Copiado!',
+    restartBtn:'\u{1F504} Empezar de Nuevo',
+    cdLabels:['Inicio','Habilidades','Logros','Lecciones','Personas','Promesa','Tarjeta'],
+  }
+};
+
+/* ===== STATE ===== */
+var lang='en', step=0;
+var sel1=[],sel2=[],sel3=[],selPromise=null;
+
+/* ===== LANGUAGE ===== */
+function setLang(l){
+  lang=l;
+  document.getElementById('root').setAttribute('lang',l);
+  document.getElementById('btn-en').className='lbtn '+(l==='en'?'on':'off');
+  document.getElementById('btn-es').className='lbtn '+(l==='es'?'on':'off');
+  renderAll();
+}
+function d(k){return T[lang][k];}
+
+function renderAll(){
+  var td=T[lang];
+  document.getElementById('h-badge').textContent=td.hBadge;
+  document.getElementById('h-title').innerHTML=td.hTitle;
+  document.getElementById('h-sub').textContent=td.hSub;
+  document.getElementById('w-title').textContent=td.wTitle;
+  document.getElementById('w-desc1').textContent=td.wDesc1;
+  document.getElementById('w-desc2').textContent=td.wDesc2;
+  ['sp1','sp2','sp3','sp4','sp5','t1n','t1d','t2n','t2d','t3n','t3d'].forEach(id=>document.getElementById(id).textContent=td[id]);
+  document.getElementById('name-lbl').textContent=td.nameLbl;
+  document.getElementById('name-input').placeholder=td.namePh;
+  document.getElementById('w-start').textContent=td.wStart;
+  document.getElementById('s1-title').textContent=td.s1Title;
+  document.getElementById('s1-desc').textContent=td.s1Desc;
+  document.getElementById('s1-next').textContent=td.s1Next;
+  document.getElementById('s2-title').textContent=td.s2Title;
+  document.getElementById('s2-desc').textContent=td.s2Desc;
+  document.getElementById('s2-next').textContent=td.s2Next;
+  document.getElementById('s3-title').textContent=td.s3Title;
+  document.getElementById('s3-desc').textContent=td.s3Desc;
+  document.getElementById('s3-next').textContent=td.s3Next;
+  document.getElementById('s3-own-lbl').textContent=td.s3OwnLbl;
+  document.getElementById('s3-own').placeholder=td.s3OwnPh;
+  document.getElementById('s4-title').textContent=td.s4Title;
+  document.getElementById('s4-desc').textContent=td.s4Desc;
+  document.getElementById('p1-lbl').textContent=td.p1Lbl;
+  document.getElementById('p1-name').placeholder=td.p1Ph;
+  document.getElementById('p1-msg-lbl').textContent=td.p1MsgLbl;
+  document.getElementById('p1-msg').placeholder=td.p1MsgPh;
+  document.getElementById('p2-lbl').textContent=td.p2Lbl;
+  document.getElementById('p2-name').placeholder=td.p2Ph;
+  document.getElementById('p2-msg-lbl').textContent=td.p2MsgLbl;
+  document.getElementById('p2-msg').placeholder=td.p2MsgPh;
+  document.getElementById('s4-next').textContent=td.s4Next;
+  document.getElementById('s5-title').textContent=td.s5Title;
+  document.getElementById('s5-desc').textContent=td.s5Desc;
+  document.getElementById('s5-own-lbl').textContent=td.s5OwnLbl;
+  document.getElementById('s5-own').placeholder=td.s5OwnPh;
+  document.getElementById('s5-build').textContent=td.s5Build;
+  document.getElementById('ai-lbl').textContent=td.aiLbl;
+  document.getElementById('copy-btn').textContent=td.copyBtn;
+  document.getElementById('copy-ok').textContent=td.copiedOk;
+  document.getElementById('restart-btn').textContent=td.restartBtn;
+  document.getElementById('print-hint-txt').textContent=td.printHint;
+  document.getElementById('print-btn').textContent=td.printBtn;
+  document.getElementById('ac-badge-title').textContent=td.acBadgeTitle;
+  document.getElementById('ac-sub').textContent=td.acSub;
+  document.getElementById('ac-s1-title').textContent=td.acS1Title;
+  document.getElementById('ac-s2-title').textContent=td.acS2Title;
+  document.getElementById('ac-s3-title').textContent=td.acS3Title;
+  document.getElementById('ac-s4-title').textContent=td.acS4Title;
+  document.getElementById('ac-s5-title').textContent=td.acS5Title;
+  document.getElementById('ac-footer').textContent=td.acFooter;
+  // Update cd labels
+  var labels=td.cdLabels;
+  for(var i=0;i<=6;i++){var el=document.getElementById('cdlbl-'+i);if(el)el.textContent=labels[i];}
+  renderChips();
+  renderPromises();
+  updateCounts();
+}
+
+/* ===== STEP NAV ===== */
+function goStep(n){
+  step=n;
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('show');});
+  document.getElementById('s-'+n).classList.add('show');
+  updateNav();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateNav(){
+  for(var i=0;i<=6;i++){
+    var dot=document.getElementById('cdot-'+i);
+    var lbl=document.getElementById('cdlbl-'+i);
+    if(i<step){dot.className='cd-dot done';if(lbl)lbl.className='cd-label';}
+    else if(i===step){dot.className='cd-dot active';if(lbl)lbl.className='cd-label active';}
+    else{dot.className='cd-dot';if(lbl)lbl.className='cd-label';}
+  }
+  for(var j=1;j<=6;j++){
+    var line=document.getElementById('cline-'+j);
+    if(line)line.className='cd-line '+(j<=step?'done':'');
+  }
+}
+
+/* ===== CHIPS ===== */
+function renderChips(){
+  var td=T[lang];
+  renderChipSet('s1-chips',td.skills,sel1,5,'sel');
+  renderChipSet('s2-chips',td.wins,sel2,4,'sel-green');
+  renderChipSet('s3-chips',td.lessons,sel3,3,'sel-purple');
+  updateCounts();
+}
+
+function renderChipSet(containerId, items, selected, max, selClass){
+  var container=document.getElementById(containerId);
+  container.innerHTML='';
+  items.forEach(function(item){
+    var btn=document.createElement('button');
+    btn.className='chip '+(selected.indexOf(item)>-1?selClass:'');
+    btn.textContent=item;
+    btn.setAttribute('aria-pressed',selected.indexOf(item)>-1?'true':'false');
+    btn.onclick=function(){
+      var idx=selected.indexOf(item);
+      if(idx>-1){selected.splice(idx,1);btn.className='chip';btn.setAttribute('aria-pressed','false');}
+      else if(selected.length<max){selected.push(item);btn.className='chip '+selClass;btn.setAttribute('aria-pressed','true');}
+      updateCounts();
+    };
+    container.appendChild(btn);
+  });
+}
+
+function updateCounts(){
+  var td=T[lang];
+  document.getElementById('s1-count').textContent=td.s1Count(sel1.length);
+  document.getElementById('s2-count').textContent=td.s2Count(sel2.length);
+  document.getElementById('s3-count').textContent=td.s3Count(sel3.length);
+}
+
+/* ===== PROMISES ===== */
+function renderPromises(){
+  var td=T[lang];
+  var grid=document.getElementById('promise-grid');
+  grid.innerHTML='';
+  td.promises.forEach(function(p){
+    var div=document.createElement('div');
+    div.className='promise-card '+(selPromise===p.text?'sel':'');
+    div.setAttribute('role','radio');
+    div.setAttribute('aria-checked',selPromise===p.text?'true':'false');
+    div.innerHTML='<div class="promise-icon">'+p.icon+'</div><div><div class="promise-text">'+p.text+'</div><div class="promise-sub">'+p.sub+'</div></div>';
+    div.onclick=function(){
+      selPromise=p.text;
+      document.querySelectorAll('.promise-card').forEach(function(c){c.classList.remove('sel');c.setAttribute('aria-checked','false');});
+      div.classList.add('sel');div.setAttribute('aria-checked','true');
+    };
+    grid.appendChild(div);
+  });
+}
+
+/* ===== BUILD CARD ===== */
+function buildCard(){
+  var name=(document.getElementById('name-input').value.trim())||d('namePh');
+  var td=T[lang];
+
+  // Name
+  document.getElementById('ac-name').textContent=name;
+
+  // Skills
+  var skillsEl=document.getElementById('ac-skills');
+  skillsEl.innerHTML='';
+  sel1.forEach(function(s){
+    var chip=document.createElement('span');chip.className='ach-chip';chip.textContent=s;skillsEl.appendChild(chip);
+  });
+
+  // Wins
+  var winsEl=document.getElementById('ac-wins');
+  winsEl.innerHTML='';
+  sel2.forEach(function(w){
+    var div=document.createElement('div');div.className='ach-item';div.textContent=w;winsEl.appendChild(div);
+  });
+
+  // Lessons
+  var lessonsEl=document.getElementById('ac-lessons');
+  lessonsEl.innerHTML='';
+  var allLessons=sel3.slice();
+  var ownLesson=document.getElementById('s3-own').value.trim();
+  if(ownLesson)allLessons.push(ownLesson);
+  allLessons.slice(0,3).forEach(function(l){
+    var div=document.createElement('div');div.className='ach-item';div.textContent=l;lessonsEl.appendChild(div);
+  });
+
+  // People
+  var peopleEl=document.getElementById('ac-people');
+  peopleEl.innerHTML='';
+  [{n:'p1-name',m:'p1-msg'},{n:'p2-name',m:'p2-msg'}].forEach(function(p){
+    var name=document.getElementById(p.n).value.trim();
+    var msg=document.getElementById(p.m).value.trim();
+    if(name){
+      var div=document.createElement('div');
+      div.className='gratitude-item';
+      div.innerHTML='<div class="g-name">'+name+'</div><div class="g-msg">'+(msg||'...')+'</div>';
+      peopleEl.appendChild(div);
+    }
+  });
+
+  // Promise
+  var ownPromise=document.getElementById('s5-own').value.trim();
+  var promise=selPromise||(ownPromise?ownPromise:(lang==='en'?'I will keep growing and never stop learning.':'Seguir\u00e9 creciendo y nunca dejar\u00e9 de aprender.'));
+  document.getElementById('ac-promise').textContent=promise;
+
+  // AI Prompt
+  var aiText=lang==='en'
+    ?'I just completed the People Management Certificate Program at West Los Angeles College, including VOC ED 418CE — Effective Business Correspondence.\n\nHere are 5 skills I mastered: '+sel1.slice(0,5).join(', ')+'.\n\nI am proud of: '+sel2.slice(0,4).join(', ')+'.\n\nMy career promise to myself is: "'+promise+'"\n\nI am looking to grow into a supervisor or team lead position in the service industry.\n\nPlease be my AI career coach. Ask me ONE coaching question at a time to help me prepare for my next promotion opportunity. After each of my answers, give me brief feedback and the next coaching question. Use simple English \u2014 I am an English learner.'
+    :'Acabo de completar el Programa de Certificado de Gesti\u00f3n de Personas en West Los Angeles College, incluyendo VOC ED 418CE \u2014 Correspondencia Comercial Efectiva.\n\nAqu\u00ed hay 5 habilidades que domin\u00e9: '+sel1.slice(0,5).join(', ')+'.\n\nEstoy orgulloso/a de: '+sel2.slice(0,4).join(', ')+'.\n\nMi promesa profesional a m\u00ed mismo/a es: "'+promise+'"\n\nEstoy buscando crecer hacia un puesto de supervisor/a o l\u00edder de equipo en la industria de servicios.\n\nPor favor s\u00e9 mi coach de carrera de IA. H\u00e1zme UNA pregunta de coaching a la vez para ayudarme a prepararme para mi pr\u00f3xima oportunidad de promoci\u00f3n. Despu\u00e9s de cada una de mis respuestas, dame retroalimentaci\u00f3n breve y la siguiente pregunta. Usa ingl\u00e9s simple.';
+
+  document.getElementById('ai-txt').textContent=aiText;
+
+  goStep(6);
+  launchConfetti();
+}
+
+/* ===== CONFETTI ===== */
+function launchConfetti(){
+  var wrap=document.getElementById('confetti-wrap');
+  wrap.innerHTML='';
+  var colors=['#c9922a','#1a2e4a','#1e8c4a','#7b4ca8','#2563a8','#c05a10','#e8b84b'];
+  for(var i=0;i<80;i++){
+    (function(idx){
+      setTimeout(function(){
+        var el=document.createElement('div');
+        el.className='confetti-piece';
+        el.style.left=Math.random()*100+'%';
+        el.style.background=colors[Math.floor(Math.random()*colors.length)];
+        el.style.width=(Math.random()*10+6)+'px';
+        el.style.height=(Math.random()*10+6)+'px';
+        el.style.borderRadius=Math.random()>0.5?'50%':'2px';
+        el.style.animationDuration=(Math.random()*2+2)+'s';
+        el.style.animationDelay='0s';
+        wrap.appendChild(el);
+        setTimeout(function(){el.remove();},4000);
+      },idx*40);
+    })(i);
+  }
+}
+
+/* ===== COPY AI ===== */
+function copyAI(){
+  var text=document.getElementById('ai-txt').textContent;
+  if(navigator.clipboard){navigator.clipboard.writeText(text).catch(function(){fallback(text);});}
+  else{fallback(text);}
+  var ok=document.getElementById('copy-ok');
+  ok.style.display='inline';
+  setTimeout(function(){ok.style.display='none';},2500);
+}
+function fallback(t){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}
+
+/* ===== RESTART ===== */
+function restart(){
+  sel1=[];sel2=[];sel3=[];selPromise=null;
+  document.getElementById('name-input').value='';
+  document.getElementById('s3-own').value='';
+  document.getElementById('s5-own').value='';
+  document.getElementById('p1-name').value='';document.getElementById('p1-msg').value='';
+  document.getElementById('p2-name').value='';document.getElementById('p2-msg').value='';
+  renderAll();goStep(0);
+}
+
+// INIT
+renderAll();
+updateNav();
+</script>
+</body>
+</html>
