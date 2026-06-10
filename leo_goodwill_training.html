@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leo's Goodwill Work Readiness Training</title>
+<style>
+  :root {
+    --c-orange:#E8651A;--c-orange-lt:#FDF0E8;--c-orange-dk:#9E3F08;
+    --c-steel:#2C3E50;--c-gray-lt:#F8F9FA;
+    --c-green:#27AE60;--c-green-lt:#E9F7EF;--c-green-dk:#1A6E3C;
+    --c-amber:#F39C12;--c-amber-lt:#FEF9E7;--c-amber-dk:#7D5406;
+    --c-red:#C0392B;--c-red-lt:#FDEDEC;
+    --c-blue:#2980B9;--c-blue-lt:#EBF5FB;--c-blue-dk:#1A5276;
+    --c-purple:#7D3C98;--c-purple-lt:#F5EEF8;--c-purple-dk:#4A235A;
+    --c-gray:#7F8C8D;--c-white:#FFFFFF;
+    --c-text:#1A1A1A;--c-text-muted:#555;
+    --radius:10px;--radius-sm:6px;--shadow:0 2px 12px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#F2F3F4;color:var(--c-text);min-height:100vh;}
+  .site-header{background:var(--c-steel);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+  .header-inner{max-width:960px;margin:0 auto;padding:.75rem 1.25rem;display:flex;align-items:center;gap:14px;}
+  .header-logo{width:42px;height:42px;background:var(--c-orange);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .header-titles{flex:1;}
+  .header-title{font-size:17px;font-weight:700;line-height:1.2;}
+  .header-sub{font-size:12px;opacity:.7;margin-top:1px;}
+  .header-badge{background:var(--c-orange);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap;}
+  .module-nav{background:var(--c-white);border-bottom:2px solid #E0E0E0;overflow-x:auto;}
+  .module-nav-inner{max-width:960px;margin:0 auto;display:flex;}
+  .nav-item{padding:.75rem 1rem;font-size:13px;font-weight:500;color:var(--c-text-muted);cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;display:flex;align-items:center;gap:6px;transition:all .15s;user-select:none;}
+  .nav-item:hover{color:var(--c-orange);background:var(--c-orange-lt);}
+  .nav-item.active{color:var(--c-orange);border-bottom-color:var(--c-orange);font-weight:700;}
+  .nav-num{width:20px;height:20px;border-radius:50%;background:#E0E0E0;color:var(--c-text-muted);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .nav-item.active .nav-num{background:var(--c-orange);color:#fff;}
+  .main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem;}
+  .module-panel{display:none;}
+  .module-panel.active{display:block;}
+  .hero-card{border-radius:var(--radius);padding:1.5rem 1.75rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:18px;}
+  .hero-icon{font-size:40px;flex-shrink:0;}
+  .hero-title{font-size:22px;font-weight:800;line-height:1.2;margin-bottom:.3rem;}
+  .hero-desc{font-size:14px;line-height:1.65;opacity:.9;}
+  .tab-bar{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+  .tab-btn{background:var(--c-white);border:1.5px solid #D5D8DC;border-radius:var(--radius-sm);padding:.55rem 1rem;font-size:13px;font-weight:500;color:var(--c-text-muted);cursor:pointer;transition:all .15s;font-family:inherit;}
+  .tab-btn:hover{border-color:var(--c-orange);color:var(--c-orange);}
+  .tab-btn.active{background:var(--c-orange);border-color:var(--c-orange);color:#fff;}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+  .card{background:var(--c-white);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1rem;box-shadow:var(--shadow);}
+  .card-title{font-size:16px;font-weight:700;color:var(--c-text);margin-bottom:.75rem;display:flex;align-items:center;gap:8px;}
+  .alert{display:flex;gap:12px;padding:1rem 1.25rem;border-radius:var(--radius-sm);margin-bottom:1rem;align-items:flex-start;font-size:14px;line-height:1.6;}
+  .alert-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+  .alert-body strong{font-weight:700;display:block;margin-bottom:2px;}
+  .alert.green{background:var(--c-green-lt);border-left:4px solid var(--c-green);color:var(--c-green-dk);}
+  .alert.amber{background:var(--c-amber-lt);border-left:4px solid var(--c-amber);color:var(--c-amber-dk);}
+  .alert.blue{background:var(--c-blue-lt);border-left:4px solid var(--c-blue);color:var(--c-blue-dk);}
+  .alert.red{background:var(--c-red-lt);border-left:4px solid var(--c-red);color:var(--c-red);}
+  .alert.orange{background:var(--c-orange-lt);border-left:4px solid var(--c-orange);color:var(--c-orange-dk);}
+  .alert.purple{background:var(--c-purple-lt);border-left:4px solid var(--c-purple);color:var(--c-purple-dk);}
+  .script-box{background:var(--c-gray-lt);border-radius:var(--radius-sm);padding:1.1rem 1.25rem;margin-bottom:1rem;}
+  .script-line{display:flex;gap:10px;margin-bottom:.85rem;align-items:flex-start;}
+  .script-line:last-child{margin-bottom:0;}
+  .speaker{font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap;margin-top:2px;min-width:58px;text-align:center;text-transform:uppercase;}
+  .speaker.leo{background:#D6EAF8;color:#1A5276;}
+  .speaker.them{background:#E8F8F5;color:#1A5E44;}
+  .script-text{font-size:15px;color:var(--c-text);line-height:1.6;}
+  .script-note{font-size:13px;color:var(--c-text-muted);margin-top:.6rem;font-style:italic;}
+  .q-counter{font-size:13px;color:var(--c-text-muted);margin-bottom:.5rem;font-weight:600;}
+  .q-prompt{font-size:16px;font-weight:700;color:var(--c-text);background:var(--c-gray-lt);border-radius:var(--radius-sm);padding:1rem 1.25rem;margin-bottom:.85rem;line-height:1.5;}
+  .choice{display:block;width:100%;text-align:left;background:var(--c-white);border:2px solid #E0E0E0;border-radius:var(--radius-sm);padding:.85rem 1.1rem;margin-bottom:.6rem;cursor:pointer;font-size:14px;color:var(--c-text);line-height:1.5;font-family:inherit;transition:border-color .12s,background .12s;}
+  .choice:hover:not(:disabled){border-color:var(--c-blue);background:var(--c-blue-lt);}
+  .choice.correct{border-color:var(--c-green);background:var(--c-green-lt);color:var(--c-green-dk);}
+  .choice.wrong{border-color:var(--c-red);background:var(--c-red-lt);color:var(--c-red);}
+  .choice.reveal-ok{border-color:var(--c-amber);background:var(--c-amber-lt);color:var(--c-amber-dk);}
+  .q-feedback{padding:.85rem 1.1rem;border-radius:var(--radius-sm);font-size:14px;line-height:1.55;margin-top:.4rem;display:none;font-weight:500;}
+  .q-feedback.show{display:block;}
+  .q-feedback.good{background:var(--c-green-lt);color:var(--c-green-dk);border-left:4px solid var(--c-green);}
+  .q-feedback.bad{background:var(--c-amber-lt);color:var(--c-amber-dk);border-left:4px solid var(--c-amber);}
+  .q-next{margin-top:.85rem;}
+  .btn{display:inline-flex;align-items:center;gap:7px;background:var(--c-orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:.65rem 1.25rem;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s,transform .1s;}
+  .btn:hover{background:var(--c-orange-dk);}
+  .btn:active{transform:scale(.98);}
+  .btn.secondary{background:var(--c-steel);}
+  .btn.secondary:hover{background:#1A252F;}
+  .btn.green-btn{background:var(--c-green);}
+  .btn.green-btn:hover{background:var(--c-green-dk);}
+  .btn.ghost{background:transparent;color:var(--c-text-muted);border:2px solid #D5D8DC;}
+  .btn.ghost:hover{border-color:var(--c-orange);color:var(--c-orange);background:var(--c-orange-lt);}
+  .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:.75rem;}
+  .cl-item{display:flex;gap:12px;align-items:flex-start;padding:.9rem 1.1rem;background:var(--c-white);border:2px solid #E0E0E0;border-radius:var(--radius-sm);margin-bottom:.6rem;cursor:pointer;transition:all .12s;}
+  .cl-item:hover{border-color:var(--c-green);}
+  .cl-item.done{background:var(--c-green-lt);border-color:var(--c-green);}
+  .cl-check{width:24px;height:24px;border-radius:50%;border:2.5px solid #CCC;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:1px;background:var(--c-white);}
+  .cl-item.done .cl-check{background:var(--c-green);border-color:var(--c-green);color:#fff;}
+  .cl-text{font-size:14px;line-height:1.5;color:var(--c-text);}
+  .cl-item.done .cl-text{color:var(--c-green-dk);}
+  .scenario-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px;margin-bottom:1.25rem;}
+  .scene-pick{background:var(--c-white);border:2px solid #E0E0E0;border-radius:var(--radius-sm);padding:.85rem .75rem;cursor:pointer;text-align:center;transition:all .12s;}
+  .scene-pick:hover{border-color:var(--c-orange);background:var(--c-orange-lt);}
+  .scene-pick.active{border-color:var(--c-orange);background:var(--c-orange-lt);}
+  .scene-pick .sp-emoji{font-size:26px;display:block;margin-bottom:5px;}
+  .scene-pick .sp-label{font-size:12px;font-weight:600;color:var(--c-text);}
+  .roadmap{position:relative;padding-left:32px;}
+  .roadmap-line{position:absolute;left:12px;top:16px;bottom:16px;width:3px;background:#E0E0E0;border-radius:99px;}
+  .rm-step{position:relative;margin-bottom:1.25rem;}
+  .rm-dot{position:absolute;left:-26px;top:3px;width:20px;height:20px;border-radius:50%;border:3px solid #CCC;background:var(--c-white);display:flex;align-items:center;justify-content:center;font-size:10px;}
+  .rm-dot.done{background:var(--c-green);border-color:var(--c-green);color:#fff;}
+  .rm-dot.now{background:var(--c-orange);border-color:var(--c-orange);color:#fff;}
+  .rm-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;}
+  .rm-label.done{color:var(--c-green);}
+  .rm-label.now{color:var(--c-orange);}
+  .rm-label.next{color:var(--c-gray);}
+  .rm-title{font-size:15px;font-weight:700;color:var(--c-text);margin-bottom:3px;}
+  .rm-desc{font-size:13px;color:var(--c-text-muted);line-height:1.55;}
+  .timer-display{font-size:64px;font-weight:800;color:var(--c-steel);text-align:center;letter-spacing:-2px;font-variant-numeric:tabular-nums;margin:.75rem 0;line-height:1;}
+  .timer-display.running{color:var(--c-orange);}
+  .timer-display.done{color:var(--c-green);}
+  .timer-task-label{text-align:center;font-size:14px;color:var(--c-text-muted);margin-bottom:.5rem;}
+  .timer-prog{height:8px;background:#E0E0E0;border-radius:99px;overflow:hidden;margin-bottom:1rem;}
+  .timer-prog-fill{height:100%;background:var(--c-orange);border-radius:99px;transition:width .9s linear;width:0%;}
+  .timer-presets{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;}
+  .preset-btn{background:var(--c-gray-lt);border:2px solid #E0E0E0;border-radius:var(--radius-sm);padding:.5rem 1rem;font-size:13px;font-weight:600;cursor:pointer;color:var(--c-text);transition:all .12s;font-family:inherit;}
+  .preset-btn:hover,.preset-btn.sel{border-color:var(--c-orange);background:var(--c-orange-lt);color:var(--c-orange-dk);}
+  .phone-rule{background:var(--c-white);border-radius:var(--radius);padding:1.1rem 1.4rem;margin-bottom:.75rem;display:flex;gap:14px;align-items:flex-start;box-shadow:var(--shadow);border-left:5px solid var(--c-orange);}
+  .pr-num{font-size:22px;font-weight:900;color:var(--c-orange);flex-shrink:0;line-height:1;margin-top:2px;}
+  .pr-title{font-size:15px;font-weight:700;color:var(--c-text);margin-bottom:4px;}
+  .pr-body{font-size:14px;color:var(--c-text-muted);line-height:1.6;}
+  .pr-say{font-size:13px;color:var(--c-blue-dk);background:var(--c-blue-lt);border-radius:4px;padding:.4rem .75rem;margin-top:.5rem;font-style:italic;}
+  .bridge{background:var(--c-white);border-radius:var(--radius);padding:1.1rem 1.4rem;margin-bottom:.75rem;box-shadow:var(--shadow);}
+  .bridge-row{display:flex;align-items:flex-start;gap:12px;}
+  .bridge-col{flex:1;}
+  .bridge-arrow{font-size:20px;color:var(--c-text-muted);flex-shrink:0;padding-top:18px;}
+  .b-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:3px;display:inline-block;margin-bottom:5px;}
+  .b-tag.gw{background:#D6EAF8;color:var(--c-blue-dk);}
+  .b-tag.tr{background:var(--c-green-lt);color:var(--c-green-dk);}
+  .b-title{font-size:14px;font-weight:700;color:var(--c-text);margin-bottom:3px;}
+  .b-desc{font-size:13px;color:var(--c-text-muted);line-height:1.5;}
+  .stars{display:flex;gap:8px;justify-content:center;margin:.75rem 0 .25rem;}
+  .star{font-size:30px;cursor:pointer;color:#E0E0E0;transition:color .1s;}
+  .star.lit{color:var(--c-amber);}
+  .affirm-box{background:linear-gradient(135deg,var(--c-steel),#34495E);border-radius:var(--radius);padding:2rem 1.75rem;text-align:center;color:#fff;margin-bottom:1rem;}
+  .affirm-quote{font-size:20px;font-weight:700;line-height:1.5;margin-bottom:.75rem;}
+  .affirm-context{font-size:14px;opacity:.75;line-height:1.6;}
+  .trade-card{background:var(--c-white);border-radius:var(--radius-sm);border:2px solid #E0E0E0;padding:1rem 1.25rem;margin-bottom:.6rem;cursor:pointer;transition:border-color .12s;}
+  .trade-card:hover{border-color:var(--c-orange);}
+  .trade-card.open{border-color:var(--c-orange);}
+  .trade-header{display:flex;justify-content:space-between;align-items:center;}
+  .trade-name{font-size:15px;font-weight:700;color:var(--c-text);}
+  .trade-pay{font-size:13px;font-weight:700;color:var(--c-green-dk);background:var(--c-green-lt);padding:3px 10px;border-radius:99px;}
+  .trade-detail{font-size:13px;color:var(--c-text-muted);line-height:1.6;margin-top:.75rem;padding-top:.75rem;border-top:1px solid #F0F0F0;display:none;}
+  .trade-card.open .trade-detail{display:block;}
+  .sec-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--c-text-muted);margin-bottom:.65rem;margin-top:.25rem;}
+  .ready-banner{display:none;background:var(--c-green-lt);border:2px solid var(--c-green);border-radius:var(--radius);padding:1.25rem 1.5rem;text-align:center;margin-top:1rem;}
+  .ready-banner.show{display:block;}
+  .ready-title{font-size:20px;font-weight:800;color:var(--c-green-dk);margin-bottom:4px;}
+  .ready-sub{font-size:14px;color:var(--c-green);}
+  .divider{height:1px;background:#E8E8E8;margin:1.25rem 0;}
+  .video-row{display:flex;gap:10px;align-items:center;padding:.75rem 1rem;background:var(--c-gray-lt);border-radius:var(--radius-sm);margin-bottom:.6rem;}
+  .vid-icon{font-size:22px;flex-shrink:0;}
+  .vid-title-text{font-size:14px;font-weight:600;color:var(--c-text);}
+  .vid-source{font-size:12px;color:var(--c-text-muted);margin-top:2px;}
+  .phone-sim{border:3px solid var(--c-steel);border-radius:22px;padding:1.25rem 1rem;max-width:300px;margin:0 auto 1rem;background:#1A1A2E;color:#fff;text-align:center;}
+  .ps-notch{width:80px;height:10px;background:#333;border-radius:99px;margin:0 auto .75rem;}
+  .ps-screen{background:#0D1117;border-radius:10px;padding:1rem;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+  .ps-app{font-size:30px;}
+  .ps-status{font-size:13px;font-weight:600;}
+  .ps-home{width:40px;height:4px;background:#555;border-radius:99px;margin:.75rem auto 0;}
+  select{width:100%;padding:.65rem .9rem;border:2px solid #E0E0E0;border-radius:var(--radius-sm);font-size:14px;font-family:inherit;color:var(--c-text);background:var(--c-white);margin-bottom:.85rem;}
+  select:focus{outline:none;border-color:var(--c-orange);}
+  .quiz-done-area{display:none;}
+  .quiz-done-area.show{display:block;}
+  @media(max-width:600px){.hero-card{flex-direction:column;gap:10px;}.timer-display{font-size:48px;}.bridge-arrow{display:none;}.bridge-row{flex-direction:column;gap:6px;}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-logo">🔨</div>
+    <div class="header-titles">
+      <div class="header-title">Leo's Work Readiness Training</div>
+      <div class="header-sub">Goodwill Brea, CA · Department of Rehabilitation · 6 Modules</div>
+    </div>
+    <div class="header-badge">Interactive</div>
+  </div>
+</header>
+
+<nav class="module-nav">
+  <div class="module-nav-inner" id="main-nav">
+    <div class="nav-item active" onclick="showModule(0)"><span class="nav-num">1</span> Greetings</div>
+    <div class="nav-item" onclick="showModule(1)"><span class="nav-num">2</span> Task Focus</div>
+    <div class="nav-item" onclick="showModule(2)"><span class="nav-num">3</span> Social Skills</div>
+    <div class="nav-item" onclick="showModule(3)"><span class="nav-num">4</span> 📵 Phone Rules</div>
+    <div class="nav-item" onclick="showModule(4)"><span class="nav-num">5</span> Career Path</div>
+    <div class="nav-item" onclick="showModule(5)"><span class="nav-num">6</span> Cheat Sheet</div>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- MODULE 1 -->
+<div class="module-panel active" id="mod-0">
+  <div class="hero-card" style="background:linear-gradient(135deg,#E8651A,#C0392B);color:#fff;">
+    <div class="hero-icon">🤝</div>
+    <div><div class="hero-title">Greetings &amp; Scripts for Work</div><div class="hero-desc">Real scripts for real moments at Goodwill. Read each one out loud at least 3 times. Then take the quiz.</div></div>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('m0','scripts')">Scripts</button>
+    <button class="tab-btn" onclick="switchTab('m0','quiz')">Practice Quiz</button>
+    <button class="tab-btn" onclick="switchTab('m0','tips')">Quick Tips</button>
+    <button class="tab-btn" onclick="switchTab('m0','videos')">Videos to Watch</button>
+  </div>
+  <div class="tab-panel active" id="m0-scripts">
+    <div class="sec-label">Choose a situation</div>
+    <div class="scenario-grid" id="m0-scene-grid"></div>
+    <div class="card" id="m0-script-card"></div>
+    <div class="alert orange"><span class="alert-icon">🗣️</span><div class="alert-body"><strong>Practice tip:</strong> Read Leo's lines out loud 3 times. You can record yourself on your phone during practice and listen back.</div></div>
+  </div>
+  <div class="tab-panel" id="m0-quiz">
+    <div class="card" id="m0-quiz-area"></div>
+    <div class="card quiz-done-area" id="m0-quiz-done">
+      <div class="alert green"><span class="alert-icon">🏆</span><div class="alert-body"><strong>Quiz complete!</strong> Great work. Rate how it felt and try again anytime.</div></div>
+      <div class="stars" id="m0-stars"><span class="star" onclick="rateStar('m0',1)">★</span><span class="star" onclick="rateStar('m0',2)">★</span><span class="star" onclick="rateStar('m0',3)">★</span><span class="star" onclick="rateStar('m0',4)">★</span><span class="star" onclick="rateStar('m0',5)">★</span></div>
+      <div id="m0-star-label" style="text-align:center;font-size:13px;color:var(--c-text-muted);margin-bottom:.75rem;">Tap a star to rate how it felt</div>
+      <div class="btn-row"><button class="btn ghost" onclick="resetQuiz('m0')">Try again</button><button class="btn" onclick="showModule(1)">Next module →</button></div>
+    </div>
+  </div>
+  <div class="tab-panel" id="m0-tips">
+    <div class="alert blue"><span class="alert-icon">👁️</span><div class="alert-body"><strong>Eye contact trick:</strong> Look at the person's nose or forehead. It looks exactly like eye contact. Only 2–3 seconds at a time.</div></div>
+    <div class="alert green"><span class="alert-icon">⏱️</span><div class="alert-body"><strong>Pausing is okay:</strong> Say "Let me think for a second" before answering. Good workers think before speaking.</div></div>
+    <div class="alert amber"><span class="alert-icon">🎧</span><div class="alert-body"><strong>Headphones at Goodwill:</strong> No headphones during your shift. Full details in Module 4.</div></div>
+    <div class="alert blue"><span class="alert-icon">🔁</span><div class="alert-body"><strong>Ask for a repeat:</strong> "Can you show me that step again? I want to make sure I do it right." Supervisors respect this.</div></div>
+    <div class="alert green"><span class="alert-icon">💪</span><div class="alert-body"><strong>Leo's strengths:</strong> Good with hands, careful, detail-oriented, respectful, reliable. Exactly what Goodwill needs for back-of-house tasks.</div></div>
+  </div>
+  <div class="tab-panel" id="m0-videos">
+    <div class="alert amber"><span class="alert-icon">📺</span><div class="alert-body"><strong>How to use:</strong> Search these on YouTube. Watch one per day — 5–10 minutes each.</div></div>
+    <div class="sec-label" style="margin-top:1rem;">Communication at work</div>
+    <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">How to greet your boss on the first day of work</div><div class="vid-source">YouTube · Indeed channel or How2Adult</div></div></div>
+    <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">"Why do you want this job?" — how to answer</div><div class="vid-source">YouTube · Indeed channel has short clear examples</div></div></div>
+    <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">First day at work tips — what to say and do</div><div class="vid-source">YouTube · search "first day at work tips"</div></div></div>
+    <div class="sec-label" style="margin-top:1.25rem;">Autism &amp; the workplace</div>
+    <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">Autism and employment: tips for your first job</div><div class="vid-source">YouTube · Autism Speaks or ASAN channels</div></div></div>
+    <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">Eye contact tips for people with autism at work</div><div class="vid-source">YouTube · many good creator videos on this topic</div></div></div>
+    <div class="sec-label" style="margin-top:1.25rem;">Goodwill-specific</div>
+    <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">Goodwill Industries — a day in the life (sorting, processing)</div><div class="vid-source">YouTube · Goodwill official channel</div></div></div>
+    <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">Retail back-of-house: sorting and tagging donated items</div><div class="vid-source">YouTube · search "thrift store sorting process"</div></div></div>
+  </div>
+</div>
+
+<!-- MODULE 2 -->
+<div class="module-panel" id="mod-1">
+  <div class="hero-card" style="background:linear-gradient(135deg,#27AE60,#1A5276);color:#fff;">
+    <div class="hero-icon">✅</div>
+    <div><div class="hero-title">Getting Started &amp; Staying on Task</div><div class="hero-desc">Task initiation is a growth area for Leo. These tools build the habit of starting quickly and staying focused through a 3-hour shift with no break.</div></div>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('m1','checklists')">Task Checklists</button>
+    <button class="tab-btn" onclick="switchTab('m1','timer')">Focus Timer</button>
+    <button class="tab-btn" onclick="switchTab('m1','strategies')">Strategies</button>
+    <button class="tab-btn" onclick="switchTab('m1','quiz')">Quiz</button>
+  </div>
+  <div class="tab-panel active" id="m1-checklists">
+    <div class="alert blue"><span class="alert-icon">ℹ️</span><div class="alert-body"><strong>How to use:</strong> Tap each step to check it off. Checking things off gives your brain a small win and keeps you moving forward.</div></div>
+    <select id="m1-task-select" onchange="loadTaskChecklist(this.value)">
+      <option value="0">Sorting donated items (bins)</option>
+      <option value="1">Organizing clothing on racks</option>
+      <option value="2">Preparing items for the sales floor</option>
+      <option value="3">Stocking shelves with books / media</option>
+      <option value="4">Receiving and unloading donations</option>
+    </select>
+    <div id="m1-cl-list"></div>
+    <div class="ready-banner" id="m1-task-done"><div class="ready-title">✅ Task complete!</div><div class="ready-sub">Find your supervisor: "I finished. What should I do next?"</div></div>
+    <div class="btn-row"><button class="btn ghost" onclick="resetChecklist()">↺ Reset checklist</button></div>
+  </div>
+  <div class="tab-panel" id="m1-timer">
+    <div class="alert blue"><span class="alert-icon">⏱️</span><div class="alert-body"><strong>Note:</strong> Leo's shifts are 3 hours with NO break. Use this timer to practice focusing in timed blocks. Build up from 10 minutes to 30 minutes over your first few weeks.</div></div>
+    <select id="m1-timer-task"><option>Sorting items from a bin</option><option>Organizing clothing by size</option><option>Tagging and pricing items</option><option>Stocking a shelf section</option><option>Unloading a donation cart</option></select>
+    <div class="timer-presets">
+      <button class="preset-btn sel" onclick="setTimerTime(5,this)">5 min</button>
+      <button class="preset-btn" onclick="setTimerTime(10,this)">10 min</button>
+      <button class="preset-btn" onclick="setTimerTime(15,this)">15 min</button>
+      <button class="preset-btn" onclick="setTimerTime(20,this)">20 min</button>
+      <button class="preset-btn" onclick="setTimerTime(30,this)">30 min</button>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div class="timer-task-label" id="timer-task-lbl">Task: Sorting items from a bin</div>
+      <div class="timer-display" id="timer-disp">05:00</div>
+      <div class="timer-prog"><div class="timer-prog-fill" id="timer-fill"></div></div>
+      <div class="btn-row" style="justify-content:center;">
+        <button class="btn green-btn" id="timer-start" onclick="startTimer()">▶ Start</button>
+        <button class="btn secondary" id="timer-pause" onclick="pauseTimer()" style="display:none;">⏸ Pause</button>
+        <button class="btn ghost" onclick="resetTimer()">↺ Reset</button>
+      </div>
+    </div>
+    <div class="alert amber"><span class="alert-icon">💡</span><div class="alert-body"><strong>Leo's rule:</strong> If you notice you reached for your phone during the timer — put it down and return to the task. Don't judge yourself. Just come back. That IS the skill.</div></div>
+  </div>
+  <div class="tab-panel" id="m1-strategies">
+    <div class="phone-rule"><div class="pr-num">1</div><div><div class="pr-title">The 3-Second Launch Rule</div><div class="pr-body">When given a task, count 1–2–3 in your head — then move your hands toward it. Don't think about the whole task. Just do the first physical action.</div><div class="pr-say">"My hands go to the bin. I pick up the first item. That's my only thought."</div></div></div>
+    <div class="phone-rule"><div class="pr-num">2</div><div><div class="pr-title">Write the Steps First</div><div class="pr-body">If a task feels overwhelming, write the steps on a notepad before you start. This is how engineers and contractors think before they build.</div><div class="pr-say">Step 1: Open bin. Step 2: Sort by category. Step 3: Place in pile. Step 4: Report done.</div></div></div>
+    <div class="phone-rule"><div class="pr-num">3</div><div><div class="pr-title">No Break = Plan Your Energy</div><div class="pr-body">Leo's shifts are 3 hours with no break. Eat before your shift. Drink water. Wear comfortable shoes. Physical comfort helps mental focus — especially for 3 solid hours.</div><div class="pr-say">Eat → arrive → clock in → 3 hours → clock out → rest. That's the whole shift.</div></div></div>
+    <div class="phone-rule"><div class="pr-num">4</div><div><div class="pr-title">Ask for a Step-by-Step Walkthrough</div><div class="pr-body">Leo works best when instructions are clear and in order. It is always okay to ask. "Can you walk me through it?" is professional, not a problem.</div><div class="pr-say">"Before I start, can you walk me through the steps? I want to make sure I understand."</div></div></div>
+    <div class="phone-rule"><div class="pr-num">5</div><div><div class="pr-title">Use Your Body — Movement Helps</div><div class="pr-body">Leo is a physical learner. If you feel stuck, physically walking to the task and touching it re-starts your focus. Your body knows what to do.</div><div class="pr-say">"I'm going to walk to the bin right now." The movement starts everything.</div></div></div>
+    <div class="alert green"><span class="alert-icon">⭐</span><div class="alert-body"><strong>Leo's superpower:</strong> Once he understands a task and gets going, he is diligent and does not give up. Employers value this enormously.</div></div>
+  </div>
+  <div class="tab-panel" id="m1-quiz">
+    <div class="card" id="m1-quiz-area"></div>
+    <div class="card quiz-done-area" id="m1-quiz-done">
+      <div class="alert green"><span class="alert-icon">✓</span><div class="alert-body"><strong>Done!</strong> These situations come up every single shift. The more you think through them, the more automatic the right response becomes.</div></div>
+      <div class="btn-row"><button class="btn ghost" onclick="resetQuiz('m1')">Try again</button><button class="btn" onclick="showModule(2)">Next module →</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 3 -->
+<div class="module-panel" id="mod-2">
+  <div class="hero-card" style="background:linear-gradient(135deg,#7D3C98,#2C3E50);color:#fff;">
+    <div class="hero-icon">💬</div>
+    <div><div class="hero-title">Social Situations at Work</div><div class="hero-desc">Work has social moments — most are short and predictable. Practice reading the situation and picking the best response. 8 real Goodwill scenarios.</div></div>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('m2','scenarios')">Real Scenarios</button>
+    <button class="tab-btn" onclick="switchTab('m2','eyecontact')">Eye Contact Guide</button>
+    <button class="tab-btn" onclick="switchTab('m2','rules')">Unwritten Rules</button>
+  </div>
+  <div class="tab-panel active" id="m2-scenarios">
+    <div class="alert purple"><span class="alert-icon">🎭</span><div class="alert-body">Pick your response. Green = best. Amber = okay but not ideal. Red = avoid. Use the arrows to navigate.</div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+      <button class="btn ghost" id="scene-prev" onclick="prevScene()" disabled>← Prev</button>
+      <div style="flex:1;text-align:center;font-size:14px;font-weight:600;color:var(--c-text-muted);" id="scene-counter">Situation 1 of 8</div>
+      <button class="btn ghost" id="scene-next" onclick="nextScene()">Next →</button>
+    </div>
+    <div id="m2-scene-card"></div>
+  </div>
+  <div class="tab-panel" id="m2-eyecontact">
+    <div class="alert blue"><span class="alert-icon">👁️</span><div class="alert-body"><strong>Why it matters:</strong> Eye contact at work signals "I'm listening." You don't need to be good at it — you need one simple strategy.</div></div>
+    <div class="card">
+      <div class="card-title">🎯 The Triangle Zone Strategy</div>
+      <div class="phone-rule" style="border-left-color:var(--c-blue);"><div class="pr-num" style="color:var(--c-blue);">1</div><div><div class="pr-title">Look at the nose or forehead</div><div class="pr-body">From the other person's view, looking at their nose or forehead looks exactly the same as eye contact. Try it in a mirror — it works.</div></div></div>
+      <div class="phone-rule" style="border-left-color:var(--c-green);"><div class="pr-num" style="color:var(--c-green);">2</div><div><div class="pr-title">2–3 seconds, then look away naturally</div><div class="pr-body">Look for 2–3 seconds, glance away, look back. This is exactly what most people do in conversation.</div></div></div>
+      <div class="phone-rule" style="border-left-color:var(--c-amber);"><div class="pr-num" style="color:var(--c-amber);">3</div><div><div class="pr-title">Nod while listening</div><div class="pr-body">A small nod shows you're engaged even when not making direct eye contact. Combined with the nose/forehead trick, this looks completely natural.</div></div></div>
+      <div class="alert orange"><span class="alert-icon">📱</span><div class="alert-body"><strong>Practice idea:</strong> Try the nose/forehead trick while watching YouTube videos. Look at the presenter's nose instead of their eyes. It gets natural within a week.</div></div>
+    </div>
+  </div>
+  <div class="tab-panel" id="m2-rules">
+    <div class="alert blue"><span class="alert-icon">📋</span><div class="alert-body">These are rules most workplaces never say out loud — but they matter. Leo can save or print this page.</div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-green);"><div class="pr-num" style="color:var(--c-green);">1</div><div><div class="pr-title">Greet coworkers when you arrive</div><div class="pr-body">A brief "hey" or "good morning" is enough. It signals you're friendly and present.</div><div class="pr-say">"Morning." or "Hey, what's up." (a nod also works)</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-orange);"><div class="pr-num" style="color:var(--c-orange);">2</div><div><div class="pr-title">No headphones means no headphones</div><div class="pr-body">This is a real workplace rule — full details in Module 4. Even one earbud can be a problem when your supervisor calls you.</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-amber);"><div class="pr-num" style="color:var(--c-amber);">3</div><div><div class="pr-title">If a coworker seems upset — it's probably not about you</div><div class="pr-body">Workplaces have moods. If someone is short with you, they're likely having their own hard day. Keep doing your job.</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-purple);"><div class="pr-num" style="color:var(--c-purple);">4</div><div><div class="pr-title">Being quiet is fine — being responsive is required</div><div class="pr-body">When a supervisor or coworker speaks to you directly, responding promptly matters. Even "got it" or a nod is enough.</div><div class="pr-say">Quiet + responsive = respected employee.</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-red);"><div class="pr-num" style="color:var(--c-red);">5</div><div><div class="pr-title">Mistakes happen — report them immediately</div><div class="pr-body">If you break something or do something wrong, telling your supervisor right away shows integrity. Not telling them is much worse than the mistake.</div><div class="pr-say">"I made a mistake with [thing]. I wanted to tell you right away. What should I do?"</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-blue);"><div class="pr-num" style="color:var(--c-blue);">6</div><div><div class="pr-title">Always close out your shift with your supervisor</div><div class="pr-body">Before leaving, find your supervisor and let them know you're done. Don't just disappear when your time is up.</div><div class="pr-say">"I finished [last task]. I'm heading out — see you next time."</div></div></div>
+  </div>
+</div>
+
+<!-- MODULE 4 - PHONE RULES -->
+<div class="module-panel" id="mod-3">
+  <div class="hero-card" style="background:linear-gradient(135deg,#C0392B,#922B21);color:#fff;">
+    <div class="hero-icon">📵</div>
+    <div><div class="hero-title">Phone &amp; Headphone Rules at Work</div><div class="hero-desc">No judgment — just clear rules, real reasons, and strategies that work. This module protects Leo's job.</div></div>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('m3','why')">Why It Matters</button>
+    <button class="tab-btn" onclick="switchTab('m3','rules')">The Rules</button>
+    <button class="tab-btn" onclick="switchTab('m3','strategies')">Strategies for Leo</button>
+    <button class="tab-btn" onclick="switchTab('m3','quiz')">Quiz</button>
+  </div>
+  <div class="tab-panel active" id="m3-why">
+    <div class="alert red"><span class="alert-icon">⚠️</span><div class="alert-body"><strong>Real talk:</strong> Phone use and headphones at work are the #1 reason young workers lose their first job. Leo deserves to know the real stakes so he can protect this opportunity.</div></div>
+    <div class="card">
+      <div class="card-title">📋 What supervisors see vs. what they think</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:13px;">
+        <div><div style="font-weight:700;color:var(--c-red);margin-bottom:.5rem;">❌ Supervisor sees Leo on his phone</div><div style="background:var(--c-red-lt);border-radius:6px;padding:.85rem;line-height:1.8;color:#5D0000;">Leo has headphones in.<br>Leo isn't responding when called.<br>Leo is looking at his phone instead of working.</div></div>
+        <div><div style="font-weight:700;color:var(--c-red);margin-bottom:.5rem;">What the supervisor thinks</div><div style="background:var(--c-red-lt);border-radius:6px;padding:.85rem;line-height:1.8;color:#5D0000;">"He doesn't care about this job."<br>"He's not taking this seriously."<br>"I can't rely on him."</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="alert green"><span class="alert-icon">✅</span><div class="alert-body"><strong>What they want to see:</strong> Phone in pocket, head up, responsive when spoken to, focused on the task. That's the whole game.</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔊 Why headphones are especially a problem at Goodwill</div>
+      <div class="alert amber"><span class="alert-icon">📦</span><div class="alert-body"><strong>Safety:</strong> In the back-of-house, people are moving carts, lifting bins, working in tight spaces. If you can't hear what's around you, it creates a safety risk for everyone.</div></div>
+      <div class="alert amber"><span class="alert-icon">🗣️</span><div class="alert-body"><strong>Communication:</strong> Your supervisor may give instructions from across the room. Headphones in with music loud = you won't hear them. Missing instructions means doing the wrong task.</div></div>
+      <div class="alert amber"><span class="alert-icon">👥</span><div class="alert-body"><strong>Team signal:</strong> Headphones signal "I'm closed off." Supervisors and coworkers hesitate to approach someone with both ears covered. This isolation can hurt Leo's reputation at work.</div></div>
+    </div>
+  </div>
+  <div class="tab-panel" id="m3-rules">
+    <div class="alert blue"><span class="alert-icon">📌</span><div class="alert-body"><strong>Leo's shifts:</strong> 2–3 times per week, 3 hours each shift, NO break or lunch. This means there is NO designated "okay time" for phone use during the shift.</div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-red);"><div class="pr-num" style="color:var(--c-red);">✗</div><div><div class="pr-title">NO headphones during your shift — at all</div><div class="pr-body">This means the entire 3-hour shift. Whether sorting in back, walking to a different area, or waiting for the next task. Headphones off means fully off, not "just one ear."</div><div class="pr-say">Exception only if your supervisor specifically permits it for a specific situation.</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-red);"><div class="pr-num" style="color:var(--c-red);">✗</div><div><div class="pr-title">NO video games on your phone — ever during a shift</div><div class="pr-body">Leo's 3-hour shifts have no break. There is no "free time" during work hours. Video games are for after the shift ends, full stop.</div><div class="pr-say">Shift ends → clock out → games. Not before.</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-red);"><div class="pr-num" style="color:var(--c-red);">✗</div><div><div class="pr-title">NO scrolling social media while on shift</div><div class="pr-body">Instagram, TikTok, YouTube, Snapchat — all off during your shift. Even 2 minutes of visible scrolling sends the wrong message to your supervisor.</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-green);"><div class="pr-num" style="color:var(--c-green);">✓</div><div><div class="pr-title">Phone stays in pocket on SILENT</div><div class="pr-body">Silent, in your pocket, untouched. It's with you the whole time — you can use it the moment your shift ends. Having it nearby gives security without becoming a distraction.</div><div class="pr-say">Clock in → phone on silent → phone in pocket → do not touch until shift ends.</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-green);"><div class="pr-num" style="color:var(--c-green);">✓</div><div><div class="pr-title">Emergency calls — tell your supervisor first</div><div class="pr-body">If a family member might need to reach you urgently, tell your supervisor at the start of your shift. This is respectful and responsible.</div><div class="pr-say">"My parent might need to reach me today. Is it okay if I step out briefly to take a call if needed?"</div></div></div>
+    <div class="divider"></div>
+    <div class="sec-label">What Leo's phone looks like during a shift</div>
+    <div class="phone-sim">
+      <div class="ps-notch"></div>
+      <div class="ps-screen" id="phone-sim-screen"><div class="ps-app" id="phone-sim-icon">🔕</div><div class="ps-status" id="phone-sim-status">Silent · In pocket · Working</div></div>
+      <div class="ps-home"></div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;">
+      <button class="btn ghost" onclick="setPhoneSim('work')">During shift</button>
+      <button class="btn ghost" onclick="setPhoneSim('after')">After shift</button>
+      <button class="btn ghost" onclick="setPhoneSim('emergency')">Emergency call</button>
+    </div>
+  </div>
+  <div class="tab-panel" id="m3-strategies">
+    <div class="alert blue"><span class="alert-icon">🧠</span><div class="alert-body"><strong>Real strategies for real urges.</strong> Leo loves music and his phone. These strategies work with that reality, not against it.</div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-orange);"><div class="pr-num">1</div><div><div class="pr-title">Make a deal with yourself before the shift starts</div><div class="pr-body">Before you walk in, say out loud: "My shift is 3 hours. I'll listen to my music the moment I'm done." This makes the wait feel shorter because there's a clear endpoint.</div><div class="pr-say">"3 hours. Then music. As loud as I want. I earned it."</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-orange);"><div class="pr-num">2</div><div><div class="pr-title">Replace the urge with a physical action</div><div class="pr-body">When you feel the pull to reach for your phone, immediately move your hands to the task. The physical action of grabbing an item replaces the urge. This works with practice.</div><div class="pr-say">Feel phone urge → hands go to task → urge fades in about 30 seconds.</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-orange);"><div class="pr-num">3</div><div><div class="pr-title">Use the Focus Timer to practice at home first</div><div class="pr-body">Before your first shift, use the Module 2 timer to practice 15–20 minutes without touching your phone. It builds the mental habit before you need it at work.</div><div class="pr-say">Practice at home → work feels familiar. Home = training. Goodwill = the real thing.</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-orange);"><div class="pr-num">4</div><div><div class="pr-title">Make it a personal competition</div><div class="pr-body">Every shift, try to beat your own record. "Last shift I went the whole 3 hours." Track it mentally. You're competing with yourself, not anyone else.</div><div class="pr-say">Shift 1: try. Shift 2: try again. Shift 3: streak. Keep going.</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-orange);"><div class="pr-num">5</div><div><div class="pr-title">The post-shift music reward</div><div class="pr-body">When your shift ends and you clock out — headphones in, volume up, music on. You earned it completely. Make this feel like a real reward, not just a habit.</div><div class="pr-say">Clock out → headphones → walk to car/bus with your music at full volume. That's the routine.</div></div></div>
+    <div class="alert green"><span class="alert-icon">🎵</span><div class="alert-body"><strong>Leo loves music — that's real and valid.</strong> The goal is not to take music away. It's to protect the job that builds toward a career. 3 hours without music is a small price for that future.</div></div>
+  </div>
+  <div class="tab-panel" id="m3-quiz">
+    <div class="card" id="m3-quiz-area"></div>
+    <div class="card quiz-done-area" id="m3-quiz-done">
+      <div class="alert green"><span class="alert-icon">✓</span><div class="alert-body"><strong>Module 4 complete!</strong> The phone and headphone rules are clear. Practice the strategies and protect this opportunity.</div></div>
+      <div class="btn-row"><button class="btn ghost" onclick="resetQuiz('m3')">Try again</button><button class="btn" onclick="showModule(4)">Next module →</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 5 - CAREER -->
+<div class="module-panel" id="mod-4">
+  <div class="hero-card" style="background:linear-gradient(135deg,#2C3E50,#7D3C98);color:#fff;">
+    <div class="hero-icon">🏗️</div>
+    <div><div class="hero-title">Your Career Starts Here</div><div class="hero-desc">Leo's goal is a career in the Building Trades. This module shows exactly how Goodwill connects to that path — and what comes next.</div></div>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('m4','bridge')">Skills That Transfer</button>
+    <button class="tab-btn" onclick="switchTab('m4','roadmap')">Leo's Roadmap</button>
+    <button class="tab-btn" onclick="switchTab('m4','trades')">Building Trades</button>
+  </div>
+  <div class="tab-panel active" id="m4-bridge">
+    <div class="alert purple"><span class="alert-icon">↔️</span><div class="alert-body"><strong>Every Goodwill shift is training for the Building Trades.</strong> Here's the direct connection.</div></div>
+    <div id="m4-bridges"></div>
+  </div>
+  <div class="tab-panel" id="m4-roadmap">
+    <div class="alert blue"><span class="alert-icon">🗺️</span><div class="alert-body">This is Leo's path. Not fixed — a direction. Every step forward matters and Leo sets the pace.</div></div>
+    <div class="roadmap" id="m4-roadmap-content"><div class="roadmap-line"></div></div>
+  </div>
+  <div class="tab-panel" id="m4-trades">
+    <div class="alert blue"><span class="alert-icon">ℹ️</span><div class="alert-body">Tap any trade to see details. Leo already has experience in two of these. All involve physical, hands-on work with strong wages.</div></div>
+    <div id="m4-trades-list"></div>
+  </div>
+</div>
+
+<!-- MODULE 6 - CHEAT SHEET -->
+<div class="module-panel" id="mod-5">
+  <div class="hero-card" style="background:linear-gradient(135deg,#E8651A,#7D3C98);color:#fff;">
+    <div class="hero-icon">⭐</div>
+    <div><div class="hero-title">Leo's Personal Cheat Sheet</div><div class="hero-desc">Open this before every shift. Pre-shift checklist. Quick scripts. Leo's strengths. Words for Leo.</div></div>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('m5','preshift')">Pre-Shift Checklist</button>
+    <button class="tab-btn" onclick="switchTab('m5','scripts')">Quick Scripts</button>
+    <button class="tab-btn" onclick="switchTab('m5','strengths')">Leo's Strengths</button>
+    <button class="tab-btn" onclick="switchTab('m5','affirm')">Words for Leo</button>
+  </div>
+  <div class="tab-panel active" id="m5-preshift">
+    <div class="alert blue"><span class="alert-icon">📋</span><div class="alert-body">Tap each item when done. Try to check all 9 before clocking in. This takes less than 2 minutes.</div></div>
+    <div id="m5-psc"></div>
+    <div class="ready-banner" id="m5-ready"><div class="ready-title">🔨 Leo is ready to work.</div><div class="ready-sub">Clock in, do your job, and remember — every shift builds your future.</div></div>
+    <div class="btn-row"><button class="btn ghost" onclick="resetPreshift()">↺ Reset for next shift</button></div>
+  </div>
+  <div class="tab-panel" id="m5-scripts">
+    <div class="sec-label">One-sentence scripts for common moments</div>
+    <div id="m5-scripts-list"></div>
+  </div>
+  <div class="tab-panel" id="m5-strengths">
+    <div class="card"><div class="card-title">💪 What Leo does well — right now</div><div style="display:grid;gap:8px;" id="m5-strengths-list"></div></div>
+    <div class="card"><div class="card-title" style="color:var(--c-green);">🎯 What Leo is actively building</div><div style="display:grid;gap:8px;" id="m5-growth-list"></div></div>
+  </div>
+  <div class="tab-panel" id="m5-affirm">
+    <div style="font-size:14px;color:var(--c-text-muted);margin-bottom:1rem;">Read one before your shift. All of these are true.</div>
+    <div class="affirm-box"><div class="affirm-quote" id="affirm-text"></div><div class="affirm-context" id="affirm-ctx"></div></div>
+    <div class="btn-row" style="justify-content:center;"><button class="btn ghost" onclick="prevAffirm()">← Previous</button><button class="btn ghost" onclick="nextAffirm()">Next →</button></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ── DATA ──────────────────────────────────────
+const M0_SCENES=[
+  {emoji:'🤝',label:'First day intro',title:'First day — meeting your supervisor',lines:[{who:'them',text:"Hi, you must be Leonardo. Welcome! I'm [Name], your supervisor."},{who:'leo',text:"Hi, nice to meet you. I'm Leonardo — you can call me Leo."},{who:'them',text:"Have you worked in a store like this before?"},{who:'leo',text:"No, this is my first job. I'm excited to learn. I'm good at working with my hands."},{who:'them',text:"Perfect. Ready to start?"},{who:'leo',text:"Yes. And if I have questions, is it okay to ask you directly?"},{who:'them',text:"Absolutely."}],note:"💡 Short and respectful is perfect. Mentioning you work well with your hands is a great detail."},
+  {emoji:'☀️',label:'Morning greeting',title:'Arriving at work — morning greeting',lines:[{who:'leo',text:"Good morning."},{who:'them',text:"Morning! How are you?"},{who:'leo',text:"Good, thanks. Ready to work."},{who:'them',text:"That's what I like to hear."},{who:'leo',text:"Got it."}],note:"💡 A simple greeting + being present is all it takes. 'Got it' is perfectly professional."},
+  {emoji:'❓',label:'Why work here?',title:'"Why do you want to work here?"',lines:[{who:'them',text:"So Leo — why do you want to work here at Goodwill?"},{who:'leo',text:"I like working with my hands and organizing things. I think I'd be good at sorting donations."},{who:'them',text:"Anything we should know to help you succeed?"},{who:'leo',text:"Sometimes I need instructions step by step. But once I understand, I work carefully and don't give up."},{who:'them',text:"I appreciate you sharing that. We can work with that."}],note:"💡 Honest self-awareness is a strength, not a weakness."},
+  {emoji:'🙋',label:'Asking for help',title:'Asking for help with a task',lines:[{who:'leo',text:"Excuse me — I have a question about this task."},{who:'them',text:"Sure, what's up?"},{who:'leo',text:"Can you show me the steps one more time? I want to make sure I do it right."},{who:'them',text:"Of course."},{who:'leo',text:"Thank you."}],note:"💡 Asking for clarity is always acceptable. Supervisors respect workers who want to do the job correctly."},
+  {emoji:'✅',label:'Task is done',title:'Task complete — letting your supervisor know',lines:[{who:'leo',text:"I finished sorting that bin. What should I do next?"},{who:'them',text:"Great! Move to the clothing rack in the back."},{who:'leo',text:"Should I organize by size or by color?"},{who:'them',text:"By size."},{who:'leo',text:"Got it."}],note:"💡 Always report when done. Don't wait. Don't check your phone. Go find your supervisor immediately."},
+  {emoji:'🚪',label:'End of shift',title:'End of shift — saying goodbye professionally',lines:[{who:'leo',text:"My shift is ending. I finished the last bin and put the cart back."},{who:'them',text:"Nice work today, Leo."},{who:'leo',text:"Thank you. I'll see you next time."},{who:'them',text:"See you then."},{who:'leo',text:"You too."}],note:"💡 Always close out with your supervisor before leaving. Brief, clear, professional."},
+];
+const M0_QUIZ=[
+  {q:"Your supervisor says 'Good morning, how are you?' — best response?",choices:["Nothing — just walk past","Good morning! Doing well, ready to work.","I'm tired and didn't sleep well.","Why are you talking to me?"],correct:1,good:"Perfect. Short, positive, professional.",bad:"Try something short and positive. You don't need to share personal details."},
+  {q:"You don't understand a task your supervisor just explained. What do you do?",choices:["Pretend you understood and guess","Check your phone while deciding","Say: 'Can you show me the steps one more time?'","Wait until someone notices you're confused"],correct:2,good:"Yes! Asking for clarification shows responsibility.",bad:"Always ask for clarity — supervisors respect it."},
+  {q:"You finish sorting a bin. What do you do?",choices:["Sit quietly and wait","Find your supervisor: 'I'm done. What's next?'","Leave without telling anyone","Scroll your phone while you wait"],correct:1,good:"Exactly right. Always report and ask for the next task.",bad:"Always let your supervisor know you're done and ask what's next."},
+  {q:"Someone asks 'Why do you want to work here?' — best answer?",choices:["My dad said I should.","I like working with my hands and I'm good at organizing.","I just need money.","I've always loved thrift stores."],correct:1,good:"Strong. Specific and connected to the actual work.",bad:"Connect your answer to the tasks and what you're good at."},
+  {q:"It's the end of your shift. What's the right move?",choices:["Leave when your time is up","Tell your supervisor you're done and say goodbye","Send a text to your supervisor","Ask a coworker to pass the message"],correct:1,good:"Always close out directly with your supervisor.",bad:"Always check out in person with your supervisor before leaving."},
+];
+const M1_TASKS=[
+  {name:"Sorting donated items (bins)",steps:[{t:"Get your bin and bring it to your station",d:"Don't wait — go get it yourself as soon as you're told to start."},{t:"Sort items by category: clothing, electronics, housewares, books",d:"One item at a time. Make piles or use labeled bins."},{t:"Check each item briefly for damage",d:"Torn/broken/stained? Discard area. Clean/usable? Keep sorting."},{t:"Keep your station clean as you go",d:"A clean workspace makes every next step faster."},{t:"When bin is empty, find your supervisor",d:"Say: 'I finished the bin. What should I do next?'"}]},
+  {name:"Organizing clothing on racks",steps:[{t:"Go to the assigned rack",d:"Your supervisor will tell you which rack or section."},{t:"Confirm: by size, color, or type?",d:"Ask if you're not sure: 'Should I sort by size or color?'"},{t:"Work left to right — don't skip around",d:"Consistent direction keeps everything clean."},{t:"Make sure all hangers face the same direction",d:"Small detail. Very professional-looking result."},{t:"Remove items that are in the wrong section",d:"Set them in the returns area."},{t:"Report when section is complete",d:"'I finished the rack. What's next?'"}]},
+  {name:"Preparing items for the sales floor",steps:[{t:"Receive pre-sorted items",d:"Already checked — your job is to get them floor-ready."},{t:"Tag or price items per store guidelines",d:"Ask your supervisor to walk you through pricing if it's new."},{t:"Group by category before going to the floor",d:"Clothing with clothing. Books with books."},{t:"Bring cart to the correct floor section — walk slowly",d:"Don't rush a full cart. Safe movement is professional."},{t:"Place items neatly in the correct display area",d:"Face products forward. Straighten what's already there."},{t:"Return cart and report",d:"Empty cart back. Tell supervisor you're done."}]},
+  {name:"Stocking shelves with books / media",steps:[{t:"Get your cart and confirm your section",d:"Which shelves are you responsible for today?"},{t:"Group items by category",d:"Match items to their labeled section."},{t:"Slide items in neatly — spines or labels facing out",d:"Everything readable from the front. No gaps."},{t:"Fill gaps and push items together",d:"Full and neat shelves = good presentation."},{t:"Return cart and report",d:"'I finished the book section. What's next?'"}]},
+  {name:"Receiving and unloading donations",steps:[{t:"Meet the donor at the donation door",d:"Brief greeting: 'Hi, I'll take those. Thank you for donating!'"},{t:"Safely unload items onto the cart",d:"Lift with your legs — don't rush heavy items."},{t:"Move cart to sorting area immediately",d:"Don't leave donations near the entrance door."},{t:"Quick look for clearly unusable items",d:"Trash or badly broken? Set aside for discard."},{t:"Let supervisor know donation is ready",d:"'New donation is in the back, ready to sort.'"}]},
+];
+const M1_QUIZ=[
+  {q:"Your supervisor explains a new task. You didn't fully understand. What do you do?",choices:["Start anyway and hope you figure it out","Say 'Can you walk me through the steps? I want to do it right.'","Ask a coworker to do it for you","Wait and see if someone notices"],correct:1,good:"Exactly right. Asking for a walkthrough shows professionalism.",bad:"Asking for clarity is always the right move. Don't guess."},
+  {q:"You've been working 20 minutes and feel the urge to reach for your phone. What's better?",choices:["Check it — just 5 minutes","Return your hands to the task in front of you","Take an unscheduled break","Tell your supervisor you need a break"],correct:1,good:"Yes. One physical action re-starts focus.",bad:"Once you pick up the phone, 5 minutes becomes 20. Return to the task."},
+  {q:"You finish a bin and aren't sure what's next. What do you do?",choices:["Sit and wait","Go to supervisor: 'I finished the bin. What should I do next?'","Start a task you weren't assigned","Check your phone"],correct:1,good:"Perfect. Proactively reporting is exactly what good workers do.",bad:"Always report completion and ask for the next task."},
+  {q:"A task has 5 steps and you forget step 3. What do you do?",choices:["Skip step 3 and continue","Ask supervisor or write steps down next time","Stop and say you can't continue","Guess and keep going"],correct:1,good:"Smart. Asking or writing steps down is professional.",bad:"It's always better to clarify than to guess."},
+];
+const M2_SCENES=[
+  {emoji:"👋",title:"A coworker waves hi in the morning",context:"You just arrived. A coworker you've met once sees you and waves.",choices:[{t:"Look away and walk to your station",type:"avoid"},{t:"Wave back or say 'hey' and keep walking",type:"best"},{t:"Stop and have a long conversation",type:"ok"}],results:["Can come across as rude even when not intentional. A small acknowledgment goes a long way.","Perfect. Brief, friendly, keeps your focus.","Better than ignoring, but long conversations at shift start can delay your work."]},
+  {emoji:"😤",title:"Supervisor corrects how you're doing a task",context:"You've been sorting your own way. Supervisor says 'Let's do it this way.'",choices:[{t:"Keep doing it your own way",type:"avoid"},{t:"Argue: 'My way works fine too.'",type:"avoid"},{t:"Say 'Got it' and switch to their method",type:"best"}],results:["This will create a problem. The supervisor's method is the standard.","Arguing in your first weeks is risky. Build trust first.","Always the right call. 'Got it' shows you're coachable."]},
+  {emoji:"🤝",title:"A coworker asks you for help moving something",context:"A coworker asks: 'Hey, can you help me move this rack?'",choices:[{t:"'I'm in the middle of something, maybe later'",type:"ok"},{t:"Ignore the question and keep working",type:"avoid"},{t:"'Sure' — or 'Let me check with the supervisor first'",type:"best"}],results:["Not terrible, but 'maybe later' sounds uncommitted.","Ignoring a direct question is unprofessional.","Helping builds goodwill. Checking with supervisor is smart if unsure."]},
+  {emoji:"😕",title:"You made a mistake — an item fell and broke",context:"Moving a cart, you bump a shelf and a small item falls and breaks.",choices:[{t:"Pretend it didn't happen",type:"avoid"},{t:"Get frustrated and upset",type:"avoid"},{t:"Tell supervisor calmly: 'An item fell and broke — what should I do?'",type:"best"}],results:["Almost always makes it worse. Reporting first shows integrity.","Accidents happen. Getting visibly upset makes the situation bigger than it needs to be.","Excellent. Reporting immediately + asking what to do = the professional response."]},
+  {emoji:"🙅",title:"A customer asks you for help finding something",context:"You're in the back. A customer walks in: 'Do you work here? Can you help me?'",choices:[{t:"Say 'I don't know' and walk away",type:"avoid"},{t:"'I work in the back — let me get someone who can help you'",type:"best"},{t:"Try to help even without knowing the layout",type:"ok"}],results:["Dismissive. You can do much better with one sentence.","Ideal. You acknowledge them, are honest, and connect them to the right person.","If you genuinely can help, fine — but directing to a floor employee is safer early on."]},
+  {emoji:"😶",title:"You didn't hear what someone said",context:"A coworker says something quickly and you didn't catch it.",choices:[{t:"Nod and say 'yeah' even though you don't know what they said",type:"avoid"},{t:"'Sorry, can you say that again? I didn't catch it.'",type:"best"},{t:"Walk away and figure it out on your own",type:"avoid"}],results:["Can lead to misunderstandings and bigger problems later.","Exactly right. Asking for a repeat is normal and professional.","Walking away without clarity leads to doing the wrong task."]},
+  {emoji:"🎧",title:"You want to listen to music while sorting in the back",context:"You're sorting alone in the back room. It's quiet. You want your earbuds in.",choices:[{t:"Both earbuds in, music loud",type:"avoid"},{t:"Ask supervisor: 'Is it okay to listen to music back here?'",type:"ok"},{t:"No music — wait until your shift ends",type:"best"}],results:["Both earbuds + loud music = you can't hear your supervisor. This will cause a problem.","Asking is better than just doing it. But at Goodwill, the policy is no headphones on shift.","The safest and most professional choice. Save music for after your shift — you've earned it."]},
+  {emoji:"💬",title:"A coworker says 'How are you today?'",context:"A coworker passes you and says 'How are you today?'",choices:[{t:"Say nothing and keep walking",type:"avoid"},{t:"'Fine, thanks. How are you?' and keep moving",type:"best"},{t:"Stop and explain in detail how you're feeling",type:"ok"}],results:["Saying nothing to a direct greeting feels rude. One word is all it takes.","Exactly right. Short, friendly, reciprocal.","'How are you?' at work is usually a greeting, not a real question. Keep it short."]},
+];
+const M3_QUIZ=[
+  {q:"Leo's shift is 3 hours with no break. When is it okay to play video games on his phone?",choices:["When a task is finished and there's a free moment","Never during a shift — games are for after work only","If no one is watching","When working alone in the back room"],correct:1,good:"Correct. No break = no phone game time. Games are for after the shift ends.",bad:"With no break in a 3-hour shift, there is no 'okay' time for phone games during work."},
+  {q:"When can Leo use headphones at Goodwill?",choices:["When sorting alone in the back room","One earbud is fine anytime","Not during the shift — headphones are for after work","Whenever the supervisor isn't nearby"],correct:2,good:"Correct. No headphones during the shift. After shift only.",bad:"The rule is no headphones during the shift — not one earbud, not quiet music."},
+  {q:"Leo's mom might call during his shift for an emergency. What should he do?",choices:["Keep phone on full volume and answer whenever","At the start of shift, tell supervisor: 'My parent might need to reach me — is it okay to step out briefly?'","Ignore all calls during work","Check his phone every 10 minutes just in case"],correct:1,good:"Right. Giving your supervisor a heads-up is respectful and responsible.",bad:"Tell your supervisor at the start of shift so they're not surprised if you need to step out."},
+  {q:"Leo is sorting and feels a strong urge to pick up his phone. Best move?",choices:["Give in — just 2 minutes","Return his hands to the task in front of him and keep working","Take a short walk to reset","Check notifications quickly"],correct:1,good:"Exactly. The physical act of returning to the task replaces the urge within 30 seconds.",bad:"The most effective strategy is to immediately return your hands to the task."},
+  {q:"Why are headphones specifically a safety risk at Goodwill?",choices:["They're too expensive to wear at work","You can't hear carts, coworkers, or your supervisor in a space where people are constantly moving","They look unprofessional","Supervisors just have a rule against them"],correct:1,good:"Exactly right. Situational awareness is a real safety need in a warehouse-style space.",bad:"Safety is the real reason — you can't hear what's around you, including moving carts."},
+];
+const M4_BRIDGES=[
+  {gw:"Following multi-step task instructions",gt:"Reading blueprints and work orders",gd:"Sorting and stocking require remembering and executing a sequence of steps.",td:"Every construction job runs on sequenced instructions. This is the foundation of trades work."},
+  {gw:"Working carefully and precisely with your hands",gt:"Fine motor skills for tools and materials",gd:"Tagging, sorting fragile items — all require physical precision.",td:"Carpentry, electrical, plumbing — all require careful, precise hand work. Leo already has this."},
+  {gw:"Showing up reliably and on time",gt:"The #1 trait contractors look for in apprentices",gd:"Good attendance — noted as a strength in Leo's IEP.",td:"In the trades, being dependable matters more than almost any other quality."},
+  {gw:"Asking for step-by-step clarity before starting",gt:"Safety and quality compliance on job sites",gd:"Asking for clear instructions protects the quality of work.",td:"In construction, unclear instructions cause mistakes and safety risks. Asking = professionalism."},
+  {gw:"Physical movement and hands-on work all shift",gt:"Active, physical, project-based career every day",gd:"Leo does better with physical tasks — lifting, sorting, carrying.",td:"Trades are almost entirely physical and project-based. No sitting at a desk. Leo is built for this."},
+  {gw:"Keeping phone away and staying focused at work",gt:"Worksite focus and safety awareness",gd:"Building the habit of no phone during work.",td:"Construction sites require full attention and situational awareness at all times."},
+];
+const M4_ROADMAP=[
+  {status:"done",label:"Already done",title:"Theater Tech — building stages for plays",desc:"Painting, constructing, and problem-solving for theater productions. Real hands-on building with a team."},
+  {status:"done",label:"Already done",title:"Construction & metal fabrication summer programs",desc:"Leo already has welding and metal fabrication exposure — a significant head start for trade school or apprenticeship."},
+  {status:"now",label:"Right now — Spring 2026",title:"Goodwill Brea — first paid work experience (DOR sponsored)",desc:"Building reliability, task completion, and professional communication. This goes on Leo's permanent work history."},
+  {status:"next",label:"Senior year 2026–27",title:"Adult Transition class + Workability program",desc:"Already enrolled for 12th grade. Workability connects Leo to more employment and career exploration opportunities."},
+  {status:"next",label:"After graduation May 2027",title:"Trade school or pre-apprenticeship program",desc:"Fullerton College, Cerritos College offer carpentry, electrical, and construction technology programs. DOR may fund this."},
+  {status:"next",label:"Career goal",title:"Union apprenticeship in a Building Trade",desc:"Carpenters Union, IBEW (electrical), UA (plumbing), Ironworkers — all have apprenticeship programs with strong wages and full benefits in the LA/OC area."},
+];
+const M4_TRADES=[
+  {name:"Carpentry",pay:"$28–$45/hr",detail:"Frame buildings, install doors, floors, ceilings, and finish woodwork. Leo's Theater Tech experience and summer building programs directly apply. Strong union (UBC) with apprenticeship programs in LA/OC. Great entry point for someone who has already built things."},
+  {name:"Ironworker / Structural Steel",pay:"$32–$55/hr",detail:"Erect steel structures, bridges, and buildings. Leo's metal fabrication experience is a direct connection. Physical, active work every day. Ironworkers Union has paid apprenticeship programs in California."},
+  {name:"Electrical (IBEW)",pay:"$30–$60/hr",detail:"Install and maintain electrical systems in buildings. Very systematic and detail-oriented — fits Leo's careful working style. IBEW apprenticeships are paid from day one and highly sought after in the OC/LA area."},
+  {name:"Plumbing / Pipefitting (UA)",pay:"$28–$52/hr",detail:"Install water and gas systems. Strong problem-solving component. United Association (UA) runs apprenticeship programs in California with great pay and full benefits."},
+  {name:"Welding",pay:"$22–$40/hr",detail:"Leo has already done welding in summer programs — this is a direct head start. Welders work in construction, manufacturing, and shipbuilding. Certification programs at Cerritos College and Fullerton College are affordable and fast."},
+  {name:"Construction Technology (general)",pay:"$20–$35/hr",detail:"A broader entry point — community college programs teach project management, blueprint reading, and site safety. A good bridge to a specialty trade or a supervisor/foreman role over time."},
+];
+const M5_PSC=["Phone is on SILENT and in my pocket — not in my hand","No headphones during my shift — I'll listen to music after I clock out","I'm NOT going to play video games or scroll social media during this shift","I know my schedule — what shift, what time I'm done","I'm dressed in clothes I can move and work in","I've eaten something — I won't be hungry during my 3-hour shift","I know at least one script: 'I finished [task]. What's next?'","I remember: if I don't understand, I'll ask — not guess","I know why this job matters: it's building my future in the trades"];
+const M5_SCRIPTS=[{label:"Arriving at work",text:'"Good morning." + a nod or wave — that\'s all you need'},{label:"When given a task",text:'"Got it." or "Sounds good." — short is fine'},{label:"Don't understand the instructions",text:'"Can you walk me through the steps one more time? I want to do it right."'},{label:"Task is finished",text:'"I finished [task]. What should I do next?"'},{label:"Made a mistake",text:'"I made a mistake with [thing]. I wanted to tell you right away. What should I do?"'},{label:"Customer asks for help",text:'"I work in the back — let me get someone who can help you."'},{label:"End of shift",text:'"I finished [last task]. I\'m heading out — see you next time."'},{label:'"How are you?" from a coworker',text:'"Good, thanks. How about you?" — then keep moving'},{label:"Feel overwhelmed or need a reset",text:'"Can I take 2 minutes? I just want to make sure I\'m on track." (ask your supervisor)'},{label:"Emergency call coming",text:'"My parent might need to reach me today — is it okay to step out briefly if needed?"'}];
+const M5_STRENGTHS=["Works carefully and precisely with his hands","Strong with physical, hands-on tasks — built for trades work","Good attendance — shows up, follows through on commitments","Respectful and non-disruptive in all settings","Once he understands a task, he does not give up","Strong arithmetic — can count, measure, and calculate accurately","Self-aware — knows what he needs and can communicate it","Already has building, Theater Tech, welding, and metal fabrication experience","Track athlete — discipline, endurance, and the ability to keep going when it's hard"];
+const M5_GROWTH=["Starting tasks quickly without needing many prompts","Keeping phone in pocket and headphones off during work","Brief, friendly social responses with coworkers","Staying engaged and focused through a full 3-hour shift with no break"];
+const AFFIRMATIONS=[{quote:"You are good with your hands. That is a real skill and not everyone has it.",ctx:"Your Theater Tech teacher sees it. Your summer instructors saw it. The Building Trades will see it too."},{quote:"Being quiet and focused at work is a strength, not a flaw.",ctx:"The best tradespeople are often people who work carefully, keep to themselves, and get the job done right."},{quote:"Asking for instructions to be repeated is what smart workers do.",ctx:"It means you care about doing the job correctly. That is what your future employer will value most."},{quote:"Every shift is practice — not just for Goodwill, but for your whole career.",ctx:"Showing up. Following through. Getting better every time. That is exactly what you are doing right now."},{quote:"You've already built stages, welded metal, and worked with your hands in real programs.",ctx:"This is not your beginning. You are further along than you think."},{quote:"Autism does not cancel your work ethic, your precision, or your dedication.",ctx:"Those belong to you. They travel with you to every job, every site, every opportunity."},{quote:"One shift at a time. One task at a time. One step at a time.",ctx:"You don't need to figure out everything today. Just do the next task in front of you."},{quote:"3 hours. No phone. No headphones. Then your music — as loud as you want. You earned it.",ctx:"That's the deal you make with yourself before every shift. It is worth it every single time."},{quote:"Your family is proud of you for doing this.",ctx:"That is not nothing. That is actually everything."}];
+
+// ── STATE ──────────────────────────────────────
+let curModule=0;
+let m0SceneIdx=0;
+let m1ClSteps=[];
+let m1TimerTotal=300,m1TimerRemain=300,m1TimerRunning=false,m1TimerInt=null;
+let m2SceneIdx=0,m2Answered=false;
+let m5PscState=[];
+let affirmIdx=0;
+const tradesOpen={};
+const quizState={};
+
+// ── NAVIGATION ──────────────────────────────────
+function showModule(idx){
+  curModule=idx;
+  document.querySelectorAll('.module-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+  document.querySelectorAll('.nav-item').forEach((n,i)=>n.classList.toggle('active',i===idx));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function switchTab(mod,tab){
+  const parent=document.getElementById('mod-'+['0','1','2','3','4','5'][['m0','m1','m2','m3','m4','m5'].indexOf(mod)]);
+  if(!parent)return;
+  parent.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  parent.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  const tp=document.getElementById(mod+'-'+tab);
+  if(tp)tp.classList.add('active');
+  parent.querySelectorAll('.tab-btn').forEach(b=>{
+    if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+tab+"'"))b.classList.add('active');
+  });
+}
+
+// ── MODULE 0 SCRIPTS ───────────────────────────
+function initM0Scenes(){
+  document.getElementById('m0-scene-grid').innerHTML=M0_SCENES.map((s,i)=>`<div class="scene-pick ${i===0?'active':''}" onclick="setM0Scene(${i})"><span class="sp-emoji">${s.emoji}</span><div class="sp-label">${s.label}</div></div>`).join('');
+  renderM0Script(0);
+}
+function setM0Scene(i){
+  m0SceneIdx=i;
+  document.querySelectorAll('#m0-scene-grid .scene-pick').forEach((el,j)=>el.classList.toggle('active',j===i));
+  renderM0Script(i);
+}
+function renderM0Script(i){
+  const s=M0_SCENES[i];
+  document.getElementById('m0-script-card').innerHTML=`<div class="card-title">${s.emoji} ${s.title}</div><div class="script-box">${s.lines.map(l=>`<div class="script-line"><span class="speaker ${l.who}">${l.who==='leo'?'LEO':'THEM'}</span><span class="script-text">${l.text}</span></div>`).join('')}</div><div class="script-note">${s.note}</div>`;
+}
+
+// ── QUIZ ENGINE ────────────────────────────────
+function initQuiz(id,data){quizState[id]={idx:0,answered:false,data};renderQuiz(id);}
+function renderQuiz(id){
+  const s=quizState[id];const ae=document.getElementById(id+'-quiz-area');const de=document.getElementById(id+'-quiz-done');
+  if(!s||!ae)return;if(de)de.classList.remove('show');
+  const q=s.data[s.idx];
+  ae.innerHTML=`<div class="q-counter">Question ${s.idx+1} of ${s.data.length}</div><div class="q-prompt">${q.q}</div>${q.choices.map((c,ci)=>`<button class="choice" id="${id}-c${ci}" onclick="pickAnswer('${id}',${ci})">${c}</button>`).join('')}<div class="q-feedback" id="${id}-fb"></div><div class="q-next" id="${id}-next" style="display:none;"><button class="btn" onclick="nextQ('${id}')">Next →</button></div>`;
+  s.answered=false;
+}
+function pickAnswer(id,idx){
+  const s=quizState[id];if(!s||s.answered)return;s.answered=true;
+  const q=s.data[s.idx];const fb=document.getElementById(id+'-fb');
+  document.querySelectorAll('[id^="'+id+'-c"]').forEach((b,i)=>{b.disabled=true;if(i===q.correct)b.classList.add('correct');else if(i===idx&&idx!==q.correct)b.classList.add('wrong');});
+  if(idx===q.correct){fb.textContent='✓ '+q.good;fb.className='q-feedback show good';}
+  else{fb.textContent='→ '+q.bad;fb.className='q-feedback show bad';}
+  document.getElementById(id+'-next').style.display='block';
+}
+function nextQ(id){
+  const s=quizState[id];if(!s)return;s.idx++;
+  if(s.idx>=s.data.length){document.getElementById(id+'-quiz-area').innerHTML='';const de=document.getElementById(id+'-quiz-done');if(de)de.classList.add('show');}
+  else renderQuiz(id);
+}
+function resetQuiz(id){quizState[id].idx=0;quizState[id].answered=false;const de=document.getElementById(id+'-quiz-done');if(de)de.classList.remove('show');renderQuiz(id);}
+function rateStar(id,n){
+  document.querySelectorAll('#'+id+'-stars .star').forEach((s,i)=>s.classList.toggle('lit',i<n));
+  const labels=['','That was tough — keep practicing!','Getting there — try again soon.','Good work! Getting more natural.','Great job! You got this.','Excellent! Leo is ready to work! 🎉'];
+  const el=document.getElementById(id+'-star-label');if(el)el.textContent=labels[n];
+}
+
+// ── MODULE 1 CHECKLISTS ────────────────────────
+function loadTaskChecklist(idx){
+  const task=M1_TASKS[parseInt(idx)];m1ClSteps=Array(task.steps.length).fill(false);renderChecklist(parseInt(idx));
+}
+function renderChecklist(ti){
+  const task=M1_TASKS[ti];
+  document.getElementById('m1-cl-list').innerHTML=task.steps.map((s,i)=>`<div class="cl-item ${m1ClSteps[i]?'done':''}" onclick="toggleCL(${ti},${i})"><div class="cl-check">${m1ClSteps[i]?'✓':''}</div><div><div style="font-weight:600;font-size:14px;margin-bottom:2px;">${s.t}</div><div style="font-size:13px;color:var(--c-text-muted);">${s.d}</div></div></div>`).join('');
+  document.getElementById('m1-task-done').classList.toggle('show',m1ClSteps.every(Boolean));
+}
+function toggleCL(ti,i){m1ClSteps[i]=!m1ClSteps[i];renderChecklist(ti);}
+function resetChecklist(){const sel=document.getElementById('m1-task-select');m1ClSteps=Array(M1_TASKS[parseInt(sel.value)].steps.length).fill(false);renderChecklist(parseInt(sel.value));}
+
+// ── MODULE 1 TIMER ─────────────────────────────
+function setTimerTime(mins,btn){
+  m1TimerTotal=mins*60;m1TimerRemain=m1TimerTotal;clearInterval(m1TimerInt);m1TimerRunning=false;
+  document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');
+  document.getElementById('timer-start').style.display='';document.getElementById('timer-pause').style.display='none';updateTimerUI();
+}
+function updateTimerUI(){
+  const m=Math.floor(m1TimerRemain/60),s=m1TimerRemain%60;
+  const disp=document.getElementById('timer-disp');
+  disp.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  disp.className='timer-display'+(m1TimerRunning?' running':'')+(m1TimerRemain===0?' done':'');
+  document.getElementById('timer-fill').style.width=Math.round(((m1TimerTotal-m1TimerRemain)/m1TimerTotal)*100)+'%';
+  document.getElementById('timer-task-lbl').textContent='Task: '+document.getElementById('m1-timer-task').value;
+}
+function startTimer(){
+  if(m1TimerRunning)return;m1TimerRunning=true;
+  document.getElementById('timer-start').style.display='none';document.getElementById('timer-pause').style.display='';
+  m1TimerInt=setInterval(()=>{
+    if(m1TimerRemain<=0){clearInterval(m1TimerInt);m1TimerRunning=false;document.getElementById('timer-disp').textContent='✓ Done!';document.getElementById('timer-disp').className='timer-display done';document.getElementById('timer-fill').style.width='100%';document.getElementById('timer-pause').style.display='none';document.getElementById('timer-start').style.display='';return;}
+    m1TimerRemain--;updateTimerUI();
+  },1000);
+}
+function pauseTimer(){clearInterval(m1TimerInt);m1TimerRunning=false;document.getElementById('timer-start').style.display='';document.getElementById('timer-pause').style.display='none';}
+function resetTimer(){clearInterval(m1TimerInt);m1TimerRunning=false;m1TimerRemain=m1TimerTotal;document.getElementById('timer-start').style.display='';document.getElementById('timer-pause').style.display='none';updateTimerUI();}
+
+// ── MODULE 2 SCENES ────────────────────────────
+function renderM2Scene(){
+  const s=M2_SCENES[m2SceneIdx];m2Answered=false;
+  document.getElementById('scene-counter').textContent=`Situation ${m2SceneIdx+1} of ${M2_SCENES.length}`;
+  document.getElementById('scene-prev').disabled=m2SceneIdx===0;
+  document.getElementById('scene-next').disabled=m2SceneIdx===M2_SCENES.length-1;
+  document.getElementById('m2-scene-card').innerHTML=`<div class="card"><div class="card-title">${s.emoji} ${s.title}</div><div style="background:var(--c-gray-lt);border-radius:6px;padding:.85rem 1rem;margin-bottom:1rem;font-size:14px;line-height:1.6;">${s.context}</div><div class="sec-label">What would you do?</div>${s.choices.map((c,i)=>`<button class="choice" id="sc-c${i}" onclick="pickScene(${i})">${c.t}</button>`).join('')}<div class="q-feedback" id="sc-fb"></div></div>`;
+}
+function pickScene(idx){
+  if(m2Answered)return;m2Answered=true;
+  const s=M2_SCENES[m2SceneIdx];const fb=document.getElementById('sc-fb');
+  document.querySelectorAll('[id^="sc-c"]').forEach((b,i)=>{b.disabled=true;if(s.choices[i].type==='best')b.classList.add('correct');else if(s.choices[i].type==='ok')b.classList.add('reveal-ok');else b.classList.add('wrong');});
+  const type=s.choices[idx].type;
+  fb.textContent=(type==='best'?'✓ ':type==='ok'?'⚠ ':'✗ ')+s.results[idx];
+  fb.className='q-feedback show '+(type==='best'?'good':'bad');
+}
+function prevScene(){if(m2SceneIdx>0){m2SceneIdx--;renderM2Scene();}}
+function nextScene(){if(m2SceneIdx<M2_SCENES.length-1){m2SceneIdx++;renderM2Scene();}}
+
+// ── MODULE 3 PHONE SIM ─────────────────────────
+function setPhoneSim(mode){
+  const icon=document.getElementById('phone-sim-icon'),status=document.getElementById('phone-sim-status');
+  if(mode==='work'){icon.textContent='🔕';status.textContent='Silent · In pocket · Working';}
+  else if(mode==='after'){icon.textContent='🎵';status.textContent='Shift over · Music on · Earned it!';}
+  else{icon.textContent='📞';status.textContent='Emergency only · Ask supervisor first';}
+}
+
+// ── MODULE 4 ───────────────────────────────────
+function initM4(){
+  document.getElementById('m4-bridges').innerHTML=M4_BRIDGES.map(b=>`<div class="bridge"><div class="bridge-row"><div class="bridge-col"><div class="b-tag gw">At Goodwill</div><div class="b-title">${b.gw}</div><div class="b-desc">${b.gd}</div></div><div class="bridge-arrow">→</div><div class="bridge-col"><div class="b-tag tr">Building Trades</div><div class="b-title">${b.gt}</div><div class="b-desc">${b.td}</div></div></div></div>`).join('');
+  document.getElementById('m4-roadmap-content').innerHTML='<div class="roadmap-line"></div>'+M4_ROADMAP.map(r=>`<div class="rm-step"><div class="rm-dot ${r.status}">${r.status==='done'?'✓':r.status==='now'?'▶':''}</div><div><div class="rm-label ${r.status}">${r.label}</div><div class="rm-title">${r.title}</div><div class="rm-desc">${r.desc}</div></div></div>`).join('');
+  renderTrades();
+}
+function renderTrades(){
+  document.getElementById('m4-trades-list').innerHTML=M4_TRADES.map((t,i)=>`<div class="trade-card ${tradesOpen[i]?'open':''}" onclick="toggleTrade(${i})"><div class="trade-header"><div class="trade-name">${t.name}</div><div style="display:flex;align-items:center;gap:8px;"><div class="trade-pay">${t.pay}</div><span style="color:var(--c-text-muted);font-size:14px;">${tradesOpen[i]?'▲':'▼'}</span></div></div><div class="trade-detail">${t.detail}</div></div>`).join('');
+}
+function toggleTrade(i){tradesOpen[i]=!tradesOpen[i];renderTrades();}
+
+// ── MODULE 5 ───────────────────────────────────
+function initM5(){
+  m5PscState=Array(M5_PSC.length).fill(false);renderPreshift();
+  document.getElementById('m5-scripts-list').innerHTML=M5_SCRIPTS.map(s=>`<div style="background:var(--c-gray-lt);border-radius:6px;padding:.75rem 1rem;margin-bottom:.6rem;"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--c-text-muted);margin-bottom:3px;">${s.label}</div><div style="font-size:14px;color:var(--c-text);font-style:italic;">${s.text}</div></div>`).join('');
+  document.getElementById('m5-strengths-list').innerHTML=M5_STRENGTHS.map(s=>`<div style="display:flex;gap:8px;align-items:flex-start;font-size:14px;"><span style="color:var(--c-green);font-size:16px;flex-shrink:0;">✓</span><span>${s}</span></div>`).join('');
+  document.getElementById('m5-growth-list').innerHTML=M5_GROWTH.map(s=>`<div style="display:flex;gap:8px;align-items:flex-start;font-size:14px;"><span style="color:var(--c-orange);font-size:16px;flex-shrink:0;">→</span><span>${s}</span></div>`).join('');
+  renderAffirm();
+}
+function renderPreshift(){
+  document.getElementById('m5-psc').innerHTML=M5_PSC.map((item,i)=>`<div class="cl-item ${m5PscState[i]?'done':''}" onclick="togglePSC(${i})"><div class="cl-check">${m5PscState[i]?'✓':''}</div><div class="cl-text">${item}</div></div>`).join('');
+  document.getElementById('m5-ready').classList.toggle('show',m5PscState.every(Boolean));
+}
+function togglePSC(i){m5PscState[i]=!m5PscState[i];renderPreshift();}
+function resetPreshift(){m5PscState=Array(M5_PSC.length).fill(false);renderPreshift();}
+function renderAffirm(){document.getElementById('affirm-text').textContent=AFFIRMATIONS[affirmIdx].quote;document.getElementById('affirm-ctx').textContent=AFFIRMATIONS[affirmIdx].ctx;}
+function nextAffirm(){affirmIdx=(affirmIdx+1)%AFFIRMATIONS.length;renderAffirm();}
+function prevAffirm(){affirmIdx=(affirmIdx-1+AFFIRMATIONS.length)%AFFIRMATIONS.length;renderAffirm();}
+
+// ── INIT ───────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  initM0Scenes();initQuiz('m0',M0_QUIZ);
+  loadTaskChecklist(0);initQuiz('m1',M1_QUIZ);updateTimerUI();
+  renderM2Scene();
+  initQuiz('m3',M3_QUIZ);
+  initM4();initM5();
+});
+</script>
+</body>
+</html>
