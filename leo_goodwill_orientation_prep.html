@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leo's Goodwill Orientation Quiz Prep</title>
+<style>
+  :root {
+    --c-orange:#E8651A;--c-orange-lt:#FDF0E8;--c-orange-dk:#9E3F08;
+    --c-steel:#2C3E50;--c-gray-lt:#F8F9FA;
+    --c-green:#27AE60;--c-green-lt:#E9F7EF;--c-green-dk:#1A6E3C;
+    --c-amber:#F39C12;--c-amber-lt:#FEF9E7;--c-amber-dk:#7D5406;
+    --c-red:#C0392B;--c-red-lt:#FDEDEC;
+    --c-blue:#2980B9;--c-blue-lt:#EBF5FB;--c-blue-dk:#1A5276;
+    --c-purple:#7D3C98;--c-purple-lt:#F5EEF8;--c-purple-dk:#4A235A;
+    --c-gray:#7F8C8D;--c-white:#FFFFFF;
+    --c-text:#1A1A1A;--c-text-muted:#555;
+    --radius:10px;--radius-sm:6px;--shadow:0 2px 12px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#F2F3F4;color:var(--c-text);min-height:100vh;}
+  .site-header{background:var(--c-steel);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+  .header-inner{max-width:960px;margin:0 auto;padding:.75rem 1.25rem;display:flex;align-items:center;gap:14px;}
+  .header-logo{width:42px;height:42px;background:var(--c-orange);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .header-titles{flex:1;}
+  .header-title{font-size:17px;font-weight:700;line-height:1.2;}
+  .header-sub{font-size:12px;opacity:.7;margin-top:1px;}
+  .header-badge{background:var(--c-orange);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap;}
+  .module-nav{background:var(--c-white);border-bottom:2px solid #E0E0E0;overflow-x:auto;}
+  .module-nav-inner{max-width:960px;margin:0 auto;display:flex;}
+  .nav-item{padding:.75rem 1rem;font-size:13px;font-weight:500;color:var(--c-text-muted);cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;display:flex;align-items:center;gap:6px;transition:all .15s;user-select:none;}
+  .nav-item:hover{color:var(--c-orange);background:var(--c-orange-lt);}
+  .nav-item.active{color:var(--c-orange);border-bottom-color:var(--c-orange);font-weight:700;}
+  .nav-num{width:20px;height:20px;border-radius:50%;background:#E0E0E0;color:var(--c-text-muted);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .nav-item.active .nav-num{background:var(--c-orange);color:#fff;}
+  .main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem;}
+  .module-panel{display:none;}
+  .module-panel.active{display:block;}
+  .hero-card{border-radius:var(--radius);padding:1.5rem 1.75rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:18px;}
+  .hero-icon{font-size:40px;flex-shrink:0;}
+  .hero-title{font-size:22px;font-weight:800;line-height:1.2;margin-bottom:.3rem;}
+  .hero-desc{font-size:14px;line-height:1.65;opacity:.9;}
+  .tab-bar{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+  .tab-btn{background:var(--c-white);border:1.5px solid #D5D8DC;border-radius:var(--radius-sm);padding:.55rem 1rem;font-size:13px;font-weight:500;color:var(--c-text-muted);cursor:pointer;transition:all .15s;font-family:inherit;}
+  .tab-btn:hover{border-color:var(--c-orange);color:var(--c-orange);}
+  .tab-btn.active{background:var(--c-orange);border-color:var(--c-orange);color:#fff;}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+  .card{background:var(--c-white);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1rem;box-shadow:var(--shadow);}
+  .card-title{font-size:16px;font-weight:700;color:var(--c-text);margin-bottom:.75rem;display:flex;align-items:center;gap:8px;}
+  .alert{display:flex;gap:12px;padding:1rem 1.25rem;border-radius:var(--radius-sm);margin-bottom:1rem;align-items:flex-start;font-size:14px;line-height:1.6;}
+  .alert-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+  .alert-body strong{font-weight:700;display:block;margin-bottom:2px;}
+  .alert.green{background:var(--c-green-lt);border-left:4px solid var(--c-green);color:var(--c-green-dk);}
+  .alert.amber{background:var(--c-amber-lt);border-left:4px solid var(--c-amber);color:var(--c-amber-dk);}
+  .alert.blue{background:var(--c-blue-lt);border-left:4px solid var(--c-blue);color:var(--c-blue-dk);}
+  .alert.red{background:var(--c-red-lt);border-left:4px solid var(--c-red);color:var(--c-red);}
+  .alert.orange{background:var(--c-orange-lt);border-left:4px solid var(--c-orange);color:var(--c-orange-dk);}
+  .alert.purple{background:var(--c-purple-lt);border-left:4px solid var(--c-purple);color:var(--c-purple-dk);}
+  .phone-rule{background:var(--c-white);border-radius:var(--radius);padding:1.1rem 1.4rem;margin-bottom:.75rem;display:flex;gap:14px;align-items:flex-start;box-shadow:var(--shadow);border-left:5px solid var(--c-orange);}
+  .pr-num{font-size:22px;font-weight:900;color:var(--c-orange);flex-shrink:0;line-height:1;margin-top:2px;}
+  .pr-title{font-size:15px;font-weight:700;color:var(--c-text);margin-bottom:4px;}
+  .pr-body{font-size:14px;color:var(--c-text-muted);line-height:1.6;}
+  .pr-say{font-size:13px;color:var(--c-blue-dk);background:var(--c-blue-lt);border-radius:4px;padding:.4rem .75rem;margin-top:.5rem;font-style:italic;}
+  .sec-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--c-text-muted);margin-bottom:.65rem;margin-top:.25rem;}
+  .divider{height:1px;background:#E8E8E8;margin:1.25rem 0;}
+  .btn{display:inline-flex;align-items:center;gap:7px;background:var(--c-orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:.65rem 1.25rem;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s,transform .1s;}
+  .btn:hover{background:var(--c-orange-dk);}
+  .btn:active{transform:scale(.98);}
+  .btn.secondary{background:var(--c-steel);}
+  .btn.secondary:hover{background:#1A252F;}
+  .btn.green-btn{background:var(--c-green);}
+  .btn.green-btn:hover{background:var(--c-green-dk);}
+  .btn.ghost{background:transparent;color:var(--c-text-muted);border:2px solid #D5D8DC;}
+  .btn.ghost:hover{border-color:var(--c-orange);color:var(--c-orange);background:var(--c-orange-lt);}
+  .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:.75rem;}
+  .ready-title{font-size:20px;font-weight:800;color:var(--c-green-dk);margin-bottom:4px;}
+  .ready-sub{font-size:14px;color:var(--c-green);}
+  /* quiz / test styles */
+  .test-q{background:var(--c-white);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1rem;box-shadow:var(--shadow);}
+  .test-q-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--c-orange);margin-bottom:.4rem;}
+  .test-q-text{font-size:15px;font-weight:700;color:var(--c-text);margin-bottom:.85rem;line-height:1.5;}
+  .test-choice{display:block;width:100%;text-align:left;background:var(--c-white);border:2px solid #E0E0E0;border-radius:var(--radius-sm);padding:.75rem 1rem;margin-bottom:.5rem;cursor:pointer;font-size:14px;color:var(--c-text);line-height:1.5;font-family:inherit;transition:border-color .12s,background .12s;}
+  .test-choice:hover{border-color:var(--c-blue);background:var(--c-blue-lt);}
+  .test-choice.selected{border-color:var(--c-orange);background:var(--c-orange-lt);font-weight:600;}
+  .test-choice.correct-answer{border-color:var(--c-green);background:var(--c-green-lt);color:var(--c-green-dk);}
+  .test-choice.wrong-answer{border-color:var(--c-red);background:var(--c-red-lt);color:var(--c-red);}
+  .test-explain{font-size:13px;line-height:1.6;background:var(--c-blue-lt);color:var(--c-blue-dk);border-radius:6px;padding:.75rem 1rem;margin-top:.5rem;display:none;}
+  .test-explain.show{display:block;}
+  .score-box{background:linear-gradient(135deg,var(--c-steel),#34495E);border-radius:var(--radius);padding:2rem 1.75rem;text-align:center;color:#fff;margin-bottom:1rem;}
+  .score-num{font-size:48px;font-weight:800;line-height:1;margin-bottom:.4rem;}
+  .score-label{font-size:14px;opacity:.85;}
+  .progress-track{height:8px;background:#E0E0E0;border-radius:99px;overflow:hidden;margin-bottom:1.25rem;}
+  .progress-fill{height:100%;background:var(--c-orange);border-radius:99px;transition:width .3s;}
+  .video-row{display:flex;gap:10px;align-items:center;padding:.75rem 1rem;background:var(--c-gray-lt);border-radius:var(--radius-sm);margin-bottom:.6rem;}
+  .vid-icon{font-size:22px;flex-shrink:0;}
+  .vid-title-text{font-size:14px;font-weight:600;color:var(--c-text);}
+  .vid-source{font-size:12px;color:var(--c-text-muted);margin-top:2px;}
+  select{width:100%;padding:.65rem .9rem;border:2px solid #E0E0E0;border-radius:var(--radius-sm);font-size:14px;font-family:inherit;color:var(--c-text);background:var(--c-white);margin-bottom:.85rem;}
+  @media(max-width:600px){.hero-card{flex-direction:column;gap:10px;}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-logo">📝</div>
+    <div class="header-titles">
+      <div class="header-title">Leo's New-Hire Quiz Prep</div>
+      <div class="header-sub">Goodwill of Orange County · New Hire Videos &amp; Quiz</div>
+    </div>
+    <div class="header-badge">Part 2</div>
+  </div>
+</header>
+
+<nav class="module-nav">
+  <div class="module-nav-inner" id="main-nav">
+    <div class="nav-item active" onclick="showModule(0)"><span class="nav-num">1</span> About the Quiz</div>
+    <div class="nav-item" onclick="showModule(1)"><span class="nav-num">2</span> 📺 Watch &amp; Learn</div>
+    <div class="nav-item" onclick="showModule(2)"><span class="nav-num">3</span> Code of Conduct</div>
+    <div class="nav-item" onclick="showModule(3)"><span class="nav-num">4</span> Harassment Prevention</div>
+    <div class="nav-item" onclick="showModule(4)"><span class="nav-num">5</span> Safety Basics</div>
+    <div class="nav-item" onclick="showModule(5)"><span class="nav-num">6</span> Practice Test</div>
+    <div class="nav-item" onclick="showModule(6)"><span class="nav-num">7</span> Test Day Tips</div>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- MODULE 1: ABOUT THE QUIZ -->
+<div class="module-panel active" id="mod-0">
+  <div class="hero-card" style="background:linear-gradient(135deg,#2980B9,#2C3E50);color:#fff;">
+    <div class="hero-icon">🎬</div>
+    <div><div class="hero-title">About the Videos &amp; Quiz</div><div class="hero-desc">Here's what to expect, so you can walk in feeling ready.</div></div>
+  </div>
+
+  <div class="phone-rule"><div class="pr-num">1</div><div><div class="pr-title">You'll watch a series of training videos</div><div class="pr-body">These cover three main topics: preventing sexual harassment in the workplace, basic job safety, and the company's code of conduct (how to treat coworkers and customers with respect).</div></div></div>
+  <div class="phone-rule"><div class="pr-num">2</div><div><div class="pr-title">There is a paper quiz afterward</div><div class="pr-body">You'll answer questions about what the videos covered. This is an independent quiz, just like a quiz at school — you do it on your own.</div></div></div>
+  <div class="phone-rule"><div class="pr-num">3</div><div><div class="pr-title">This is a "pay attention" quiz, not a trick quiz</div><div class="pr-body">The quiz is designed to check that you understood the videos — not to confuse you. If you go through Modules 2–4 of this app and the Practice Test, you'll already be familiar with almost everything that could be asked.</div></div></div>
+
+  <div class="alert green"><span class="alert-icon">💪</span><div class="alert-body"><strong>How to use this app:</strong> Start with Module 2 (Watch &amp; Learn) for real videos on these topics. Then go through Module 3 (Code of Conduct), Module 4 (Harassment Prevention), and Module 5 (Safety Basics). Then take the Practice Test in Module 6. Finish with Module 7 for quiz-taking tips.</div></div>
+</div>
+
+<!-- MODULE 2: WATCH & LEARN -->
+<div class="module-panel" id="mod-1">
+  <div class="hero-card" style="background:linear-gradient(135deg,#27AE60,#1A5276);color:#fff;">
+    <div class="hero-icon">📺</div>
+    <div><div class="hero-title">Watch &amp; Learn</div><div class="hero-desc">Real videos on the exact topics your quiz will cover. Watch these before the Practice Test — they make everything click faster.</div></div>
+  </div>
+
+  <div class="alert green"><span class="alert-icon">▶️</span><div class="alert-body"><strong>Start here — the real official training:</strong> California provides a free official video training on preventing sexual harassment at work. It's the real training many companies use — go to <strong>calcivilrights.ca.gov/shpt</strong> and choose the "non-supervisor" course. It takes about an hour and covers exactly what Module 4 of this app explains.</div></div>
+
+  <div class="sec-label">🛡️ Sexual harassment prevention</div>
+  <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">Sexual Harassment Prevention Training (official, non-supervisor)</div><div class="vid-source">calcivilrights.ca.gov/shpt — choose the employee/non-supervisor course</div></div></div>
+  <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">What is workplace harassment? (basics explained)</div><div class="vid-source">YouTube · search "what is sexual harassment at work explained simply"</div></div></div>
+  <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">How to report harassment at work</div><div class="vid-source">YouTube · search "how to report workplace harassment"</div></div></div>
+
+  <div class="sec-label" style="margin-top:1.25rem;">⚠️ Workplace safety basics</div>
+  <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">How to lift heavy objects safely (proper lifting technique)</div><div class="vid-source">YouTube · search "how to lift heavy objects safely at work"</div></div></div>
+  <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">Warehouse / retail safety basics for new employees</div><div class="vid-source">YouTube · search "warehouse safety training for new employees"</div></div></div>
+  <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">Slip, trip, and fall prevention at work</div><div class="vid-source">YouTube · search "slip trip fall prevention workplace safety"</div></div></div>
+
+  <div class="sec-label" style="margin-top:1.25rem;">🤝 Code of conduct &amp; respect at work</div>
+  <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">Workplace code of conduct for new employees</div><div class="vid-source">YouTube · search "workplace code of conduct training for new employees"</div></div></div>
+  <div class="video-row"><span class="vid-icon">▶️</span><div><div class="vid-title-text">Diversity and respect in the workplace (basics)</div><div class="vid-source">YouTube · search "respect in the workplace training video"</div></div></div>
+
+  <div class="alert amber"><span class="alert-icon">💡</span><div class="alert-body"><strong>Tip:</strong> Watch one short video per day in the days leading up to the appointment. You don't need to watch everything in one sitting — a little each day helps the information stick.</div></div>
+</div>
+
+<!-- MODULE 3: CODE OF CONDUCT -->
+<div class="module-panel" id="mod-2">
+  <div class="hero-card" style="background:linear-gradient(135deg,#7D3C98,#2C3E50);color:#fff;">
+    <div class="hero-icon">🤝</div>
+    <div><div class="hero-title">Code of Conduct &amp; Respect at Work</div><div class="hero-desc">Every California employer covers these basics in new-hire orientation. This is how Goodwill expects everyone to treat each other.</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚖️ Treating everyone equally (non-discrimination)</div>
+    <div class="alert blue"><span class="alert-icon">👥</span><div class="alert-body"><strong>The big idea:</strong> Every employee must be treated fairly no matter their race, color, religion, sex, age, national origin, disability, sexual orientation, gender identity, or veteran status. This is the law in California, not just a company preference.</div></div>
+    <div class="alert green"><span class="alert-icon">✅</span><div class="alert-body"><strong>What this looks like day to day:</strong> Treating every coworker and customer the same way — with basic respect — regardless of who they are or how they're different from you.</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔒 Confidentiality</div>
+    <div class="phone-rule"><div class="pr-num">1</div><div><div class="pr-title">Don't share personal information</div><div class="pr-body">If you see a donor's or customer's personal information (like on a receipt, ID, or form), it stays private. Don't share it with anyone, including friends or on social media.</div></div></div>
+    <div class="phone-rule"><div class="pr-num">2</div><div><div class="pr-title">Don't post about work on social media without permission</div><div class="pr-body">Photos of the store, coworkers, donors, or anything work-related should not be posted online unless you're specifically told it's okay.</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⏰ Attendance &amp; punctuality</div>
+    <div class="alert amber"><span class="alert-icon">⏱️</span><div class="alert-body"><strong>Be on time, every time.</strong> Arrive a few minutes early so you're ready to start exactly at your shift time. If you're going to be late or absent, call your supervisor as early as possible — don't just not show up.</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">👔 Dress code &amp; ID badge</div>
+    <div class="alert blue"><span class="alert-icon">🪪</span><div class="alert-body"><strong>Wear your ID badge at all times during your shift.</strong> Follow whatever dress code Goodwill gives you (closed-toe shoes are very common in donation/sorting areas for safety). Ask your supervisor if you're unsure what to wear.</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚫 What NOT to do at work</div>
+    <div style="display:grid; gap:8px; font-size:14px;">
+      <div style="display:flex;gap:8px;"><span style="color:var(--c-red);">✗</span><span>Bring weapons, alcohol, or illegal drugs to work</span></div>
+      <div style="display:flex;gap:8px;"><span style="color:var(--c-red);">✗</span><span>Use offensive language, slurs, or jokes about someone's identity</span></div>
+      <div style="display:flex;gap:8px;"><span style="color:var(--c-red);">✗</span><span>Take store merchandise or donations without paying/permission</span></div>
+      <div style="display:flex;gap:8px;"><span style="color:var(--c-red);">✗</span><span>Use your phone for games, videos, or social media during your shift (covered in Part 1)</span></div>
+      <div style="display:flex;gap:8px;"><span style="color:var(--c-red);">✗</span><span>Leave your station without telling your supervisor</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 4: SEXUAL HARASSMENT PREVENTION -->
+<div class="module-panel" id="mod-3">
+  <div class="hero-card" style="background:linear-gradient(135deg,#C0392B,#922B21);color:#fff;">
+    <div class="hero-icon">🛡️</div>
+    <div><div class="hero-title">Preventing Sexual Harassment</div><div class="hero-desc">California law requires every employer to teach this to every employee. This is what the video will almost certainly cover.</div></div>
+  </div>
+
+  <div class="alert blue"><span class="alert-icon">📜</span><div class="alert-body"><strong>Why this exists:</strong> California state law requires all employers with 5+ employees to give every employee training on this topic, so that everyone knows what's okay, what's not okay, and what to do if something happens. It's required for ALL new hires, in every job, everywhere in California — not specific to Goodwill.</div></div>
+
+  <div class="card">
+    <div class="card-title">❓ What counts as sexual harassment</div>
+    <div class="phone-rule"><div class="pr-num">1</div><div><div class="pr-title">Unwelcome comments or jokes</div><div class="pr-body">Comments about someone's body, sexual jokes, or comments about someone's gender or sexual orientation that make a person uncomfortable.</div></div></div>
+    <div class="phone-rule"><div class="pr-num">2</div><div><div class="pr-title">Unwanted physical contact</div><div class="pr-body">Touching, patting, hugging, or any physical contact that the other person doesn't want — even if it seems "friendly" to the person doing it.</div></div></div>
+    <div class="phone-rule"><div class="pr-num">3</div><div><div class="pr-title">Showing inappropriate images or messages</div><div class="pr-body">Sharing sexual pictures, videos, or messages at work — on a phone, computer, or in person.</div></div></div>
+    <div class="phone-rule"><div class="pr-num">4</div><div><div class="pr-title">Asking someone out repeatedly after they said no</div><div class="pr-body">Continuing to ask a coworker for a date, their number, or to "hang out" after they've already said no.</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🌍 Important facts to remember</div>
+    <div style="display:grid; gap:10px; font-size:14px; line-height:1.6;">
+      <div><strong>It can happen to anyone.</strong> Any gender can experience it, and it can come from a coworker, supervisor, or even a customer.</div>
+      <div><strong>It doesn't have to be "on purpose."</strong> If a behavior makes someone uncomfortable, it's still a problem — even if the person doing it thought it was funny or harmless.</div>
+      <div><strong>It is never the victim's fault.</strong> No one "asks for it" by what they wear, say, or how they act.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🗣️ What to do if it happens (to you or someone else)</div>
+    <div class="phone-rule" style="border-left-color:var(--c-green);"><div class="pr-num" style="color:var(--c-green);">1</div><div><div class="pr-title">Tell your supervisor or manager right away</div><div class="pr-body">You don't have to handle it yourself. Reporting it is the correct, professional response — every time.</div><div class="pr-say">"I need to talk to you about something that happened. Someone made me uncomfortable and I think it should be reported."</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-green);"><div class="pr-num" style="color:var(--c-green);">2</div><div><div class="pr-title">You will not get in trouble for reporting</div><div class="pr-body">This is called "retaliation," and it's against the law. Reporting a problem is the right thing to do — it can't be used against you.</div></div></div>
+    <div class="phone-rule" style="border-left-color:var(--c-green);"><div class="pr-num" style="color:var(--c-green);">3</div><div><div class="pr-title">There are people outside Goodwill too</div><div class="pr-body">The California Civil Rights Department (CRD) handles these issues for the whole state, if needed: 800-884-1684.</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📺 Real training video (optional preview)</div>
+    <div class="alert green"><span class="alert-icon">▶️</span><div class="alert-body"><strong>California's official training:</strong> The state of California provides a free, official training video that covers this exact topic and is used by many employers. You can preview it together at <strong>calcivilrights.ca.gov/shpt</strong> — it's the real thing, not a knockoff, and seeing it once before Goodwill's version may make Leo's video feel familiar.</div></div>
+  </div>
+</div>
+
+<!-- MODULE 5: SAFETY BASICS -->
+<div class="module-panel" id="mod-4">
+  <div class="hero-card" style="background:linear-gradient(135deg,#27AE60,#1A5276);color:#fff;">
+    <div class="hero-icon">⚠️</div>
+    <div><div class="hero-title">Workplace Safety Basics</div><div class="hero-desc">Sorting donations involves boxes, carts, and sometimes sharp or heavy items. These are the basics every retail/warehouse worker learns.</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏋️ Lifting safely</div>
+    <div class="phone-rule"><div class="pr-num">1</div><div><div class="pr-title">Bend your knees, not your back</div><div class="pr-body">Squat down to pick up heavy items, keep the item close to your body, and stand up using your legs. Never bend over at the waist to lift something heavy.</div></div></div>
+    <div class="phone-rule"><div class="pr-num">2</div><div><div class="pr-title">If it's too heavy — ask for help</div><div class="pr-body">Asking a coworker to help lift something heavy is normal and expected. It is not a sign of weakness — it's the safe and correct choice.</div><div class="pr-say">"This is heavy — can you help me lift it?"</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🧤 Handling donations safely</div>
+    <div class="phone-rule"><div class="pr-num">1</div><div><div class="pr-title">Watch for sharp objects</div><div class="pr-body">Donations sometimes contain hidden sharp items — broken glass, needles, knives. If you feel or see something sharp, stop and tell your supervisor. Don't reach blindly into bags or boxes.</div></div></div>
+    <div class="phone-rule"><div class="pr-num">2</div><div><div class="pr-title">Wear gloves if provided</div><div class="pr-body">If Goodwill gives you gloves for sorting, wear them. They protect your hands from sharp or dirty items.</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚧 Keeping the workspace safe</div>
+    <div class="phone-rule"><div class="pr-num">1</div><div><div class="pr-title">Clean up spills immediately</div><div class="pr-body">A spill on the floor is a slip-and-fall hazard. If you see one, either clean it up or tell your supervisor immediately so it can be handled.</div></div></div>
+    <div class="phone-rule"><div class="pr-num">2</div><div><div class="pr-title">Keep aisles and exits clear</div><div class="pr-body">Boxes, carts, and bins should never block walkways, fire exits, or fire extinguishers.</div></div></div>
+    <div class="phone-rule"><div class="pr-num">3</div><div><div class="pr-title">Only use equipment you've been trained on</div><div class="pr-body">If you haven't been shown how to use a piece of equipment (like a baler, box cutter, or pallet jack), don't use it. Ask your supervisor to show you first.</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚨 If you get hurt — even a little</div>
+    <div class="alert red"><span class="alert-icon">🩹</span><div class="alert-body"><strong>Report every injury — even small ones.</strong> A small cut or scrape might seem like "no big deal," but it needs to be reported right away so it can be treated and documented. This protects Leo, not just the company.</div><div class="pr-say">"I got a small cut on my hand. I wanted to let you know right away."</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔥 Emergency basics</div>
+    <div class="alert amber"><span class="alert-icon">🚪</span><div class="alert-body"><strong>Know where the exits are.</strong> On your first day, take a moment to notice where the nearest exit is from your work area. If there's a fire alarm or evacuation, follow your supervisor and other staff calmly to the exit — don't use elevators, and don't stop to grab belongings.</div></div>
+  </div>
+</div>
+
+<!-- MODULE 6: PRACTICE TEST -->
+<div class="module-panel" id="mod-5">
+  <div class="hero-card" style="background:linear-gradient(135deg,#E8651A,#7D3C98);color:#fff;">
+    <div class="hero-icon">📝</div>
+    <div><div class="hero-title">Practice Test</div><div class="hero-desc">20 questions covering everything in Modules 2–4. Answer all of them like a real test — then check your answers at the end to see what you got right.</div></div>
+  </div>
+
+  <div class="alert blue"><span class="alert-icon">ℹ️</span><div class="alert-body"><strong>How to use this:</strong> Answer every question first (just like the real quiz — no checking answers as you go). When you're done, tap "Check My Answers" to see your score and read the explanation for each question.</div></div>
+
+  <div class="progress-track"><div class="progress-fill" id="test-progress" style="width:0%;"></div></div>
+  <div id="test-progress-label" style="text-align:center;font-size:13px;color:var(--c-text-muted);margin-bottom:1rem;">0 of 20 answered</div>
+
+  <div id="test-questions"></div>
+
+  <div class="btn-row" style="justify-content:center;">
+    <button class="btn green-btn" id="check-btn" onclick="checkTest()">✓ Check My Answers</button>
+    <button class="btn ghost" onclick="resetTest()">↺ Start Over</button>
+  </div>
+
+  <div id="score-area"></div>
+</div>
+
+<!-- MODULE 7: TEST DAY TIPS -->
+<div class="module-panel" id="mod-6">
+  <div class="hero-card" style="background:linear-gradient(135deg,#2C3E50,#27AE60);color:#fff;">
+    <div class="hero-icon">⭐</div>
+    <div><div class="hero-title">Test Day Tips for Leo</div><div class="hero-desc">Strategies for the day of the video and quiz — when Leo has to do it on his own.</div></div>
+  </div>
+
+  <div class="phone-rule"><div class="pr-num">1</div><div><div class="pr-title">Watch the videos like you're going to be quizzed — because you are</div><div class="pr-body">When something feels important in the video (a rule, a "what to do" step, a number), pay extra attention. If you're allowed to take notes, jot down key words.</div></div></div>
+
+  <div class="phone-rule"><div class="pr-num">2</div><div><div class="pr-title">Read every question slowly — twice if needed</div><div class="pr-body">Test questions sometimes use words like "NOT" or "EXCEPT" in capital letters. These flip the meaning of the question. Read carefully before choosing an answer.</div><div class="pr-say">"Which of the following is NOT an example of..." — this is asking for the one that's different.</div></div></div>
+
+  <div class="phone-rule"><div class="pr-num">3</div><div><div class="pr-title">If you don't know — pick the most careful, respectful, "tell someone" answer</div><div class="pr-body">On these kinds of quizzes, the correct answer is almost always the one that involves: being safe, being respectful, reporting something, or asking a supervisor. If you're stuck between two answers, pick the one that does this.</div></div></div>
+
+  <div class="phone-rule"><div class="pr-num">4</div><div><div class="pr-title">It's okay to ask how much time you have</div><div class="pr-body">Before starting, it's reasonable to ask: "About how much time do I have for this?" Knowing the time helps you pace yourself without rushing.</div></div></div>
+
+  <div class="phone-rule"><div class="pr-num">5</div><div><div class="pr-title">Remember: this is a "pay attention" test, not a "trick" test</div><div class="pr-body">Companies use this quiz to confirm employees understood the videos — not to fail people. If Leo has gone through Modules 2–4 of this app and the Practice Test, he has already seen almost everything that could be asked.</div></div></div>
+
+  <div class="alert green"><span class="alert-icon">💪</span><div class="alert-body"><strong>One more reminder for Leo:</strong> You've already learned to follow multi-step instructions, ask for clarification, and work carefully — at school, in Theater Tech, and in your summer programs. A video-and-quiz orientation is just another set of instructions to follow. You've done this kind of thing before.</div></div>
+</div>
+
+</main>
+
+<script>
+// ── DATA ──────────────────────────────────────
+// 20-question practice test
+const TEST=[
+  {q:"What is the BEST thing to do if a coworker makes a comment about your body that makes you uncomfortable?",choices:["Laugh it off so it's not awkward","Tell your supervisor or manager what happened","Say nothing and avoid that person from now on","Post about it on social media"],correct:1,explain:"Reporting it to a supervisor or manager is always the correct response. You won't get in trouble for reporting — that's protected by law."},
+  {q:"True or False: Sexual harassment can only happen between a man and a woman.",choices:["True","False"],correct:1,explain:"False. Sexual harassment can happen between any combination of genders, and the law protects everyone equally."},
+  {q:"If you report a problem to your supervisor, what should happen to you afterward?",choices:["You might get in trouble for causing problems","Nothing negative — reporting is protected and cannot be held against you","You'll be moved to a different store","Your hours will be reduced"],correct:1,explain:"Punishing someone for reporting a problem is called retaliation, and it is against the law. Reporting is always the right move."},
+  {q:"Which of these is an example of unwelcome behavior at work?",choices:["A coworker says 'good morning' and smiles","A coworker repeatedly asks you out after you said no","A supervisor explains a task step by step","A coworker asks for help lifting a box"],correct:1,explain:"Continuing to ask someone out after they've said no is a form of unwanted attention and is not okay at work."},
+  {q:"You're lifting a heavy box. What's the correct technique?",choices:["Bend at your waist and lift with your back","Bend your knees, keep the box close, and lift with your legs","Twist your body while lifting to save time","Lift it as fast as possible"],correct:1,explain:"Bending your knees and lifting with your legs protects your back from injury. This is the standard safe-lifting technique."},
+  {q:"A donation box feels like it might have something sharp inside. What should you do?",choices:["Reach in carefully with your bare hand","Stop, and tell your supervisor before continuing","Shake the box to see what's inside","Throw the whole box away"],correct:1,explain:"Stopping and reporting a possible hazard protects you from cuts or injury from hidden sharp objects like glass or needles."},
+  {q:"You get a small cut on your finger while sorting items. What should you do?",choices:["Ignore it — it's too small to matter","Wrap it yourself and don't tell anyone","Report it to your supervisor right away, even though it's small","Wait until the end of your shift to mention it"],correct:2,explain:"All injuries, even small ones, should be reported immediately. This protects you and ensures it's properly documented and treated."},
+  {q:"You see a spill on the floor in the sorting area. What should you do?",choices:["Walk around it and keep working","Clean it up or tell your supervisor immediately","Wait for someone else to notice it","Put a donation box on top of it"],correct:1,explain:"Spills are slip-and-fall hazards. Addressing them immediately — either by cleaning them or alerting a supervisor — keeps everyone safe."},
+  {q:"You've never used a piece of equipment before, and a coworker asks you to use it. What should you do?",choices:["Try it carefully on your own","Say you'll figure it out as you go","Tell them you haven't been trained on it and ask your supervisor to show you first","Watch a video about it on your phone during your shift"],correct:2,explain:"Only use equipment you've been properly trained on. Asking your supervisor for a walkthrough is the safe and professional choice."},
+  {q:"Which of the following should be kept clear at all times in a workplace?",choices:["The break room refrigerator","Aisles, walkways, and exits","The cash register area only","The parking lot"],correct:1,explain:"Aisles, walkways, and exits must always be kept clear for safety — especially in case of an emergency evacuation."},
+  {q:"What does 'non-discrimination' mean in the workplace?",choices:["Only certain people get special treatment","Everyone is treated fairly regardless of race, religion, gender, disability, or other personal characteristics","Only managers have to follow the rules","Discrimination is allowed if it's a joke"],correct:1,explain:"Non-discrimination means every employee and customer is treated fairly and with respect, no matter their background or identity. This is required by California law."},
+  {q:"You see private information about a customer (like their address on a form). What should you do with that information?",choices:["Keep it private — don't share it with anyone","Tell your friends about it","Post about it online","Share it with other customers"],correct:0,explain:"Customer and donor information is confidential. It should never be shared outside of what's required for your job."},
+  {q:"What is the correct way to handle being late to your shift?",choices:["Just show up whenever you can, no need to call","Call your supervisor as early as possible to let them know","Don't come in at all and explain later","Ask a coworker to cover for you without telling your supervisor"],correct:1,explain:"Calling ahead as soon as you know you'll be late is the responsible and expected action."},
+  {q:"True or False: It's okay to use your phone for social media or games if you're not currently helping a customer.",choices:["True","False"],correct:1,explain:"False. Phone use for games or social media is not okay during your shift, even during quiet moments. Phones should stay on silent and in your pocket."},
+  {q:"If you notice a coworker is being harassed by someone else, what should you do?",choices:["Ignore it — it's not your business","Report what you saw to a supervisor","Join in so you don't seem awkward","Tell the coworker to handle it themselves"],correct:1,explain:"If you witness harassment happening to someone else, reporting it helps protect your coworker and is the responsible thing to do."},
+  {q:"Which of these is required to be worn during your shift, if provided?",choices:["Headphones","Sunglasses","Your employee ID badge","A backpack"],correct:2,explain:"Your ID badge should be worn at all times during your shift — it's part of identifying you as an employee."},
+  {q:"What should you do if there's a fire alarm or emergency evacuation?",choices:["Grab your belongings first, then leave","Use the elevator to leave quickly","Follow your supervisor and other staff calmly to the nearest exit","Wait at your workstation until someone tells you what to do"],correct:2,explain:"During an evacuation, follow staff calmly to the nearest exit. Don't use elevators, and don't delay to gather belongings."},
+  {q:"A heavy box needs to be moved and it feels too heavy for one person. What's the best choice?",choices:["Push through and lift it alone to be helpful","Ask a coworker for help lifting it","Drag it across the floor instead of lifting","Leave it where it is and don't tell anyone"],correct:1,explain:"Asking for help with something too heavy is the safe and correct choice — it's expected, not a weakness."},
+  {q:"Is it the victim's fault if they experience sexual harassment because of what they were wearing or how they acted?",choices:["Yes, if they 'invited' it somehow","No — it is never the victim's fault, regardless of appearance or behavior","Only if they didn't say anything at the time","It depends on the situation"],correct:1,explain:"It is never the victim's fault. No one 'asks for' harassment through their appearance, words, or actions."},
+  {q:"What is the best response if you finish a task and aren't sure what to do next?",choices:["Sit and wait for someone to notice you","Find your supervisor and ask what to do next","Start a different task without asking","Take a break until someone gives you instructions"],correct:1,explain:"Proactively reporting that you're done and asking for direction is the professional and expected response in any workplace."},
+];
+
+let testAnswers=[];
+
+// ── NAVIGATION ──────────────────────────────────
+function showModule(idx){
+  document.querySelectorAll('.module-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+  document.querySelectorAll('.nav-item').forEach((n,i)=>n.classList.toggle('active',i===idx));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function switchTab(mod,tab){
+  const parent=document.getElementById('mod-0');
+  if(!parent)return;
+  parent.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  parent.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  const tp=document.getElementById(mod+'-'+tab);
+  if(tp)tp.classList.add('active');
+  parent.querySelectorAll('.tab-btn').forEach(b=>{
+    if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+tab+"'"))b.classList.add('active');
+  });
+}
+
+// ── PRACTICE TEST ──────────────────────────────────
+function initTest(){
+  testAnswers=Array(TEST.length).fill(null);
+  document.getElementById('test-questions').innerHTML=TEST.map((q,qi)=>`
+    <div class="test-q">
+      <div class="test-q-num">Question ${qi+1} of ${TEST.length}</div>
+      <div class="test-q-text">${q.q}</div>
+      ${q.choices.map((c,ci)=>`<button class="test-choice" id="t${qi}-c${ci}" onclick="selectAnswer(${qi},${ci})">${c}</button>`).join('')}
+      <div class="test-explain" id="t${qi}-explain"></div>
+    </div>`).join('');
+  document.getElementById('score-area').innerHTML='';
+  updateProgress();
+}
+function selectAnswer(qi,ci){
+  testAnswers[qi]=ci;
+  for(let i=0;i<TEST[qi].choices.length;i++){
+    document.getElementById(`t${qi}-c${i}`).classList.toggle('selected',i===ci);
+  }
+  updateProgress();
+}
+function updateProgress(){
+  const answered=testAnswers.filter(a=>a!==null).length;
+  document.getElementById('test-progress').style.width=Math.round((answered/TEST.length)*100)+'%';
+  document.getElementById('test-progress-label').textContent=`${answered} of ${TEST.length} answered`;
+}
+function checkTest(){
+  let score=0;
+  TEST.forEach((q,qi)=>{
+    const userAns=testAnswers[qi];
+    for(let i=0;i<q.choices.length;i++){
+      const btn=document.getElementById(`t${qi}-c${i}`);
+      btn.disabled=true;
+      if(i===q.correct)btn.classList.add('correct-answer');
+      else if(i===userAns)btn.classList.add('wrong-answer');
+    }
+    if(userAns===q.correct)score++;
+    const ex=document.getElementById(`t${qi}-explain`);
+    ex.textContent='💡 '+q.explain;
+    ex.classList.add('show');
+  });
+  const pct=Math.round((score/TEST.length)*100);
+  let msg='';
+  if(pct>=90)msg="Outstanding! You clearly understand the material.";
+  else if(pct>=75)msg="Great work! Review the ones you missed, then you're ready.";
+  else if(pct>=60)msg="Good start. Re-read Modules 2–4 and try again — it'll click.";
+  else msg="No problem — this is what practice is for. Review Modules 2–4 and try again.";
+  document.getElementById('score-area').innerHTML=`<div class="score-box"><div class="score-num">${score} / ${TEST.length}</div><div class="score-label">${pct}% correct — ${msg}</div></div>`;
+  document.getElementById('score-area').scrollIntoView({behavior:'smooth'});
+}
+function resetTest(){
+  initTest();
+}
+
+// ── INIT ───────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  initTest();
+});
+</script>
+</body>
+</html>
