@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+<title>Quiz: Introduction to Post-Secondary Education | West LA College</title>
+<style>
+  :root {
+    --navy: #0B1F5C;
+    --navy-dark: #081642;
+    --gold: #F5C13B;
+    --gold-deep: #D89B1C;
+    --orange: #E8622C;
+    --white: #FFFFFF;
+    --charcoal: #2B2B2B;
+    --light: #F4F6FB;
+    --gray: #5A5F6E;
+    --green: #1E8E4F;
+    --red: #C0392B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Verdana, Arial, sans-serif;
+    background: var(--light);
+    color: var(--charcoal);
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 22px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: "";
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    background: var(--navy-dark);
+    border-radius: 50%;
+  }
+  .header-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+  .kicker {
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 32px;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+  }
+  .subtitle { font-size: 19px; color: #C9D3EE; margin: 0; }
+  .lang-toggle {
+    position: absolute;
+    top: 20px; right: 20px;
+    z-index: 2;
+    background: var(--gold);
+    color: var(--navy-dark);
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  .lang-toggle:hover { background: var(--gold-deep); }
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+  }
+  .instructions {
+    background: white;
+    border-left: 6px solid var(--gold);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 22px;
+    font-size: 19px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .name-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .name-card label {
+    font-weight: 700;
+    color: var(--navy);
+    display: block;
+    margin-bottom: 8px;
+    font-size: 19px;
+  }
+  .name-card input {
+    width: 100%;
+    font-size: 20px;
+    padding: 12px 14px;
+    border: 3px solid #E2E6F0;
+    border-radius: 8px;
+    font-family: inherit;
+  }
+  .name-card input:focus { outline: none; border-color: var(--gold); }
+
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--navy);
+  }
+  .progress-bar-bg {
+    flex: 1;
+    background: #DCE2F2;
+    height: 16px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--orange));
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .q-card {
+    background: white;
+    border-radius: 14px;
+    padding: 26px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  }
+  .q-number {
+    display: inline-block;
+    background: var(--navy);
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .q-text {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+  .choice {
+    display: block;
+    background: var(--light);
+    border: 3px solid #E2E6F0;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 19px;
+    transition: all 0.15s ease;
+  }
+  .choice:hover { border-color: var(--gold); }
+  .choice input { margin-right: 12px; transform: scale(1.3); vertical-align: middle; }
+  .choice.picked { border-color: var(--navy); background: #EAF0FF; font-weight: 700; }
+
+  .submit-btn {
+    display: block;
+    margin: 30px auto 0;
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    border-radius: 30px;
+    font-size: 21px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .submit-btn:hover { background: var(--navy-dark); }
+  .submit-btn:disabled { background: #AEB6D0; cursor: not-allowed; }
+
+  .missing-note {
+    text-align: center;
+    color: var(--red);
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 14px;
+    display: none;
+  }
+
+  .results {
+    display: none;
+    text-align: center;
+    background: white;
+    border-radius: 16px;
+    padding: 40px 28px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .results.show { display: block; }
+  .score-circle {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: var(--light);
+    border: 8px solid var(--gold);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .score-num { font-size: 42px; font-weight: 700; color: var(--navy); font-family: Georgia, serif; }
+  .score-den { font-size: 18px; color: var(--gray); }
+  .results h2 {
+    font-family: Georgia, serif;
+    color: var(--navy);
+    font-size: 28px;
+    margin: 6px 0;
+  }
+  .results p { font-size: 19px; color: var(--charcoal); }
+  .review-item {
+    text-align: left;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    font-size: 17px;
+  }
+  .review-item.correct { background: #E7F6ED; border-left: 6px solid var(--green); }
+  .review-item.incorrect { background: #FBEAE8; border-left: 6px solid var(--red); }
+  .review-item .rq { font-weight: 700; margin-bottom: 4px; color: var(--navy); }
+  .screenshot-note {
+    background: #FFF6DE;
+    border: 2px dashed var(--gold-deep);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 24px;
+    font-size: 17px;
+    color: var(--navy-dark);
+    text-align: left;
+  }
+  .retry-btn {
+    display: inline-block;
+    margin-top: 20px;
+    background: var(--orange);
+    color: white;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .retry-btn:hover { background: #C94F1F; }
+
+  footer {
+    text-align: center;
+    color: var(--gray);
+    font-size: 15px;
+    padding: 20px;
+  }
+  [data-lang="es"] { display: none; }
+  body.lang-es [data-lang="en"] { display: none; }
+  body.lang-es [data-lang="es"] { display: inline; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 25px; }
+    body { font-size: 18px; }
+    .q-text { font-size: 19px; }
+    .choice { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <button class="lang-toggle" onclick="toggleLang()">
+    <span data-lang="en">Español</span>
+    <span data-lang="es">English</span>
+  </button>
+  <div class="header-inner">
+    <div class="kicker">
+      <span data-lang="en">Module 2 · Graded Assessment</span>
+      <span data-lang="es">Módulo 2 · Evaluación Calificada</span>
+    </div>
+    <h1>
+      <span data-lang="en">Quick Check: Post-Secondary Education</span>
+      <span data-lang="es">Evaluación Rápida: Educación Postsecundaria</span>
+    </h1>
+    <p class="subtitle">VOC ED 075CE — West Los Angeles College</p>
+  </div>
+</header>
+
+<main>
+  <div class="instructions">
+    <span data-lang="en">8 questions. Pick the best answer for each one. You will see your score right away.</span>
+    <span data-lang="es">8 preguntas. Elige la mejor respuesta para cada una. Verás tu puntaje al instante.</span>
+  </div>
+
+  <div class="name-card">
+    <label><span data-lang="en">Your Name</span><span data-lang="es">Tu Nombre</span></label>
+    <input type="text" id="studentName" placeholder="">
+  </div>
+
+  <div class="progress-wrap">
+    <span><span data-lang="en">Answered</span><span data-lang="es">Contestadas</span>: <span id="answeredCount">0</span>/8</span>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+  </div>
+
+  <div id="quizForm"></div>
+
+  <button class="submit-btn" id="submitBtn" onclick="submitQuiz()">
+    <span data-lang="en">See My Score</span>
+    <span data-lang="es">Ver Mi Puntaje</span>
+  </button>
+  <div class="missing-note" id="missingNote">
+    <span data-lang="en">Please answer every question before submitting.</span>
+    <span data-lang="es">Por favor responde todas las preguntas antes de enviar.</span>
+  </div>
+
+  <div class="results" id="results">
+    <div class="score-circle">
+      <div class="score-num" id="scoreNum">0</div>
+      <div class="score-den"><span data-lang="en">out of 8</span><span data-lang="es">de 8</span></div>
+    </div>
+    <h2 id="resultMessage"></h2>
+    <p id="resultSub"></p>
+
+    <div id="reviewList" style="margin-top:24px;"></div>
+
+    <div class="screenshot-note">
+      📸 <span data-lang="en"><strong>Show your instructor:</strong> Take a screenshot of this results page (with your name and score) and show it to Alejandra, or email it to salceda@laccd.edu.</span>
+      <span data-lang="es"><strong>Muéstraselo a tu instructora:</strong> Toma una captura de pantalla de esta página de resultados (con tu nombre y puntaje) y muéstrasela a Alejandra, o envíala por correo a salceda@laccd.edu.</span>
+    </div>
+
+    <button class="retry-btn" onclick="retryQuiz()">
+      <span data-lang="en">Try Again</span>
+      <span data-lang="es">Intentar de Nuevo</span>
+    </button>
+  </div>
+</main>
+
+<footer>
+  VOC ED 075CE · West Los Angeles College · Building Skills Partnership
+</footer>
+
+<script>
+const questions = [
+  {
+    en: "Which is an example of a certificate program that usually takes less than a year?",
+    es: "¿Cuál es un ejemplo de un programa de certificado que generalmente toma menos de un año?",
+    choices: [
+      { en: "Bachelor's degree", es: "Título de licenciatura" },
+      { en: "HVAC Basics certificate", es: "Certificado básico de HVAC" },
+      { en: "Master's degree", es: "Título de maestría" }
+    ],
+    correct: 1
+  },
+  {
+    en: "What does FAFSA help students get?",
+    es: "¿Qué ayuda a conseguir la FAFSA a los estudiantes?",
+    choices: [
+      { en: "A driver's license", es: "Una licencia de conducir" },
+      { en: "Financial aid for college", es: "Ayuda financiera para la universidad" },
+      { en: "A job interview", es: "Una entrevista de trabajo" }
+    ],
+    correct: 1
+  },
+  {
+    en: "About how long does an Associate Degree usually take?",
+    es: "¿Aproximadamente cuánto tiempo toma normalmente un título de asociado?",
+    choices: [
+      { en: "6 months", es: "6 meses" },
+      { en: "2 years", es: "2 años" },
+      { en: "4 years", es: "4 años" }
+    ],
+    correct: 1
+  },
+  {
+    en: "Which office helps you enroll and take your first steps at a community college?",
+    es: "¿Qué oficina te ayuda a inscribirte y dar tus primeros pasos en un colegio comunitario?",
+    choices: [
+      { en: "Financial Aid Office", es: "Oficina de Ayuda Financiera" },
+      { en: "Welcome Center", es: "Centro de Bienvenida" },
+      { en: "Bookstore", es: "Librería" }
+    ],
+    correct: 1
+  },
+  {
+    en: "A porter interested in building systems might train to become a:",
+    es: "Un portero interesado en los sistemas de edificios podría entrenarse para ser:",
+    choices: [
+      { en: "Line Cook", es: "Cocinero de línea" },
+      { en: "Building Engineer", es: "Ingeniero de edificios" },
+      { en: "Loss Prevention Officer", es: "Oficial de prevención de pérdidas" }
+    ],
+    correct: 1
+  },
+  {
+    en: "What is one benefit of the California College Promise Grant?",
+    es: "¿Cuál es un beneficio de la Beca California College Promise?",
+    choices: [
+      { en: "It waives enrollment fees", es: "Exime las cuotas de inscripción" },
+      { en: "It pays your rent", es: "Paga tu renta" },
+      { en: "It replaces FAFSA", es: "Reemplaza a la FAFSA" }
+    ],
+    correct: 0
+  },
+  {
+    en: "In your Action Plan, \"My First Step\" should be something you can do in:",
+    es: "En tu Plan de Acción, \"Mi Primer Paso\" debe ser algo que puedas hacer en:",
+    choices: [
+      { en: "5 years", es: "5 años" },
+      { en: "The next 30 days", es: "Los próximos 30 días" },
+      { en: "Never", es: "Nunca" }
+    ],
+    correct: 1
+  },
+  {
+    en: "Which is generally the most affordable option in California?",
+    es: "¿Cuál es generalmente la opción más económica en California?",
+    choices: [
+      { en: "Private university", es: "Universidad privada" },
+      { en: "California Community College", es: "Colegio Comunitario de California" },
+      { en: "Private trade school", es: "Escuela técnica privada" }
+    ],
+    correct: 1
+  }
+];
+
+let currentLang = 'en';
+const userAnswers = new Array(questions.length).fill(null);
+
+function buildQuiz() {
+  const form = document.getElementById('quizForm');
+  form.innerHTML = '';
+  questions.forEach((q, qi) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    let choicesHtml = '';
+    q.choices.forEach((c, ci) => {
+      choicesHtml += `
+        <label class="choice" id="choice-${qi}-${ci}">
+          <input type="radio" name="q${qi}" value="${ci}" onchange="pickAnswer(${qi}, ${ci})">
+          <span data-lang="en">${c.en}</span><span data-lang="es">${c.es}</span>
+        </label>`;
+    });
+    card.innerHTML = `
+      <div class="q-number"><span data-lang="en">Question ${qi + 1} of ${questions.length}</span><span data-lang="es">Pregunta ${qi + 1} de ${questions.length}</span></div>
+      <div class="q-text"><span data-lang="en">${q.en}</span><span data-lang="es">${q.es}</span></div>
+      ${choicesHtml}
+    `;
+    form.appendChild(card);
+  });
+  applyLangVisibility();
+}
+
+function pickAnswer(qi, ci) {
+  userAnswers[qi] = ci;
+  for (let i = 0; i < questions[qi].choices.length; i++) {
+    document.getElementById(`choice-${qi}-${i}`).classList.toggle('picked', i === ci);
+  }
+  updateProgress();
+}
+
+function updateProgress() {
+  const answered = userAnswers.filter(a => a !== null).length;
+  document.getElementById('answeredCount').textContent = answered;
+  document.getElementById('progressFill').style.width = (answered / questions.length * 100) + '%';
+}
+
+function submitQuiz() {
+  const missing = userAnswers.some(a => a === null);
+  const nameVal = document.getElementById('studentName').value.trim();
+  if (missing) {
+    document.getElementById('missingNote').style.display = 'block';
+    return;
+  }
+  document.getElementById('missingNote').style.display = 'none';
+
+  let score = 0;
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  questions.forEach((q, qi) => {
+    const isCorrect = userAnswers[qi] === q.correct;
+    if (isCorrect) score++;
+    const div = document.createElement('div');
+    div.className = 'review-item ' + (isCorrect ? 'correct' : 'incorrect');
+    div.innerHTML = `
+      <div class="rq">${qi + 1}. <span data-lang="en">${q.en}</span><span data-lang="es">${q.es}</span></div>
+      <div>${isCorrect ? '✔' : '✘'}
+        <span data-lang="en">Your answer: ${q.choices[userAnswers[qi]].en}</span>
+        <span data-lang="es">Tu respuesta: ${q.choices[userAnswers[qi]].es}</span>
+        ${!isCorrect ? `<br><span data-lang="en">Correct answer: ${q.choices[q.correct].en}</span><span data-lang="es">Respuesta correcta: ${q.choices[q.correct].es}</span>` : ''}
+      </div>
+    `;
+    reviewList.appendChild(div);
+  });
+
+  document.getElementById('scoreNum').textContent = score;
+  const pct = Math.round(score / questions.length * 100);
+  const msgEl = document.getElementById('resultMessage');
+  const subEl = document.getElementById('resultSub');
+
+  let msgEn, msgEs;
+  if (pct >= 70) {
+    msgEn = "Great job" + (nameVal ? ", " + nameVal : "") + "! 🎉";
+    msgEs = "¡Excelente trabajo" + (nameVal ? ", " + nameVal : "") + "! 🎉";
+  } else if (pct >= 40) {
+    msgEn = "Good effort" + (nameVal ? ", " + nameVal : "") + "!";
+    msgEs = "¡Buen esfuerzo" + (nameVal ? ", " + nameVal : "") + "!";
+  } else {
+    msgEn = "Keep going" + (nameVal ? ", " + nameVal : "") + "!";
+    msgEs = "¡Sigue adelante" + (nameVal ? ", " + nameVal : "") + "!";
+  }
+  msgEl.innerHTML = `<span data-lang="en">${msgEn}</span><span data-lang="es">${msgEs}</span>`;
+  subEl.innerHTML = `<span data-lang="en">You scored ${pct}%.</span><span data-lang="es">Obtuviste ${pct}%.</span>`;
+
+  document.querySelector('main').querySelectorAll('.instructions, .name-card, .progress-wrap, #quizForm, #submitBtn, #missingNote').forEach(el => el.style.display = 'none');
+  document.getElementById('results').classList.add('show');
+  applyLangVisibility();
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+function retryQuiz() {
+  userAnswers.fill(null);
+  document.getElementById('studentName').value = '';
+  document.getElementById('results').classList.remove('show');
+  document.querySelector('main').querySelectorAll('.instructions, .name-card, .progress-wrap, #quizForm, #submitBtn').forEach(el => el.style.display = '');
+  updateProgress();
+  buildQuiz();
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  document.body.classList.toggle('lang-es', currentLang === 'es');
+}
+function applyLangVisibility() {
+  document.body.classList.toggle('lang-es', currentLang === 'es');
+}
+
+buildQuiz();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+<title>Activity 2: Plan It Out | West LA College</title>
+<style>
+  :root {
+    --navy: #0B1F5C;
+    --navy-dark: #081642;
+    --gold: #F5C13B;
+    --gold-deep: #D89B1C;
+    --orange: #E8622C;
+    --white: #FFFFFF;
+    --charcoal: #2B2B2B;
+    --light: #F4F6FB;
+    --gray: #5A5F6E;
+    --green: #1E8E4F;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Verdana, Arial, sans-serif;
+    background: var(--light);
+    color: var(--charcoal);
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 22px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: "";
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    background: var(--navy-dark);
+    border-radius: 50%;
+  }
+  .header-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+  .kicker {
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 34px;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+  }
+  .subtitle { font-size: 19px; color: #C9D3EE; margin: 0; }
+  .lang-toggle {
+    position: absolute;
+    top: 20px; right: 20px;
+    z-index: 2;
+    background: var(--gold);
+    color: var(--navy-dark);
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  .lang-toggle:hover { background: var(--gold-deep); }
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+  }
+  .instructions {
+    background: white;
+    border-left: 6px solid var(--gold);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 26px;
+    font-size: 19px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: #DCE2F2;
+    transition: all 0.3s ease;
+  }
+  .dot.active { background: var(--gold); transform: scale(1.3); }
+  .dot.done { background: var(--green); }
+  .step {
+    display: none;
+    background: white;
+    border-radius: 14px;
+    padding: 30px 28px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  }
+  .step.active { display: block; }
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px; height: 46px;
+    background: var(--gold);
+    color: var(--navy-dark);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+  .step h2 {
+    font-family: Georgia, serif;
+    color: var(--navy);
+    font-size: 27px;
+    margin: 0 0 6px 0;
+  }
+  .step .prompt {
+    font-size: 19px;
+    color: var(--gray);
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  textarea, input[type=text] {
+    width: 100%;
+    font-size: 20px;
+    font-family: inherit;
+    padding: 16px;
+    border: 3px solid #E2E6F0;
+    border-radius: 10px;
+    resize: vertical;
+    min-height: 90px;
+  }
+  input[type=text] { min-height: unset; }
+  textarea:focus, input[type=text]:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .btn-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 26px;
+    gap: 12px;
+  }
+  button.nav-btn {
+    font-size: 19px;
+    font-weight: 700;
+    padding: 14px 26px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-back {
+    background: #E2E6F0;
+    color: var(--navy);
+  }
+  .btn-back:hover { background: #D2D8EA; }
+  .btn-next {
+    background: var(--navy);
+    color: white;
+  }
+  .btn-next:hover { background: var(--navy-dark); }
+  .btn-back:disabled { visibility: hidden; }
+
+  .summary {
+    display: none;
+    background: white;
+    border-radius: 14px;
+    padding: 34px 28px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  }
+  .summary.active { display: block; }
+  .summary h2 {
+    font-family: Georgia, serif;
+    color: var(--navy);
+    text-align: center;
+    font-size: 30px;
+    margin-top: 0;
+  }
+  .summary-card {
+    background: var(--light);
+    border-left: 6px solid var(--gold);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+  .summary-card .label {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .summary-card .value {
+    font-size: 20px;
+    color: var(--charcoal);
+    white-space: pre-wrap;
+  }
+  .print-btn {
+    display: block;
+    margin: 26px auto 0;
+    background: var(--orange);
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .print-btn:hover { background: #C94F1F; }
+  .edit-btn {
+    display: block;
+    margin: 14px auto 0;
+    background: none;
+    border: none;
+    color: var(--navy);
+    font-size: 17px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  footer {
+    text-align: center;
+    color: var(--gray);
+    font-size: 15px;
+    padding: 20px;
+  }
+  [data-lang="es"] { display: none; }
+  body.lang-es [data-lang="en"] { display: none; }
+  body.lang-es [data-lang="es"] { display: inline; }
+
+  @media print {
+    header, .lang-toggle, .step-indicator, .instructions, .print-btn, .edit-btn, footer { display: none; }
+    .summary { box-shadow: none; }
+  }
+  @media (max-width: 600px) {
+    h1 { font-size: 27px; }
+    body { font-size: 18px; }
+    .step, .summary { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <button class="lang-toggle" onclick="toggleLang()">
+    <span data-lang="en">Español</span>
+    <span data-lang="es">English</span>
+  </button>
+  <div class="header-inner">
+    <div class="kicker">
+      <span data-lang="en">Module 2 · Interactive Activity</span>
+      <span data-lang="es">Módulo 2 · Actividad Interactiva</span>
+    </div>
+    <h1>
+      <span data-lang="en">Activity 2: Plan It Out</span>
+      <span data-lang="es">Actividad 2: Planéalo</span>
+    </h1>
+    <p class="subtitle">VOC ED 075CE — West Los Angeles College</p>
+  </div>
+</header>
+
+<main>
+  <div class="instructions">
+    <span data-lang="en">This is your moment. Answer each question in your own words. Take your time — there are no wrong answers.</span>
+    <span data-lang="es">Este es tu momento. Responde cada pregunta con tus propias palabras. Tómate tu tiempo — no hay respuestas incorrectas.</span>
+  </div>
+
+  <div class="step-indicator" id="stepIndicator"></div>
+
+  <div id="steps"></div>
+
+  <div class="summary" id="summary">
+    <h2>
+      <span data-lang="en">🎉 Your Action Plan</span>
+      <span data-lang="es">🎉 Tu Plan de Acción</span>
+    </h2>
+    <div class="summary-card">
+      <div class="label"><span data-lang="en">My Goal</span><span data-lang="es">Mi Meta</span></div>
+      <div class="value" id="sumGoal"></div>
+    </div>
+    <div class="summary-card">
+      <div class="label"><span data-lang="en">My First Step</span><span data-lang="es">Mi Primer Paso</span></div>
+      <div class="value" id="sumStep"></div>
+    </div>
+    <div class="summary-card">
+      <div class="label"><span data-lang="en">My Support</span><span data-lang="es">Mi Apoyo</span></div>
+      <div class="value" id="sumSupport"></div>
+    </div>
+    <div class="summary-card">
+      <div class="label"><span data-lang="en">My Timeline</span><span data-lang="es">Mi Fecha Límite</span></div>
+      <div class="value" id="sumTimeline"></div>
+    </div>
+    <button class="print-btn" onclick="window.print()">
+      <span data-lang="en">🖨 Print / Save My Plan</span>
+      <span data-lang="es">🖨 Imprimir / Guardar Mi Plan</span>
+    </button>
+    <button class="edit-btn" onclick="goToStep(0)">
+      <span data-lang="en">Edit my answers</span>
+      <span data-lang="es">Editar mis respuestas</span>
+    </button>
+  </div>
+</main>
+
+<footer>
+  VOC ED 075CE · West Los Angeles College · Building Skills Partnership
+</footer>
+
+<script>
+const steps = [
+  {
+    key: 'goal',
+    titleEn: 'My Goal', titleEs: 'Mi Meta',
+    promptEn: 'What do you want to be doing in 2 years?',
+    promptEs: '¿Qué quieres estar haciendo en 2 años?',
+    placeholderEn: 'Example: I want to be working as a facilities supervisor.',
+    placeholderEs: 'Ejemplo: Quiero estar trabajando como supervisor(a) de instalaciones.'
+  },
+  {
+    key: 'step',
+    titleEn: 'My First Step', titleEs: 'Mi Primer Paso',
+    promptEn: 'What is one thing you will do in the next 30 days?',
+    promptEs: '¿Cuál es una cosa que harás en los próximos 30 días?',
+    placeholderEn: 'Example: I will talk to a counselor about enrolling.',
+    placeholderEs: 'Ejemplo: Hablaré con un consejero sobre cómo inscribirme.'
+  },
+  {
+    key: 'support',
+    titleEn: 'My Support', titleEs: 'Mi Apoyo',
+    promptEn: 'Who will help you stay on track?',
+    promptEs: '¿Quién te ayudará a mantenerte en el camino correcto?',
+    placeholderEn: 'Example: My sister and my coworker Maria.',
+    placeholderEs: 'Ejemplo: Mi hermana y mi compañera de trabajo María.'
+  },
+  {
+    key: 'timeline',
+    titleEn: 'My Timeline', titleEs: 'Mi Fecha Límite',
+    promptEn: 'When will you apply, enroll, or start?',
+    promptEs: '¿Cuándo vas a aplicar, inscribirte, o empezar?',
+    placeholderEn: 'Example: I will apply by the end of October.',
+    placeholderEs: 'Ejemplo: Voy a aplicar antes de que termine octubre.'
+  }
+];
+
+let currentStep = 0;
+let currentLang = 'en';
+const answers = { goal: '', step: '', support: '', timeline: '' };
+
+function buildSteps() {
+  const container = document.getElementById('steps');
+  const indicator = document.getElementById('stepIndicator');
+  container.innerHTML = '';
+  indicator.innerHTML = '';
+
+  steps.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'step' + (i === 0 ? ' active' : '');
+    div.id = 'step-' + i;
+    div.innerHTML = `
+      <div class="step-number">${i + 1}</div>
+      <h2><span data-lang="en">${s.titleEn}</span><span data-lang="es">${s.titleEs}</span></h2>
+      <p class="prompt"><span data-lang="en">${s.promptEn}</span><span data-lang="es">${s.promptEs}</span></p>
+      <textarea id="input-${s.key}" placeholder="${currentLang === 'en' ? s.placeholderEn : s.placeholderEs}"></textarea>
+      <div class="btn-row">
+        <button class="nav-btn btn-back" onclick="prevStep()" ${i === 0 ? 'disabled' : ''}>
+          <span data-lang="en">← Back</span><span data-lang="es">← Atrás</span>
+        </button>
+        <button class="nav-btn btn-next" onclick="nextStep()">
+          ${i === steps.length - 1 ? '<span data-lang="en">See My Plan →</span><span data-lang="es">Ver Mi Plan →</span>' : '<span data-lang="en">Next →</span><span data-lang="es">Siguiente →</span>'}
+        </button>
+      </div>
+    `;
+    container.appendChild(div);
+
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.id = 'dot-' + i;
+    indicator.appendChild(dot);
+  });
+
+  applyLangVisibility();
+}
+
+function saveCurrentAnswer() {
+  const key = steps[currentStep].key;
+  answers[key] = document.getElementById('input-' + key).value;
+}
+
+function nextStep() {
+  saveCurrentAnswer();
+  if (currentStep === steps.length - 1) {
+    showSummary();
+    return;
+  }
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  document.getElementById('dot-' + currentStep).classList.remove('active');
+  document.getElementById('dot-' + currentStep).classList.add('done');
+  currentStep++;
+  document.getElementById('step-' + currentStep).classList.add('active');
+  document.getElementById('dot-' + currentStep).classList.add('active');
+  document.getElementById('input-' + steps[currentStep].key).value = answers[steps[currentStep].key];
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+function prevStep() {
+  saveCurrentAnswer();
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  document.getElementById('dot-' + currentStep).classList.remove('active');
+  currentStep--;
+  document.getElementById('step-' + currentStep).classList.add('active');
+  document.getElementById('dot-' + currentStep).classList.add('active');
+  document.getElementById('dot-' + currentStep).classList.remove('done');
+  document.getElementById('input-' + steps[currentStep].key).value = answers[steps[currentStep].key];
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+function goToStep(i) {
+  document.getElementById('summary').classList.remove('active');
+  document.getElementById('steps').style.display = 'block';
+  document.getElementById('stepIndicator').style.display = 'flex';
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+  currentStep = i;
+  document.getElementById('step-' + i).classList.add('active');
+  document.getElementById('dot-' + i).classList.add('active');
+  document.getElementById('input-' + steps[i].key).value = answers[steps[i].key];
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+function fillPlaceholderIfEmpty(key, val) {
+  return val && val.trim() !== '' ? val : (currentLang === 'en' ? '(not answered)' : '(sin responder)');
+}
+
+function showSummary() {
+  document.getElementById('steps').style.display = 'none';
+  document.getElementById('stepIndicator').style.display = 'none';
+  document.getElementById('summary').classList.add('active');
+  document.getElementById('sumGoal').textContent = fillPlaceholderIfEmpty('goal', answers.goal);
+  document.getElementById('sumStep').textContent = fillPlaceholderIfEmpty('step', answers.step);
+  document.getElementById('sumSupport').textContent = fillPlaceholderIfEmpty('support', answers.support);
+  document.getElementById('sumTimeline').textContent = fillPlaceholderIfEmpty('timeline', answers.timeline);
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  document.body.classList.toggle('lang-es', currentLang === 'es');
+  steps.forEach(s => {
+    const el = document.getElementById('input-' + s.key);
+    if (el) el.placeholder = currentLang === 'en' ? s.placeholderEn : s.placeholderEs;
+  });
+}
+function applyLangVisibility() {
+  document.body.classList.toggle('lang-es', currentLang === 'es');
+}
+
+buildSteps();
+</script>
+
+</body>
+</html>
