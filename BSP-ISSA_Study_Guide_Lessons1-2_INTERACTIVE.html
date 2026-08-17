@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BSP - ISSA-CMI Supervision Certification - Bilingual Study Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --navy: #1B2A5E;
+  --navy-dark: #101B42;
+  --gold: #E8C24A;
+  --gold-dark: #C9A227;
+  --cream: #FDF8EA;
+  --ink: #1E2430;
+}
+
+* { box-sizing: border-box; }
+
+svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: var(--ink);
+  background: #f4f1e8;
+  line-height: 1.55;
+}
+
+h1, h2, h3, h4, .brand-font {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ---------- Header ---------- */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+  color: #fff;
+  padding: 46px 0 40px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -80px; top: -80px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: rgba(232,194,74,0.10);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  left: -60px; bottom: -120px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: rgba(232,194,74,0.07);
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+.hero-logo {
+  width: 92px; height: auto;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  flex-shrink: 0;
+}
+.hero-text .eyebrow {
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 12.5px;
+  margin-bottom: 6px;
+}
+.hero-text h1 {
+  font-size: 30px;
+  font-weight: 900;
+  margin: 0 0 6px;
+  line-height: 1.18;
+}
+.hero-text .subtitle {
+  color: #cfd6ee;
+  font-size: 15px;
+  font-weight: 500;
+}
+.hero-badges {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.badge {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(232,194,74,0.45);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.badge svg { width: 13px; height: 13px; }
+
+.gold-rule {
+  height: 5px;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold) 40%, var(--gold-dark));
+}
+
+/* ---------- Callout ---------- */
+.callout {
+  background: #fff;
+  border: 1px solid #e7e0c8;
+  border-left: 6px solid var(--gold-dark);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 26px 0;
+  box-shadow: 0 2px 10px rgba(27,42,94,0.06);
+}
+.callout h4 {
+  margin: 0 0 8px;
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 800;
+  display: flex; align-items: center; gap: 8px;
+}
+.callout h4 svg { width: 18px; height: 18px; color: var(--gold-dark); }
+.callout p { margin: 4px 0; font-size: 14.5px; }
+.callout .es { color: #555; font-style: italic; }
+
+/* ---------- Section headers ---------- */
+.lesson-header {
+  background: var(--navy);
+  color: #fff;
+  border-radius: 14px;
+  padding: 26px 28px;
+  margin: 40px 0 22px;
+  position: relative;
+  box-shadow: 0 8px 22px rgba(27,42,94,0.22);
+}
+.lesson-header .tag {
+  background: var(--gold);
+  color: var(--navy-dark);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.lesson-header h2 {
+  margin: 0 0 4px;
+  font-size: 24px;
+  font-weight: 900;
+}
+.lesson-header h2 .es {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-top: 3px;
+}
+.lesson-header .pages {
+  font-size: 13px;
+  color: #cfd6ee;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+h3.block-title {
+  color: var(--navy);
+  font-size: 18px;
+  font-weight: 800;
+  margin: 30px 0 4px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid var(--gold);
+  display: flex; align-items: center; gap: 8px;
+}
+h3.block-title .es {
+  font-weight: 600;
+  font-size: 13.5px;
+  color: #7a7250;
+}
+
+/* ---------- Concept cards ---------- */
+.concept-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e9e3cd;
+  padding: 18px 20px;
+  margin: 14px 0;
+  box-shadow: 0 2px 8px rgba(27,42,94,0.05);
+  position: relative;
+}
+.concept-card .pgpill {
+  position: absolute;
+  top: -10px; right: 16px;
+  background: var(--gold);
+  color: var(--navy-dark);
+  font-weight: 800;
+  font-size: 11.5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.concept-card h4 {
+  color: var(--navy);
+  margin: 0 0 2px;
+  font-size: 16px;
+  font-weight: 800;
+}
+.concept-card h4 .es {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-dark);
+  margin-top: 2px;
+}
+.concept-card .en-text { margin: 10px 0 6px; font-size: 14.5px; }
+.concept-card .es-text { margin: 6px 0 0; font-size: 14px; color: #4b4a3e; font-style: italic; border-top: 1px dashed #e2dcc4; padding-top: 8px;}
+.lang-tag {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.06em;
+  color: var(--navy); background: #eef0fa; padding: 1px 6px; border-radius: 4px; margin-right: 6px;
+}
+.lang-tag.es { color: var(--gold-dark); background: #fbf3dc; }
+
+/* ---------- Flashcards ---------- */
+.flash-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 16px 0 8px;
+}
+.flash {
+  background: #fff;
+  border: 1px solid #e9e3cd;
+  border-radius: 12px;
+  padding: 16px;
+  min-height: 108px;
+  box-shadow: 0 2px 8px rgba(27,42,94,0.05);
+}
+.flash .term-en { font-weight: 800; color: var(--navy); font-size: 14.5px; }
+.flash .term-es { font-weight: 700; color: var(--gold-dark); font-size: 12.5px; margin-top: 1px; }
+.flash .def { font-size: 12.5px; color: #47473c; margin-top: 8px; border-top: 1px dashed #e2dcc4; padding-top: 8px;}
+
+/* ---------- Diagrams ---------- */
+.diagram-box {
+  background: #fff;
+  border: 1px solid #e9e3cd;
+  border-radius: 14px;
+  padding: 22px;
+  margin: 18px 0 26px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(27,42,94,0.05);
+}
+.diagram-box .cap {
+  font-size: 12px;
+  color: #7a7250;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* ---------- Quiz ---------- */
+.quiz-q {
+  background: #fff;
+  border: 1px solid #e9e3cd;
+  border-radius: 12px;
+  padding: 16px 20px 18px;
+  margin: 12px 0;
+  box-shadow: 0 2px 8px rgba(27,42,94,0.05);
+}
+.quiz-q .qnum {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--navy); color: #fff; font-weight: 800; font-size: 12px;
+  margin-right: 8px;
+}
+.quiz-q .qpg {
+  float: right;
+  font-size: 11px; font-weight: 800; color: var(--gold-dark);
+  background: #fbf3dc; padding: 3px 9px; border-radius: 999px;
+}
+.quiz-q .qtext-en { font-weight: 700; font-size: 14.5px; margin: 8px 0 2px; }
+.quiz-q .qtext-es { font-style: italic; color: #555; font-size: 13px; margin-bottom: 10px; }
+.opt {
+  display: block;
+  border: 1.5px solid #dcd6bc;
+  border-radius: 8px;
+  padding: 9px 12px;
+  margin: 6px 0;
+  font-size: 13.5px;
+  cursor: pointer;
+  background: #fffdf6;
+  transition: 0.15s;
+}
+.opt:hover { border-color: var(--gold-dark); background: #fbf3dc; }
+.opt.correct { border-color: #2f8f4e; background: #e6f6ea; font-weight: 700; }
+.opt.incorrect { border-color: #c0392b; background: #fbe8e6; }
+.es-op { display:block; color:#666; font-style: italic; font-size: 12px; margin-top: 2px;}
+.explain {
+  display: none;
+  margin-top: 10px;
+  background: #eef3ec;
+  border-left: 4px solid #2f8f4e;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.explain.show { display: block; }
+.explain .es { color: #4b4a3e; font-style: italic; display:block; margin-top:4px; }
+
+.check-answers { text-align: right; }
+.answer-key-table { width:100%; border-collapse: collapse; font-size: 13.5px; margin-top: 10px;}
+.answer-key-table th, .answer-key-table td { border: 1px solid #e2dcc4; padding: 8px 10px; text-align: left; }
+.answer-key-table th { background: var(--navy); color: #fff; }
+.answer-key-table tr:nth-child(even) { background: #fbf8ec; }
+
+/* ---------- Footer ---------- */
+footer {
+  background: var(--navy-dark);
+  color: #b9c1de;
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 50px;
+  font-size: 12.5px;
+}
+footer .credit { color: var(--gold); font-weight: 700; margin-bottom: 4px; }
+
+.toc {
+  display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 6px;
+}
+.toc a {
+  background: #fff; border: 1.5px solid var(--navy); color: var(--navy);
+  font-weight: 700; font-size: 13px; padding: 8px 16px; border-radius: 999px;
+  text-decoration: none;
+}
+.toc a:hover { background: var(--navy); color: #fff; }
+
+
+.lang-toggle {
+  position: sticky; top: 0; z-index: 50;
+  background: #fff;
+  border-bottom: 3px solid var(--gold);
+  padding: 10px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.lang-toggle .inner { display:flex; align-items:center; justify-content: space-between; flex-wrap: wrap; gap: 10px;}
+.lang-toggle button {
+  border: 1.5px solid var(--navy); background:#fff; color: var(--navy);
+  font-weight:700; font-size:12.5px; padding:7px 14px; border-radius:999px; cursor:pointer; margin-right:6px;
+}
+.lang-toggle button.active { background: var(--navy); color:#fff; }
+
+body.hide-es .es, body.hide-es .es-text, body.hide-es .es-op, body.hide-es .qtext-es, body.hide-es .term-es { display:none !important; }
+body.hide-en .en-text, body.hide-en .qtext-en, body.hide-en .term-en { display:none !important; }
+
+.progress-wrap { background:#e6e0c8; border-radius:999px; height:8px; overflow:hidden; margin: 6px 0 18px;}
+.progress-bar { background: linear-gradient(90deg,var(--gold-dark),var(--gold)); height:100%; width:0%; transition:0.4s; }
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <div class="wrap inner">
+    <div style="font-weight:800;color:var(--navy);font-size:13px;">View / Ver:</div>
+    <div>
+      <button id="btn-both" class="active" onclick="setLang('both')">Both / Ambos</button>
+      <button id="btn-en" onclick="setLang('en')">English only</button>
+      <button id="btn-es" onclick="setLang('es')">Solo Espanol</button>
+    </div>
+  </div>
+</div>
+
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <img src="data:image/png;base64,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" class="hero-logo" alt="BSP Logo">
+    <div class="hero-text">
+      <div class="eyebrow">Building Skills Partnership &middot; ISSA / CMI Certification Prep</div>
+      <h1>Custodial &amp; Maintenance Supervision<br>Certification &mdash; Study Guide</h1>
+      <div class="subtitle">Gu&iacute;a de estudio bilingüe &middot; Bilingual English / Espa&ntilde;ol &middot; Lessons 1 &amp; 2</div>
+      <div class="hero-badges">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4.5A2.5 2.5 0 016.5 2H20v17H6.5A2.5 2.5 0 004 16.5v-12z"/><path d="M4 16.5A2.5 2.5 0 016.5 19H20"/></svg> Book pp. 6&ndash;18</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> 80% passing score per section</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg> Exam available in English &amp; Spanish</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Open-book exam</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="gold-rule"></div>
+
+
+<div class="wrap">
+  
+<div class="callout">
+  <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4.5A2.5 2.5 0 016.5 2H20v17H6.5A2.5 2.5 0 004 16.5v-12z"/><path d="M4 16.5A2.5 2.5 0 016.5 19H20"/></svg> How to use this guide &nbsp;/&nbsp; <span class="es">C&oacute;mo usar esta gu&iacute;a</span></h4>
+  <p><strong>EN:</strong> Each section exam is <strong>open-book</strong> and requires an <strong>80% passing score</strong>
+  before you can move on. Every concept below shows the exact <strong>page number</strong> in your handbook &mdash;
+  use it! You may now take your official exam in <strong>English or Spanish</strong>, whichever feels most comfortable.</p>
+  <p class="es"><strong>ES:</strong> El examen de cada secci&oacute;n es <strong>de libro abierto</strong> y requiere un
+  <strong>puntaje de aprobaci&oacute;n del 80%</strong> antes de avanzar. Cada concepto a continuaci&oacute;n muestra el
+  <strong>n&uacute;mero de p&aacute;gina</strong> exacto en tu manual &mdash; &iexcl;&uacute;salo! Ahora puedes tomar tu
+  examen oficial en <strong>ingl&eacute;s o espa&ntilde;ol</strong>, lo que te resulte m&aacute;s c&oacute;modo.</p>
+</div>
+
+
+  <div class="toc">
+    <a href="#lesson1">Lesson 1 - Leccion 1</a>
+    <a href="#lesson2">Lesson 2 - Leccion 2</a>
+    <a href="#quiz1">Quiz 1</a>
+    <a href="#quiz2">Quiz 2</a>
+  </div>
+
+  <a id="lesson1"></a>
+  <div class="lesson-header">
+    <span class="tag">Section 1 - Seccion 1</span>
+    <h2>Lesson 1: Personal Development Training Programs<span class="es">Leccion 1: Programas de Desarrollo Personal</span></h2>
+    <div class="pages">Book pages / Paginas del libro: 6-14</div>
+  </div>
+
+  <h3 class="block-title">Key Concepts <span class="es">Conceptos clave</span></h3>
+  
+        <div class="concept-card">
+          <span class="pgpill">p. 6</span>
+          <h4>Attitude Is Your #1 Tool<span class="es">La actitud es tu herramienta #1</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Attitude is the strongest tool in your tool belt, across every career. In the book's letter activity, ATTITUDE literally adds up to 100 (A=1, T=20, T=20, I=9, T=20, U=21, D=4, E=5) — a reminder that attitude reflects 100% of your success.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>La actitud es la herramienta más fuerte en tu cinturón de herramientas, en cualquier carrera. En la actividad de letras del libro, la palabra ACTITUD (ATTITUDE) suma exactamente 100 — un recordatorio de que la actitud refleja el 100% de tu éxito.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 7</span>
+          <h4>SMART Goals<span class="es">Metas SMART</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Set goals that are Specific, Measurable, Attainable, Realistic, and Time Focused. Break goals into 30-day, 60-day, 90-day, 1-year, and over-1-year targets, and keep a personal "visions board."</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Fija metas que sean Específicas, Medibles, Alcanzables, Realistas y Enfocadas en el tiempo. Divide tus metas en plazos de 30, 60, 90 días, 1 año y más de 1 año, y mantén un "tablero de visión" personal.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 7</span>
+          <h4>Accountability Partner<span class="es">Compañero de responsabilidad</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>A supervisor or manager is the strongest accountability partner because they have a direct impact on your success — more than family, coworkers, or friends.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Un supervisor o gerente es el mejor compañero de responsabilidad porque tiene un impacto directo en tu éxito — más que la familia, los compañeros de trabajo o los amigos.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 8</span>
+          <h4>Body Language<span class="es">Lenguaje corporal</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Every body part — head, shoulders, mid-section, hands, and arms — sends a non-verbal message. Customers should read you as attentive, honest, open, interested, and confident.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Cada parte del cuerpo — cabeza, hombros, torso, manos y brazos — envía un mensaje no verbal. Los clientes deben percibirte como atento, honesto, abierto, interesado y confiado.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 8</span>
+          <h4>Who Is the Customer?<span class="es">¿Quién es el cliente?</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Treat every building occupant as a customer, even without direct influence over your tasks: owner/operator, contract manager, quality officers, building occupants, and visitors.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Trata a todo ocupante del edificio como cliente, aunque no tenga influencia directa sobre tus tareas: propietario/operador, gerente de contrato, oficiales de calidad, ocupantes del edificio y visitantes.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 9</span>
+          <h4>Personal Image & Dress Code<span class="es">Imagen personal y código de vestimenta</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>A smile, direct eye contact, and a firm handshake build trust in seconds. Clothing must always be clean, neat, and safe for the equipment around it.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Una sonrisa, contacto visual directo y un apretón de manos firme generan confianza en segundos. La ropa siempre debe estar limpia, ordenada y ser segura para el equipo que te rodea.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 9</span>
+          <h4>Types of Customer Issues<span class="es">Tipos de problemas del cliente</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Short-term (coffee spills, un-emptied trash), Mid-range (scuffs, floor damage, light bulb outage), Long-term (recurring carpet spots, odors), and Safety Concerns (wet floors, chemical hazards, fire hazards).</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Corto plazo (café derramado, basura sin vaciar), Rango medio (rayones, daño al piso, foco fundido), Largo plazo (manchas recurrentes en alfombra, olores), y Preocupaciones de seguridad (pisos mojados, riesgos químicos, riesgos de incendio).</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 10</span>
+          <h4>The 5 Steps of Communication<span class="es">Los 5 pasos de la comunicación</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Listen → Assess → Explain → Take Action → Thank the customer. When a customer is upset, focus on the first three: Listening, Assessing, and Explanation.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Escuchar → Evaluar → Explicar → Tomar acción → Agradecer al cliente. Cuando un cliente está molesto, concéntrate en los primeros tres: Escuchar, Evaluar y Explicar.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 12</span>
+          <h4>"I" Statements, Not "You" Statements<span class="es">Declaraciones con "Yo", no con "Tú"</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>"You" statements sound condescending ("You need to be patient"). "I" statements show ownership ("I apologize for the delay; I am working to get this solved.")</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Las declaraciones con "Tú" suenan condescendientes ("Tú necesitas tener paciencia"). Las declaraciones con "Yo" muestran responsabilidad ("Yo me disculpo por la demora; estoy trabajando para resolverlo").</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 12</span>
+          <h4>Empathy Resolves Conflict<span class="es">La empatía resuelve conflictos</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Empathy is the capacity to share or recognize emotions. Repeat back what you heard, and — if you can't resolve it alone — ask a management-level employee for help. It's never wrong to ask.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>La empatía es la capacidad de compartir o reconocer emociones. Repite lo que escuchaste y, si no puedes resolverlo solo, pide ayuda a un empleado de nivel gerencial. Nunca está mal pedir ayuda.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 13</span>
+          <h4>Reporting Harassment<span class="es">Reportar el acoso</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Every organization has an organizational chart / chain of command. Know it before an incident happens — it tells you who to speak with for a harassment issue or process approval.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Toda organización tiene un organigrama / cadena de mando. Conócelo antes de que ocurra un incidente — te indica con quién hablar ante un problema de acoso o para aprobar un proceso.</p>
+        </div>
+
+  <h3 class="block-title">The Attitude Formula <span class="es">La formula de la actitud</span></h3>
+  <div class="diagram-box">
+    
+<svg viewBox="0 0 640 100" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;width:100%;height:auto;">
+  
+        <g transform="translate(20,10)">
+          <rect width="52" height="62" rx="10" fill="#fff" stroke="#C9A227" stroke-width="2"/>
+          <text x="26" y="34" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="26" fill="#1B2A5E">A</text>
+          <text x="26" y="52" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#C9A227">1</text>
+        </g>
+        <g transform="translate(80,10)">
+          <rect width="52" height="62" rx="10" fill="#FDF6E3" stroke="#C9A227" stroke-width="2"/>
+          <text x="26" y="34" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="26" fill="#1B2A5E">T</text>
+          <text x="26" y="52" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#C9A227">20</text>
+        </g>
+        <g transform="translate(140,10)">
+          <rect width="52" height="62" rx="10" fill="#fff" stroke="#C9A227" stroke-width="2"/>
+          <text x="26" y="34" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="26" fill="#1B2A5E">T</text>
+          <text x="26" y="52" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#C9A227">20</text>
+        </g>
+        <g transform="translate(200,10)">
+          <rect width="52" height="62" rx="10" fill="#FDF6E3" stroke="#C9A227" stroke-width="2"/>
+          <text x="26" y="34" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="26" fill="#1B2A5E">I</text>
+          <text x="26" y="52" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#C9A227">9</text>
+        </g>
+        <g transform="translate(260,10)">
+          <rect width="52" height="62" rx="10" fill="#fff" stroke="#C9A227" stroke-width="2"/>
+          <text x="26" y="34" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="26" fill="#1B2A5E">T</text>
+          <text x="26" y="52" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#C9A227">20</text>
+        </g>
+        <g transform="translate(320,10)">
+          <rect width="52" height="62" rx="10" fill="#FDF6E3" stroke="#C9A227" stroke-width="2"/>
+          <text x="26" y="34" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="26" fill="#1B2A5E">U</text>
+          <text x="26" y="52" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#C9A227">21</text>
+        </g>
+        <g transform="translate(380,10)">
+          <rect width="52" height="62" rx="10" fill="#fff" stroke="#C9A227" stroke-width="2"/>
+          <text x="26" y="34" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="26" fill="#1B2A5E">D</text>
+          <text x="26" y="52" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#C9A227">4</text>
+        </g>
+        <g transform="translate(440,10)">
+          <rect width="52" height="62" rx="10" fill="#FDF6E3" stroke="#C9A227" stroke-width="2"/>
+          <text x="26" y="34" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="26" fill="#1B2A5E">E</text>
+          <text x="26" y="52" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#C9A227">5</text>
+        </g>
+  <g transform="translate(508,10)">
+    <rect width="118" height="62" rx="10" fill="#1B2A5E"/>
+    <text x="59" y="30" text-anchor="middle" font-family="Inter" font-weight="700" font-size="12" fill="#E8C24A">SUM =</text>
+    <text x="59" y="52" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="24" fill="#fff">100</text>
+  </g>
+</svg>
+    <div class="cap">A + T + T + I + T + U + D + E = 100 - p. 6</div>
+  </div>
+
+  <h3 class="block-title">The 5-Step Communication Cycle <span class="es">El ciclo de comunicacion de 5 pasos</span></h3>
+  <div class="diagram-box">
+    
+<svg viewBox="0 0 440 400" xmlns="http://www.w3.org/2000/svg" style="max-width:420px;width:100%;height:auto;">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 z" fill="#1B2A5E"/>
+    </marker>
+  </defs>
+  <path d="M244.7,132.4 Q287.6,107.0 276.7,155.6" fill="none" stroke="#1B2A5E" stroke-width="2.5" marker-end="url(#arrow)"/><path d="M292.0,202.6 Q329.4,235.5 279.7,240.2" fill="none" stroke="#1B2A5E" stroke-width="2.5" marker-end="url(#arrow)"/><path d="M239.8,269.2 Q220.0,315.0 200.2,269.2" fill="none" stroke="#1B2A5E" stroke-width="2.5" marker-end="url(#arrow)"/><path d="M160.3,240.2 Q110.6,235.5 148.0,202.6" fill="none" stroke="#1B2A5E" stroke-width="2.5" marker-end="url(#arrow)"/><path d="M163.3,155.6 Q152.4,107.0 195.3,132.4" fill="none" stroke="#1B2A5E" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <circle cx="220" cy="200" r="46" fill="#1B2A5E"/>
+  <text x="220" y="194" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="13" fill="#fff">CUSTOMER</text>
+  <text x="220" y="212" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="13" fill="#E8C24A">APPRECIATION</text>
+  
+        <g transform="translate(220.0,70.0)">
+          <circle r="52" fill="#E8C24A" stroke="#1B2A5E" stroke-width="3"/>
+          <text x="0" y="-4" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="13" fill="#1B2A5E">1. Listen</text>
+          <text x="0" y="14" text-anchor="middle" font-family="Inter" font-style="italic" font-weight="600" font-size="11" fill="#101B42">Escuchar</text>
+        </g>
+        <g transform="translate(343.63734711837,159.82779073125684)">
+          <circle r="52" fill="#fff" stroke="#1B2A5E" stroke-width="3"/>
+          <text x="0" y="-4" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="13" fill="#1B2A5E">2. Assess</text>
+          <text x="0" y="14" text-anchor="middle" font-family="Inter" font-style="italic" font-weight="600" font-size="11" fill="#101B42">Evaluar</text>
+        </g>
+        <g transform="translate(296.4120827980215,305.1722092687432)">
+          <circle r="52" fill="#E8C24A" stroke="#1B2A5E" stroke-width="3"/>
+          <text x="0" y="-4" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="13" fill="#1B2A5E">3. Explain</text>
+          <text x="0" y="14" text-anchor="middle" font-family="Inter" font-style="italic" font-weight="600" font-size="11" fill="#101B42">Explicar</text>
+        </g>
+        <g transform="translate(143.5879172019785,305.1722092687432)">
+          <circle r="52" fill="#fff" stroke="#1B2A5E" stroke-width="3"/>
+          <text x="0" y="-4" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="13" fill="#1B2A5E">4. Take Action</text>
+          <text x="0" y="14" text-anchor="middle" font-family="Inter" font-style="italic" font-weight="600" font-size="11" fill="#101B42">Tomar acción</text>
+        </g>
+        <g transform="translate(96.36265288163003,159.82779073125687)">
+          <circle r="52" fill="#E8C24A" stroke="#1B2A5E" stroke-width="3"/>
+          <text x="0" y="-4" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="13" fill="#1B2A5E">5. Thank</text>
+          <text x="0" y="14" text-anchor="middle" font-family="Inter" font-style="italic" font-weight="600" font-size="11" fill="#101B42">Agradecer</text>
+        </g>
+</svg>
+    <div class="cap">Listen - Assess - Explain - Take Action - Thank &middot; p. 10-11</div>
+  </div>
+
+  <h3 class="block-title">Flashcards <span class="es">Tarjetas de estudio</span></h3>
+  <div class="flash-grid">
+        <div class="flash">
+          <div class="term-en">Attitude</div>
+          <div class="term-es">Actitud</div>
+          <div class="def">Your outlook and mindset — the #1 predictor of career success.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">SMART Goal</div>
+          <div class="term-es">Meta SMART</div>
+          <div class="def">Specific, Measurable, Attainable, Realistic, Time Focused.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Body Language</div>
+          <div class="term-es">Lenguaje corporal</div>
+          <div class="def">Non-verbal communication through head, shoulders, mid-section, hands, and arms.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Customer</div>
+          <div class="term-es">Cliente</div>
+          <div class="def">Anyone connected to the building — owner, manager, occupant, or visitor.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Short-term Issue</div>
+          <div class="term-es">Problema a corto plazo</div>
+          <div class="def">Quick fix, little/no equipment — e.g., a coffee spill.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Mid-range Issue</div>
+          <div class="term-es">Problema de rango medio</div>
+          <div class="def">Requires more work/equipment — e.g., floor damage.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Long-term Issue</div>
+          <div class="term-es">Problema a largo plazo</div>
+          <div class="def">Documented, researched — e.g., recurring carpet spots.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Empathy</div>
+          <div class="term-es">Empatía</div>
+          <div class="def">The capacity to share or recognize another person's emotions.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Accountability Partner</div>
+          <div class="term-es">Compañero de responsabilidad</div>
+          <div class="def">Person (ideally your supervisor) who helps you stay on track toward your goals.</div>
+        </div></div>
+
+  <a id="quiz1"></a>
+  <h3 class="block-title">Practice Quiz 1 <span class="es">Cuestionario de practica 1</span></h3>
+  <p style="font-size:13.5px;color:#555;">Based on the official BSP instructor practice exam, Section One. Click an answer to check it instantly.<br>
+  <span class="es">Basado en el examen de practica oficial del instructor de BSP, Seccion Uno. Haz clic en una respuesta para verificarla al instante.</span></p>
+  <div class="progress-wrap"><div class="progress-bar" id="l1-progress"></div></div>
+  <div id="l1-quiz">
+        <div class="quiz-q" id="l1-q0">
+          <span class="qpg">p. 8</span>
+          <span class="qnum">1</span>
+          <div class="qtext-en">Who are the customers that facility staff members deal with?</div>
+          <div class="qtext-es">¿Quiénes son los clientes con los que trata el personal de instalaciones?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',0,0,3)">
+              Managers<span class="es-op">Gerentes</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',0,1,3)">
+              Employees<span class="es-op">Empleados</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',0,2,3)">
+              Teammates<span class="es-op">Compañeros de equipo</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',0,3,3)">
+              Building occupants<span class="es-op">Ocupantes del edificio</span>
+            </div>
+          <div class="explain" id="l1-exp0">
+            <strong>Explanation:</strong> The book lists Building Owner/Operator, Contract Manager, Quality Management Officers, Building Occupants, and Visitors as customers.
+            <span class="es"><strong>Explicacion:</strong> El libro enumera como clientes a: Propietario/Operador, Gerente de Contrato, Oficiales de Gestión de Calidad, Ocupantes del Edificio y Visitantes.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q1">
+          <span class="qpg">p. 8</span>
+          <span class="qnum">2</span>
+          <div class="qtext-en">Body language includes everything EXCEPT:</div>
+          <div class="qtext-es">El lenguaje corporal incluye todo EXCEPTO:</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',1,0,2)">
+              Appearance<span class="es-op">Apariencia</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',1,1,2)">
+              Body position<span class="es-op">Posición del cuerpo</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',1,2,2)">
+              Tone of your voice<span class="es-op">El tono de tu voz</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',1,3,2)">
+              Posture<span class="es-op">Postura</span>
+            </div>
+          <div class="explain" id="l1-exp1">
+            <strong>Explanation:</strong> Body language is non-verbal (head, shoulders, mid-section, hands, arms). Tone of voice is a verbal cue.
+            <span class="es"><strong>Explicacion:</strong> El lenguaje corporal es no verbal (cabeza, hombros, torso, manos, brazos). El tono de voz es una señal verbal.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q2">
+          <span class="qpg">p. 9</span>
+          <span class="qnum">3</span>
+          <div class="qtext-en">Clothing should never cause a safety issue.</div>
+          <div class="qtext-es">La ropa nunca debe causar un problema de seguridad.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',2,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',2,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l1-exp2">
+            <strong>Explanation:</strong> Clothing must be clean, neat, and safe for use around equipment.
+            <span class="es"><strong>Explicacion:</strong> La ropa debe estar limpia, ordenada y ser segura para usarse cerca del equipo.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q3">
+          <span class="qpg">p. 9</span>
+          <span class="qnum">4</span>
+          <div class="qtext-en">Which of these is an example of a short-term issue?</div>
+          <div class="qtext-es">¿Cuál de estos es un ejemplo de un problema a corto plazo?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',3,0,3)">
+              Light bulb outage<span class="es-op">Foco fundido</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',3,1,3)">
+              Improper chemical usage<span class="es-op">Uso inadecuado de químicos</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',3,2,3)">
+              Reappearance of spots on a carpet<span class="es-op">Reaparición de manchas en la alfombra</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',3,3,3)">
+              Excess dirt tracked into the building<span class="es-op">Exceso de tierra arrastrada al edificio</span>
+            </div>
+          <div class="explain" id="l1-exp3">
+            <strong>Explanation:</strong> Light bulb outage = mid-range; improper chemical usage = safety concern; recurring carpet spots = long-term.
+            <span class="es"><strong>Explicacion:</strong> Foco fundido = rango medio; uso inadecuado de químicos = seguridad; manchas recurrentes en alfombra = largo plazo.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q4">
+          <span class="qpg">p. 11</span>
+          <span class="qnum">5</span>
+          <div class="qtext-en">What is the last step of good communication?</div>
+          <div class="qtext-es">¿Cuál es el último paso de una buena comunicación?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',4,0,2)">
+              Listening<span class="es-op">Escuchar</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',4,1,2)">
+              Take action<span class="es-op">Tomar acción</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',4,2,2)">
+              Thank the customer<span class="es-op">Agradecer al cliente</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',4,3,2)">
+              Assess the situation<span class="es-op">Evaluar la situación</span>
+            </div>
+          <div class="explain" id="l1-exp4">
+            <strong>Explanation:</strong> The cycle is Listen → Assess → Explain → Take Action → Thank.
+            <span class="es"><strong>Explicacion:</strong> El ciclo es: Escuchar → Evaluar → Explicar → Tomar acción → Agradecer.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q5">
+          <span class="qpg">p. 10</span>
+          <span class="qnum">6</span>
+          <div class="qtext-en">When dealing with angry customers, it's important to focus on what three things?</div>
+          <div class="qtext-es">Al tratar con clientes enojados, ¿en qué tres cosas es importante enfocarse?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',5,0,0)">
+              Listening, Assessing, and Explanation<span class="es-op">Escuchar, Evaluar y Explicar</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',5,1,0)">
+              Assessing, Taking Action, and Thanking<span class="es-op">Evaluar, Tomar acción y Agradecer</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',5,2,0)">
+              Avoid angry customers<span class="es-op">Evitar a los clientes enojados</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',5,3,0)">
+              Doing everything possible to make them happy<span class="es-op">Hacer todo lo posible para complacerlos</span>
+            </div>
+          <div class="explain" id="l1-exp5">
+            <strong>Explanation:</strong> Pushing back escalates the situation — focus on the first three communication steps instead.
+            <span class="es"><strong>Explicacion:</strong> Responder a la defensiva empeora la situación — concéntrate en los primeros tres pasos de la comunicación.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q6">
+          <span class="qpg">p. 6</span>
+          <span class="qnum">7</span>
+          <div class="qtext-en">Taking pride in your career is one of the most important components of your growth potential.</div>
+          <div class="qtext-es">Sentir orgullo por tu carrera es uno de los componentes más importantes de tu potencial de crecimiento.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',6,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',6,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l1-exp6">
+            <strong>Explanation:</strong> This is the opening line of "How to Develop & Set Goals."
+            <span class="es"><strong>Explicacion:</strong> Esta es la frase inicial de "Cómo desarrollar y fijar metas".</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q7">
+          <span class="qpg">p. 12</span>
+          <span class="qnum">8</span>
+          <div class="qtext-en">Improper communication has no negative effect on relationships, personal nor professional.</div>
+          <div class="qtext-es">La comunicación inadecuada no tiene ningún efecto negativo en las relaciones, ni personales ni profesionales.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',7,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',7,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l1-exp7">
+            <strong>Explanation:</strong> "Communication can be the demise of any relationship... if it is done improperly."
+            <span class="es"><strong>Explicacion:</strong> "La comunicación puede ser el fin de cualquier relación... si se hace de manera inadecuada."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q8">
+          <span class="qpg">p. 13</span>
+          <span class="qnum">9</span>
+          <div class="qtext-en">If you are dealing with a harassment issue or looking for approval on a new process, _______ is a tool to find the right person to speak with.</div>
+          <div class="qtext-es">Si estás lidiando con un problema de acoso o buscando aprobación para un nuevo proceso, _______ es una herramienta para encontrar a la persona correcta con quién hablar.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',8,0,1)">
+              Safety Data Sheet<span class="es-op">Hoja de Datos de Seguridad</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',8,1,1)">
+              Organizational Chart<span class="es-op">Organigrama</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',8,2,1)">
+              Contract<span class="es-op">Contrato</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',8,3,1)">
+              Timeline<span class="es-op">Cronograma</span>
+            </div>
+          <div class="explain" id="l1-exp8">
+            <strong>Explanation:</strong> The organizational chart / chain of command tells you who to report to.
+            <span class="es"><strong>Explicacion:</strong> El organigrama / cadena de mando te indica a quién reportar.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q9">
+          <span class="qpg">p. 10</span>
+          <span class="qnum">10</span>
+          <div class="qtext-en">When dealing with aggressive or angry customers, it is beneficial to find common ground.</div>
+          <div class="qtext-es">Al tratar con clientes agresivos o enojados, es beneficioso encontrar un punto en común.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',9,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',9,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l1-exp9">
+            <strong>Explanation:</strong> Finding common ground — acknowledging outside factors like stress at work or home — helps create calm, open communication.
+            <span class="es"><strong>Explicacion:</strong> Encontrar un punto en común — reconociendo factores externos como el estrés laboral o familiar — ayuda a crear una comunicación tranquila y abierta.</span>
+          </div>
+        </div>
+    <div class="callout" style="text-align:center;" id="l1-score-box">
+      <h4 style="justify-content:center;">Your Score / Tu puntaje: <span id="l1-score">0</span> / 10
+        &nbsp; (<span id="l1-pct">0</span>%)</h4>
+      <p style="font-size:13px;color:#666;">Remember: 80% or higher is a pass on the real exam. / Recuerda: 80% o mas es aprobatorio en el examen real.</p>
+      <button onclick="resetQuiz('l1',10)" style="background:var(--navy);color:#fff;border:none;padding:9px 18px;border-radius:999px;font-weight:700;cursor:pointer;font-size:13px;">Reset Quiz / Reiniciar</button>
+    </div>
+    </div>
+
+  <a id="lesson2"></a>
+  <div class="lesson-header">
+    <span class="tag">Section 2 - Seccion 2</span>
+    <h2>Lesson 2: Qualifications of a Supervisor<span class="es">Leccion 2: Cualidades de un Supervisor</span></h2>
+    <div class="pages">Book pages / Paginas del libro: 15-18</div>
+  </div>
+
+  <h3 class="block-title">Key Concepts <span class="es">Conceptos clave</span></h3>
+  
+        <div class="concept-card">
+          <span class="pgpill">p. 15</span>
+          <h4>Leadership Is the #1 Qualification<span class="es">El liderazgo es la cualificación #1</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>A supervisor's most important qualification is leadership. Supervisors must be experts at getting the greatest, most efficient effort from others — and inspire respect and cooperation.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>La cualificación más importante de un supervisor es el liderazgo. Los supervisores deben ser expertos en obtener el mayor esfuerzo, de la manera más eficiente, de los demás — e inspirar respeto y cooperación.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 15</span>
+          <h4>In-House vs. Contracted Operations<span class="es">Operaciones internas vs. contratadas</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>All custodial operations are Facility Service Providers (FSP): an in-house service provider (ISP) is owned/managed by the building owner; a Building Service Contractor (BSC) has won the bid, either lowest cost or best value.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Todas las operaciones de limpieza son Proveedores de Servicios de Instalaciones (FSP): un proveedor de servicio interno (ISP) es propiedad/administrado por el dueño del edificio; un Contratista de Servicios de Edificios (BSC) ganó la licitación, ya sea por costo más bajo o mejor valor.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 16</span>
+          <h4>What a Supervisor Needs to Succeed<span class="es">Lo que un supervisor necesita para tener éxito</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Willingness to get dirty (as a training tool, not routine), being observant and perceptive of staff needs, determination, self-discipline, staying current with new methods, and communicating effectively.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Disposición para "ensuciarse las manos" (como herramienta de capacitación, no como rutina), ser observador y perceptivo de las necesidades del personal, determinación, autodisciplina, mantenerse al día con nuevos métodos y comunicarse eficazmente.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 16</span>
+          <h4>Set the Example<span class="es">Dar el ejemplo</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>If supervisors are careless, come in late, and watch the clock, staff will too. Regular participation in daily duties can actually dilute a supervisor's leadership status — it should be used mainly as a training tool.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Si los supervisores son descuidados, llegan tarde y solo miran el reloj, el personal hará lo mismo. Participar regularmente en las tareas diarias puede en realidad debilitar el estatus de liderazgo del supervisor — debe usarse principalmente como herramienta de capacitación.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 17</span>
+          <h4>Leadership vs. Dictatorship<span class="es">Liderazgo vs. dictadura</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Employees might obey a dictator, but they'll feel resentful, which creates expensive, time-consuming inefficiency. Humility — not title alone — is a quality of successful supervisors.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Los empleados podrían obedecer a un dictador, pero se sentirán resentidos, lo cual genera ineficiencia costosa y que consume tiempo. La humildad — no solo el título — es una cualidad de los supervisores exitosos.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 18</span>
+          <h4>Basic Leadership Style Scale<span class="es">Escala básica de estilos de liderazgo</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Three philosophies, used depending on the situation: Authoritarian (leader decides), Participative (team proposes, leader decides), and Delegative (full delegation to the team).</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Tres filosofías, usadas según la situación: Autoritario (el líder decide), Participativo (el equipo propone, el líder decide) y Delegativo (delegación total al equipo).</p>
+        </div>
+
+  <h3 class="block-title">Basic Leadership Style Scale <span class="es">Escala basica de estilos de liderazgo</span></h3>
+  <div class="diagram-box">
+    
+<svg viewBox="0 0 668 175" xmlns="http://www.w3.org/2000/svg" style="max-width:680px;width:100%;height:auto;">
+  
+        <g transform="translate(20,10)">
+          <rect width="200" height="150" rx="12" fill="#1B2A5E"/>
+          <text x="100.0" y="30" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="15" fill="#E8C24A">Authoritarian</text>
+          <text x="100.0" y="48" text-anchor="middle" font-family="Inter" font-weight="600" font-size="11.5" fill="#dfe4f5">Autoritario</text>
+          <text x="100.0" y="74" text-anchor="middle" font-family="Inter" font-size="11" fill="#fff">
+            <tspan x="100.0" dy="0">Autocratic decision by leader</tspan>
+          </text>
+          <text x="100.0" y="90" text-anchor="middle" font-family="Inter" font-style="italic" font-size="10" fill="#cfd6ee">
+            <tspan x="100.0" dy="0">Decisión autocrática del líder</tspan>
+          </text>
+          <rect x="10" y="106" width="180" height="1" fill="rgba(255,255,255,0.25)"/>
+          <text x="100.0" y="124" text-anchor="middle" font-family="Inter" font-weight="700" font-size="10.5" fill="#E8C24A">Emergency situations</text>
+          <text x="100.0" y="139" text-anchor="middle" font-family="Inter" font-style="italic" font-weight="600" font-size="9.5" fill="#cfd6ee">Situaciones de emergencia</text>
+        </g>
+        <g transform="translate(236,10)">
+          <rect width="200" height="150" rx="12" fill="#2c3f80"/>
+          <text x="100.0" y="30" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="15" fill="#E8C24A">Participative</text>
+          <text x="100.0" y="48" text-anchor="middle" font-family="Inter" font-weight="600" font-size="11.5" fill="#dfe4f5">Participativo</text>
+          <text x="100.0" y="74" text-anchor="middle" font-family="Inter" font-size="11" fill="#fff">
+            <tspan x="100.0" dy="0">Team proposes, leader decides</tspan>
+          </text>
+          <text x="100.0" y="90" text-anchor="middle" font-family="Inter" font-style="italic" font-size="10" fill="#cfd6ee">
+            <tspan x="100.0" dy="0">El equipo propone, el líder decide</tspan>
+          </text>
+          <rect x="10" y="106" width="180" height="1" fill="rgba(255,255,255,0.25)"/>
+          <text x="100.0" y="124" text-anchor="middle" font-family="Inter" font-weight="700" font-size="10.5" fill="#E8C24A">Training & development</text>
+          <text x="100.0" y="139" text-anchor="middle" font-family="Inter" font-style="italic" font-weight="600" font-size="9.5" fill="#cfd6ee">Capacitación y desarrollo</text>
+        </g>
+        <g transform="translate(452,10)">
+          <rect width="200" height="150" rx="12" fill="#3c52a0"/>
+          <text x="100.0" y="30" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="15" fill="#E8C24A">Delegative</text>
+          <text x="100.0" y="48" text-anchor="middle" font-family="Inter" font-weight="600" font-size="11.5" fill="#dfe4f5">Delegativo</text>
+          <text x="100.0" y="74" text-anchor="middle" font-family="Inter" font-size="11" fill="#fff">
+            <tspan x="100.0" dy="0">Full delegation to team</tspan>
+          </text>
+          <text x="100.0" y="90" text-anchor="middle" font-family="Inter" font-style="italic" font-size="10" fill="#cfd6ee">
+            <tspan x="100.0" dy="0">Delegación total al equipo</tspan>
+          </text>
+          <rect x="10" y="106" width="180" height="1" fill="rgba(255,255,255,0.25)"/>
+          <text x="100.0" y="124" text-anchor="middle" font-family="Inter" font-weight="700" font-size="10.5" fill="#E8C24A">Day-to-day tasks</text>
+          <text x="100.0" y="139" text-anchor="middle" font-family="Inter" font-style="italic" font-weight="600" font-size="9.5" fill="#cfd6ee">Tareas diarias</text>
+        </g>
+</svg>
+    <div class="cap">Authoritarian - Participative - Delegative - p. 18</div>
+  </div>
+
+  <h3 class="block-title">Flashcards <span class="es">Tarjetas de estudio</span></h3>
+  <div class="flash-grid">
+        <div class="flash">
+          <div class="term-en">Leadership</div>
+          <div class="term-es">Liderazgo</div>
+          <div class="def">The ability to get the greatest, most efficient effort from others.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Facility Service Provider (FSP)</div>
+          <div class="term-es">Proveedor de Servicios de Instalaciones (FSP)</div>
+          <div class="def">Umbrella term for any custodial operation, in-house or contracted.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">In-House Service Provider (ISP)</div>
+          <div class="term-es">Proveedor de servicio interno (ISP)</div>
+          <div class="def">Custodial operation owned/managed directly by the building owner.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Building Service Contractor (BSC)</div>
+          <div class="term-es">Contratista de Servicios de Edificios (BSC)</div>
+          <div class="def">A commercial contractor that won the custodial services bid.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Self-Discipline</div>
+          <div class="term-es">Autodisciplina</div>
+          <div class="def">Staying focused on important steps without being sidetracked by trivial objections.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Authoritarian Leadership</div>
+          <div class="term-es">Liderazgo autoritario</div>
+          <div class="def">Leader makes the decision alone — best for emergencies.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Participative Leadership</div>
+          <div class="term-es">Liderazgo participativo</div>
+          <div class="def">Team proposes; leader makes the final call — best for training.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Delegative Leadership</div>
+          <div class="term-es">Liderazgo delegativo</div>
+          <div class="def">Full decision-making delegated to the team — best for daily tasks.</div>
+        </div>
+        <div class="flash">
+          <div class="term-en">Humility</div>
+          <div class="term-es">Humildad</div>
+          <div class="def">A quality of successful supervisors — leading without acting superior.</div>
+        </div></div>
+
+  <a id="quiz2"></a>
+  <h3 class="block-title">Practice Quiz 2 <span class="es">Cuestionario de practica 2</span></h3>
+  <p style="font-size:13.5px;color:#555;">6 questions from the official BSP instructor practice exam, Section Two, plus 4 additional review questions written in the same style.<br>
+  <span class="es">6 preguntas del examen de practica oficial del instructor de BSP, Seccion Dos, mas 4 preguntas de repaso adicionales escritas en el mismo estilo.</span></p>
+  <div class="progress-wrap"><div class="progress-bar" id="l2-progress"></div></div>
+  <div id="l2-quiz">
+        <div class="quiz-q" id="l2-q0">
+          <span class="qpg">p. 17</span>
+          <span class="qnum">1</span>
+          <div class="qtext-en">The most successful supervisors in any field are those who have learned:</div>
+          <div class="qtext-es">Los supervisores más exitosos en cualquier campo son aquellos que han aprendido:</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',0,0,0)">
+              How to lead<span class="es-op">Cómo liderar</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',0,1,0)">
+              How to get others to do their work for them<span class="es-op">Cómo lograr que otros hagan su trabajo por ellos</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',0,2,0)">
+              How to impress management<span class="es-op">Cómo impresionar a la gerencia</span>
+            </div>
+          <div class="explain" id="l2-exp0">
+            <strong>Explanation:</strong> "Successful supervisors know how to lead."
+            <span class="es"><strong>Explicacion:</strong> "Los supervisores exitosos saben cómo liderar."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q1">
+          <span class="qpg">p. 16</span>
+          <span class="qnum">2</span>
+          <div class="qtext-en">The Custodial Maintenance Supervisor must be constantly aware of the requirements and standards established by top management.</div>
+          <div class="qtext-es">El Supervisor de Mantenimiento de Limpieza debe estar constantemente consciente de los requisitos y estándares establecidos por la alta gerencia.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',1,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',1,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp1">
+            <strong>Explanation:</strong> Supervisors must stick to management's principles, practices, and policies.
+            <span class="es"><strong>Explicacion:</strong> Los supervisores deben apegarse a los principios, prácticas y políticas de la gerencia.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q2">
+          <span class="qpg">p. 16</span>
+          <span class="qnum">3</span>
+          <div class="qtext-en">It doesn't matter if supervisors come in late or are careless in their work, because they are the boss.</div>
+          <div class="qtext-es">No importa si los supervisores llegan tarde o son descuidados en su trabajo, porque ellos son el jefe.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',2,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',2,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp2">
+            <strong>Explanation:</strong> Supervisors must set a proper example — carelessness and lateness spread to staff.
+            <span class="es"><strong>Explicacion:</strong> Los supervisores deben dar un buen ejemplo — el descuido y las tardanzas se contagian al personal.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q3">
+          <span class="qpg">p. 16</span>
+          <span class="qnum">4</span>
+          <div class="qtext-en">Regular participation in daily cleaning duties improves a supervisor's leadership status.</div>
+          <div class="qtext-es">La participación regular en las tareas diarias de limpieza mejora el estatus de liderazgo de un supervisor.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',3,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',3,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp3">
+            <strong>Explanation:</strong> The opposite is true — regular participation can dilute a supervisor's leadership status. It should mainly be a training tool.
+            <span class="es"><strong>Explicacion:</strong> Es lo contrario — la participación regular puede debilitar el estatus de liderazgo. Debe usarse principalmente como capacitación.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q4">
+          <span class="qpg">p. 17</span>
+          <span class="qnum">5</span>
+          <div class="qtext-en">Humility is a quality of a good supervisor.</div>
+          <div class="qtext-es">La humildad es una cualidad de un buen supervisor.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',4,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',4,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp4">
+            <strong>Explanation:</strong> "While supervisors are on a higher level than the staff, it is not necessary to be a dictator... humility is a quality many successful supervisors have."
+            <span class="es"><strong>Explicacion:</strong> "Aunque los supervisores están en un nivel más alto que el personal, no es necesario ser un dictador... la humildad es una cualidad que tienen muchos supervisores exitosos."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q5">
+          <span class="qpg">p. 17</span>
+          <span class="qnum">6</span>
+          <div class="qtext-en">Custodial personnel will obey and respect a supervisor who acts like a dictator.</div>
+          <div class="qtext-es">El personal de limpieza obedecerá y respetará a un supervisor que actúa como un dictador.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',5,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',5,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp5">
+            <strong>Explanation:</strong> Employees may obey a dictator, but they will "most likely feel resentful" — obedience is not the same as respect.
+            <span class="es"><strong>Explicacion:</strong> Los empleados podrían obedecer a un dictador, pero "lo más probable es que se sientan resentidos" — obediencia no es lo mismo que respeto.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q6">
+          <span class="qpg">p. 15</span>
+          <span class="qnum">7</span>
+          <div class="qtext-en">A Building Service Contractor (BSC) wins custodial work by:</div>
+          <div class="qtext-es">Un Contratista de Servicios de Edificios (BSC) gana el trabajo de limpieza al:</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',6,0,1)">
+              Being related to the building owner<span class="es-op">Ser familiar del propietario del edificio</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',6,1,1)">
+              Being the lowest bid or the best value for the price<span class="es-op">Ofrecer la oferta más baja o el mejor valor por el precio</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',6,2,1)">
+              Being the only company available<span class="es-op">Ser la única empresa disponible</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l2',6,3,1)">
+              Working for free the first month<span class="es-op">Trabajar gratis el primer mes</span>
+            </div>
+          <div class="explain" id="l2-exp6">
+            <strong>Explanation:</strong> A BSC "has successfully bid on the custodial services either by being the lowest bid or the best value for the price."
+            <span class="es"><strong>Explicacion:</strong> Un BSC "ha ganado la licitación de los servicios de limpieza, ya sea por ser la oferta más baja o el mejor valor por el precio".</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q7">
+          <span class="qpg">p. 16</span>
+          <span class="qnum">8</span>
+          <div class="qtext-en">Fill in the blank: To lead workers, it is essential to know the ________, since supervisors almost always work their way up through the ranks.</div>
+          <div class="qtext-es">Completa el espacio: Para liderar a los trabajadores, es esencial conocer el ________, ya que los supervisores casi siempre ascienden desde las bases.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',7,0,0)">
+              job<span class="es-op">trabajo</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',7,1,0)">
+              budget<span class="es-op">presupuesto</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',7,2,0)">
+              vendor list<span class="es-op">lista de proveedores</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l2',7,3,0)">
+              org chart's history<span class="es-op">historia del organigrama</span>
+            </div>
+          <div class="explain" id="l2-exp7">
+            <strong>Explanation:</strong> "To lead workers it is, of course, essential to know the job."
+            <span class="es"><strong>Explicacion:</strong> "Para liderar a los trabajadores es, por supuesto, esencial conocer el trabajo."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q8">
+          <span class="qpg">p. 18</span>
+          <span class="qnum">9</span>
+          <div class="qtext-en">Which leadership style gives the team full authority to decide, and works best for routine day-to-day tasks?</div>
+          <div class="qtext-es">¿Qué estilo de liderazgo le da al equipo autoridad total para decidir, y funciona mejor para tareas diarias de rutina?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',8,0,2)">
+              Authoritarian<span class="es-op">Autoritario</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',8,1,2)">
+              Participative<span class="es-op">Participativo</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',8,2,2)">
+              Delegative<span class="es-op">Delegativo</span>
+            </div>
+          <div class="explain" id="l2-exp8">
+            <strong>Explanation:</strong> Delegative = full delegation of the decision to the team — best for day-to-day tasks and developing schedules.
+            <span class="es"><strong>Explicacion:</strong> Delegativo = delegación total de la decisión al equipo — ideal para tareas diarias y desarrollo de horarios.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q9">
+          <span class="qpg">p. 18</span>
+          <span class="qnum">10</span>
+          <div class="qtext-en">Which leadership style is best used for an emergency situation requiring a fast, decisive call?</div>
+          <div class="qtext-es">¿Qué estilo de liderazgo se usa mejor en una situación de emergencia que requiere una decisión rápida y firme?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',9,0,0)">
+              Authoritarian<span class="es-op">Autoritario</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',9,1,0)">
+              Participative<span class="es-op">Participativo</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',9,2,0)">
+              Delegative<span class="es-op">Delegativo</span>
+            </div>
+          <div class="explain" id="l2-exp9">
+            <strong>Explanation:</strong> Authoritarian = autocratic decision by the leader — best for emergencies and decisive decision-making.
+            <span class="es"><strong>Explicacion:</strong> Autoritario = decisión autocrática del líder — ideal para emergencias y toma de decisiones firmes.</span>
+          </div>
+        </div>
+    <div class="callout" style="text-align:center;" id="l2-score-box">
+      <h4 style="justify-content:center;">Your Score / Tu puntaje: <span id="l2-score">0</span> / 10
+        &nbsp; (<span id="l2-pct">0</span>%)</h4>
+      <p style="font-size:13px;color:#666;">Remember: 80% or higher is a pass on the real exam. / Recuerda: 80% o mas es aprobatorio en el examen real.</p>
+      <button onclick="resetQuiz('l2',10)" style="background:var(--navy);color:#fff;border:none;padding:9px 18px;border-radius:999px;font-weight:700;cursor:pointer;font-size:13px;">Reset Quiz / Reiniciar</button>
+    </div>
+    </div>
+
+</div>
+
+
+<footer>
+  <div class="credit">Prepared for Building Skills Partnership</div>
+  <div>Study guide developed by Alejandra Salcedo &middot; Based on ISSA Cleaning Management Institute&reg;, Custodial &amp; Maintenance Supervision Certification Course, Version 6</div>
+  <div style="margin-top:8px;opacity:0.75;">This is an independent study aid; it does not replace the official CMI handbook. Refer to your book for full lesson text.</div>
+</footer>
+
+
+<script>
+var state = { l1: {}, l2: {} };
+
+function setLang(mode) {
+  document.body.classList.remove('hide-es','hide-en');
+  ['btn-both','btn-en','btn-es'].forEach(function(id){ document.getElementById(id).classList.remove('active'); });
+  if (mode === 'en') { document.body.classList.add('hide-es'); document.getElementById('btn-en').classList.add('active'); }
+  else if (mode === 'es') { document.body.classList.add('hide-en'); document.getElementById('btn-es').classList.add('active'); }
+  else { document.getElementById('btn-both').classList.add('active'); }
+}
+
+function selectOpt(prefix, qidx, oidx, correctIdx) {
+  if (state[prefix][qidx] !== undefined) return;
+  state[prefix][qidx] = oidx;
+  var qdiv = document.getElementById(prefix + '-q' + qidx);
+  var opts = qdiv.querySelectorAll('.opt');
+  opts.forEach(function(el, i) {
+    el.style.pointerEvents = 'none';
+    if (i === correctIdx) el.classList.add('correct');
+    else if (i === oidx) el.classList.add('incorrect');
+  });
+  document.getElementById(prefix + '-exp' + qidx).classList.add('show');
+  updateScore(prefix);
+}
+
+function updateScore(prefix) {
+  var answered = state[prefix];
+  var quizLen = document.querySelectorAll('#' + prefix + '-quiz .quiz-q').length;
+  var correctCount = 0;
+  document.querySelectorAll('#' + prefix + '-quiz .quiz-q').forEach(function(qdiv, i) {
+    var correctOpt = qdiv.querySelector('.opt.correct');
+    if (answered[i] !== undefined && correctOpt) {
+      var idx = parseInt(correctOpt.getAttribute('data-idx'));
+      if (answered[i] === idx) correctCount++;
+    }
+  });
+  document.getElementById(prefix + '-score').textContent = correctCount;
+  var pct = Math.round((correctCount / quizLen) * 100);
+  document.getElementById(prefix + '-pct').textContent = pct;
+  var answeredCount = Object.keys(answered).length;
+  document.getElementById(prefix + '-progress').style.width = Math.round((answeredCount/quizLen)*100) + '%';
+}
+
+function resetQuiz(prefix, len) {
+  state[prefix] = {};
+  for (var i=0;i<len;i++) {
+    var qdiv = document.getElementById(prefix + '-q' + i);
+    qdiv.querySelectorAll('.opt').forEach(function(el) {
+      el.classList.remove('correct','incorrect');
+      el.style.pointerEvents = 'auto';
+    });
+    document.getElementById(prefix + '-exp' + i).classList.remove('show');
+  }
+  document.getElementById(prefix + '-score').textContent = '0';
+  document.getElementById(prefix + '-pct').textContent = '0';
+  document.getElementById(prefix + '-progress').style.width = '0%';
+}
+</script>
+
+</body>
+</html>
