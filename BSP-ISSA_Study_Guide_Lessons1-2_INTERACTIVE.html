@@ -25,7 +25,8 @@ body {
   font-family: 'Inter', -apple-system, sans-serif;
   color: var(--ink);
   background: #f4f1e8;
-  line-height: 1.55;
+  line-height: 1.6;
+  font-size: 17px;
 }
 
 h1, h2, h3, h4, .brand-font {
@@ -85,14 +86,14 @@ h1, h2, h3, h4, .brand-font {
   margin-bottom: 6px;
 }
 .hero-text h1 {
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 900;
   margin: 0 0 6px;
   line-height: 1.18;
 }
 .hero-text .subtitle {
   color: #cfd6ee;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
 }
 .hero-badges {
@@ -105,9 +106,9 @@ h1, h2, h3, h4, .brand-font {
   background: rgba(255,255,255,0.10);
   border: 1px solid rgba(232,194,74,0.45);
   color: #fff;
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 600;
-  padding: 6px 12px;
+  padding: 7px 13px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
@@ -133,12 +134,12 @@ h1, h2, h3, h4, .brand-font {
 .callout h4 {
   margin: 0 0 8px;
   color: var(--navy);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 800;
   display: flex; align-items: center; gap: 8px;
 }
 .callout h4 svg { width: 18px; height: 18px; color: var(--gold-dark); }
-.callout p { margin: 4px 0; font-size: 14.5px; }
+.callout p { margin: 4px 0; font-size: 16px; }
 .callout .es { color: #555; font-style: italic; }
 
 /* ---------- Section headers ---------- */
@@ -165,18 +166,18 @@ h1, h2, h3, h4, .brand-font {
 }
 .lesson-header h2 {
   margin: 0 0 4px;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 900;
 }
 .lesson-header h2 .es {
   display: block;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--gold);
   margin-top: 3px;
 }
 .lesson-header .pages {
-  font-size: 13px;
+  font-size: 14.5px;
   color: #cfd6ee;
   margin-top: 6px;
   font-weight: 600;
@@ -184,16 +185,17 @@ h1, h2, h3, h4, .brand-font {
 
 h3.block-title {
   color: var(--navy);
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 800;
   margin: 30px 0 4px;
   padding-bottom: 8px;
   border-bottom: 3px solid var(--gold);
   display: flex; align-items: center; gap: 8px;
+  flex-wrap: wrap;
 }
 h3.block-title .es {
   font-weight: 600;
-  font-size: 13.5px;
+  font-size: 15px;
   color: #7a7250;
 }
 
@@ -221,21 +223,21 @@ h3.block-title .es {
 .concept-card h4 {
   color: var(--navy);
   margin: 0 0 2px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 800;
 }
 .concept-card h4 .es {
   display: block;
-  font-size: 13px;
+  font-size: 14.5px;
   font-weight: 600;
   color: var(--gold-dark);
   margin-top: 2px;
 }
-.concept-card .en-text { margin: 10px 0 6px; font-size: 14.5px; }
-.concept-card .es-text { margin: 6px 0 0; font-size: 14px; color: #4b4a3e; font-style: italic; border-top: 1px dashed #e2dcc4; padding-top: 8px;}
+.concept-card .en-text { margin: 10px 0 6px; font-size: 16.5px; }
+.concept-card .es-text { margin: 6px 0 0; font-size: 16px; color: #4b4a3e; font-style: italic; border-top: 1px dashed #e2dcc4; padding-top: 8px;}
 .lang-tag {
-  font-size: 10px; font-weight: 800; letter-spacing: 0.06em;
-  color: var(--navy); background: #eef0fa; padding: 1px 6px; border-radius: 4px; margin-right: 6px;
+  font-size: 11.5px; font-weight: 800; letter-spacing: 0.06em;
+  color: var(--navy); background: #eef0fa; padding: 2px 7px; border-radius: 4px; margin-right: 6px;
 }
 .lang-tag.es { color: var(--gold-dark); background: #fbf3dc; }
 
@@ -254,9 +256,10 @@ h3.block-title .es {
   min-height: 108px;
   box-shadow: 0 2px 8px rgba(27,42,94,0.05);
 }
-.flash .term-en { font-weight: 800; color: var(--navy); font-size: 14.5px; }
-.flash .term-es { font-weight: 700; color: var(--gold-dark); font-size: 12.5px; margin-top: 1px; }
-.flash .def { font-size: 12.5px; color: #47473c; margin-top: 8px; border-top: 1px dashed #e2dcc4; padding-top: 8px;}
+.flash .term-en { font-weight: 800; color: var(--navy); font-size: 16px; }
+.flash .term-es { font-weight: 700; color: var(--gold-dark); font-size: 14.5px; margin-top: 1px; }
+.flash .def { font-size: 14.5px; color: #47473c; margin-top: 8px; border-top: 1px dashed #e2dcc4; padding-top: 8px;}
+.flash .def.es-text { font-style: italic; color: #5b5a4a; }
 
 /* ---------- Diagrams ---------- */
 .diagram-box {
@@ -295,31 +298,32 @@ h3.block-title .es {
   font-size: 11px; font-weight: 800; color: var(--gold-dark);
   background: #fbf3dc; padding: 3px 9px; border-radius: 999px;
 }
-.quiz-q .qtext-en { font-weight: 700; font-size: 14.5px; margin: 8px 0 2px; }
-.quiz-q .qtext-es { font-style: italic; color: #555; font-size: 13px; margin-bottom: 10px; }
+.quiz-q .qtext-en { font-weight: 700; font-size: 17px; margin: 8px 0 2px; }
+.quiz-q .qtext-es { font-style: italic; color: #555; font-size: 15px; margin-bottom: 10px; }
 .opt {
   display: block;
   border: 1.5px solid #dcd6bc;
   border-radius: 8px;
-  padding: 9px 12px;
-  margin: 6px 0;
-  font-size: 13.5px;
+  padding: 12px 15px;
+  margin: 7px 0;
+  font-size: 16px;
   cursor: pointer;
   background: #fffdf6;
   transition: 0.15s;
+  min-height: 44px;
 }
 .opt:hover { border-color: var(--gold-dark); background: #fbf3dc; }
 .opt.correct { border-color: #2f8f4e; background: #e6f6ea; font-weight: 700; }
 .opt.incorrect { border-color: #c0392b; background: #fbe8e6; }
-.es-op { display:block; color:#666; font-style: italic; font-size: 12px; margin-top: 2px;}
+.es-op { display:block; color:#666; font-style: italic; font-size: 14.5px; margin-top: 3px;}
 .explain {
   display: none;
   margin-top: 10px;
   background: #eef3ec;
   border-left: 4px solid #2f8f4e;
-  padding: 10px 14px;
+  padding: 12px 15px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 15px;
 }
 .explain.show { display: block; }
 .explain .es { color: #4b4a3e; font-style: italic; display:block; margin-top:4px; }
@@ -331,25 +335,56 @@ h3.block-title .es {
 .answer-key-table tr:nth-child(even) { background: #fbf8ec; }
 
 /* ---------- Footer ---------- */
+.toc {
+  display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 6px;
+}
+.toc a {
+  background: #fff; border: 1.5px solid var(--navy); color: var(--navy);
+  font-weight: 700; font-size: 14.5px; padding: 9px 18px; border-radius: 999px;
+  text-decoration: none;
+}
+.toc a:hover { background: var(--navy); color: #fff; }
+
 footer {
   background: var(--navy-dark);
   color: #b9c1de;
   text-align: center;
   padding: 30px 20px;
   margin-top: 50px;
-  font-size: 12.5px;
+  font-size: 14px;
 }
-footer .credit { color: var(--gold); font-weight: 700; margin-bottom: 4px; }
+footer .credit { color: var(--gold); font-weight: 700; margin-bottom: 4px; font-size: 15px; }
 
-.toc {
-  display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 6px;
+/* ---------- Mobile responsiveness ---------- */
+@media (max-width: 700px) {
+  body { font-size: 16px; }
+  .wrap { padding: 0 16px; }
+  .hero { padding: 34px 0 30px; }
+  .hero-inner { flex-direction: column; text-align: center; gap: 16px; }
+  .hero-logo { width: 76px; }
+  .hero-text h1 { font-size: 24px; }
+  .hero-text .subtitle { font-size: 15px; }
+  .hero-badges { justify-content: center; }
+  .badge { font-size: 12.5px; }
+  .lesson-header { padding: 20px 18px; }
+  .lesson-header h2 { font-size: 21px; }
+  .lesson-header h2 .es { font-size: 15px; }
+  h3.block-title { font-size: 18px; }
+  .concept-card h4 { font-size: 16.5px; }
+  .concept-card .en-text, .concept-card .es-text { font-size: 15.5px; }
+  .flash-grid { grid-template-columns: 1fr; }
+  .quiz-q .qtext-en { font-size: 16px; }
+  .opt { font-size: 15.5px; padding: 12px 14px; }
+  .callout { padding: 16px 16px; }
+  .callout p { font-size: 15px; }
+  .lang-toggle .inner { justify-content: center; text-align: center; }
+  .toc { justify-content: center; }
+  .toc a { font-size: 13.5px; padding: 8px 14px; }
 }
-.toc a {
-  background: #fff; border: 1.5px solid var(--navy); color: var(--navy);
-  font-weight: 700; font-size: 13px; padding: 8px 16px; border-radius: 999px;
-  text-decoration: none;
+@media (max-width: 460px) {
+  .hero-badges { flex-direction: column; align-items: center; }
+  .badge { width: 100%; max-width: 280px; justify-content: center; }
 }
-.toc a:hover { background: var(--navy); color: #fff; }
 
 
 .lang-toggle {
@@ -393,9 +428,9 @@ body.hide-en .en-text, body.hide-en .qtext-en, body.hide-en .term-en { display:n
     <div class="hero-text">
       <div class="eyebrow">Building Skills Partnership &middot; ISSA / CMI Certification Prep</div>
       <h1>Custodial &amp; Maintenance Supervision<br>Certification &mdash; Study Guide</h1>
-      <div class="subtitle">Gu&iacute;a de estudio bilingüe &middot; Bilingual English / Espa&ntilde;ol &middot; Lessons 1 &amp; 2</div>
+      <div class="subtitle">Gu&iacute;a de estudio bilingüe &middot; Bilingual English / Espa&ntilde;ol &middot; Sections 1 &amp; 2</div>
       <div class="hero-badges">
-        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4.5A2.5 2.5 0 016.5 2H20v17H6.5A2.5 2.5 0 004 16.5v-12z"/><path d="M4 16.5A2.5 2.5 0 016.5 19H20"/></svg> Book pp. 6&ndash;18</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4.5A2.5 2.5 0 016.5 2H20v17H6.5A2.5 2.5 0 004 16.5v-12z"/><path d="M4 16.5A2.5 2.5 0 016.5 19H20"/></svg> Book pp. 6&ndash;53</span>
         <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> 80% passing score per section</span>
         <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg> Exam available in English &amp; Spanish</span>
         <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Open-book exam</span>
@@ -422,7 +457,7 @@ body.hide-en .en-text, body.hide-en .qtext-en, body.hide-en .term-en { display:n
 
   <div class="toc">
     <a href="#lesson1">Lesson 1 - Leccion 1</a>
-    <a href="#lesson2">Lesson 2 - Leccion 2</a>
+    <a href="#lesson2">Section 2 - Seccion 2</a>
     <a href="#quiz1">Quiz 1</a>
     <a href="#quiz2">Quiz 2</a>
   </div>
@@ -605,53 +640,62 @@ body.hide-en .en-text, body.hide-en .qtext-en, body.hide-en .term-en { display:n
         <div class="flash">
           <div class="term-en">Attitude</div>
           <div class="term-es">Actitud</div>
-          <div class="def">Your outlook and mindset — the #1 predictor of career success.</div>
+          <div class="def en-text">Your outlook and mindset — the #1 predictor of career success.</div>
+          <div class="def es-text">Tu forma de ver las cosas y tu mentalidad — el predictor #1 del éxito profesional.</div>
         </div>
         <div class="flash">
           <div class="term-en">SMART Goal</div>
           <div class="term-es">Meta SMART</div>
-          <div class="def">Specific, Measurable, Attainable, Realistic, Time Focused.</div>
+          <div class="def en-text">Specific, Measurable, Attainable, Realistic, Time Focused.</div>
+          <div class="def es-text">Específica, Medible, Alcanzable, Realista, Enfocada en el tiempo.</div>
         </div>
         <div class="flash">
           <div class="term-en">Body Language</div>
           <div class="term-es">Lenguaje corporal</div>
-          <div class="def">Non-verbal communication through head, shoulders, mid-section, hands, and arms.</div>
+          <div class="def en-text">Non-verbal communication through head, shoulders, mid-section, hands, and arms.</div>
+          <div class="def es-text">Comunicación no verbal a través de la cabeza, los hombros, el torso, las manos y los brazos.</div>
         </div>
         <div class="flash">
           <div class="term-en">Customer</div>
           <div class="term-es">Cliente</div>
-          <div class="def">Anyone connected to the building — owner, manager, occupant, or visitor.</div>
+          <div class="def en-text">Anyone connected to the building — owner, manager, occupant, or visitor.</div>
+          <div class="def es-text">Cualquier persona conectada con el edificio — propietario, gerente, ocupante o visitante.</div>
         </div>
         <div class="flash">
           <div class="term-en">Short-term Issue</div>
           <div class="term-es">Problema a corto plazo</div>
-          <div class="def">Quick fix, little/no equipment — e.g., a coffee spill.</div>
+          <div class="def en-text">Quick fix, little/no equipment — e.g., a coffee spill.</div>
+          <div class="def es-text">Solución rápida, con poco o ningún equipo — por ejemplo, café derramado.</div>
         </div>
         <div class="flash">
           <div class="term-en">Mid-range Issue</div>
           <div class="term-es">Problema de rango medio</div>
-          <div class="def">Requires more work/equipment — e.g., floor damage.</div>
+          <div class="def en-text">Requires more work/equipment — e.g., floor damage.</div>
+          <div class="def es-text">Requiere más trabajo o equipo — por ejemplo, daño al piso.</div>
         </div>
         <div class="flash">
           <div class="term-en">Long-term Issue</div>
           <div class="term-es">Problema a largo plazo</div>
-          <div class="def">Documented, researched — e.g., recurring carpet spots.</div>
+          <div class="def en-text">Documented, researched — e.g., recurring carpet spots.</div>
+          <div class="def es-text">Documentado e investigado — por ejemplo, manchas recurrentes en la alfombra.</div>
         </div>
         <div class="flash">
           <div class="term-en">Empathy</div>
           <div class="term-es">Empatía</div>
-          <div class="def">The capacity to share or recognize another person's emotions.</div>
+          <div class="def en-text">The capacity to share or recognize another person's emotions.</div>
+          <div class="def es-text">La capacidad de compartir o reconocer las emociones de otra persona.</div>
         </div>
         <div class="flash">
           <div class="term-en">Accountability Partner</div>
           <div class="term-es">Compañero de responsabilidad</div>
-          <div class="def">Person (ideally your supervisor) who helps you stay on track toward your goals.</div>
+          <div class="def en-text">Person (ideally your supervisor) who helps you stay on track toward your goals.</div>
+          <div class="def es-text">Persona (idealmente tu supervisor) que te ayuda a mantenerte encaminado hacia tus metas.</div>
         </div></div>
 
   <a id="quiz1"></a>
   <h3 class="block-title">Practice Quiz 1 <span class="es">Cuestionario de practica 1</span></h3>
-  <p style="font-size:13.5px;color:#555;">Based on the official BSP instructor practice exam, Section One. Click an answer to check it instantly.<br>
-  <span class="es">Basado en el examen de practica oficial del instructor de BSP, Seccion Uno. Haz clic en una respuesta para verificarla al instante.</span></p>
+  <p style="font-size:13.5px;color:#555;">30 questions: all 10 questions from the official BSP instructor practice exam, Section One, plus 20 additional review questions written in the same style, covering every page of Section One (pp. 6-14). Click an answer to check it instantly.<br>
+  <span class="es">30 preguntas: las 10 preguntas oficiales del examen de practica del instructor de BSP, Seccion Uno, mas 20 preguntas de repaso adicionales escritas en el mismo estilo, cubriendo cada pagina de la Seccion Uno (pags. 6-14). Haz clic en una respuesta para verificarla al instante.</span></p>
   <div class="progress-wrap"><div class="progress-bar" id="l1-progress"></div></div>
   <div id="l1-quiz">
         <div class="quiz-q" id="l1-q0">
@@ -860,19 +904,443 @@ body.hide-en .en-text, body.hide-en .qtext-en, body.hide-en .term-en { display:n
             <span class="es"><strong>Explicacion:</strong> Encontrar un punto en común — reconociendo factores externos como el estrés laboral o familiar — ayuda a crear una comunicación tranquila y abierta.</span>
           </div>
         </div>
+        <div class="quiz-q" id="l1-q10">
+          <span class="qpg">p. 6</span>
+          <span class="qnum">11</span>
+          <div class="qtext-en">According to the book, what is the strongest tool in your tool belt, across every career?</div>
+          <div class="qtext-es">Según el libro, ¿cuál es la herramienta más fuerte en tu cinturón de herramientas, en cualquier carrera?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',10,0,1)">
+              Experience<span class="es-op">Experiencia</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',10,1,1)">
+              Attitude<span class="es-op">Actitud</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',10,2,1)">
+              Certification<span class="es-op">Certificación</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',10,3,1)">
+              Salary<span class="es-op">Salario</span>
+            </div>
+          <div class="explain" id="l1-exp10">
+            <strong>Explanation:</strong> "Attitude is the strongest tool in your tool belt for any employee, across all careers."
+            <span class="es"><strong>Explicacion:</strong> "La actitud es la herramienta más fuerte en tu cinturón de herramientas para cualquier empleado, en todas las carreras."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q11">
+          <span class="qpg">p. 6</span>
+          <span class="qnum">12</span>
+          <div class="qtext-en">Success comes overnight or by wishing upon a star.</div>
+          <div class="qtext-es">El éxito llega de la noche a la mañana o al pedir un deseo.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',11,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',11,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l1-exp11">
+            <strong>Explanation:</strong> "Success is driven from a complete strategy that you put in place and completing the plan."
+            <span class="es"><strong>Explicacion:</strong> "El éxito proviene de una estrategia completa que pones en marcha y de completar el plan."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q12">
+          <span class="qpg">p. 7</span>
+          <span class="qnum">13</span>
+          <div class="qtext-en">In the SMART goal-setting model, what does the "A" stand for?</div>
+          <div class="qtext-es">En el modelo de metas SMART, ¿qué significa la "A"?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',12,0,0)">
+              Attainable<span class="es-op">Alcanzable</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',12,1,0)">
+              Approved<span class="es-op">Aprobada</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',12,2,0)">
+              Assigned<span class="es-op">Asignada</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',12,3,0)">
+              Automatic<span class="es-op">Automática</span>
+            </div>
+          <div class="explain" id="l1-exp12">
+            <strong>Explanation:</strong> SMART = Specific, Measurable, Attainable, Realistic, Time Focused.
+            <span class="es"><strong>Explicacion:</strong> SMART = Específica, Medible, Alcanzable, Realista, Enfocada en el tiempo.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q13">
+          <span class="qpg">p. 7</span>
+          <span class="qnum">14</span>
+          <div class="qtext-en">Which of these is NOT one of the goal timeframes suggested on the CMI goal-setting form?</div>
+          <div class="qtext-es">¿Cuál de estos NO es uno de los plazos de metas sugeridos en el formulario de metas de CMI?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',13,0,2)">
+              30 day<span class="es-op">30 días</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',13,1,2)">
+              90 day<span class="es-op">90 días</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',13,2,2)">
+              5 year<span class="es-op">5 años</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',13,3,2)">
+              Over 1 year<span class="es-op">Más de 1 año</span>
+            </div>
+          <div class="explain" id="l1-exp13">
+            <strong>Explanation:</strong> The form breaks goals down to represent a 30 day, 60 day, 90 day, 1 year, and over 1 year goal.
+            <span class="es"><strong>Explicacion:</strong> El formulario divide las metas en plazos de 30 días, 60 días, 90 días, 1 año y más de 1 año.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q14">
+          <span class="qpg">p. 7</span>
+          <span class="qnum">15</span>
+          <div class="qtext-en">A "visions board" is a suggested tool to help you stay motivated toward your goals.</div>
+          <div class="qtext-es">Un "tablero de visión" es una herramienta sugerida para ayudarte a mantenerte motivado hacia tus metas.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',14,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',14,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l1-exp14">
+            <strong>Explanation:</strong> "It always will be a good idea to keep a 'visions board' near you."
+            <span class="es"><strong>Explicacion:</strong> "Siempre será una buena idea mantener un 'tablero de visión' cerca de ti."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q15">
+          <span class="qpg">p. 7</span>
+          <span class="qnum">16</span>
+          <div class="qtext-en">Why does the book recommend a supervisor/manager as your accountability partner, over family or friends?</div>
+          <div class="qtext-es">¿Por qué el libro recomienda a un supervisor/gerente como compañero de responsabilidad, en lugar de familia o amigos?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',15,0,1)">
+              They have more free time<span class="es-op">Tienen más tiempo libre</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',15,1,1)">
+              They have a direct impact on your success<span class="es-op">Tienen un impacto directo en tu éxito</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',15,2,1)">
+              They are required to by law<span class="es-op">Están obligados por ley</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',15,3,1)">
+              They are more likely to agree with you<span class="es-op">Es más probable que estén de acuerdo contigo</span>
+            </div>
+          <div class="explain" id="l1-exp15">
+            <strong>Explanation:</strong> Family, coworkers, or friends "do not have a direct impact from your success like a supervisor/manager will."
+            <span class="es"><strong>Explicacion:</strong> La familia, compañeros o amigos "no tienen un impacto directo de tu éxito como lo tendrá un supervisor/gerente."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q16">
+          <span class="qpg">p. 8</span>
+          <span class="qnum">17</span>
+          <div class="qtext-en">Fill in the blank: Customer service is an essential part of a custodian's ______.</div>
+          <div class="qtext-es">Completa el espacio: El servicio al cliente es una parte esencial de los ______ diarios de un custodio.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',16,0,1)">
+              paycheck<span class="es-op">cheque de pago</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',16,1,1)">
+              daily job responsibilities<span class="es-op">responsabilidades laborales</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',16,2,1)">
+              uniform<span class="es-op">uniforme</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',16,3,1)">
+              union contract<span class="es-op">contrato sindical</span>
+            </div>
+          <div class="explain" id="l1-exp16">
+            <strong>Explanation:</strong> "Customer service is an essential part of a custodian's daily job responsibilities."
+            <span class="es"><strong>Explicacion:</strong> "El servicio al cliente es una parte esencial de las responsabilidades laborales diarias de un custodio."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q17">
+          <span class="qpg">p. 8</span>
+          <span class="qnum">18</span>
+          <div class="qtext-en">Which of these is NOT listed as one of the customer service best practices?</div>
+          <div class="qtext-es">¿Cuál de estos NO aparece como una de las mejores prácticas de servicio al cliente?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',17,0,3)">
+              Being polite<span class="es-op">Ser cortés</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',17,1,3)">
+              Using proper grammar<span class="es-op">Usar buena gramática</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',17,2,3)">
+              Wearing proper dress attire<span class="es-op">Vestir apropiadamente</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',17,3,3)">
+              Working unpaid overtime<span class="es-op">Trabajar horas extra sin pago</span>
+            </div>
+          <div class="explain" id="l1-exp17">
+            <strong>Explanation:</strong> The four best practices listed: being polite, using proper grammar, wearing proper dress attire, and making eye contact.
+            <span class="es"><strong>Explicacion:</strong> Las cuatro mejores prácticas: ser cortés, usar buena gramática, vestir apropiadamente y hacer contacto visual.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q18">
+          <span class="qpg">p. 8</span>
+          <span class="qnum">19</span>
+          <div class="qtext-en">Contracted services are not responsible for treating a building and its customers well, since they don't work for the same organization.</div>
+          <div class="qtext-es">Los servicios contratados no son responsables de tratar bien a un edificio y sus clientes, ya que no trabajan para la misma organización.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',18,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',18,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l1-exp18">
+            <strong>Explanation:</strong> "Contracted services may not work for the same organization but you will still be responsible to treat the building and its customers..."
+            <span class="es"><strong>Explicacion:</strong> "Los servicios contratados pueden no trabajar para la misma organización, pero aun así serás responsable de tratar bien al edificio y sus clientes..."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q19">
+          <span class="qpg">p. 9</span>
+          <span class="qnum">20</span>
+          <div class="qtext-en">Fill in the blank: Research shows you likely only have several ______ to make a first impression on someone.</div>
+          <div class="qtext-es">Completa el espacio: Las investigaciones muestran que probablemente solo tienes varios ______ para causar una primera impresión en alguien.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',19,0,1)">
+              minutes<span class="es-op">minutos</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',19,1,1)">
+              seconds<span class="es-op">segundos</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',19,2,1)">
+              hours<span class="es-op">horas</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',19,3,1)">
+              days<span class="es-op">días</span>
+            </div>
+          <div class="explain" id="l1-exp19">
+            <strong>Explanation:</strong> "Research shows you likely only have several seconds to make a first impression on someone."
+            <span class="es"><strong>Explicacion:</strong> "Las investigaciones muestran que probablemente solo tienes varios segundos para causar una primera impresión en alguien."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q20">
+          <span class="qpg">p. 9</span>
+          <span class="qnum">21</span>
+          <div class="qtext-en">Tattoos should be limited to areas that can be covered by clothing.</div>
+          <div class="qtext-es">Los tatuajes deben limitarse a áreas que se puedan cubrir con la ropa.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',20,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',20,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l1-exp20">
+            <strong>Explanation:</strong> "Tattoos should be limited to areas that can be covered by clothing. This will help limit complaints or disagreements."
+            <span class="es"><strong>Explicacion:</strong> "Los tatuajes deben limitarse a áreas que se puedan cubrir con la ropa. Esto ayudará a limitar quejas o desacuerdos."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q21">
+          <span class="qpg">p. 9</span>
+          <span class="qnum">22</span>
+          <div class="qtext-en">Headwear is generally safe and acceptable for the facility cleaning field, even without employer approval.</div>
+          <div class="qtext-es">Los sombreros o gorras generalmente son seguros y aceptables en el campo de limpieza de instalaciones, incluso sin aprobación del empleador.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',21,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',21,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l1-exp21">
+            <strong>Explanation:</strong> "Headwear in general is not safe or acceptable for the facility cleaning and maintenance field, unless provided by employer."
+            <span class="es"><strong>Explicacion:</strong> "Los sombreros o gorras en general no son seguros ni aceptables en el campo de limpieza y mantenimiento, a menos que los proporcione el empleador."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q22">
+          <span class="qpg">p. 9</span>
+          <span class="qnum">23</span>
+          <div class="qtext-en">Which of these is an example of a long-term issue?</div>
+          <div class="qtext-es">¿Cuál de estos es un ejemplo de un problema a largo plazo?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',22,0,2)">
+              Coffee spill<span class="es-op">Café derramado</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',22,1,2)">
+              Light bulb outage<span class="es-op">Foco fundido</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',22,2,2)">
+              Reappearance of spots on a carpet<span class="es-op">Reaparición de manchas en la alfombra</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',22,3,2)">
+              Wet floor from a leak<span class="es-op">Piso mojado por una fuga</span>
+            </div>
+          <div class="explain" id="l1-exp22">
+            <strong>Explanation:</strong> Long-term issue examples: improper floor color after maintenance, reappearance of spots on carpet, maintenance-related smells in the restroom.
+            <span class="es"><strong>Explicacion:</strong> Ejemplos de problemas a largo plazo: color de piso incorrecto tras el mantenimiento, reaparición de manchas en la alfombra, olores relacionados con el mantenimiento en el baño.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q23">
+          <span class="qpg">p. 10</span>
+          <span class="qnum">24</span>
+          <div class="qtext-en">Which of these is an example of a Safety Concern, not just a routine maintenance issue?</div>
+          <div class="qtext-es">¿Cuál de estos es un ejemplo de una Preocupación de Seguridad, y no solo un problema de mantenimiento rutinario?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',23,0,2)">
+              Un-emptied trash<span class="es-op">Basura sin vaciar</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',23,1,2)">
+              Scuffs on the floor<span class="es-op">Rayones en el piso</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',23,2,2)">
+              Improper chemical usage<span class="es-op">Uso inadecuado de químicos</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',23,3,2)">
+              Excess dirt tracked in<span class="es-op">Exceso de tierra arrastrada</span>
+            </div>
+          <div class="explain" id="l1-exp23">
+            <strong>Explanation:</strong> Safety concern examples: wet floors, improper chemical usage, fire hazards.
+            <span class="es"><strong>Explicacion:</strong> Ejemplos de preocupaciones de seguridad: pisos mojados, uso inadecuado de químicos, riesgos de incendio.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q24">
+          <span class="qpg">p. 10</span>
+          <span class="qnum">25</span>
+          <div class="qtext-en">When assessing a customer situation, which of these is NOT one of the key factors to consider?</div>
+          <div class="qtext-es">Al evaluar una situación con un cliente, ¿cuál de estos NO es uno de los factores clave a considerar?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',24,0,2)">
+              Time of day<span class="es-op">Hora del día</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',24,1,2)">
+              Number of people affected<span class="es-op">Número de personas afectadas</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',24,2,2)">
+              The customer's favorite color<span class="es-op">El color favorito del cliente</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',24,3,2)">
+              The resources available<span class="es-op">Los recursos disponibles</span>
+            </div>
+          <div class="explain" id="l1-exp24">
+            <strong>Explanation:</strong> Key factors: time of day, number of people affected, amount of time to fix the problem, customer's overall mindset, and the resources available.
+            <span class="es"><strong>Explicacion:</strong> Factores clave: hora del día, número de personas afectadas, tiempo para resolver el problema, actitud general del cliente y los recursos disponibles.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q25">
+          <span class="qpg">p. 11</span>
+          <span class="qnum">26</span>
+          <div class="qtext-en">Documenting the problem and the steps taken to fix it only benefits the customer, not management.</div>
+          <div class="qtext-es">Documentar el problema y los pasos tomados para solucionarlo solo beneficia al cliente, no a la gerencia.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',25,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',25,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l1-exp25">
+            <strong>Explanation:</strong> "This provides management with valuable information on where and when specific issues may arise."
+            <span class="es"><strong>Explicacion:</strong> "Esto le proporciona a la gerencia información valiosa sobre dónde y cuándo pueden surgir problemas específicos."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q26">
+          <span class="qpg">p. 12</span>
+          <span class="qnum">27</span>
+          <div class="qtext-en">Which is the more appropriate "I" statement version of "You need to be patient; this could take time to solve"?</div>
+          <div class="qtext-es">¿Cuál es la versión más apropiada con "Yo" de la frase "Tú necesitas tener paciencia; esto podría tardar en resolverse"?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',26,0,1)">
+              "You should wait."<span class="es-op">"Deberías esperar."</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',26,1,1)">
+              "I apologize for the delay; we are trying to get the situation solved as soon as possible."<span class="es-op">"Me disculpo por la demora; estamos tratando de resolver la situación lo antes posible."</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',26,2,1)">
+              "That's not my problem."<span class="es-op">"Ese no es mi problema."</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',26,3,1)">
+              "You always complain."<span class="es-op">"Siempre te quejas."</span>
+            </div>
+          <div class="explain" id="l1-exp26">
+            <strong>Explanation:</strong> This is the book's example of a more appropriate "I" statement.
+            <span class="es"><strong>Explicacion:</strong> Este es el ejemplo del libro de una declaración con "Yo" más apropiada.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q27">
+          <span class="qpg">p. 12</span>
+          <span class="qnum">28</span>
+          <div class="qtext-en">Fill in the blank: Empathy is the capacity to ______ or recognize emotions.</div>
+          <div class="qtext-es">Completa el espacio: La empatía es la capacidad de ______ o reconocer emociones.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',27,0,1)">
+              ignore<span class="es-op">ignorar</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',27,1,1)">
+              share<span class="es-op">compartir</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',27,2,1)">
+              judge<span class="es-op">juzgar</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',27,3,1)">
+              avoid<span class="es-op">evitar</span>
+            </div>
+          <div class="explain" id="l1-exp27">
+            <strong>Explanation:</strong> "Empathy is the capacity to share or recognize emotions."
+            <span class="es"><strong>Explicacion:</strong> "La empatía es la capacidad de compartir o reconocer emociones."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q28">
+          <span class="qpg">p. 13</span>
+          <span class="qnum">29</span>
+          <div class="qtext-en">According to the book, the most notable types of physical and emotional harassment have been:</div>
+          <div class="qtext-es">Según el libro, los tipos más notables de acoso físico y emocional han sido:</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',28,0,0)">
+              Sexual, racial, religious, and sexist<span class="es-op">Sexual, racial, religioso y sexista</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',28,1,0)">
+              Political, financial, seasonal, and regional<span class="es-op">Político, financiero, estacional y regional</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',28,2,0)">
+              Verbal only<span class="es-op">Solo verbal</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',28,3,0)">
+              None of these<span class="es-op">Ninguno de estos</span>
+            </div>
+          <div class="explain" id="l1-exp28">
+            <strong>Explanation:</strong> "The most notable types of physical and emotional harassment have been sexual, racial, religious and sexist."
+            <span class="es"><strong>Explicacion:</strong> "Los tipos más notables de acoso físico y emocional han sido sexual, racial, religioso y sexista."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l1-q29">
+          <span class="qpg">p. 13</span>
+          <span class="qnum">30</span>
+          <div class="qtext-en">Fill in the blank: Safety sheets used for employee reference are called ______.</div>
+          <div class="qtext-es">Completa el espacio: Las hojas de seguridad usadas como referencia para los empleados se llaman ______.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l1',29,0,1)">
+              Time Sheets<span class="es-op">Hojas de horario</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l1',29,1,1)">
+              Safety Data Sheets (SDS)<span class="es-op">Hojas de Datos de Seguridad (SDS)</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l1',29,2,1)">
+              Inventory Logs<span class="es-op">Registros de inventario</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l1',29,3,1)">
+              Work Orders<span class="es-op">Órdenes de trabajo</span>
+            </div>
+          <div class="explain" id="l1-exp29">
+            <strong>Explanation:</strong> "Other documents will be for employee use such as safety sheets called Safety Data Sheets (SDS)."
+            <span class="es"><strong>Explicacion:</strong> "Otros documentos serán para uso del empleado, como las hojas de seguridad llamadas Hojas de Datos de Seguridad (SDS)."</span>
+          </div>
+        </div>
     <div class="callout" style="text-align:center;" id="l1-score-box">
-      <h4 style="justify-content:center;">Your Score / Tu puntaje: <span id="l1-score">0</span> / 10
+      <h4 style="justify-content:center;">Your Score / Tu puntaje: <span id="l1-score">0</span> / 30
         &nbsp; (<span id="l1-pct">0</span>%)</h4>
       <p style="font-size:13px;color:#666;">Remember: 80% or higher is a pass on the real exam. / Recuerda: 80% o mas es aprobatorio en el examen real.</p>
-      <button onclick="resetQuiz('l1',10)" style="background:var(--navy);color:#fff;border:none;padding:9px 18px;border-radius:999px;font-weight:700;cursor:pointer;font-size:13px;">Reset Quiz / Reiniciar</button>
+      <button onclick="resetQuiz('l1',30)" style="background:var(--navy);color:#fff;border:none;padding:9px 18px;border-radius:999px;font-weight:700;cursor:pointer;font-size:13px;">Reset Quiz / Reiniciar</button>
     </div>
     </div>
 
   <a id="lesson2"></a>
   <div class="lesson-header">
     <span class="tag">Section 2 - Seccion 2</span>
-    <h2>Lesson 2: Qualifications of a Supervisor<span class="es">Leccion 2: Cualidades de un Supervisor</span></h2>
-    <div class="pages">Book pages / Paginas del libro: 15-18</div>
+    <h2>Section 2: Supervisor Development, Management &amp; Equipment<span class="es">Seccion 2: Desarrollo del Supervisor, Gestion y Equipo</span></h2>
+    <div class="pages">Book pages / Paginas del libro: 15-53 &middot; Lessons 1-8 / Lecciones 1-8</div>
   </div>
 
   <h3 class="block-title">Key Concepts <span class="es">Conceptos clave</span></h3>
@@ -912,6 +1380,90 @@ body.hide-en .en-text, body.hide-en .qtext-en, body.hide-en .term-en { display:n
           <h4>Basic Leadership Style Scale<span class="es">Escala básica de estilos de liderazgo</span></h4>
           <p class="en-text"><span class="lang-tag en">EN</span>Three philosophies, used depending on the situation: Authoritarian (leader decides), Participative (team proposes, leader decides), and Delegative (full delegation to the team).</p>
           <p class="es-text"><span class="lang-tag es">ES</span>Tres filosofías, usadas según la situación: Autoritario (el líder decide), Participativo (el equipo propone, el líder decide) y Delegativo (delegación total al equipo).</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 19</span>
+          <h4>Start With Self-Appraisal<span class="es">Comienza con una autoevaluación</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Developing supervisory potential starts with a long, critical self-appraisal of your strengths and weaknesses. Don't be afraid to ask your boss for feedback — it shows you care about your job.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Desarrollar el potencial de supervisión comienza con una autoevaluación larga y crítica de tus fortalezas y debilidades. No temas pedirle retroalimentación a tu jefe — demuestra que te importa tu trabajo.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 20</span>
+          <h4>The Four F's of Discipline<span class="es">Las cuatro F de la disciplina</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>A supervisor disciplining an employee should always be Fair, Factual, Firm, and Friendly. Keep records of every interaction with employees.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Un supervisor que disciplina a un empleado siempre debe ser Justo, Objetivo, Firme y Amigable. Lleva un registro de cada interacción con los empleados.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 22</span>
+          <h4>Top Management vs. Supervisor Goals<span class="es">Metas de la alta gerencia vs. del supervisor</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Top management's job is to provide the resources and climate for supervision. Too often, executives only notice the maintenance department when trash cans are full or desks are dusty.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>El trabajo de la alta gerencia es proporcionar los recursos y el ambiente para la supervisión. Con demasiada frecuencia, los ejecutivos solo notan al departamento de mantenimiento cuando los botes de basura están llenos o los escritorios están polvorientos.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 23</span>
+          <h4>Four Levels of Supervision<span class="es">Cuatro niveles de supervisión</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>A typical org chart runs: Maintenance Department Manager → Assistant Manager → Foreman → Group Leader (a working lead who trains alongside staff).</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Un organigrama típico sigue este orden: Gerente del Departamento de Mantenimiento → Gerente Asistente → Capataz → Líder de Grupo (un líder que trabaja y capacita junto al personal).</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 26</span>
+          <h4>The Four Functions: P-O-D-C<span class="es">Las cuatro funciones: P-O-D-C</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Management breaks down into four functions: Planning, Organization, Directing, and Control. The supervisor is part of management, not just staff.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>La gerencia se divide en cuatro funciones: Planeación, Organización, Dirección y Control. El supervisor es parte de la gerencia, no solo del personal.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 26</span>
+          <h4>The Supervisor's Two-Way Responsibility<span class="es">La doble responsabilidad del supervisor</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Supervisors represent staff to management (pass along suggestions, report good work) AND represent management to staff (explain policies, share production requirements).</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Los supervisores representan al personal ante la gerencia (transmiten sugerencias, reportan el buen trabajo) Y representan a la gerencia ante el personal (explican políticas, comparten requisitos de producción).</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 29</span>
+          <h4>Attitude & Self-Esteem Drive Advancement<span class="es">La actitud y la autoestima impulsan el ascenso</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Ambition is the biggest factor in job advancement. Workers who say "there's too much competition" or "the boss has it in for me" are usually masking low self-esteem.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>La ambición es el factor más importante para avanzar en el trabajo. Los trabajadores que dicen "hay demasiada competencia" o "el jefe me tiene entre ojos" suelen estar ocultando baja autoestima.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 30</span>
+          <h4>Six Steps to Get Promoted<span class="es">Seis pasos para ser ascendido</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Work Hard, Make Yourself Noticed (the right way), Watch and Listen, Speak Up, Make Suggestions, and Read and Learn.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Trabaja duro, Hazte notar (de la manera correcta), Observa y escucha, Habla cuando sea necesario, Haz sugerencias, y Lee y aprende.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 32</span>
+          <h4>Arrive Early, Plan the Day<span class="es">Llega temprano, planea el día</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>The supervisor should arrive 15 minutes to a half hour before staff to review orders and plan the day's schedule in a quiet, uninterrupted period.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>El supervisor debe llegar de 15 minutos a media hora antes que el personal para revisar las órdenes y planear el horario del día en un período tranquilo, sin interrupciones.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 32</span>
+          <h4>What to Avoid When Communicating<span class="es">Qué evitar al comunicarte</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Six things to avoid: Emotion, Wishful hearing, Desire to please, Treachery with words, Prejudice, and Failure to listen.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Seis cosas que evitar: Emoción, Escuchar lo que quieres oír, Deseo de complacer, Traición con palabras, Prejuicio y Falta de escucha.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 34</span>
+          <h4>The Self-Interview<span class="es">La autoentrevista</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Imagine you're both the interviewer and the applicant for supervisor. Evaluate your personal image, your real experience, and your honest self-confidence.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Imagina que eres tanto el entrevistador como el candidato al puesto de supervisor. Evalúa tu imagen personal, tu experiencia real y tu confianza en ti mismo, con honestidad.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 35</span>
+          <h4>What Qualifies You to Be a Supervisor?<span class="es">¿Qué te califica para ser supervisor?</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Desire alone is not enough. A supervisor must translate experience into clear assignments, fairly appraise each worker's competence, and be ready to discipline, train, hire, and fire.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>El deseo por sí solo no es suficiente. Un supervisor debe traducir la experiencia en asignaciones claras, evaluar con justicia la competencia de cada trabajador, y estar listo para disciplinar, capacitar, contratar y despedir.</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 38</span>
+          <h4>Equipment vs. Materials vs. Supplies<span class="es">Equipo vs. materiales vs. suministros</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Equipment = the tools and machines themselves (mop buckets, floor machines, vacuums). Materials = items that wear out and get replaced (brooms, pads, mop heads). Supplies = consumables (floor chemicals).</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Equipo = las herramientas y máquinas en sí (cubetas de trapear, máquinas para pisos, aspiradoras). Materiales = artículos que se desgastan y se reemplazan (escobas, almohadillas, cabezas de trapeador). Suministros = consumibles (químicos para pisos).</p>
+        </div>
+        <div class="concept-card">
+          <span class="pgpill">p. 51</span>
+          <h4>Justifying a Purchase: ROI<span class="es">Justificar una compra: ROI</span></h4>
+          <p class="en-text"><span class="lang-tag en">EN</span>Use economic justification (numbers showing how the item saves the company money) plus convenience justification (safety, attractiveness, productivity) to win approval for new equipment.</p>
+          <p class="es-text"><span class="lang-tag es">ES</span>Usa la justificación económica (números que muestran cómo el artículo ahorra dinero a la empresa) más la justificación de conveniencia (seguridad, atractivo, productividad) para lograr la aprobación de nuevo equipo.</p>
         </div>
 
   <h3 class="block-title">Basic Leadership Style Scale <span class="es">Escala basica de estilos de liderazgo</span></h3>
@@ -970,53 +1522,62 @@ body.hide-en .en-text, body.hide-en .qtext-en, body.hide-en .term-en { display:n
         <div class="flash">
           <div class="term-en">Leadership</div>
           <div class="term-es">Liderazgo</div>
-          <div class="def">The ability to get the greatest, most efficient effort from others.</div>
+          <div class="def en-text">The ability to get the greatest, most efficient effort from others.</div>
+          <div class="def es-text">La capacidad de obtener el mayor esfuerzo, de la manera más eficiente, de los demás.</div>
         </div>
         <div class="flash">
           <div class="term-en">Facility Service Provider (FSP)</div>
           <div class="term-es">Proveedor de Servicios de Instalaciones (FSP)</div>
-          <div class="def">Umbrella term for any custodial operation, in-house or contracted.</div>
+          <div class="def en-text">Umbrella term for any custodial operation, in-house or contracted.</div>
+          <div class="def es-text">Término general para cualquier operación de limpieza, ya sea interna o contratada.</div>
         </div>
         <div class="flash">
           <div class="term-en">In-House Service Provider (ISP)</div>
           <div class="term-es">Proveedor de servicio interno (ISP)</div>
-          <div class="def">Custodial operation owned/managed directly by the building owner.</div>
+          <div class="def en-text">Custodial operation owned/managed directly by the building owner.</div>
+          <div class="def es-text">Operación de limpieza propiedad del dueño del edificio, o administrada directamente por él.</div>
         </div>
         <div class="flash">
           <div class="term-en">Building Service Contractor (BSC)</div>
           <div class="term-es">Contratista de Servicios de Edificios (BSC)</div>
-          <div class="def">A commercial contractor that won the custodial services bid.</div>
+          <div class="def en-text">A commercial contractor that won the custodial services bid.</div>
+          <div class="def es-text">Un contratista comercial que ganó la licitación de los servicios de limpieza.</div>
         </div>
         <div class="flash">
           <div class="term-en">Self-Discipline</div>
           <div class="term-es">Autodisciplina</div>
-          <div class="def">Staying focused on important steps without being sidetracked by trivial objections.</div>
+          <div class="def en-text">Staying focused on important steps without being sidetracked by trivial objections.</div>
+          <div class="def es-text">Mantenerse enfocado en los pasos importantes sin distraerse por objeciones triviales.</div>
         </div>
         <div class="flash">
           <div class="term-en">Authoritarian Leadership</div>
           <div class="term-es">Liderazgo autoritario</div>
-          <div class="def">Leader makes the decision alone — best for emergencies.</div>
+          <div class="def en-text">Leader makes the decision alone — best for emergencies.</div>
+          <div class="def es-text">El líder toma la decisión solo — ideal para emergencias.</div>
         </div>
         <div class="flash">
           <div class="term-en">Participative Leadership</div>
           <div class="term-es">Liderazgo participativo</div>
-          <div class="def">Team proposes; leader makes the final call — best for training.</div>
+          <div class="def en-text">Team proposes; leader makes the final call — best for training.</div>
+          <div class="def es-text">El equipo propone; el líder toma la decisión final — ideal para capacitación.</div>
         </div>
         <div class="flash">
           <div class="term-en">Delegative Leadership</div>
           <div class="term-es">Liderazgo delegativo</div>
-          <div class="def">Full decision-making delegated to the team — best for daily tasks.</div>
+          <div class="def en-text">Full decision-making delegated to the team — best for daily tasks.</div>
+          <div class="def es-text">Toma de decisiones totalmente delegada al equipo — ideal para tareas diarias.</div>
         </div>
         <div class="flash">
           <div class="term-en">Humility</div>
           <div class="term-es">Humildad</div>
-          <div class="def">A quality of successful supervisors — leading without acting superior.</div>
+          <div class="def en-text">A quality of successful supervisors — leading without acting superior.</div>
+          <div class="def es-text">Una cualidad de los supervisores exitosos — liderar sin actuar como superior.</div>
         </div></div>
 
   <a id="quiz2"></a>
   <h3 class="block-title">Practice Quiz 2 <span class="es">Cuestionario de practica 2</span></h3>
-  <p style="font-size:13.5px;color:#555;">6 questions from the official BSP instructor practice exam, Section Two, that cover this lesson's pages (15-18). The other 19 questions in that exam cover later lessons and will appear in the next study guide.<br>
-  <span class="es">6 preguntas del examen de practica oficial del instructor de BSP, Seccion Dos, que cubren las paginas de esta leccion (15-18). Las otras 19 preguntas de ese examen cubren lecciones posteriores y apareceran en la proxima guia de estudio.</span></p>
+  <p style="font-size:13.5px;color:#555;">30 questions: all 25 questions from the official BSP instructor practice exam, Section Two, plus 5 additional review questions written in the same style, covering every lesson through page 53. Click an answer to check it instantly.<br>
+  <span class="es">30 preguntas: las 25 preguntas oficiales del examen de practica del instructor de BSP, Seccion Dos, mas 5 preguntas de repaso adicionales escritas en el mismo estilo, cubriendo cada leccion hasta la pagina 53. Haz clic en una respuesta para verificarla al instante.</span></p>
   <div class="progress-wrap"><div class="progress-bar" id="l2-progress"></div></div>
   <div id="l2-quiz">
         <div class="quiz-q" id="l2-q0">
@@ -1124,11 +1685,479 @@ body.hide-en .en-text, body.hide-en .qtext-en, body.hide-en .term-en { display:n
             <span class="es"><strong>Explicacion:</strong> Los empleados podrían obedecer a un dictador, pero "lo más probable es que se sientan resentidos" — obediencia no es lo mismo que respeto.</span>
           </div>
         </div>
+        <div class="quiz-q" id="l2-q6">
+          <span class="qpg">p. 19</span>
+          <span class="qnum">7</span>
+          <div class="qtext-en">The first task for developing your supervisory potential is:</div>
+          <div class="qtext-es">La primera tarea para desarrollar tu potencial de supervisión es:</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',6,0,1)">
+              Asking for a raise<span class="es-op">Pedir un aumento</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',6,1,1)">
+              A long, critical self-appraisal<span class="es-op">Una autoevaluación larga y crítica</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',6,2,1)">
+              Buying new equipment<span class="es-op">Comprar equipo nuevo</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l2',6,3,1)">
+              Waiting for a promotion offer<span class="es-op">Esperar una oferta de ascenso</span>
+            </div>
+          <div class="explain" id="l2-exp6">
+            <strong>Explanation:</strong> "The first task for developing supervisory potential is a long, critical self-appraisal."
+            <span class="es"><strong>Explicacion:</strong> "La primera tarea para desarrollar el potencial de supervisión es una autoevaluación larga y crítica."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q7">
+          <span class="qpg">p. 22</span>
+          <span class="qnum">8</span>
+          <div class="qtext-en">The supervisor establishes the custodial maintenance program according to upper management's directions.</div>
+          <div class="qtext-es">El supervisor establece el programa de mantenimiento de limpieza según las directrices de la alta gerencia.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',7,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',7,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp7">
+            <strong>Explanation:</strong> "A supervisor establishes the program according to upper management's directions, and then administers the program with custodial staff."
+            <span class="es"><strong>Explicacion:</strong> "Un supervisor establece el programa según las directrices de la alta gerencia, y luego administra el programa con el personal."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q8">
+          <span class="qpg">p. 26</span>
+          <span class="qnum">9</span>
+          <div class="qtext-en">If a staff member's production is not up to standard, the supervisor's FIRST step should be to:</div>
+          <div class="qtext-es">Si la producción de un miembro del personal no cumple con el estándar, el PRIMER paso del supervisor debe ser:</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',8,0,1)">
+              Report the employee to a superior immediately<span class="es-op">Reportar al empleado a un superior de inmediato</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',8,1,1)">
+              Approach the employee directly to discuss the problem<span class="es-op">Hablar directamente con el empleado sobre el problema</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',8,2,1)">
+              Ignore it<span class="es-op">Ignorarlo</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l2',8,3,1)">
+              Terminate the employee<span class="es-op">Despedir al empleado</span>
+            </div>
+          <div class="explain" id="l2-exp8">
+            <strong>Explanation:</strong> "It is the supervisor's responsibility to first approach the employee directly to ask about the problem and try to correct it. Only as a last resort should the supervisor report the employee to a superior."
+            <span class="es"><strong>Explicacion:</strong> "Es responsabilidad del supervisor primero acercarse directamente al empleado para preguntar sobre el problema e intentar corregirlo. Solo como último recurso el supervisor debe reportar al empleado a un superior."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q9">
+          <span class="qpg">p. 29</span>
+          <span class="qnum">10</span>
+          <div class="qtext-en">One of the best ways to learn the actual job of supervision is to:</div>
+          <div class="qtext-es">Una de las mejores formas de aprender el trabajo real de supervisión es:</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',9,0,1)">
+              Only read textbooks<span class="es-op">Solo leer libros de texto</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',9,1,1)">
+              Observe your present superior<span class="es-op">Observar a tu superior actual</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',9,2,1)">
+              Avoid asking questions<span class="es-op">Evitar hacer preguntas</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l2',9,3,1)">
+              Wait until you're promoted<span class="es-op">Esperar hasta ser ascendido</span>
+            </div>
+          <div class="explain" id="l2-exp9">
+            <strong>Explanation:</strong> "One of the best ways to do this is to observe your present superior... study the methods that are effective."
+            <span class="es"><strong>Explicacion:</strong> "Una de las mejores formas de hacerlo es observar a tu superior actual... estudia los métodos que son eficaces."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q10">
+          <span class="qpg">p. 30</span>
+          <span class="qnum">11</span>
+          <div class="qtext-en">The more varied jobs and responsibilities you can assume, the more capable you are, and the better your possibilities for advancement.</div>
+          <div class="qtext-es">Mientras más variados sean los trabajos y responsabilidades que puedas asumir, más capaz eres, y mejores serán tus posibilidades de ascenso.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',10,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',10,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp10">
+            <strong>Explanation:</strong> This is a direct statement from the "Watch and Listen" step of the six key steps to advancement.
+            <span class="es"><strong>Explicacion:</strong> Esta es una afirmación directa del paso "Observa y escucha" de los seis pasos clave para el ascenso.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q11">
+          <span class="qpg">p. 22</span>
+          <span class="qnum">12</span>
+          <div class="qtext-en">The prime responsibility of top management is to:</div>
+          <div class="qtext-es">La responsabilidad principal de la alta gerencia es:</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',11,0,1)">
+              Clean the building themselves<span class="es-op">Limpiar el edificio ellos mismos</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',11,1,1)">
+              Provide the resources and climate for supervision<span class="es-op">Proporcionar los recursos y el ambiente para la supervisión</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',11,2,1)">
+              Avoid the maintenance department entirely<span class="es-op">Evitar por completo al departamento de mantenimiento</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l2',11,3,1)">
+              Set the supervisor's personal schedule<span class="es-op">Fijar el horario personal del supervisor</span>
+            </div>
+          <div class="explain" id="l2-exp11">
+            <strong>Explanation:</strong> "The prime responsibility of management is to provide the resources and climate for supervision."
+            <span class="es"><strong>Explicacion:</strong> "La responsabilidad principal de la gerencia es proporcionar los recursos y el ambiente para la supervisión."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q12">
+          <span class="qpg">p. 23</span>
+          <span class="qnum">13</span>
+          <div class="qtext-en">In a typical organizational chart, who is the administrative head, in overall charge of the entire maintenance function?</div>
+          <div class="qtext-es">En un organigrama típico, ¿quién es la cabeza administrativa, a cargo de toda la función de mantenimiento?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',12,0,2)">
+              Group Leader<span class="es-op">Líder de Grupo</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',12,1,2)">
+              Foreman<span class="es-op">Capataz</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',12,2,2)">
+              Maintenance Department Manager<span class="es-op">Gerente del Departamento de Mantenimiento</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l2',12,3,2)">
+              Contract Tradesmen<span class="es-op">Personal Contratado</span>
+            </div>
+          <div class="explain" id="l2-exp12">
+            <strong>Explanation:</strong> "This person is the administrative head in the department and is in overall charge of the entire maintenance and cleaning functions."
+            <span class="es"><strong>Explicacion:</strong> "Esta persona es la cabeza administrativa del departamento y está a cargo de todas las funciones de mantenimiento y limpieza."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q13">
+          <span class="qpg">p. 27</span>
+          <span class="qnum">14</span>
+          <div class="qtext-en">Fill in the blank: The first step in planning any job is determining the ______, followed by collecting available data.</div>
+          <div class="qtext-es">Completa el espacio: El primer paso al planear cualquier trabajo es determinar el ______, seguido de recolectar los datos disponibles.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',13,0,1)">
+              budget<span class="es-op">presupuesto</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',13,1,1)">
+              objective<span class="es-op">objetivo</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',13,2,1)">
+              vendor<span class="es-op">proveedor</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l2',13,3,1)">
+              uniform<span class="es-op">uniforme</span>
+            </div>
+          <div class="explain" id="l2-exp13">
+            <strong>Explanation:</strong> "Determining an objective is the first step in planning any job, followed by collecting available data."
+            <span class="es"><strong>Explicacion:</strong> "Determinar un objetivo es el primer paso al planear cualquier trabajo, seguido de recolectar los datos disponibles."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q14">
+          <span class="qpg">p. 23</span>
+          <span class="qnum">15</span>
+          <div class="qtext-en">A supervisor should try to achieve a balance between what is ideal and what is practical, since it's impossible to keep everyone happy.</div>
+          <div class="qtext-es">Un supervisor debe tratar de lograr un equilibrio entre lo ideal y lo práctico, ya que es imposible mantener contentos a todos.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',14,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',14,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp14">
+            <strong>Explanation:</strong> "With so many competing interests, it is impossible to keep everyone happy. The best approach is to achieve a balance between what is ideal and what is practical."
+            <span class="es"><strong>Explicacion:</strong> "Con tantos intereses en competencia, es imposible mantener contentos a todos. El mejor enfoque es lograr un equilibrio entre lo ideal y lo práctico."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q15">
+          <span class="qpg">p. 30</span>
+          <span class="qnum">16</span>
+          <div class="qtext-en">If you have a good idea that could save the company money, you should keep it to yourself until you are officially promoted to supervisor.</div>
+          <div class="qtext-es">Si tienes una buena idea que podría ahorrarle dinero a la empresa, debes guardártela hasta que seas ascendido oficialmente a supervisor.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',15,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',15,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp15">
+            <strong>Explanation:</strong> "If you have an idea that will save money for your company or institution... bring it to the attention of management." Making suggestions is one of the six key steps to advancement.
+            <span class="es"><strong>Explicacion:</strong> "Si tienes una idea que ahorrará dinero a tu empresa o institución... llévala a la atención de la gerencia." Hacer sugerencias es uno de los seis pasos clave para el ascenso.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q16">
+          <span class="qpg">p. 22</span>
+          <span class="qnum">17</span>
+          <div class="qtext-en">Many company executives only realize the maintenance department exists when trash cans are full or desks are dusty.</div>
+          <div class="qtext-es">Muchos ejecutivos de empresas solo se dan cuenta de que existe el departamento de mantenimiento cuando los botes de basura están llenos o los escritorios están polvorientos.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',16,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',16,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp16">
+            <strong>Explanation:</strong> "Only when their trashcans are full or their desks dusty, do these executives realize that a custodial maintenance department exists."
+            <span class="es"><strong>Explicacion:</strong> "Solo cuando sus botes de basura están llenos o sus escritorios polvorientos, estos ejecutivos se dan cuenta de que existe un departamento de mantenimiento de limpieza."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q17">
+          <span class="qpg">p. 26</span>
+          <span class="qnum">18</span>
+          <div class="qtext-en">Nearly all of a staff member's relationships with the company come directly through the immediate supervisor.</div>
+          <div class="qtext-es">Casi todas las relaciones de un miembro del personal con la empresa se dan directamente a través del supervisor inmediato.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',17,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',17,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp17">
+            <strong>Explanation:</strong> "Nearly all relationships with the company come directly through the immediate supervisor."
+            <span class="es"><strong>Explicacion:</strong> "Casi todas las relaciones con la empresa se dan directamente a través del supervisor inmediato."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q18">
+          <span class="qpg">p. 30</span>
+          <span class="qnum">19</span>
+          <div class="qtext-en">Learning is a process you no longer need to worry about once you finish school.</div>
+          <div class="qtext-es">El aprendizaje es un proceso del que ya no debes preocuparte una vez que terminas la escuela.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',18,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',18,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp18">
+            <strong>Explanation:</strong> "Learning is a process that never ends, no matter how old we get. Remember, education leads to success."
+            <span class="es"><strong>Explicacion:</strong> "El aprendizaje es un proceso que nunca termina, sin importar la edad que tengamos. Recuerda, la educación lleva al éxito."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q19">
+          <span class="qpg">p. 29</span>
+          <span class="qnum">20</span>
+          <div class="qtext-en">The best way to learn what makes a supervisor successful is to study the methods used by your present superior.</div>
+          <div class="qtext-es">La mejor forma de aprender qué hace exitoso a un supervisor es estudiar los métodos que usa tu superior actual.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',19,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',19,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp19">
+            <strong>Explanation:</strong> "Through careful observation you will learn what makes your superior successful."
+            <span class="es"><strong>Explicacion:</strong> "A través de una observación cuidadosa aprenderás qué hace exitoso a tu superior."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q20">
+          <span class="qpg">p. 29</span>
+          <span class="qnum">21</span>
+          <div class="qtext-en">You can move into a supervisory position without knowing your present job well.</div>
+          <div class="qtext-es">Puedes pasar a un puesto de supervisión sin conocer bien tu trabajo actual.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',20,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',20,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp20">
+            <strong>Explanation:</strong> "You have to know your present job before you are ready for the next step."
+            <span class="es"><strong>Explicacion:</strong> "Tienes que conocer tu trabajo actual antes de estar listo para el siguiente paso."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q21">
+          <span class="qpg">p. 26</span>
+          <span class="qnum">22</span>
+          <div class="qtext-en">A supervisor should not bother advising management if an employee's production is consistently below standard.</div>
+          <div class="qtext-es">Un supervisor no debe molestarse en avisar a la gerencia si la producción de un empleado está constantemente por debajo del estándar.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',21,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',21,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp21">
+            <strong>Explanation:</strong> Supervisors should "inform management about production records — good or bad — and of accomplishments."
+            <span class="es"><strong>Explicacion:</strong> Los supervisores deben "informar a la gerencia sobre los registros de producción — buenos o malos — y de los logros."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q22">
+          <span class="qpg">p. 26</span>
+          <span class="qnum">23</span>
+          <div class="qtext-en">Being accepted as "the boss" by staff is not an important part of a supervisor's success.</div>
+          <div class="qtext-es">Ser aceptado como "el jefe" por el personal no es una parte importante del éxito de un supervisor.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',22,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',22,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp22">
+            <strong>Explanation:</strong> "Being accepted as the 'boss' by the staff is a substantial part of success as a supervisor."
+            <span class="es"><strong>Explicacion:</strong> "Ser aceptado como el 'jefe' por el personal es una parte sustancial del éxito como supervisor."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q23">
+          <span class="qpg">p. 16</span>
+          <span class="qnum">24</span>
+          <div class="qtext-en">A supervisor should look at their department as a whole, rather than getting to know staff members as individuals.</div>
+          <div class="qtext-es">Un supervisor debe ver a su departamento como un conjunto, en lugar de conocer al personal como individuos.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',23,0,1)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',23,1,1)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp23">
+            <strong>Explanation:</strong> Supervisors are described as being "both friends and confidants to staff members" — knowing people as individuals matters.
+            <span class="es"><strong>Explicacion:</strong> Los supervisores son descritos como "tanto amigos como confidentes del personal" — conocer a las personas como individuos sí importa.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q24">
+          <span class="qpg">p. 26</span>
+          <span class="qnum">25</span>
+          <div class="qtext-en">Given the complexity of human beings, management requires a solid working knowledge of human behavior.</div>
+          <div class="qtext-es">Dada la complejidad del ser humano, la gerencia requiere un buen conocimiento del comportamiento humano.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',24,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',24,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp24">
+            <strong>Explanation:</strong> "Given the complexity of human beings, it requires a solid working knowledge of human behavior."
+            <span class="es"><strong>Explicacion:</strong> "Dada la complejidad del ser humano, se requiere un buen conocimiento práctico del comportamiento humano."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q25">
+          <span class="qpg">p. 20</span>
+          <span class="qnum">26</span>
+          <div class="qtext-en">According to "The Four F's," a supervisor should be Fair, Factual, Firm, and ______.</div>
+          <div class="qtext-es">Según "Las cuatro F," un supervisor debe ser Justo, Objetivo, Firme y ______.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',25,0,0)">
+              Friendly<span class="es-op">Amigable</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',25,1,0)">
+              Funny<span class="es-op">Gracioso</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',25,2,0)">
+              Flexible<span class="es-op">Flexible</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l2',25,3,0)">
+              Fast<span class="es-op">Rápido</span>
+            </div>
+          <div class="explain" id="l2-exp25">
+            <strong>Explanation:</strong> The Four F's: Fair, Factual, Firm, Friendly.
+            <span class="es"><strong>Explicacion:</strong> Las cuatro F: Justo, Objetivo, Firme, Amigable.</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q26">
+          <span class="qpg">p. 26</span>
+          <span class="qnum">27</span>
+          <div class="qtext-en">The four functions of management are Planning, Organization, Directing, and ______.</div>
+          <div class="qtext-es">Las cuatro funciones de la gerencia son Planeación, Organización, Dirección y ______.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',26,0,0)">
+              Control<span class="es-op">Control</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',26,1,0)">
+              Communication<span class="es-op">Comunicación</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',26,2,0)">
+              Compensation<span class="es-op">Compensación</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l2',26,3,0)">
+              Compliance<span class="es-op">Cumplimiento</span>
+            </div>
+          <div class="explain" id="l2-exp26">
+            <strong>Explanation:</strong> "The functions of management can be broken down into four areas: Planning, Organization, Directing, Control."
+            <span class="es"><strong>Explicacion:</strong> "Las funciones de la gerencia se dividen en cuatro áreas: Planeación, Organización, Dirección, Control."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q27">
+          <span class="qpg">p. 32</span>
+          <span class="qnum">28</span>
+          <div class="qtext-en">How early should a custodial maintenance supervisor typically arrive before staff?</div>
+          <div class="qtext-es">¿Con cuánta anticipación debe llegar típicamente un supervisor de mantenimiento de limpieza antes que el personal?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',27,0,0)">
+              15 minutes to a half hour<span class="es-op">De 15 minutos a media hora</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',27,1,0)">
+              Right when staff arrives<span class="es-op">Justo cuando llega el personal</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',27,2,0)">
+              3 hours early<span class="es-op">3 horas antes</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l2',27,3,0)">
+              The night before<span class="es-op">La noche anterior</span>
+            </div>
+          <div class="explain" id="l2-exp27">
+            <strong>Explanation:</strong> "The supervisor should arrive from 15 minutes to a half hour before the staff to allow for time to review orders..."
+            <span class="es"><strong>Explicacion:</strong> "El supervisor debe llegar de 15 minutos a media hora antes que el personal para tener tiempo de revisar las órdenes..."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q28">
+          <span class="qpg">p. 51</span>
+          <span class="qnum">29</span>
+          <div class="qtext-en">The "economic justification" method for purchasing new equipment focuses on demonstrating what?</div>
+          <div class="qtext-es">El método de "justificación económica" para comprar equipo nuevo se enfoca en demostrar qué?</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',28,0,1)">
+              How the item looks<span class="es-op">Qué apariencia tiene el artículo</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',28,1,1)">
+              How the item will save the company money<span class="es-op">Cómo el artículo ahorrará dinero a la empresa</span>
+            </div>
+            <div class="opt" data-idx="2" onclick="selectOpt('l2',28,2,1)">
+              How popular the item is<span class="es-op">Qué tan popular es el artículo</span>
+            </div>
+            <div class="opt" data-idx="3" onclick="selectOpt('l2',28,3,1)">
+              How the item was advertised<span class="es-op">Cómo se anunció el artículo</span>
+            </div>
+          <div class="explain" id="l2-exp28">
+            <strong>Explanation:</strong> "Economic justification... demonstrates how the item will save the company money using numbers."
+            <span class="es"><strong>Explicacion:</strong> "La justificación económica... demuestra cómo el artículo ahorrará dinero a la empresa usando números."</span>
+          </div>
+        </div>
+        <div class="quiz-q" id="l2-q29">
+          <span class="qpg">p. 20</span>
+          <span class="qnum">30</span>
+          <div class="qtext-en">Grass-roots supervisory skills come from having done the job, not just from books.</div>
+          <div class="qtext-es">Las habilidades de supervisión de base vienen de haber hecho el trabajo, no solo de los libros.</div>
+          
+            <div class="opt" data-idx="0" onclick="selectOpt('l2',29,0,0)">
+              True<span class="es-op">Verdadero</span>
+            </div>
+            <div class="opt" data-idx="1" onclick="selectOpt('l2',29,1,0)">
+              False<span class="es-op">Falso</span>
+            </div>
+          <div class="explain" id="l2-exp29">
+            <strong>Explanation:</strong> "They need 'grass-roots' skills that come from having done the job — not from books."
+            <span class="es"><strong>Explicacion:</strong> "Necesitan habilidades 'de base' que vienen de haber hecho el trabajo — no de los libros."</span>
+          </div>
+        </div>
     <div class="callout" style="text-align:center;" id="l2-score-box">
-      <h4 style="justify-content:center;">Your Score / Tu puntaje: <span id="l2-score">0</span> / 6
+      <h4 style="justify-content:center;">Your Score / Tu puntaje: <span id="l2-score">0</span> / 30
         &nbsp; (<span id="l2-pct">0</span>%)</h4>
       <p style="font-size:13px;color:#666;">Remember: 80% or higher is a pass on the real exam. / Recuerda: 80% o mas es aprobatorio en el examen real.</p>
-      <button onclick="resetQuiz('l2',6)" style="background:var(--navy);color:#fff;border:none;padding:9px 18px;border-radius:999px;font-weight:700;cursor:pointer;font-size:13px;">Reset Quiz / Reiniciar</button>
+      <button onclick="resetQuiz('l2',30)" style="background:var(--navy);color:#fff;border:none;padding:9px 18px;border-radius:999px;font-weight:700;cursor:pointer;font-size:13px;">Reset Quiz / Reiniciar</button>
     </div>
     </div>
 
@@ -1203,4 +2232,3 @@ function resetQuiz(prefix, len) {
 
 </body>
 </html>
-
