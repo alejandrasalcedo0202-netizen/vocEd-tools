@@ -38,10 +38,12 @@
   textarea{min-height:90px; resize:vertical;}
   .choice-list{display:flex; flex-direction:column; gap:10px;}
   .choice{display:flex; align-items:center; gap:12px; border:2px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; background:#fbfcfe; font-size:16.5px; font-weight:600; color:var(--ink);}
-  .choice .dot{width:20px; height:20px; border-radius:5px; border:2px solid #b7bedb; flex:none; position:relative;}
+  .choice .dot{width:20px; height:20px; border-radius:5px; border:2px solid #8890ad; flex:none; position:relative;}
   .choice.selected{border-color:var(--navy); background:#eef1fb;}
   .choice.selected .dot{border-color:var(--navy); background:var(--navy);}
   .choice.selected .dot::after{content:""; position:absolute; inset:4px; background:var(--gold); border-radius:2px;}
+  .choice.radio .dot{border-radius:50%;}
+  .choice.radio.selected .dot::after{border-radius:50%;}
   .nav-row{display:flex; gap:12px; margin-top:26px;}
   button.btn{flex:1; border:none; border-radius:12px; padding:15px 18px; font-size:17px; font-weight:700; cursor:pointer; font-family:inherit;}
   .btn-primary{background:var(--navy); color:#fff;}
@@ -50,6 +52,13 @@
   .note{font-size:13.5px; color:var(--muted); margin-top:10px; min-height:18px;}
   .note.warn{color:#9c5b00;}
   .checklist-score{background:var(--card); border-radius:12px; padding:14px 16px; margin-top:16px; font-size:14.5px; color:var(--navy); font-weight:600; text-align:center;}
+  .rating-block{margin-bottom:20px;}
+  .rating-label{font-size:15px; font-weight:700; color:var(--navy); margin-bottom:8px;}
+  .rating-scale{display:flex; gap:6px;}
+  .rating-btn{flex:1; border:2px solid var(--line); border-radius:10px; padding:10px 0; text-align:center; font-weight:800; font-size:16px; color:var(--navy); background:#fbfcfe; cursor:pointer;}
+  .rating-btn.selected{background:var(--navy); color:#fff; border-color:var(--navy);}
+  .rating-scale-labels{display:flex; justify-content:space-between; font-size:10.5px; color:var(--muted); margin-top:4px;}
+  .rating-scale-labels span:last-child{text-align:right;}
   /* summary */
   .summary-card{background:#fff; border-radius:18px; padding:0; overflow:hidden; box-shadow:0 12px 34px rgba(10,31,92,0.16); border:3px solid var(--gold);}
   .summary-head{background:var(--navy); color:#fff; padding:24px 22px 20px; text-align:center;}
@@ -62,9 +71,15 @@
   .plan-item{background:var(--card); border-left:4px solid var(--gold); border-radius:8px; padding:14px 16px;}
   .s-label{font-size:12.5px; font-weight:700; color:var(--gold-dark); text-transform:uppercase; letter-spacing:.04em; margin-bottom:4px;}
   .s-value{font-size:16px; color:var(--ink); line-height:1.4;}
+  .s-block{margin-bottom:18px;}
   .checklist-summary{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;}
   .s-tag{background:var(--card); border:1px solid var(--line); border-radius:999px; padding:6px 12px; font-size:13.5px; color:var(--navy); font-weight:600;}
   .s-tag.done::before{content:"✓ "; color:#1E7A34;}
+  .mini-bars{display:flex; flex-direction:column; gap:8px;}
+  .mini-bar-row{display:flex; align-items:center; gap:10px;}
+  .mini-bar-name{width:44%; font-size:13px; color:var(--ink); font-weight:600;}
+  .mini-bar-track{flex:1; background:var(--card); border-radius:99px; height:10px; overflow:hidden;}
+  .mini-bar-fill{background:var(--navy); height:100%; border-radius:99px;}
   .next-step-banner{background:var(--navy); color:#fff; border-radius:10px; padding:14px 16px; margin-top:20px; font-size:14px; text-align:center; line-height:1.5;}
   .footer-note{text-align:center; font-size:13px; color:var(--muted); margin-top:16px; line-height:1.5;}
   @media print{
@@ -83,8 +98,8 @@
   </header>
   <div class="eyebrow" data-k="eyebrow">MODULE 3 • ACTIVITY 3</div>
   <h1 class="title" data-k="title">Plan It Out</h1>
-  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:16%"></div></div>
-  <div class="progress-label" id="progressLabel">Step 1 of 5</div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:11%"></div></div>
+  <div class="progress-label" id="progressLabel">Step 1 of 9</div>
 
   <div class="card">
 
@@ -108,9 +123,9 @@
     </div>
 
     <div class="step" id="step-2">
-      <div class="num-badge">1</div>
-      <p class="q" data-k="q2">My Goal: What do I want to be doing in 2 years?</p>
-      <textarea id="planGoal" data-k-ph="ph2" placeholder="In 2 years, I want to..."></textarea>
+      <p class="q" data-k="q2">How ready do you feel about each part of your job search?</p>
+      <p class="hint" data-k="h2">Tap a number for each one. 1 = just starting, 5 = very ready.</p>
+      <div id="readinessBlocks"></div>
       <div class="note" id="note-2"></div>
       <div class="nav-row">
         <button class="btn btn-secondary" onclick="goBack(2)" data-k="back">Back</button>
@@ -119,9 +134,9 @@
     </div>
 
     <div class="step" id="step-3">
-      <div class="num-badge">2</div>
-      <p class="q" data-k="q3">My First Step: One thing I will do in the next 30 days</p>
-      <textarea id="planStep" data-k-ph="ph3" placeholder="In the next 30 days, I will..."></textarea>
+      <div class="num-badge">1</div>
+      <p class="q" data-k="q3">My Goal: What do I want to be doing in 2 years?</p>
+      <textarea id="planGoal" data-k-ph="ph3" placeholder="In 2 years, I want to..."></textarea>
       <div class="note" id="note-3"></div>
       <div class="nav-row">
         <button class="btn btn-secondary" onclick="goBack(3)" data-k="back">Back</button>
@@ -130,9 +145,12 @@
     </div>
 
     <div class="step" id="step-4">
-      <div class="num-badge">3</div>
-      <p class="q" data-k="q4">My Support: Who will help me stay on track?</p>
-      <textarea id="planSupport" data-k-ph="ph4" placeholder="I can count on..."></textarea>
+      <p class="q" data-k="q4">What might get in your way — and what's your plan?</p>
+      <p class="hint" data-k="h4">Naming it now makes it easier to handle later.</p>
+      <p class="hint" style="margin-bottom:6px; font-weight:700; color:var(--navy);" data-k="obstacleLabel">Obstacle</p>
+      <textarea id="obstacle" data-k-ph="phObstacle" placeholder="One thing that might get in my way is..." style="margin-bottom:16px;"></textarea>
+      <p class="hint" style="margin-bottom:6px; font-weight:700; color:var(--navy);" data-k="planLabel">My Plan</p>
+      <textarea id="obstaclePlan" data-k-ph="phPlan" placeholder="If that happens, I will..."></textarea>
       <div class="note" id="note-4"></div>
       <div class="nav-row">
         <button class="btn btn-secondary" onclick="goBack(4)" data-k="back">Back</button>
@@ -141,12 +159,45 @@
     </div>
 
     <div class="step" id="step-5">
-      <div class="num-badge">4</div>
-      <p class="q" data-k="q5">My Timeline: When will I apply / enroll / interview?</p>
-      <input type="text" id="planTimeline" data-k-ph="ph5" placeholder="By...">
+      <div class="num-badge">2</div>
+      <p class="q" data-k="q5">My First Step: One thing I will do in the next 30 days</p>
+      <textarea id="planStep" data-k-ph="ph5" placeholder="In the next 30 days, I will..."></textarea>
       <div class="note" id="note-5"></div>
       <div class="nav-row">
         <button class="btn btn-secondary" onclick="goBack(5)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(5)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-6">
+      <div class="num-badge">3</div>
+      <p class="q" data-k="q6">My Support: Who will help me stay on track?</p>
+      <textarea id="planSupport" data-k-ph="ph6" placeholder="I can count on..."></textarea>
+      <div class="note" id="note-6"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(6)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(6)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-7">
+      <div class="num-badge">4</div>
+      <p class="q" data-k="q7">My Timeline: When will I apply / enroll / interview?</p>
+      <input type="text" id="planTimeline" data-k-ph="ph7" placeholder="By...">
+      <div class="note" id="note-7"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(7)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(7)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-8">
+      <p class="q" data-k="q8">Are you interested in the People Management Certificate Program?</p>
+      <p class="hint" data-k="h8">A new BSP cohort begins September 2026 — building on what you learned here.</p>
+      <div class="choice-list" id="certChoices"></div>
+      <div class="note" id="note-8"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(8)" data-k="back">Back</button>
         <button class="btn btn-primary" onclick="showSummary()" data-k="finish">See My Plan</button>
       </div>
     </div>
@@ -163,18 +214,26 @@ const STR = {
     eyebrow:"MODULE 3 • ACTIVITY 3", title:"Plan It Out", langBtn:"Español",
     q0:"What's your name?", h0:"This will appear on your results card at the end.", ph0:"Type your name",
     q1:"Resume Readiness Checklist", h1:"Check off what you already have ready.",
-    checklist:["My contact information is ready","I've written down my work experience","I know 5–8 skills I want to list","I have my education / certifications listed"],
-    q2:"My Goal: What do I want to be doing in 2 years?", ph2:"In 2 years, I want to...",
-    q3:"My First Step: One thing I will do in the next 30 days", ph3:"In the next 30 days, I will...",
-    q4:"My Support: Who will help me stay on track?", ph4:"I can count on...",
-    q5:"My Timeline: When will I apply / enroll / interview?", ph5:"By...",
+    checklist:["My contact information is ready","I've written down my work experience","I know 5–8 skills I want to list","I have my education / certifications listed","I have 2–3 references lined up","I have a professional email address"],
+    q2:"How ready do you feel about each part of your job search?", h2:"Tap a number for each one. 1 = just starting, 5 = very ready.",
+    readinessAreas:["Resume", "Cover Letter", "Interview Skills", "Networking"],
+    q3:"My Goal: What do I want to be doing in 2 years?", ph3:"In 2 years, I want to...",
+    q4:"What might get in your way — and what's your plan?", h4:"Naming it now makes it easier to handle later.",
+    obstacleLabel:"Obstacle", planLabel:"My Plan", phObstacle:"One thing that might get in my way is...", phPlan:"If that happens, I will...",
+    q5:"My First Step: One thing I will do in the next 30 days", ph5:"In the next 30 days, I will...",
+    q6:"My Support: Who will help me stay on track?", ph6:"I can count on...",
+    q7:"My Timeline: When will I apply / enroll / interview?", ph7:"By...",
+    q8:"Are you interested in the People Management Certificate Program?", h8:"A new BSP cohort begins September 2026 — building on what you learned here.",
+    certOptions:["Yes, sign me up!","Maybe — I want to learn more","Not right now"],
     next:"Next", back:"Back", finish:"See My Plan",
     needName:"Please type your name to continue.",
+    needReadiness:"Please rate all four areas to continue.",
+    needChoice:"Please choose one option to continue.",
     footer:"Introduction to Workforce Opportunities • BSIC SKL 101CE • West Los Angeles College",
     scoreTpl:(n,total)=> n===total ? "Great — your resume basics are ready! Use the Google Form your instructor shared to get your finished resume." : n+" of "+total+" ready. That's OK — you can keep working on the rest with your instructor.",
     sumEyebrow:"YOUR RESULTS", sumTitle:"My College-to-Career Plan", sumSub:"Introduction to Workforce Opportunities",
-    labelGoal:"My Goal", labelStep:"My First Step", labelSupport:"My Support", labelTimeline:"My Timeline",
-    labelChecklist:"Resume Readiness",
+    labelGoal:"My Goal", labelObstacle:"Possible Obstacle & My Plan", labelStep:"My First Step", labelSupport:"My Support", labelTimeline:"My Timeline",
+    labelChecklist:"Resume Readiness", labelReadiness:"How Ready I Feel", labelCert:"Certificate Program Interest",
     notAnswered:"Not answered",
     printBtn:"Print / Save as PDF", restartBtn:"Start Over",
     saveNote:"Take a screenshot or tap Print to save this — show your instructor or keep it for yourself. This is your personal record for Module 3.",
@@ -184,18 +243,26 @@ const STR = {
     eyebrow:"MÓDULO 3 • ACTIVIDAD 3", title:"Haz Tu Plan", langBtn:"English",
     q0:"¿Cómo te llamas?", h0:"Esto aparecerá en tu tarjeta de resultados al final.", ph0:"Escribe tu nombre",
     q1:"Lista de Preparación del Resumen", h1:"Marca lo que ya tienes listo.",
-    checklist:["Mi información de contacto está lista","Ya escribí mi experiencia de trabajo","Sé 5–8 habilidades que quiero incluir","Tengo lista mi educación / certificaciones"],
-    q2:"Mi Meta: ¿Qué quiero estar haciendo en 2 años?", ph2:"En 2 años, quiero...",
-    q3:"Mi Primer Paso: Una cosa que haré en los próximos 30 días", ph3:"En los próximos 30 días, voy a...",
-    q4:"Mi Apoyo: ¿Quién me ayudará a mantenerme en el camino?", ph4:"Puedo contar con...",
-    q5:"Mi Tiempo: ¿Cuándo voy a aplicar / inscribirme / entrevistarme?", ph5:"Para...",
+    checklist:["Mi información de contacto está lista","Ya escribí mi experiencia de trabajo","Sé 5–8 habilidades que quiero incluir","Tengo lista mi educación / certificaciones","Tengo 2–3 referencias preparadas","Tengo un correo electrónico profesional"],
+    q2:"¿Qué tan preparado/a te sientes en cada parte de tu búsqueda de empleo?", h2:"Toca un número para cada una. 1 = apenas empezando, 5 = muy preparado/a.",
+    readinessAreas:["Resumen", "Carta de Presentación", "Habilidades de Entrevista", "Contactos Profesionales"],
+    q3:"Mi Meta: ¿Qué quiero estar haciendo en 2 años?", ph3:"En 2 años, quiero...",
+    q4:"¿Qué podría interponerse en tu camino — y cuál es tu plan?", h4:"Nombrarlo ahora lo hace más fácil de manejar después.",
+    obstacleLabel:"Obstáculo", planLabel:"Mi Plan", phObstacle:"Una cosa que podría interponerse es...", phPlan:"Si eso pasa, voy a...",
+    q5:"Mi Primer Paso: Una cosa que haré en los próximos 30 días", ph5:"En los próximos 30 días, voy a...",
+    q6:"Mi Apoyo: ¿Quién me ayudará a mantenerme en el camino?", ph6:"Puedo contar con...",
+    q7:"Mi Tiempo: ¿Cuándo voy a aplicar / inscribirme / entrevistarme?", ph7:"Para...",
+    q8:"¿Te interesa el Programa de Certificado de Gestión de Personas?", h8:"Un nuevo grupo de BSP comienza en septiembre de 2026 — basado en lo que aprendiste aquí.",
+    certOptions:["¡Sí, apúntenme!","Tal vez — quiero saber más","Ahora no"],
     next:"Siguiente", back:"Atrás", finish:"Ver Mi Plan",
     needName:"Por favor escribe tu nombre para continuar.",
+    needReadiness:"Por favor califica las cuatro áreas para continuar.",
+    needChoice:"Por favor elige una opción para continuar.",
     footer:"Introducción a las Oportunidades Laborales • BSIC SKL 101CE • West Los Angeles College",
     scoreTpl:(n,total)=> n===total ? "¡Excelente — lo básico de tu resumen está listo! Usa el formulario de Google que compartió tu instructora para obtener tu resumen terminado." : n+" de "+total+" listos. Está bien — puedes seguir trabajando en el resto con tu instructora.",
     sumEyebrow:"TUS RESULTADOS", sumTitle:"Mi Plan de Universidad a Carrera", sumSub:"Introducción a las Oportunidades Laborales",
-    labelGoal:"Mi Meta", labelStep:"Mi Primer Paso", labelSupport:"Mi Apoyo", labelTimeline:"Mi Tiempo",
-    labelChecklist:"Preparación del Resumen",
+    labelGoal:"Mi Meta", labelObstacle:"Posible Obstáculo y Mi Plan", labelStep:"Mi Primer Paso", labelSupport:"Mi Apoyo", labelTimeline:"Mi Tiempo",
+    labelChecklist:"Preparación del Resumen", labelReadiness:"Qué Tan Preparado/a Me Siento", labelCert:"Interés en el Programa de Certificado",
     notAnswered:"Sin respuesta",
     printBtn:"Imprimir / Guardar como PDF", restartBtn:"Empezar de Nuevo",
     saveNote:"Toma una captura de pantalla o presiona Imprimir para guardar esto — muéstraselo a tu instructora o guárdalo para ti. Este es tu registro personal del Módulo 3.",
@@ -203,8 +270,8 @@ const STR = {
   }
 };
 let lang = "en";
-const state = { name:"", checklist:[], goal:"", step:"", support:"", timeline:"" };
-const TOTAL_STEPS = 6;
+const state = { name:"", checklist:[], readiness:[0,0,0,0], goal:"", obstacle:"", obstaclePlan:"", step:"", support:"", timeline:"", certInterest:null };
+const TOTAL_STEPS = 9;
 
 function toggleLang(){ lang = (lang==="en") ? "es" : "en"; applyLang(); }
 function applyLang(){
@@ -213,7 +280,7 @@ function applyLang(){
   document.getElementById("langBtn").textContent = t.langBtn;
   document.querySelectorAll("[data-k]").forEach(el=>{ const k=el.getAttribute("data-k"); if(t[k]!==undefined) el.textContent=t[k]; });
   document.querySelectorAll("[data-k-ph]").forEach(el=>{ const k=el.getAttribute("data-k-ph"); if(t[k]!==undefined) el.setAttribute("placeholder", t[k]); });
-  renderChecklist();
+  renderChecklist(); renderReadinessBlocks(); renderCertChoices();
   if(document.getElementById("step-summary").classList.contains("active")) renderSummary();
   updateProgressLabel();
 }
@@ -228,6 +295,37 @@ function renderChecklist(){
     wrap.appendChild(div);
   });
   document.getElementById("checklistScore").textContent = t.scoreTpl(state.checklist.length, t.checklist.length);
+}
+function renderReadinessBlocks(){
+  const wrap = document.getElementById("readinessBlocks"); const t = STR[lang]; wrap.innerHTML = "";
+  t.readinessAreas.forEach((label, areaIdx)=>{
+    const block = document.createElement("div");
+    block.className = "rating-block";
+    const scaleHtml = [1,2,3,4,5].map(n=>{
+      const sel = state.readiness[areaIdx] === n;
+      return '<div class="rating-btn'+(sel?" selected":"")+'" data-area="'+areaIdx+'" data-val="'+n+'">'+n+'</div>';
+    }).join("");
+    block.innerHTML = '<div class="rating-label">'+label+'</div><div class="rating-scale">'+scaleHtml+'</div>';
+    wrap.appendChild(block);
+  });
+  wrap.querySelectorAll(".rating-btn").forEach(btn=>{
+    btn.onclick = ()=>{
+      const area = parseInt(btn.getAttribute("data-area"),10);
+      const val = parseInt(btn.getAttribute("data-val"),10);
+      state.readiness[area] = val;
+      renderReadinessBlocks();
+    };
+  });
+}
+function renderCertChoices(){
+  const wrap = document.getElementById("certChoices"); const t = STR[lang]; wrap.innerHTML = "";
+  t.certOptions.forEach((label,i)=>{
+    const div = document.createElement("div");
+    div.className = "choice radio" + (state.certInterest===i ? " selected" : "");
+    div.innerHTML = '<span class="dot"></span><span>'+label+'</span>';
+    div.onclick = ()=>{ state.certInterest = i; renderCertChoices(); };
+    wrap.appendChild(div);
+  });
 }
 function updateProgressLabel(){
   const activeStep = getActiveStepIndex(); const t = STR[lang];
@@ -250,13 +348,19 @@ function goNext(i){
     state.name = document.getElementById("name").value.trim();
     if(!state.name){ document.getElementById("note-0").textContent=t.needName; document.getElementById("note-0").className="note warn"; return; }
   }
-  if(i===2) state.goal = document.getElementById("planGoal").value.trim();
-  if(i===3) state.step = document.getElementById("planStep").value.trim();
-  if(i===4) state.support = document.getElementById("planSupport").value.trim();
+  if(i===2){
+    if(state.readiness.some(r=>r===0)){ document.getElementById("note-2").textContent=t.needReadiness; document.getElementById("note-2").className="note warn"; return; }
+  }
+  if(i===3) state.goal = document.getElementById("planGoal").value.trim();
+  if(i===4){ state.obstacle = document.getElementById("obstacle").value.trim(); state.obstaclePlan = document.getElementById("obstaclePlan").value.trim(); }
+  if(i===5) state.step = document.getElementById("planStep").value.trim();
+  if(i===6) state.support = document.getElementById("planSupport").value.trim();
   showStep(i+1);
 }
 function showSummary(){
+  const t = STR[lang];
   state.timeline = document.getElementById("planTimeline").value.trim();
+  if(state.certInterest===null){ document.getElementById("note-8").textContent=t.needChoice; document.getElementById("note-8").className="note warn"; return; }
   for(let j=0;j<TOTAL_STEPS;j++) document.getElementById("step-"+j).classList.remove("active");
   document.getElementById("step-summary").classList.add("active");
   document.getElementById("progressFill").style.width="100%";
@@ -270,6 +374,12 @@ function renderSummary(){
     const done = state.checklist.includes(i);
     return '<span class="s-tag'+(done?" done":"")+'">'+label+'</span>';
   }).join("");
+  const readinessHtml = t.readinessAreas.map((label,i)=>{
+    const val = state.readiness[i] || 0;
+    return '<div class="mini-bar-row"><div class="mini-bar-name">'+label+'</div><div class="mini-bar-track"><div class="mini-bar-fill" style="width:'+(val*20)+'%"></div></div></div>';
+  }).join("");
+  const obstacleHtml = '<div><strong>'+t.obstacleLabel+':</strong> '+(state.obstacle || t.notAnswered)+'</div><div style="margin-top:8px;"><strong>'+t.planLabel+':</strong> '+(state.obstaclePlan || t.notAnswered)+'</div>';
+  const certLabel = state.certInterest !== null ? t.certOptions[state.certInterest] : t.notAnswered;
   document.getElementById("step-summary").innerHTML = `
     <div class="summary-card">
       <div class="summary-head">
@@ -280,12 +390,15 @@ function renderSummary(){
       </div>
       <div class="summary-body">
         <p class="summary-name">${state.name || t.notAnswered}</p>
-        <div class="s-block" style="margin-bottom:18px;"><div class="s-label">${t.labelChecklist}</div><div class="checklist-summary">${checklistHtml}</div></div>
+        <div class="s-block"><div class="s-label">${t.labelChecklist}</div><div class="checklist-summary">${checklistHtml}</div></div>
+        <div class="s-block"><div class="s-label">${t.labelReadiness}</div><div class="mini-bars">${readinessHtml}</div></div>
         <div class="plan-grid">
           <div class="plan-item"><div class="s-label">${t.labelGoal}</div><div class="s-value">${state.goal || t.notAnswered}</div></div>
+          <div class="plan-item"><div class="s-label">${t.labelObstacle}</div><div class="s-value">${obstacleHtml}</div></div>
           <div class="plan-item"><div class="s-label">${t.labelStep}</div><div class="s-value">${state.step || t.notAnswered}</div></div>
           <div class="plan-item"><div class="s-label">${t.labelSupport}</div><div class="s-value">${state.support || t.notAnswered}</div></div>
           <div class="plan-item"><div class="s-label">${t.labelTimeline}</div><div class="s-value">${state.timeline || t.notAnswered}</div></div>
+          <div class="plan-item"><div class="s-label">${t.labelCert}</div><div class="s-value">${certLabel}</div></div>
         </div>
         <div class="next-step-banner">${t.nextStepBanner}</div>
       </div>
@@ -298,12 +411,16 @@ function renderSummary(){
   `;
 }
 function restart(){
-  state.name=""; state.checklist=[]; state.goal=""; state.step=""; state.support=""; state.timeline="";
+  state.name=""; state.checklist=[]; state.readiness=[0,0,0,0]; state.goal=""; state.obstacle=""; state.obstaclePlan="";
+  state.step=""; state.support=""; state.timeline=""; state.certInterest=null;
   document.getElementById("name").value=""; document.getElementById("planGoal").value="";
+  document.getElementById("obstacle").value=""; document.getElementById("obstaclePlan").value="";
   document.getElementById("planStep").value=""; document.getElementById("planSupport").value=""; document.getElementById("planTimeline").value="";
   showStep(0);
 }
 renderChecklist();
+renderReadinessBlocks();
+renderCertChoices();
 updateProgressLabel();
 </script>
 </body>
