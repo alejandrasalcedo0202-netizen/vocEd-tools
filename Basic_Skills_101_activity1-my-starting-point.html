@@ -19,59 +19,47 @@
   .wrap{max-width:560px; margin:0 auto; padding:0 18px 60px;}
   header{padding:22px 4px 14px; display:flex; align-items:center; justify-content:space-between; gap:10px;}
   header img{height:46px; display:block; background:#fff; border-radius:8px; padding:4px 8px;}
-  .langbtn{
-    background:rgba(255,255,255,0.15); color:#fff; border:1.5px solid rgba(255,255,255,0.55);
-    border-radius:999px; padding:8px 16px; font-size:15px; font-weight:600; cursor:pointer;
-  }
+  .langbtn{background:rgba(255,255,255,0.15); color:#fff; border:1.5px solid rgba(255,255,255,0.55); border-radius:999px; padding:8px 16px; font-size:15px; font-weight:600; cursor:pointer;}
   .langbtn:active{background:rgba(255,255,255,0.3);}
   .eyebrow{color:var(--gold); font-weight:700; font-size:14px; letter-spacing:.03em; margin:6px 0 2px;}
   h1.title{color:#fff; font-family:Georgia,'Times New Roman',serif; font-size:28px; margin:0 0 18px; line-height:1.25;}
   .progress-track{background:rgba(255,255,255,0.25); height:8px; border-radius:99px; overflow:hidden; margin-bottom:6px;}
   .progress-fill{background:var(--gold); height:100%; border-radius:99px; transition:width .3s ease;}
   .progress-label{color:#dfe6f7; font-size:13px; margin-bottom:14px;}
-  .card{
-    background:var(--white); border-radius:16px; padding:26px 22px; box-shadow:0 10px 30px rgba(10,31,92,0.12);
-    margin-top:4px;
-  }
+  .card{background:var(--white); border-radius:16px; padding:26px 22px; box-shadow:0 10px 30px rgba(10,31,92,0.12); margin-top:4px;}
   .step{display:none;}
   .step.active{display:block; animation:fadein .25s ease;}
   @keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
   .q{font-size:20px; font-weight:700; color:var(--navy); margin:0 0 6px; line-height:1.35;}
   .hint{font-size:14.5px; color:var(--muted); margin:0 0 18px;}
-  input[type="text"], textarea{
-    width:100%; border:2px solid var(--line); border-radius:12px; padding:14px 14px; font-size:17px;
-    font-family:inherit; color:var(--ink); background:#fbfcfe;
-  }
+  input[type="text"], textarea{width:100%; border:2px solid var(--line); border-radius:12px; padding:14px 14px; font-size:17px; font-family:inherit; color:var(--ink); background:#fbfcfe;}
   input[type="text"]:focus, textarea:focus{outline:none; border-color:var(--navy);}
   textarea{min-height:90px; resize:vertical;}
   .choice-list{display:flex; flex-direction:column; gap:10px;}
-  .choice{
-    display:flex; align-items:center; gap:12px; border:2px solid var(--line); border-radius:12px;
-    padding:14px 16px; cursor:pointer; background:#fbfcfe; font-size:17px; font-weight:600; color:var(--ink);
-  }
-  .choice .dot{width:20px; height:20px; border-radius:50%; border:2px solid #b7bedb; flex:none; position:relative;}
+  .choice{display:flex; align-items:center; gap:12px; border:2px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; background:#fbfcfe; font-size:17px; font-weight:600; color:var(--ink);}
+  .choice .dot{width:20px; height:20px; border-radius:50%; border:2px solid #8890ad; flex:none; position:relative;}
   .choice.check .dot{border-radius:5px;}
   .choice.selected{border-color:var(--navy); background:#eef1fb;}
   .choice.selected .dot{border-color:var(--navy); background:var(--navy);}
-  .choice.selected .dot::after{
-    content:""; position:absolute; inset:4px; background:var(--gold); border-radius:50%;
-  }
+  .choice.selected .dot::after{content:""; position:absolute; inset:4px; background:var(--gold); border-radius:50%;}
   .choice.check.selected .dot::after{border-radius:2px;}
   .nav-row{display:flex; gap:12px; margin-top:26px;}
-  button.btn{
-    flex:1; border:none; border-radius:12px; padding:15px 18px; font-size:17px; font-weight:700;
-    cursor:pointer; font-family:inherit;
-  }
+  button.btn{flex:1; border:none; border-radius:12px; padding:15px 18px; font-size:17px; font-weight:700; cursor:pointer; font-family:inherit;}
   .btn-primary{background:var(--navy); color:#fff;}
   .btn-primary:active{background:var(--navy-dark);}
   .btn-secondary{background:#eef1f8; color:var(--navy); flex:0 0 110px;}
   .note{font-size:13.5px; color:var(--muted); margin-top:10px; min-height:18px;}
   .note.warn{color:#9c5b00;}
+  /* rating grid */
+  .rating-block{margin-bottom:22px;}
+  .rating-label{font-size:15.5px; font-weight:700; color:var(--navy); margin-bottom:8px;}
+  .rating-scale{display:flex; gap:6px;}
+  .rating-btn{flex:1; border:2px solid var(--line); border-radius:10px; padding:10px 0; text-align:center; font-weight:800; font-size:16px; color:var(--navy); background:#fbfcfe; cursor:pointer;}
+  .rating-btn.selected{background:var(--navy); color:#fff; border-color:var(--navy);}
+  .rating-scale-labels{display:flex; justify-content:space-between; font-size:10.5px; color:var(--muted); margin-top:4px;}
+  .rating-scale-labels span:last-child{text-align:right;}
   /* summary */
-  .summary-card{
-    background:#fff; border-radius:18px; padding:0; overflow:hidden; box-shadow:0 12px 34px rgba(10,31,92,0.16);
-    border:3px solid var(--gold);
-  }
+  .summary-card{background:#fff; border-radius:18px; padding:0; overflow:hidden; box-shadow:0 12px 34px rgba(10,31,92,0.16); border:3px solid var(--gold);}
   .summary-head{background:var(--navy); color:#fff; padding:24px 22px 20px; text-align:center;}
   .summary-head img{height:42px; margin-bottom:10px; background:#fff; border-radius:8px; padding:4px 8px;}
   .summary-head h2{font-family:Georgia,'Times New Roman',serif; font-size:24px; margin:4px 0 2px;}
@@ -83,6 +71,11 @@
   .s-value{font-size:16.5px; color:var(--ink); line-height:1.4;}
   .s-tags{display:flex; flex-wrap:wrap; gap:8px;}
   .s-tag{background:var(--card); border:1px solid var(--line); border-radius:999px; padding:6px 12px; font-size:14px; color:var(--navy); font-weight:600;}
+  .mini-bars{display:flex; flex-direction:column; gap:8px;}
+  .mini-bar-row{display:flex; align-items:center; gap:10px;}
+  .mini-bar-name{width:44%; font-size:13px; color:var(--ink); font-weight:600;}
+  .mini-bar-track{flex:1; background:var(--card); border-radius:99px; height:10px; overflow:hidden;}
+  .mini-bar-fill{background:var(--navy); height:100%; border-radius:99px;}
   .summary-actions{padding:0 22px 24px; display:flex; gap:12px;}
   .footer-note{text-align:center; font-size:13px; color:var(--muted); margin-top:16px; line-height:1.5;}
   @media print{
@@ -101,8 +94,8 @@
   </header>
   <div class="eyebrow" data-k="eyebrow">MODULE 1 • ACTIVITY 1</div>
   <h1 class="title" data-k="title">My Starting Point</h1>
-  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:16%"></div></div>
-  <div class="progress-label" id="progressLabel">Step 1 of 5</div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:11%"></div></div>
+  <div class="progress-label" id="progressLabel">Step 1 of 9</div>
 
   <div class="card">
 
@@ -111,9 +104,7 @@
       <p class="hint" data-k="h0">This will appear on your results card at the end.</p>
       <input type="text" id="name" data-k-ph="ph0" placeholder="Type your name">
       <div class="note" id="note-0"></div>
-      <div class="nav-row">
-        <button class="btn btn-primary" style="flex:1" onclick="goNext(0)" data-k="next">Next</button>
-      </div>
+      <div class="nav-row"><button class="btn btn-primary" onclick="goNext(0)" data-k="next">Next</button></div>
     </div>
 
     <div class="step" id="step-1">
@@ -128,9 +119,9 @@
     </div>
 
     <div class="step" id="step-2">
-      <p class="q" data-k="q2">What's one thing you're proud of in your work?</p>
-      <p class="hint" data-k="h2">A skill, a habit, something you do well.</p>
-      <textarea id="proud" data-k-ph="ph2" placeholder="I'm proud that I..."></textarea>
+      <p class="q" data-k="q2">How confident do you feel about each of these right now?</p>
+      <p class="hint" data-k="h2">Tap a number for each one. 1 = just starting, 5 = very confident.</p>
+      <div id="ratingBlocks"></div>
       <div class="note" id="note-2"></div>
       <div class="nav-row">
         <button class="btn btn-secondary" onclick="goBack(2)" data-k="back">Back</button>
@@ -139,9 +130,9 @@
     </div>
 
     <div class="step" id="step-3">
-      <p class="q" data-k="q3">Which habits do you want to build this course?</p>
-      <p class="hint" data-k="h3">Pick as many as you like.</p>
-      <div class="choice-list" id="habitChoices"></div>
+      <p class="q" data-k="q3">What's one thing you're proud of in your work?</p>
+      <p class="hint" data-k="h3">Give a specific example if you can.</p>
+      <textarea id="proud" data-k-ph="ph3" placeholder="I'm proud that I..."></textarea>
       <div class="note" id="note-3"></div>
       <div class="nav-row">
         <button class="btn btn-secondary" onclick="goBack(3)" data-k="back">Back</button>
@@ -150,12 +141,57 @@
     </div>
 
     <div class="step" id="step-4">
-      <p class="q" data-k="q4">What's one goal you want to reach by the end of this course?</p>
-      <p class="hint" data-k="h4">It can be small. We'll build on it in Activity 2.</p>
-      <textarea id="goal" data-k-ph="ph4" placeholder="By the end of this course, I want to..."></textarea>
+      <p class="q" data-k="q4">What's one challenge you've faced that you overcame?</p>
+      <p class="hint" data-k="h4">At work, at home, or in your own life.</p>
+      <textarea id="challenge" data-k-ph="ph4" placeholder="One challenge I overcame was..."></textarea>
       <div class="note" id="note-4"></div>
       <div class="nav-row">
         <button class="btn btn-secondary" onclick="goBack(4)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(4)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-5">
+      <p class="q" data-k="q5">Which habits do you want to build this course?</p>
+      <p class="hint" data-k="h5">Pick as many as you like — you'll choose your top one next.</p>
+      <div class="choice-list" id="habitChoices"></div>
+      <div class="note" id="note-5"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(5)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(5)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-6">
+      <p class="q" data-k="q6">Of those, which ONE will you focus on first?</p>
+      <p class="hint" data-k="h6">Pick just one to start with.</p>
+      <div class="choice-list" id="focusHabitChoices"></div>
+      <div class="note" id="note-6"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(6)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(6)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-7">
+      <p class="q" data-k="q7">What's one goal you want to reach by the end of this course?</p>
+      <p class="hint" data-k="h7">It can be small. We'll build on it in Activity 2.</p>
+      <textarea id="goal" data-k-ph="ph7" placeholder="By the end of this course, I want to..."></textarea>
+      <div class="note" id="note-7"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(7)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(7)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-8">
+      <p class="q" data-k="q8">How confident are you that you'll reach this goal?</p>
+      <p class="hint" data-k="h8">1 = not sure yet, 5 = very confident.</p>
+      <div class="rating-scale" id="goalConfidenceScale"></div>
+      <div class="rating-scale-labels"><span data-k="scaleLow">Just starting</span><span data-k="scaleHigh">Very confident</span></div>
+      <div class="note" id="note-8"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(8)" data-k="back">Back</button>
         <button class="btn btn-primary" onclick="showSummary()" data-k="finish">See My Starting Point</button>
       </div>
     </div>
@@ -173,18 +209,29 @@ const STR = {
     eyebrow:"MODULE 1 • ACTIVITY 1", title:"My Starting Point", langBtn:"Español",
     q0:"What's your name?", h0:"This will appear on your results card at the end.", ph0:"Type your name",
     q1:"What best describes your current work?", h1:"Choose the one closest to your job.",
-    q2:"What's one thing you're proud of in your work?", h2:"A skill, a habit, something you do well.", ph2:"I'm proud that I...",
-    q3:"Which habits do you want to build this course?", h3:"Pick as many as you like.",
-    q4:"What's one goal you want to reach by the end of this course?", h4:"It can be small. We'll build on it in Activity 2.", ph4:"By the end of this course, I want to...",
+    q2:"How confident do you feel about each of these right now?", h2:"Tap a number for each one. 1 = just starting, 5 = very confident.",
+    q3:"What's one thing you're proud of in your work?", h3:"Give a specific example if you can.", ph3:"I'm proud that I...",
+    q4:"What's one challenge you've faced that you overcame?", h4:"At work, at home, or in your own life.", ph4:"One challenge I overcame was...",
+    q5:"Which habits do you want to build this course?", h5:"Pick as many as you like — you'll choose your top one next.",
+    q6:"Of those, which ONE will you focus on first?", h6:"Pick just one to start with.",
+    q7:"What's one goal you want to reach by the end of this course?", h7:"It can be small. We'll build on it in Activity 2.", ph7:"By the end of this course, I want to...",
+    q8:"How confident are you that you'll reach this goal?", h8:"1 = not sure yet, 5 = very confident.",
+    scaleLow:"Just starting", scaleHigh:"Very confident",
     next:"Next", back:"Back", finish:"See My Starting Point",
     needName:"Please type your name to continue.",
     needChoice:"Please choose one option to continue.",
+    needRatings:"Please rate all four areas to continue.",
+    needHabit:"Please pick at least one habit to continue.",
+    needFocusHabit:"Please choose your top habit to continue.",
+    needRating:"Please choose a number to continue.",
     footer:"Introduction to Workforce Opportunities • BSIC SKL 101CE • West Los Angeles College",
     jobs:["Wheelchair / Airport Attendant","Porter / Custodian","Food Service Worker","Security Guard","Something else"],
-    habits:["Show up on time, every time","Ask questions when I'm unsure","Take responsibility for my tasks","Communicate clearly with my team","Keep learning and practicing","Ask for help early, not last minute"],
+    habits:["Show up on time, every time","Ask questions when I'm unsure","Take responsibility for my tasks","Communicate clearly with my team","Keep learning and practicing","Ask for help early, not last minute","Manage my time well","Use technology and apps with confidence","Stay positive under pressure"],
+    ratingAreas:["Communication","Time Management","Teamwork","Using Technology (Canvas, email, apps)"],
     sumEyebrow:"YOUR RESULTS", sumTitle:"My Starting Point",
     sumSub:"Introduction to Workforce Opportunities",
-    labelRole:"Current Work", labelProud:"What I'm Proud Of", labelHabits:"Habits I'm Building", labelGoal:"My Goal for This Course",
+    labelRole:"Current Work", labelConfidence:"How I'm Feeling Right Now", labelProud:"What I'm Proud Of", labelChallenge:"A Challenge I Overcame",
+    labelHabits:"Habits I'm Building", labelFocusHabit:"My Top Focus", labelGoal:"My Goal for This Course", labelGoalConfidence:"My Confidence in This Goal",
     notAnswered:"Not answered",
     printBtn:"Print / Save as PDF", restartBtn:"Start Over",
     saveNote:"Take a screenshot or tap Print to save this — show your instructor or keep it for yourself. This is your personal record for Module 1."
@@ -193,51 +240,51 @@ const STR = {
     eyebrow:"MÓDULO 1 • ACTIVIDAD 1", title:"Mi Punto de Partida", langBtn:"English",
     q0:"¿Cómo te llamas?", h0:"Esto aparecerá en tu tarjeta de resultados al final.", ph0:"Escribe tu nombre",
     q1:"¿Qué describe mejor tu trabajo actual?", h1:"Elige la opción más parecida a tu trabajo.",
-    q2:"¿De qué estás orgulloso/a en tu trabajo?", h2:"Una habilidad, un hábito, algo que haces bien.", ph2:"Estoy orgulloso/a de que yo...",
-    q3:"¿Qué hábitos quieres desarrollar en este curso?", h3:"Elige todos los que quieras.",
-    q4:"¿Cuál es una meta que quieres lograr al final de este curso?", h4:"Puede ser pequeña. La usaremos en la Actividad 2.", ph4:"Al final de este curso, quiero...",
+    q2:"¿Qué tan seguro/a te sientes en cada una de estas áreas ahora mismo?", h2:"Toca un número para cada una. 1 = apenas empezando, 5 = muy seguro/a.",
+    q3:"¿De qué estás orgulloso/a en tu trabajo?", h3:"Da un ejemplo específico si puedes.", ph3:"Estoy orgulloso/a de que yo...",
+    q4:"¿Cuál es un reto que enfrentaste y superaste?", h4:"En el trabajo, en casa, o en tu propia vida.", ph4:"Un reto que superé fue...",
+    q5:"¿Qué hábitos quieres desarrollar en este curso?", h5:"Elige todos los que quieras — luego elegirás tu favorito.",
+    q6:"De esos, ¿en cuál TE enfocarás primero?", h6:"Elige solo uno para empezar.",
+    q7:"¿Cuál es una meta que quieres lograr al final de este curso?", h7:"Puede ser pequeña. La usaremos en la Actividad 2.", ph7:"Al final de este curso, quiero...",
+    q8:"¿Qué tan seguro/a estás de que lograrás esta meta?", h8:"1 = no estoy seguro/a todavía, 5 = muy seguro/a.",
+    scaleLow:"Apenas empezando", scaleHigh:"Muy seguro/a",
     next:"Siguiente", back:"Atrás", finish:"Ver Mi Punto de Partida",
     needName:"Por favor escribe tu nombre para continuar.",
     needChoice:"Por favor elige una opción para continuar.",
+    needRatings:"Por favor califica las cuatro áreas para continuar.",
+    needHabit:"Por favor elige al menos un hábito para continuar.",
+    needFocusHabit:"Por favor elige tu hábito principal para continuar.",
+    needRating:"Por favor elige un número para continuar.",
     footer:"Introducción a las Oportunidades Laborales • BSIC SKL 101CE • West Los Angeles College",
     jobs:["Asistente de Sillas de Ruedas / Aeropuerto","Portero / Conserje","Trabajador de Servicio de Comida","Guardia de Seguridad","Otro tipo de trabajo"],
-    habits:["Llegar a tiempo, siempre","Preguntar cuando tengo dudas","Ser responsable de mis tareas","Comunicarme con claridad con mi equipo","Seguir aprendiendo y practicando","Pedir ayuda temprano, no al final"],
+    habits:["Llegar a tiempo, siempre","Preguntar cuando tengo dudas","Ser responsable de mis tareas","Comunicarme con claridad con mi equipo","Seguir aprendiendo y practicando","Pedir ayuda temprano, no al final","Administrar bien mi tiempo","Usar tecnología y aplicaciones con confianza","Mantenerme positivo/a bajo presión"],
+    ratingAreas:["Comunicación","Manejo del Tiempo","Trabajo en Equipo","Uso de Tecnología (Canvas, correo, apps)"],
     sumEyebrow:"TUS RESULTADOS", sumTitle:"Mi Punto de Partida",
     sumSub:"Introducción a las Oportunidades Laborales",
-    labelRole:"Trabajo Actual", labelProud:"De Lo Que Estoy Orgulloso/a", labelHabits:"Hábitos Que Estoy Desarrollando", labelGoal:"Mi Meta Para Este Curso",
+    labelRole:"Trabajo Actual", labelConfidence:"Cómo Me Siento Ahora Mismo", labelProud:"De Lo Que Estoy Orgulloso/a", labelChallenge:"Un Reto Que Superé",
+    labelHabits:"Hábitos Que Estoy Desarrollando", labelFocusHabit:"Mi Enfoque Principal", labelGoal:"Mi Meta Para Este Curso", labelGoalConfidence:"Mi Confianza en Esta Meta",
     notAnswered:"Sin respuesta",
     printBtn:"Imprimir / Guardar como PDF", restartBtn:"Empezar de Nuevo",
     saveNote:"Toma una captura de pantalla o presiona Imprimir para guardar esto — muéstraselo a tu instructora o guárdalo para ti. Este es tu registro personal del Módulo 1."
   }
 };
 let lang = "en";
-const state = { name:"", job:null, proud:"", habits:[], goal:"" };
-const TOTAL_STEPS = 5;
+const state = { name:"", job:null, ratings:[0,0,0,0], proud:"", challenge:"", habits:[], focusHabit:null, goal:"", goalConfidence:0 };
+const TOTAL_STEPS = 9;
 
-function toggleLang(){
-  lang = (lang === "en") ? "es" : "en";
-  applyLang();
-}
+function toggleLang(){ lang = (lang === "en") ? "es" : "en"; applyLang(); }
 function applyLang(){
   const t = STR[lang];
   document.documentElement.setAttribute("lang", lang);
   document.getElementById("langBtn").textContent = t.langBtn;
-  document.querySelectorAll("[data-k]").forEach(el=>{
-    const k = el.getAttribute("data-k");
-    if(t[k] !== undefined) el.textContent = t[k];
-  });
-  document.querySelectorAll("[data-k-ph]").forEach(el=>{
-    const k = el.getAttribute("data-k-ph");
-    if(t[k] !== undefined) el.setAttribute("placeholder", t[k]);
-  });
-  renderJobChoices(); renderHabitChoices();
+  document.querySelectorAll("[data-k]").forEach(el=>{ const k = el.getAttribute("data-k"); if(t[k] !== undefined) el.textContent = t[k]; });
+  document.querySelectorAll("[data-k-ph]").forEach(el=>{ const k = el.getAttribute("data-k-ph"); if(t[k] !== undefined) el.setAttribute("placeholder", t[k]); });
+  renderJobChoices(); renderRatingBlocks(); renderHabitChoices(); renderFocusHabitChoices(); renderGoalConfidenceScale();
   if(document.getElementById("step-summary").classList.contains("active")) renderSummary();
   updateProgressLabel();
 }
 function renderJobChoices(){
-  const wrap = document.getElementById("jobChoices");
-  const t = STR[lang];
-  wrap.innerHTML = "";
+  const wrap = document.getElementById("jobChoices"); const t = STR[lang]; wrap.innerHTML = "";
   t.jobs.forEach((label, i)=>{
     const div = document.createElement("div");
     div.className = "choice" + (state.job === i ? " selected" : "");
@@ -246,40 +293,75 @@ function renderJobChoices(){
     wrap.appendChild(div);
   });
 }
+function renderRatingBlocks(){
+  const wrap = document.getElementById("ratingBlocks"); const t = STR[lang]; wrap.innerHTML = "";
+  t.ratingAreas.forEach((label, areaIdx)=>{
+    const block = document.createElement("div");
+    block.className = "rating-block";
+    const scaleHtml = [1,2,3,4,5].map(n=>{
+      const sel = state.ratings[areaIdx] === n;
+      return '<div class="rating-btn'+(sel?" selected":"")+'" data-area="'+areaIdx+'" data-val="'+n+'">'+n+'</div>';
+    }).join("");
+    block.innerHTML = '<div class="rating-label">'+label+'</div><div class="rating-scale">'+scaleHtml+'</div>' +
+      '<div class="rating-scale-labels"><span>'+t.scaleLow+'</span><span>'+t.scaleHigh+'</span></div>';
+    wrap.appendChild(block);
+  });
+  wrap.querySelectorAll(".rating-btn").forEach(btn=>{
+    btn.onclick = ()=>{
+      const area = parseInt(btn.getAttribute("data-area"),10);
+      const val = parseInt(btn.getAttribute("data-val"),10);
+      state.ratings[area] = val;
+      renderRatingBlocks();
+    };
+  });
+}
 function renderHabitChoices(){
-  const wrap = document.getElementById("habitChoices");
-  const t = STR[lang];
-  wrap.innerHTML = "";
+  const wrap = document.getElementById("habitChoices"); const t = STR[lang]; wrap.innerHTML = "";
   t.habits.forEach((label, i)=>{
     const selected = state.habits.includes(i);
     const div = document.createElement("div");
     div.className = "choice check" + (selected ? " selected" : "");
     div.innerHTML = '<span class="dot"></span><span>'+label+'</span>';
     div.onclick = ()=>{
-      if(state.habits.includes(i)) state.habits = state.habits.filter(x=>x!==i);
+      if(state.habits.includes(i)){ state.habits = state.habits.filter(x=>x!==i); if(state.focusHabit===i) state.focusHabit=null; }
       else state.habits.push(i);
       renderHabitChoices();
     };
     wrap.appendChild(div);
   });
 }
+function renderFocusHabitChoices(){
+  const wrap = document.getElementById("focusHabitChoices"); const t = STR[lang]; wrap.innerHTML = "";
+  state.habits.forEach(i=>{
+    const div = document.createElement("div");
+    div.className = "choice" + (state.focusHabit === i ? " selected" : "");
+    div.innerHTML = '<span class="dot"></span><span>'+t.habits[i]+'</span>';
+    div.onclick = ()=>{ state.focusHabit = i; renderFocusHabitChoices(); };
+    wrap.appendChild(div);
+  });
+}
+function renderGoalConfidenceScale(){
+  const wrap = document.getElementById("goalConfidenceScale"); wrap.innerHTML = "";
+  [1,2,3,4,5].forEach(n=>{
+    const div = document.createElement("div");
+    div.className = "rating-btn" + (state.goalConfidence === n ? " selected" : "");
+    div.textContent = n;
+    div.onclick = ()=>{ state.goalConfidence = n; renderGoalConfidenceScale(); };
+    wrap.appendChild(div);
+  });
+}
 function updateProgressLabel(){
-  const activeStep = getActiveStepIndex();
-  const t = STR[lang];
+  const activeStep = getActiveStepIndex(); const t = STR[lang];
   const label = lang === "en" ? "Step "+(activeStep+1)+" of "+TOTAL_STEPS : "Paso "+(activeStep+1)+" de "+TOTAL_STEPS;
   document.getElementById("progressLabel").textContent = activeStep < TOTAL_STEPS ? label : "";
   document.getElementById("progressFill").style.width = Math.min(100, ((activeStep+1)/TOTAL_STEPS)*100) + "%";
 }
-function getActiveStepIndex(){
-  for(let i=0;i<TOTAL_STEPS;i++){
-    if(document.getElementById("step-"+i).classList.contains("active")) return i;
-  }
-  return TOTAL_STEPS;
-}
+function getActiveStepIndex(){ for(let i=0;i<TOTAL_STEPS;i++){ if(document.getElementById("step-"+i).classList.contains("active")) return i; } return TOTAL_STEPS; }
 function showStep(i){
   for(let j=0;j<TOTAL_STEPS;j++) document.getElementById("step-"+j).classList.remove("active");
   document.getElementById("step-summary").classList.remove("active");
   document.getElementById("step-"+i).classList.add("active");
+  if(i===6) renderFocusHabitChoices();
   updateProgressLabel();
   window.scrollTo({top:0, behavior:"smooth"});
 }
@@ -293,12 +375,23 @@ function goNext(i){
   if(i===1){
     if(state.job===null){ document.getElementById("note-1").textContent = t.needChoice; document.getElementById("note-1").className="note warn"; return; }
   }
-  if(i===2){ state.proud = document.getElementById("proud").value.trim(); }
-  if(i===3){ /* habits optional */ }
+  if(i===2){
+    if(state.ratings.some(r=>r===0)){ document.getElementById("note-2").textContent = t.needRatings; document.getElementById("note-2").className="note warn"; return; }
+  }
+  if(i===3){ state.proud = document.getElementById("proud").value.trim(); }
+  if(i===4){ state.challenge = document.getElementById("challenge").value.trim(); }
+  if(i===5){
+    if(state.habits.length===0){ document.getElementById("note-5").textContent = t.needHabit; document.getElementById("note-5").className="note warn"; return; }
+  }
+  if(i===6){
+    if(state.focusHabit===null){ document.getElementById("note-6").textContent = t.needFocusHabit; document.getElementById("note-6").className="note warn"; return; }
+  }
+  if(i===7){ state.goal = document.getElementById("goal").value.trim(); }
   showStep(i+1);
 }
 function showSummary(){
-  state.goal = document.getElementById("goal").value.trim();
+  const t = STR[lang];
+  if(state.goalConfidence===0){ document.getElementById("note-8").textContent = t.needRating; document.getElementById("note-8").className="note warn"; return; }
   document.getElementById("step-summary").classList.add("active");
   for(let j=0;j<TOTAL_STEPS;j++) document.getElementById("step-"+j).classList.remove("active");
   document.getElementById("progressFill").style.width = "100%";
@@ -313,6 +406,11 @@ function renderSummary(){
   const habitsHtml = habitLabels.length
     ? '<div class="s-tags">' + habitLabels.map(h=>'<span class="s-tag">'+h+'</span>').join("") + '</div>'
     : '<div class="s-value">'+t.notAnswered+'</div>';
+  const ratingRowsHtml = t.ratingAreas.map((label,i)=>{
+    const val = state.ratings[i] || 0;
+    return '<div class="mini-bar-row"><div class="mini-bar-name">'+label+'</div><div class="mini-bar-track"><div class="mini-bar-fill" style="width:'+(val*20)+'%"></div></div></div>';
+  }).join("");
+  const focusHabitLabel = state.focusHabit !== null ? t.habits[state.focusHabit] : t.notAnswered;
   document.getElementById("step-summary").innerHTML = `
     <div class="summary-card">
       <div class="summary-head">
@@ -324,9 +422,13 @@ function renderSummary(){
       <div class="summary-body">
         <p class="summary-name">${state.name || t.notAnswered}</p>
         <div class="s-block"><div class="s-label">${t.labelRole}</div><div class="s-value">${jobLabel}</div></div>
+        <div class="s-block"><div class="s-label">${t.labelConfidence}</div><div class="mini-bars">${ratingRowsHtml}</div></div>
         <div class="s-block"><div class="s-label">${t.labelProud}</div><div class="s-value">${state.proud || t.notAnswered}</div></div>
+        <div class="s-block"><div class="s-label">${t.labelChallenge}</div><div class="s-value">${state.challenge || t.notAnswered}</div></div>
         <div class="s-block"><div class="s-label">${t.labelHabits}</div>${habitsHtml}</div>
+        <div class="s-block"><div class="s-label">${t.labelFocusHabit}</div><div class="s-value">${focusHabitLabel}</div></div>
         <div class="s-block"><div class="s-label">${t.labelGoal}</div><div class="s-value">${state.goal || t.notAnswered}</div></div>
+        <div class="s-block"><div class="s-label">${t.labelGoalConfidence}</div><div class="s-value">${state.goalConfidence || t.notAnswered} / 5</div></div>
       </div>
     </div>
     <div class="nav-row no-print" style="margin-top:20px;">
@@ -337,12 +439,16 @@ function renderSummary(){
   `;
 }
 function restart(){
-  state.name=""; state.job=null; state.proud=""; state.habits=[]; state.goal="";
-  document.getElementById("name").value=""; document.getElementById("proud").value=""; document.getElementById("goal").value="";
+  state.name=""; state.job=null; state.ratings=[0,0,0,0]; state.proud=""; state.challenge="";
+  state.habits=[]; state.focusHabit=null; state.goal=""; state.goalConfidence=0;
+  document.getElementById("name").value=""; document.getElementById("proud").value="";
+  document.getElementById("challenge").value=""; document.getElementById("goal").value="";
   showStep(0);
 }
 renderJobChoices();
+renderRatingBlocks();
 renderHabitChoices();
+renderGoalConfidenceScale();
 updateProgressLabel();
 </script>
 </body>
