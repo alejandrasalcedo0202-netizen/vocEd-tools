@@ -19,45 +19,31 @@
   .wrap{max-width:560px; margin:0 auto; padding:0 18px 60px;}
   header{padding:22px 4px 14px; display:flex; align-items:center; justify-content:space-between; gap:10px;}
   header img{height:46px; display:block; background:#fff; border-radius:8px; padding:4px 8px;}
-  .langbtn{
-    background:rgba(255,255,255,0.15); color:#fff; border:1.5px solid rgba(255,255,255,0.55);
-    border-radius:999px; padding:8px 16px; font-size:15px; font-weight:600; cursor:pointer;
-  }
+  .langbtn{background:rgba(255,255,255,0.15); color:#fff; border:1.5px solid rgba(255,255,255,0.55); border-radius:999px; padding:8px 16px; font-size:15px; font-weight:600; cursor:pointer;}
   .langbtn:active{background:rgba(255,255,255,0.3);}
   .eyebrow{color:var(--gold); font-weight:700; font-size:14px; letter-spacing:.03em; margin:6px 0 2px;}
   h1.title{color:#fff; font-family:Georgia,'Times New Roman',serif; font-size:28px; margin:0 0 18px; line-height:1.25;}
   .progress-track{background:rgba(255,255,255,0.25); height:8px; border-radius:99px; overflow:hidden; margin-bottom:6px;}
   .progress-fill{background:var(--gold); height:100%; border-radius:99px; transition:width .3s ease;}
   .progress-label{color:#dfe6f7; font-size:13px; margin-bottom:14px;}
-  .card{
-    background:var(--white); border-radius:16px; padding:26px 22px; box-shadow:0 10px 30px rgba(10,31,92,0.12);
-    margin-top:4px;
-  }
+  .card{background:var(--white); border-radius:16px; padding:26px 22px; box-shadow:0 10px 30px rgba(10,31,92,0.12); margin-top:4px;}
   .step{display:none;}
   .step.active{display:block; animation:fadein .25s ease;}
   @keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
-  .letter-badge{
-    width:52px; height:52px; border-radius:14px; background:var(--navy); color:var(--gold);
-    font-family:Georgia,'Times New Roman',serif; font-weight:800; font-size:28px;
-    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
-  }
+  .letter-badge{width:52px; height:52px; border-radius:14px; background:var(--navy); color:var(--gold); font-family:Georgia,'Times New Roman',serif; font-weight:800; font-size:28px; display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
   .q{font-size:20px; font-weight:700; color:var(--navy); margin:0 0 6px; line-height:1.35;}
   .hint{font-size:14.5px; color:var(--muted); margin:0 0 18px;}
-  input[type="text"], textarea{
-    width:100%; border:2px solid var(--line); border-radius:12px; padding:14px 14px; font-size:17px;
-    font-family:inherit; color:var(--ink); background:#fbfcfe;
-  }
+  input[type="text"], textarea{width:100%; border:2px solid var(--line); border-radius:12px; padding:14px 14px; font-size:17px; font-family:inherit; color:var(--ink); background:#fbfcfe;}
   input[type="text"]:focus, textarea:focus{outline:none; border-color:var(--navy);}
   textarea{min-height:80px; resize:vertical;}
   .choice-list{display:flex; flex-direction:column; gap:10px;}
-  .choice{
-    display:flex; align-items:center; gap:12px; border:2px solid var(--line); border-radius:12px;
-    padding:14px 16px; cursor:pointer; background:#fbfcfe; font-size:17px; font-weight:600; color:var(--ink);
-  }
-  .choice .dot{width:20px; height:20px; border-radius:50%; border:2px solid #b7bedb; flex:none; position:relative;}
+  .choice{display:flex; align-items:center; gap:12px; border:2px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; background:#fbfcfe; font-size:17px; font-weight:600; color:var(--ink);}
+  .choice .dot{width:20px; height:20px; border-radius:50%; border:2px solid #8890ad; flex:none; position:relative;}
+  .choice.check .dot{border-radius:5px;}
   .choice.selected{border-color:var(--navy); background:#eef1fb;}
   .choice.selected .dot{border-color:var(--navy); background:var(--navy);}
   .choice.selected .dot::after{content:""; position:absolute; inset:4px; background:var(--gold); border-radius:50%;}
+  .choice.check.selected .dot::after{border-radius:2px;}
   .nav-row{display:flex; gap:12px; margin-top:26px;}
   button.btn{flex:1; border:none; border-radius:12px; padding:15px 18px; font-size:17px; font-weight:700; cursor:pointer; font-family:inherit;}
   .btn-primary{background:var(--navy); color:#fff;}
@@ -68,6 +54,9 @@
   .pathway-box{border:2px solid var(--line); border-radius:14px; padding:16px 18px; margin-bottom:18px; background:var(--card);}
   .pathway-from{font-size:13px; font-weight:700; color:var(--gold-dark); text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px;}
   .pathway-job{font-size:19px; font-weight:800; color:var(--navy);}
+  .pathway-target{border:2px solid var(--gold); border-radius:14px; padding:14px 18px; margin-bottom:18px; background:#fffbe9;}
+  .pathway-target-label{font-size:12px; font-weight:700; color:var(--gold-dark); text-transform:uppercase; letter-spacing:.03em; margin-bottom:2px;}
+  .pathway-target-value{font-size:18px; font-weight:800; color:var(--navy);}
   .pathway-arrow{text-align:center; color:var(--gold-dark); font-size:22px; margin:4px 0;}
   /* summary */
   .summary-card{background:#fff; border-radius:18px; padding:0; overflow:hidden; box-shadow:0 12px 34px rgba(10,31,92,0.16); border:3px solid var(--gold);}
@@ -80,10 +69,9 @@
   .s-block{margin-bottom:18px;}
   .s-label{font-size:12.5px; font-weight:700; color:var(--gold-dark); text-transform:uppercase; letter-spacing:.04em; margin-bottom:4px;}
   .s-value{font-size:16.5px; color:var(--ink); line-height:1.4;}
-  .smart-sentence{
-    background:var(--card); border-left:4px solid var(--gold); border-radius:8px; padding:16px 18px;
-    font-size:17px; line-height:1.6; color:var(--navy); font-weight:600;
-  }
+  .s-tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .s-tag{background:var(--card); border:1px solid var(--line); border-radius:999px; padding:6px 12px; font-size:14px; color:var(--navy); font-weight:600;}
+  .smart-sentence{background:var(--card); border-left:4px solid var(--gold); border-radius:8px; padding:16px 18px; font-size:17px; line-height:1.6; color:var(--navy); font-weight:600;}
   .summary-actions{padding:0 22px 24px; display:flex; gap:12px;}
   .footer-note{text-align:center; font-size:13px; color:var(--muted); margin-top:16px; line-height:1.5;}
   @media print{
@@ -102,8 +90,8 @@
   </header>
   <div class="eyebrow" data-k="eyebrow">MODULE 2 • ACTIVITY 2</div>
   <h1 class="title" data-k="title">Match Your Path</h1>
-  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:12%"></div></div>
-  <div class="progress-label" id="progressLabel">Step 1 of 8</div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:8%"></div></div>
+  <div class="progress-label" id="progressLabel">Step 1 of 12</div>
 
   <div class="card">
 
@@ -138,10 +126,9 @@
     </div>
 
     <div class="step" id="step-3">
-      <div class="letter-badge">S</div>
-      <p class="q" data-k="qS">Specific: What exactly do you want to achieve?</p>
-      <p class="hint" data-k="hS">Be as clear as you can.</p>
-      <textarea id="smartS" data-k-ph="phS" placeholder="I want to..."></textarea>
+      <div id="targetDisplay3"></div>
+      <p class="q" data-k="q3">Why does this role interest you?</p>
+      <textarea id="whyRole" data-k-ph="ph3" placeholder="This interests me because..."></textarea>
       <div class="note" id="note-3"></div>
       <div class="nav-row">
         <button class="btn btn-secondary" onclick="goBack(3)" data-k="back">Back</button>
@@ -150,10 +137,10 @@
     </div>
 
     <div class="step" id="step-4">
-      <div class="letter-badge">M</div>
-      <p class="q" data-k="qM">Measurable: How will you know you did it?</p>
-      <p class="hint" data-k="hM">A number, a document, a result you can see.</p>
-      <textarea id="smartM" data-k-ph="phM" placeholder="I will know because..."></textarea>
+      <div id="targetDisplay4"></div>
+      <p class="q" data-k="q4">What skills or training do you think you'll need?</p>
+      <p class="hint" data-k="h4">Pick as many as you like.</p>
+      <div id="skillsWrap"></div>
       <div class="note" id="note-4"></div>
       <div class="nav-row">
         <button class="btn btn-secondary" onclick="goBack(4)" data-k="back">Back</button>
@@ -162,10 +149,10 @@
     </div>
 
     <div class="step" id="step-5">
-      <div class="letter-badge">A</div>
-      <p class="q" data-k="qA">Achievable: What will make this realistic for you?</p>
-      <p class="hint" data-k="hA">Think about your time, support, and resources.</p>
-      <textarea id="smartA" data-k-ph="phA" placeholder="This is realistic because..."></textarea>
+      <div class="letter-badge">S</div>
+      <p class="q" data-k="qS">Specific: What exactly do you want to achieve?</p>
+      <p class="hint" data-k="hS">Be as clear as you can.</p>
+      <textarea id="smartS" data-k-ph="phS" placeholder="I want to..."></textarea>
       <div class="note" id="note-5"></div>
       <div class="nav-row">
         <button class="btn btn-secondary" onclick="goBack(5)" data-k="back">Back</button>
@@ -174,10 +161,10 @@
     </div>
 
     <div class="step" id="step-6">
-      <div class="letter-badge">R</div>
-      <p class="q" data-k="qR">Relevant: Why does this goal matter to you?</p>
-      <p class="hint" data-k="hR">Your reason will keep you going.</p>
-      <textarea id="smartR" data-k-ph="phR" placeholder="This matters to me because..."></textarea>
+      <div class="letter-badge">M</div>
+      <p class="q" data-k="qM">Measurable: How will you know you did it?</p>
+      <p class="hint" data-k="hM">A number, a document, a result you can see.</p>
+      <textarea id="smartM" data-k-ph="phM" placeholder="I will know because..."></textarea>
       <div class="note" id="note-6"></div>
       <div class="nav-row">
         <button class="btn btn-secondary" onclick="goBack(6)" data-k="back">Back</button>
@@ -186,13 +173,63 @@
     </div>
 
     <div class="step" id="step-7">
+      <div class="letter-badge">A</div>
+      <p class="q" data-k="qA">Achievable: What will make this realistic for you?</p>
+      <p class="hint" data-k="hA">Think about your time, support, and resources.</p>
+      <textarea id="smartA" data-k-ph="phA" placeholder="This is realistic because..."></textarea>
+      <div class="note" id="note-7"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(7)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(7)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-8">
+      <p class="q" data-k="q8">What might get in your way — and what's your plan?</p>
+      <p class="hint" data-k="h8">Naming the obstacle now makes it easier to handle later.</p>
+      <p class="hint" style="margin-bottom:6px; font-weight:700; color:var(--navy);" data-k="obstacleLabel">Obstacle</p>
+      <textarea id="obstacle" data-k-ph="phObstacle" placeholder="One thing that might get in my way is..." style="margin-bottom:16px;"></textarea>
+      <p class="hint" style="margin-bottom:6px; font-weight:700; color:var(--navy);" data-k="planLabel">My Plan</p>
+      <textarea id="obstaclePlan" data-k-ph="phPlan" placeholder="If that happens, I will..."></textarea>
+      <div class="note" id="note-8"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(8)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(8)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-9">
+      <div class="letter-badge">R</div>
+      <p class="q" data-k="qR">Relevant: Why does this goal matter to you?</p>
+      <p class="hint" data-k="hR">Your reason will keep you going.</p>
+      <textarea id="smartR" data-k-ph="phR" placeholder="This matters to me because..."></textarea>
+      <div class="note" id="note-9"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(9)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(9)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-10">
       <div class="letter-badge">T</div>
       <p class="q" data-k="qT">Time-bound: By when will you do this?</p>
       <p class="hint" data-k="hT">A date, or "in 30 days," "by Module 3."</p>
       <input type="text" id="smartT" data-k-ph="phT" placeholder="By...">
-      <div class="note" id="note-7"></div>
+      <div class="note" id="note-10"></div>
       <div class="nav-row">
-        <button class="btn btn-secondary" onclick="goBack(7)" data-k="back">Back</button>
+        <button class="btn btn-secondary" onclick="goBack(10)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(10)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-11">
+      <p class="q" data-k="q11">How confident are you that you'll reach this goal?</p>
+      <p class="hint" data-k="h11">1 = not sure yet, 5 = very confident.</p>
+      <div class="letter-badge" style="display:none;"></div>
+      <div id="confidenceScale" style="display:flex; gap:6px;"></div>
+      <div class="note" id="note-11"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(11)" data-k="back">Back</button>
         <button class="btn btn-primary" onclick="showSummary()" data-k="finish">See My Path</button>
       </div>
     </div>
@@ -204,36 +241,68 @@
 </div>
 
 <script>
-const PATHWAYS = [
-  { toKey:"path0", roles:["role0a","role0b","role0c"] },
-  { toKey:"path1", roles:["role1a","role1b","role1c"] },
-  { toKey:"path2", roles:["role2a","role2b","role2c"] },
-  { toKey:"path3", roles:["role3a","role3b","role3c"] }
-];
+const SKILLS = {
+  // job0: Wheelchair/Airport Attendant pathway
+  "0-0": {en:["Leadership & team supervision","Airline safety regulations","Scheduling & shift planning","Ground equipment operation","Clear radio communication"],
+          es:["Liderazgo y supervisión de equipos","Regulaciones de seguridad aérea","Programación y planificación de turnos","Operación de equipo terrestre","Comunicación clara por radio"]},
+  "0-1": {en:["Customer service excellence","Conflict resolution","Team coordination","Airline policies & procedures","Bilingual communication"],
+          es:["Excelencia en servicio al cliente","Resolución de conflictos","Coordinación de equipo","Políticas y procedimientos de la aerolínea","Comunicación bilingüe"]},
+  "0-2": {en:["Flight scheduling coordination","Safety compliance","Cross-team communication","Problem-solving under pressure","Basic dispatch systems"],
+          es:["Coordinación de horarios de vuelo","Cumplimiento de seguridad","Comunicación entre equipos","Resolución de problemas bajo presión","Sistemas básicos de despacho"]},
+  // job1: Porter/Custodian pathway
+  "1-0": {en:["HVAC & mechanical systems","Electrical basics","Preventive maintenance","Reading blueprints","Safety code compliance"],
+          es:["Sistemas de HVAC y mecánicos","Conceptos básicos de electricidad","Mantenimiento preventivo","Lectura de planos","Cumplimiento de códigos de seguridad"]},
+  "1-1": {en:["Team supervision","Vendor & contractor coordination","Budgeting basics","Work order management","Safety inspections"],
+          es:["Supervisión de equipo","Coordinación con proveedores y contratistas","Conceptos básicos de presupuesto","Gestión de órdenes de trabajo","Inspecciones de seguridad"]},
+  "1-2": {en:["HVAC certification","Electrical basics","Tool handling & repair","Refrigerant handling safety","Troubleshooting systems"],
+          es:["Certificación de HVAC","Conceptos básicos de electricidad","Manejo y reparación de herramientas","Manejo seguro de refrigerantes","Solución de problemas en sistemas"]},
+  // job2: Food Service Worker pathway
+  "2-0": {en:["Knife skills & food prep","Food safety certification","Working under time pressure","Reading recipes & portioning","Kitchen equipment use"],
+          es:["Técnicas de cuchillo y preparación","Certificación de seguridad alimentaria","Trabajar bajo presión de tiempo","Leer recetas y porciones","Uso de equipo de cocina"]},
+  "2-1": {en:["Staff scheduling","Inventory & ordering","Food safety management","Budgeting & cost control","Team leadership"],
+          es:["Programación de personal","Inventario y pedidos","Gestión de seguridad alimentaria","Presupuesto y control de costos","Liderazgo de equipo"]},
+  "2-2": {en:["Food safety certification (ServSafe)","Health code compliance","Staff training","Inspection readiness","Recordkeeping"],
+          es:["Certificación de seguridad alimentaria (ServSafe)","Cumplimiento del código de salud","Capacitación del personal","Preparación para inspecciones","Mantenimiento de registros"]},
+  // job3: Security Guard pathway
+  "3-0": {en:["Team supervision","Incident report writing","Conflict de-escalation","Scheduling & shift coverage","Emergency response planning"],
+          es:["Supervisión de equipo","Redacción de reportes de incidentes","Manejo y desescalada de conflictos","Programación y cobertura de turnos","Planificación de respuesta a emergencias"]},
+  "3-1": {en:["Surveillance & observation","Investigation basics","Report writing","Asset protection knowledge","Attention to detail"],
+          es:["Vigilancia y observación","Conceptos básicos de investigación","Redacción de reportes","Conocimiento de protección de activos","Atención al detalle"]},
+  "3-2": {en:["Emergency response planning","Crisis communication","Team coordination","Safety regulations knowledge","Basic first aid/CPR"],
+          es:["Planificación de respuesta a emergencias","Comunicación en crisis","Coordinación de equipo","Conocimiento de regulaciones de seguridad","Primeros auxilios/RCP básico"]}
+};
 const STR = {
   en:{
     eyebrow:"MODULE 2 • ACTIVITY 2", title:"Match Your Path", langBtn:"Español",
     q0:"What's your name?", h0:"This will appear on your results card at the end.", ph0:"Type your name",
     q1:"What's your current work?", h1:"Choose the one closest to your job.",
     q2:"Which future role interests you most?",
+    q3:"Why does this role interest you?", ph3:"This interests me because...",
+    q4:"What skills or training do you think you'll need?", h4:"Pick as many as you like.",
     qS:"Specific: What exactly do you want to achieve?", hS:"Be as clear as you can.", phS:"I want to...",
     qM:"Measurable: How will you know you did it?", hM:"A number, a document, a result you can see.", phM:"I will know because...",
     qA:"Achievable: What will make this realistic for you?", hA:"Think about your time, support, and resources.", phA:"This is realistic because...",
+    q8:"What might get in your way — and what's your plan?", h8:"Naming the obstacle now makes it easier to handle later.",
+    obstacleLabel:"Obstacle", planLabel:"My Plan", phObstacle:"One thing that might get in my way is...", phPlan:"If that happens, I will...",
     qR:"Relevant: Why does this goal matter to you?", hR:"Your reason will keep you going.", phR:"This matters to me because...",
     qT:"Time-bound: By when will you do this?", hT:'A date, or "in 30 days," "by Module 3."', phT:"By...",
+    q11:"How confident are you that you'll reach this goal?", h11:"1 = not sure yet, 5 = very confident.",
     next:"Next", back:"Back", finish:"See My Path",
     needName:"Please type your name to continue.", needChoice:"Please choose one option to continue.",
+    needSkill:"Please choose at least one skill to continue.", needRating:"Please choose a number to continue.",
     footer:"Introduction to Workforce Opportunities • BSIC SKL 101CE • West Los Angeles College",
     jobs:["Wheelchair / Airport Attendant","Porter / Custodian","Food Service Worker","Security Guard","Something else"],
-    fromLabel:"YOUR CURRENT WORK",
+    fromLabel:"YOUR CURRENT WORK", targetLabel:"YOUR TARGET ROLE",
     path0:["Ramp Supervisor","Passenger Services Lead","Ground Ops Coordinator"],
     path1:["Building Engineer","Facilities Supervisor","HVAC Technician"],
     path2:["Line Cook","Kitchen Manager","Food Safety Manager"],
     path3:["Security Supervisor","Loss Prevention","Emergency Management"],
     otherPathwayNote:"Talk with your instructor about pathways that fit your goals.",
     otherRoleQ:"What role or field interests you?", otherRolePh:"Type the role you're interested in",
+    otherSkillsPh:"List a few skills or training you think this role needs",
     sumEyebrow:"YOUR RESULTS", sumTitle:"My Career Pathway & SMART Goal", sumSub:"Introduction to Workforce Opportunities",
-    labelCurrent:"Current Work", labelTarget:"Role I'm Interested In", labelSmart:"My SMART Goal",
+    labelCurrent:"Current Work", labelTarget:"Role I'm Interested In", labelWhy:"Why This Role", labelSkills:"Skills I'll Need",
+    labelSmart:"My SMART Goal", labelObstacle:"Possible Obstacle & My Plan", labelConfidence:"My Confidence in This Goal",
     notAnswered:"Not answered",
     printBtn:"Print / Save as PDF", restartBtn:"Start Over",
     saveNote:"Take a screenshot or tap Print to save this — show your instructor or keep it for yourself. This is your personal record for Module 2.",
@@ -244,24 +313,32 @@ const STR = {
     q0:"¿Cómo te llamas?", h0:"Esto aparecerá en tu tarjeta de resultados al final.", ph0:"Escribe tu nombre",
     q1:"¿Cuál es tu trabajo actual?", h1:"Elige la opción más parecida a tu trabajo.",
     q2:"¿Qué puesto futuro te interesa más?",
+    q3:"¿Por qué te interesa este puesto?", ph3:"Esto me interesa porque...",
+    q4:"¿Qué habilidades o capacitación crees que necesitarás?", h4:"Elige todas las que quieras.",
     qS:"Específico: ¿Qué quieres lograr exactamente?", hS:"Sé lo más claro posible.", phS:"Quiero...",
     qM:"Medible: ¿Cómo sabrás que lo lograste?", hM:"Un número, un documento, un resultado visible.", phM:"Lo sabré porque...",
     qA:"Alcanzable: ¿Qué hará esto realista para ti?", hA:"Piensa en tu tiempo, apoyo y recursos.", phA:"Esto es realista porque...",
+    q8:"¿Qué podría interponerse en tu camino — y cuál es tu plan?", h8:"Nombrar el obstáculo ahora lo hace más fácil de manejar después.",
+    obstacleLabel:"Obstáculo", planLabel:"Mi Plan", phObstacle:"Una cosa que podría interponerse es...", phPlan:"Si eso pasa, voy a...",
     qR:"Relevante: ¿Por qué te importa esta meta?", hR:"Tu razón te ayudará a seguir adelante.", phR:"Esto me importa porque...",
     qT:"Con Tiempo Definido: ¿Para cuándo lo harás?", hT:'Una fecha, o "en 30 días," "para el Módulo 3."', phT:"Para...",
+    q11:"¿Qué tan seguro/a estás de que lograrás esta meta?", h11:"1 = no estoy seguro/a todavía, 5 = muy seguro/a.",
     next:"Siguiente", back:"Atrás", finish:"Ver Mi Camino",
     needName:"Por favor escribe tu nombre para continuar.", needChoice:"Por favor elige una opción para continuar.",
+    needSkill:"Por favor elige al menos una habilidad para continuar.", needRating:"Por favor elige un número para continuar.",
     footer:"Introducción a las Oportunidades Laborales • BSIC SKL 101CE • West Los Angeles College",
     jobs:["Asistente de Sillas de Ruedas / Aeropuerto","Portero / Conserje","Trabajador de Servicio de Comida","Guardia de Seguridad","Otro tipo de trabajo"],
-    fromLabel:"TU TRABAJO ACTUAL",
+    fromLabel:"TU TRABAJO ACTUAL", targetLabel:"TU PUESTO OBJETIVO",
     path0:["Supervisor de Rampa","Líder de Servicios al Pasajero","Coordinador de Operaciones Terrestres"],
     path1:["Ingeniero de Edificio","Supervisor de Instalaciones","Técnico de HVAC"],
     path2:["Cocinero de Línea","Gerente de Cocina","Gerente de Seguridad Alimentaria"],
     path3:["Supervisor de Seguridad","Prevención de Pérdidas","Gestión de Emergencias"],
     otherPathwayNote:"Habla con tu instructora sobre caminos que se ajusten a tus metas.",
     otherRoleQ:"¿Qué puesto o campo te interesa?", otherRolePh:"Escribe el puesto que te interesa",
+    otherSkillsPh:"Enumera algunas habilidades o capacitación que crees que necesita este puesto",
     sumEyebrow:"TUS RESULTADOS", sumTitle:"Mi Camino Profesional y Meta SMART", sumSub:"Introducción a las Oportunidades Laborales",
-    labelCurrent:"Trabajo Actual", labelTarget:"Puesto Que Me Interesa", labelSmart:"Mi Meta SMART",
+    labelCurrent:"Trabajo Actual", labelTarget:"Puesto Que Me Interesa", labelWhy:"Por Qué Este Puesto", labelSkills:"Habilidades Que Necesitaré",
+    labelSmart:"Mi Meta SMART", labelObstacle:"Posible Obstáculo y Mi Plan", labelConfidence:"Mi Confianza en Esta Meta",
     notAnswered:"Sin respuesta",
     printBtn:"Imprimir / Guardar como PDF", restartBtn:"Empezar de Nuevo",
     saveNote:"Toma una captura de pantalla o presiona Imprimir para guardar esto — muéstraselo a tu instructora o guárdalo para ti. Este es tu registro personal del Módulo 2.",
@@ -269,10 +346,17 @@ const STR = {
   }
 };
 let lang = "en";
-const state = { name:"", job:null, targetIndex:null, targetOther:"", S:"", M:"", A:"", R:"", T:"" };
-const TOTAL_STEPS = 8;
+const state = { name:"", job:null, targetIndex:null, targetOther:"", whyRole:"", skills:[], skillsOther:"",
+  S:"", M:"", A:"", obstacle:"", obstaclePlan:"", R:"", T:"", confidence:0 };
+const TOTAL_STEPS = 12;
 
 function toggleLang(){ lang = (lang === "en") ? "es" : "en"; applyLang(); }
+function currentTargetLabel(){
+  const t = STR[lang];
+  if(state.job===4) return state.targetOther || "";
+  if(state.job!==null && state.targetIndex!==null) return t["path"+state.job][state.targetIndex];
+  return "";
+}
 function applyLang(){
   const t = STR[lang];
   document.documentElement.setAttribute("lang", lang);
@@ -281,6 +365,9 @@ function applyLang(){
   document.querySelectorAll("[data-k-ph]").forEach(el=>{ const k=el.getAttribute("data-k-ph"); if(t[k]!==undefined) el.setAttribute("placeholder", t[k]); });
   renderJobChoices();
   renderPathwayStep();
+  renderTargetDisplay("targetDisplay3");
+  renderSkillsStep();
+  renderConfidenceScale();
   if(document.getElementById("step-summary").classList.contains("active")) renderSummary();
   updateProgressLabel();
 }
@@ -290,7 +377,7 @@ function renderJobChoices(){
     const div = document.createElement("div");
     div.className = "choice" + (state.job===i ? " selected" : "");
     div.innerHTML = '<span class="dot"></span><span>'+label+'</span>';
-    div.onclick = ()=>{ if(state.job!==i){ state.job=i; state.targetIndex=null; state.targetOther=""; } renderJobChoices(); };
+    div.onclick = ()=>{ if(state.job!==i){ state.job=i; state.targetIndex=null; state.targetOther=""; state.skills=[]; state.skillsOther=""; } renderJobChoices(); };
     wrap.appendChild(div);
   });
 }
@@ -318,6 +405,47 @@ function renderPathwayStep(){
     choiceWrap.appendChild(div);
   });
 }
+function renderTargetDisplay(elId){
+  const t = STR[lang];
+  const el = document.getElementById(elId);
+  const label = currentTargetLabel();
+  el.innerHTML = label ? '<div class="pathway-target"><div class="pathway-target-label">'+t.targetLabel+'</div><div class="pathway-target-value">'+label+'</div></div>' : "";
+}
+function renderSkillsStep(){
+  renderTargetDisplay("targetDisplay4");
+  const t = STR[lang];
+  const wrap = document.getElementById("skillsWrap");
+  if(state.job===4){
+    wrap.innerHTML = '<textarea id="skillsOtherInput" placeholder="'+t.otherSkillsPh+'">'+(state.skillsOther||"")+'</textarea>';
+    document.getElementById("skillsOtherInput").oninput = (e)=>{ state.skillsOther = e.target.value; };
+    return;
+  }
+  if(state.job===null || state.targetIndex===null){ wrap.innerHTML = ""; return; }
+  const key = state.job+"-"+state.targetIndex;
+  const list = SKILLS[key] ? SKILLS[key][lang] : [];
+  wrap.innerHTML = '<div class="choice-list" id="skillsChoiceList"></div>';
+  const listWrap = document.getElementById("skillsChoiceList");
+  list.forEach((label,i)=>{
+    const selected = state.skills.includes(i);
+    const div = document.createElement("div");
+    div.className = "choice check" + (selected ? " selected" : "");
+    div.innerHTML = '<span class="dot"></span><span>'+label+'</span>';
+    div.onclick = ()=>{ if(state.skills.includes(i)) state.skills = state.skills.filter(x=>x!==i); else state.skills.push(i); renderSkillsStep(); };
+    listWrap.appendChild(div);
+  });
+}
+function renderConfidenceScale(){
+  const wrap = document.getElementById("confidenceScale"); wrap.innerHTML = "";
+  [1,2,3,4,5].forEach(n=>{
+    const div = document.createElement("div");
+    div.style.cssText = "flex:1; border:2px solid var(--line); border-radius:10px; padding:12px 0; text-align:center; font-weight:800; font-size:17px; cursor:pointer;";
+    div.style.background = state.confidence===n ? "#0A1F5C" : "#fbfcfe";
+    div.style.color = state.confidence===n ? "#fff" : "#0A1F5C";
+    div.textContent = n;
+    div.onclick = ()=>{ state.confidence = n; renderConfidenceScale(); };
+    wrap.appendChild(div);
+  });
+}
 function updateProgressLabel(){
   const activeStep = getActiveStepIndex(); const t = STR[lang];
   const label = lang==="en" ? "Step "+(activeStep+1)+" of "+TOTAL_STEPS : "Paso "+(activeStep+1)+" de "+TOTAL_STEPS;
@@ -330,6 +458,8 @@ function showStep(i){
   document.getElementById("step-summary").classList.remove("active");
   document.getElementById("step-"+i).classList.add("active");
   if(i===2) renderPathwayStep();
+  if(i===3) renderTargetDisplay("targetDisplay3");
+  if(i===4) renderSkillsStep();
   updateProgressLabel();
   window.scrollTo({top:0, behavior:"smooth"});
 }
@@ -347,14 +477,22 @@ function goNext(i){
     if(state.job===4){ if(!state.targetOther){ document.getElementById("note-2").textContent=t.needChoice; document.getElementById("note-2").className="note warn"; return; } }
     else if(state.targetIndex===null){ document.getElementById("note-2").textContent=t.needChoice; document.getElementById("note-2").className="note warn"; return; }
   }
-  if(i===3) state.S = document.getElementById("smartS").value.trim();
-  if(i===4) state.M = document.getElementById("smartM").value.trim();
-  if(i===5) state.A = document.getElementById("smartA").value.trim();
-  if(i===6) state.R = document.getElementById("smartR").value.trim();
+  if(i===3){ state.whyRole = document.getElementById("whyRole").value.trim(); }
+  if(i===4){
+    if(state.job===4){ /* optional free text, no hard block */ }
+    else if(state.skills.length===0){ document.getElementById("note-4").textContent=t.needSkill; document.getElementById("note-4").className="note warn"; return; }
+  }
+  if(i===5) state.S = document.getElementById("smartS").value.trim();
+  if(i===6) state.M = document.getElementById("smartM").value.trim();
+  if(i===7) state.A = document.getElementById("smartA").value.trim();
+  if(i===8){ state.obstacle = document.getElementById("obstacle").value.trim(); state.obstaclePlan = document.getElementById("obstaclePlan").value.trim(); }
+  if(i===9) state.R = document.getElementById("smartR").value.trim();
+  if(i===10) state.T = document.getElementById("smartT").value.trim();
   showStep(i+1);
 }
 function showSummary(){
-  state.T = document.getElementById("smartT").value.trim();
+  const t = STR[lang];
+  if(state.confidence===0){ document.getElementById("note-11").textContent=t.needRating; document.getElementById("note-11").className="note warn"; return; }
   for(let j=0;j<TOTAL_STEPS;j++) document.getElementById("step-"+j).classList.remove("active");
   document.getElementById("step-summary").classList.add("active");
   document.getElementById("progressFill").style.width="100%";
@@ -365,10 +503,18 @@ function showSummary(){
 function renderSummary(){
   const t = STR[lang];
   const jobLabel = state.job!==null ? t.jobs[state.job] : t.notAnswered;
-  let targetLabel = t.notAnswered;
-  if(state.job===4) targetLabel = state.targetOther || t.notAnswered;
-  else if(state.job!==null && state.targetIndex!==null) targetLabel = t["path"+state.job][state.targetIndex];
+  const targetLabel = currentTargetLabel() || t.notAnswered;
+  let skillsHtml;
+  if(state.job===4){
+    skillsHtml = '<div class="s-value">'+(state.skillsOther || t.notAnswered)+'</div>';
+  } else {
+    const key = state.job+"-"+state.targetIndex;
+    const list = SKILLS[key] ? SKILLS[key][lang] : [];
+    const chosen = state.skills.map(i=>list[i]);
+    skillsHtml = chosen.length ? '<div class="s-tags">'+chosen.map(s=>'<span class="s-tag">'+s+'</span>').join("")+'</div>' : '<div class="s-value">'+t.notAnswered+'</div>';
+  }
   const sentence = t.smartSentenceTpl(state.S, state.M, state.A, state.R, state.T);
+  const obstacleSentence = '<div><strong>'+t.obstacleLabel+':</strong> '+(state.obstacle || t.notAnswered)+'</div><div style="margin-top:8px;"><strong>'+t.planLabel+':</strong> '+(state.obstaclePlan || t.notAnswered)+'</div>';
   document.getElementById("step-summary").innerHTML = `
     <div class="summary-card">
       <div class="summary-head">
@@ -381,7 +527,11 @@ function renderSummary(){
         <p class="summary-name">${state.name || t.notAnswered}</p>
         <div class="s-block"><div class="s-label">${t.labelCurrent}</div><div class="s-value">${jobLabel}</div></div>
         <div class="s-block"><div class="s-label">${t.labelTarget}</div><div class="s-value">${targetLabel}</div></div>
+        <div class="s-block"><div class="s-label">${t.labelWhy}</div><div class="s-value">${state.whyRole || t.notAnswered}</div></div>
+        <div class="s-block"><div class="s-label">${t.labelSkills}</div>${skillsHtml}</div>
         <div class="s-block"><div class="s-label">${t.labelSmart}</div><div class="smart-sentence">${sentence}</div></div>
+        <div class="s-block"><div class="s-label">${t.labelObstacle}</div><div class="s-value">${obstacleSentence}</div></div>
+        <div class="s-block"><div class="s-label">${t.labelConfidence}</div><div class="s-value">${state.confidence} / 5</div></div>
       </div>
     </div>
     <div class="nav-row no-print" style="margin-top:20px;">
@@ -392,14 +542,17 @@ function renderSummary(){
   `;
 }
 function restart(){
-  state.name=""; state.job=null; state.targetIndex=null; state.targetOther="";
-  state.S=""; state.M=""; state.A=""; state.R=""; state.T="";
+  state.name=""; state.job=null; state.targetIndex=null; state.targetOther=""; state.whyRole=""; state.skills=[]; state.skillsOther="";
+  state.S=""; state.M=""; state.A=""; state.obstacle=""; state.obstaclePlan=""; state.R=""; state.T=""; state.confidence=0;
   document.getElementById("name").value="";
+  document.getElementById("whyRole").value="";
   document.getElementById("smartS").value=""; document.getElementById("smartM").value="";
-  document.getElementById("smartA").value=""; document.getElementById("smartR").value=""; document.getElementById("smartT").value="";
+  document.getElementById("smartA").value=""; document.getElementById("obstacle").value=""; document.getElementById("obstaclePlan").value="";
+  document.getElementById("smartR").value=""; document.getElementById("smartT").value="";
   showStep(0);
 }
 renderJobChoices();
+renderConfidenceScale();
 updateProgressLabel();
 </script>
 </body>
