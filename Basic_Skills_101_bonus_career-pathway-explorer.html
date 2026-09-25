@@ -8,6 +8,7 @@
   :root{
     --navy:#0A1F5C; --navy-dark:#071640; --gold:#F5C518; --gold-dark:#8A6A00;
     --ink:#1c2230; --muted:#5b6172; --card:#F4F6FB; --line:#7d86a3; --white:#ffffff;
+    --green:#1b6e3c; --green-bg:#e8f5ec; --red:#9c1f1f; --red-bg:#fbeaea;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -32,8 +33,9 @@
   @keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
   .q{font-size:20px; font-weight:700; color:var(--navy); margin:0 0 6px; line-height:1.35;}
   .hint{font-size:14.5px; color:var(--muted); margin:0 0 18px;}
-  textarea{width:100%; border:2px solid var(--line); border-radius:12px; padding:14px 14px; font-size:17px; font-family:inherit; color:var(--ink); background:#fbfcfe; min-height:90px; resize:vertical;}
-  textarea:focus{outline:none; border-color:var(--navy);}
+  textarea{width:100%; border:2px solid var(--line); border-radius:12px; padding:14px 14px; font-size:17px; font-family:inherit; color:var(--ink); background:#fbfcfe; min-height:80px; resize:vertical;}
+  input[type="text"]{width:100%; border:2px solid var(--line); border-radius:12px; padding:14px 14px; font-size:17px; font-family:inherit; color:var(--ink); background:#fbfcfe;}
+  textarea:focus, input[type="text"]:focus{outline:none; border-color:var(--navy);}
   .nav-row{display:flex; gap:12px; margin-top:26px;}
   button.btn{flex:1; border:none; border-radius:12px; padding:15px 18px; font-size:17px; font-weight:700; cursor:pointer; font-family:inherit;}
   .btn-primary{background:var(--navy); color:#fff;}
@@ -41,29 +43,56 @@
   .btn-secondary{background:#eef1f8; color:var(--navy); flex:0 0 110px;}
   .note{font-size:13.5px; color:var(--muted); margin-top:10px; min-height:18px;}
   .note.warn{color:#9c5b00;}
+  /* checkbox pills */
+  .pill-grid{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;}
+  .pill{border:2px solid var(--line); border-radius:999px; padding:10px 16px; font-size:15px; font-weight:600; color:var(--ink); background:#fbfcfe; cursor:pointer; user-select:none;}
+  .pill.selected{background:var(--navy); border-color:var(--navy); color:#fff;}
+  .pill .chk{display:inline-block; width:16px;}
   /* accordion explore cards */
   .explore-card{border:2px solid var(--line); border-radius:14px; margin-bottom:12px; overflow:hidden; background:#fbfcfe;}
   .explore-head{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; cursor:pointer; font-weight:700; font-size:16.5px; color:var(--navy);}
   .explore-head .arrow{transition:transform .2s ease; color:var(--gold-dark); font-size:14px;}
   .explore-card.open .arrow{transform:rotate(180deg);}
-  .explore-body{max-height:0; overflow:hidden; transition:max-height .25s ease;}
-  .explore-card.open .explore-body{max-height:260px;}
+  .explore-body{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .explore-card.open .explore-body{max-height:900px;}
   .explore-body-inner{padding:0 16px 16px;}
-  .explore-role{background:var(--card); border-radius:8px; padding:8px 12px; margin-top:8px; font-size:14.5px; color:var(--ink);}
-  .pick-btn{width:100%; margin-top:10px; border:2px solid var(--gold); background:#fffbe9; color:var(--gold-dark); font-weight:700; border-radius:10px; padding:10px; cursor:pointer; font-size:14.5px;}
+  .explore-role{background:var(--card); border-radius:10px; padding:10px 12px; margin-top:10px;}
+  .explore-role .role-name{font-size:14.5px; font-weight:700; color:var(--navy); margin-bottom:3px;}
+  .explore-role .role-desc{font-size:13.5px; color:var(--ink); line-height:1.4; margin-bottom:4px;}
+  .explore-role .role-train{font-size:12.5px; color:var(--gold-dark); font-weight:600;}
+  .fit-row{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;}
+  .fit-tag{background:#eef1f8; color:var(--navy); font-size:12px; font-weight:700; padding:4px 10px; border-radius:999px;}
+  .pick-btn{width:100%; margin-top:12px; border:2px solid var(--gold); background:#fffbe9; color:var(--gold-dark); font-weight:700; border-radius:10px; padding:10px; cursor:pointer; font-size:14.5px;}
   .pick-btn.selected{background:var(--navy); border-color:var(--navy); color:#fff;}
+  /* quiz */
+  .quiz-opt{display:block; width:100%; text-align:left; border:2px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:10px; background:#fbfcfe; font-size:15.5px; font-family:inherit; color:var(--ink); cursor:pointer;}
+  .quiz-opt:active{background:#eef1f8;}
+  .quiz-opt.correct{border-color:var(--green); background:var(--green-bg); color:var(--green); font-weight:700;}
+  .quiz-opt.incorrect{border-color:var(--red); background:var(--red-bg); color:var(--red); font-weight:700;}
+  .quiz-opt[disabled]{cursor:default;}
+  .quiz-feedback{font-size:14.5px; line-height:1.5; margin-top:8px; padding:12px 14px; border-radius:10px; display:none;}
+  .quiz-feedback.show{display:block;}
+  .quiz-feedback.correct{background:var(--green-bg); color:var(--green);}
+  .quiz-feedback.incorrect{background:var(--red-bg); color:var(--red);}
   /* present card */
   .present-card{background:var(--navy); border-radius:22px; padding:34px 26px; color:#fff; text-align:center; box-shadow:0 16px 40px rgba(10,31,92,0.35);}
   .present-eyebrow{color:var(--gold); font-weight:700; font-size:15px; letter-spacing:.06em; margin-bottom:10px;}
   .present-name{font-family:Georgia,'Times New Roman',serif; font-size:28px; margin:0 0 6px;}
-  .present-path{font-size:15px; color:#dfe6f7; margin-bottom:20px;}
+  .present-path{font-size:15px; color:#dfe6f7; margin-bottom:16px;}
   .present-path b{color:var(--gold);}
-  .present-reflection{font-size:20px; line-height:1.5; font-weight:600; background:rgba(255,255,255,0.08); border:2px solid var(--gold); border-radius:16px; padding:20px;}
+  .present-tags{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:14px 0;}
+  .present-tag{background:var(--gold); color:var(--navy-dark); font-weight:800; font-size:12.5px; padding:6px 12px; border-radius:999px;}
+  .present-block{text-align:left; font-size:15px; line-height:1.5; background:rgba(255,255,255,0.08); border:2px solid var(--gold); border-radius:16px; padding:18px 18px; margin-top:14px;}
+  .present-block .lbl{color:var(--gold); font-weight:700; font-size:12.5px; letter-spacing:.04em; margin-bottom:4px; text-transform:uppercase;}
+  .present-block p{margin:0 0 12px;}
+  .present-block p:last-child{margin-bottom:0;}
   .footer-note{text-align:center; font-size:13px; color:var(--muted); margin-top:16px; line-height:1.5;}
   @media print{
     body{background:#fff !important;}
     header, .progress-track, .progress-label, .eyebrow, h1.title, .no-print{display:none !important;}
     .wrap{max-width:100%; padding:0;}
+    .present-block{color:#000 !important; background:#fff !important; border-color:#8A6A00 !important;}
+    .present-block .lbl{color:#8A6A00 !important;}
   }
 </style>
 </head>
@@ -75,26 +104,82 @@
   </header>
   <div class="eyebrow" data-k="eyebrow">MODULE 2 • BONUS ACTIVITY</div>
   <h1 class="title" data-k="title">Career Pathway Explorer</h1>
-  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:33%"></div></div>
-  <div class="progress-label" id="progressLabel">Step 1 of 3</div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:14%"></div></div>
+  <div class="progress-label" id="progressLabel">Step 1 of 7</div>
 
   <div class="card">
 
     <div class="step active" id="step-0">
-      <p class="q" data-k="q0">Tap each pathway to explore where it can lead</p>
-      <p class="hint" data-k="h0">Then tap "Choose This Path" under the one that interests you most.</p>
-      <div id="exploreList"></div>
+      <p class="q" data-k="q0">What's your name?</p>
+      <p class="hint" data-k="h0">You'll build a full career pathway card to present to the class.</p>
+      <input type="text" id="name" data-k-ph="ph0" placeholder="Type your name">
       <div class="note" id="note-0"></div>
       <div class="nav-row"><button class="btn btn-primary" onclick="goNext(0)" data-k="next">Next</button></div>
     </div>
 
     <div class="step" id="step-1">
-      <p class="q" data-k="q1">What surprised you or excites you about this path?</p>
-      <p class="hint" data-k="h1">Write a sentence or two — you'll share this with the class.</p>
-      <textarea id="reflection" data-k-ph="ph1" placeholder="What excites me is..."></textarea>
+      <p class="q" data-k="q1">Interests: What kind of work do you enjoy?</p>
+      <p class="hint" data-k="h1">Tap all that apply.</p>
+      <div class="pill-grid" id="interestGrid"></div>
       <div class="note" id="note-1"></div>
       <div class="nav-row">
         <button class="btn btn-secondary" onclick="goBack(1)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(1)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-2">
+      <p class="q" data-k="q2">Skills: What are you already good at?</p>
+      <p class="hint" data-k="h2">Tap all that apply.</p>
+      <div class="pill-grid" id="skillGrid"></div>
+      <div class="note" id="note-2"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(2)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(2)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-3">
+      <p class="q" data-k="q3">Dream: If nothing were in your way, what job or life would you want in 5 years?</p>
+      <p class="hint" data-k="h3">Write a sentence or two. There's no wrong answer.</p>
+      <textarea id="dream" data-k-ph="ph3" placeholder="In 5 years I want..."></textarea>
+      <div class="note" id="note-3"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(3)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(3)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-4">
+      <p class="q" data-k="q4">Tap each pathway to explore where it can lead</p>
+      <p class="hint" data-k="h4">Then tap "Choose This Path" under the one that fits your interests, skills, or dream best.</p>
+      <div id="exploreList"></div>
+      <div class="note" id="note-4"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(4)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(4)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-5">
+      <p class="q" data-k="q5quiz">Quick Check</p>
+      <p class="hint" id="quizPrompt"></p>
+      <div id="quizOptions"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <div class="note" id="note-5"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(5)" data-k="back">Back</button>
+        <button class="btn btn-primary" onclick="goNext(5)" data-k="next">Next</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-6">
+      <p class="q" data-k="q6">What surprised you or excites you about this path?</p>
+      <p class="hint" data-k="h6">Connect it to your interests, skills, or dream from earlier. You'll share this with the class.</p>
+      <textarea id="reflection" data-k-ph="ph6" placeholder="What excites me is..."></textarea>
+      <div class="note" id="note-6"></div>
+      <div class="nav-row">
+        <button class="btn btn-secondary" onclick="goBack(6)" data-k="back">Back</button>
         <button class="btn btn-primary" onclick="showPresent()" data-k="finish">Build My Explorer Card</button>
       </div>
     </div>
@@ -109,44 +194,114 @@
 const STR = {
   en:{
     eyebrow:"MODULE 2 • BONUS ACTIVITY", title:"Career Pathway Explorer", langBtn:"Español",
-    q0:'Tap each pathway to explore where it can lead', h0:'Then tap "Choose This Path" under the one that interests you most.',
-    q1:"What surprised you or excites you about this path?", h1:"Write a sentence or two — you'll share this with the class.", ph1:"What excites me is...",
+    q0:"What's your name?", h0:"You'll build a full career pathway card to present to the class.", ph0:"Type your name",
+    q1:"Interests: What kind of work do you enjoy?", h1:"Tap all that apply.",
+    q2:"Skills: What are you already good at?", h2:"Tap all that apply.",
+    q3:"Dream: If nothing were in your way, what job or life would you want in 5 years?", h3:"Write a sentence or two. There's no wrong answer.", ph3:"In 5 years I want...",
+    q4:'Tap each pathway to explore where it can lead', h4:'Then tap "Choose This Path" under the one that fits your interests, skills, or dream best.',
+    q5quiz:"Quick Check",
+    q6:"What surprised you or excites you about this path?", h6:"Connect it to your interests, skills, or dream from earlier. You'll share this with the class.", ph6:"What excites me is...",
     next:"Next", back:"Back", finish:"Build My Explorer Card",
     needChoice:"Please choose a pathway to explore first.", needText:"Please write a short answer to continue.",
+    needPill:"Please tap at least one option to continue.", needQuiz:"Please choose an answer to continue.",
     footer:"Introduction to Workforce Opportunities • BSIC SKL 101CE • West Los Angeles College",
     pickBtn:"Choose This Path", pickedBtn:"✓ This Is My Path",
-    fromLabel:"From", pathways:[
-      { from:"Wheelchair / Airport Attendant", roles:["Ramp Supervisor","Passenger Services Lead","Ground Ops Coordinator"] },
-      { from:"Porter / Custodian", roles:["Building Engineer","Facilities Supervisor","HVAC Technician"] },
-      { from:"Food Service Worker", roles:["Line Cook","Kitchen Manager","Food Safety Manager"] },
-      { from:"Security Guard", roles:["Security Supervisor","Loss Prevention","Emergency Management"] }
+    fromLabel:"From", fitLabel:"Might fit you if you enjoy:", trainLabel:"Getting there usually takes:",
+    interests:["Helping people","Fixing / building things","Organizing & planning","Being active / moving","Working with food","Keeping people & places safe"],
+    skills:["Communication","Teamwork","Attention to detail","Safety awareness","Problem-solving","Leading others"],
+    pathways:[
+      { from:"Wheelchair / Airport Attendant", fit:["Helping people","Organizing & planning","Communication"],
+        roles:[
+          {name:"Ramp Supervisor", desc:"Oversees the ramp crew loading and unloading aircraft safely and on schedule.", train:"1–2 years of ramp experience plus safety/supervisor training."},
+          {name:"Passenger Services Lead", desc:"Leads the passenger assistance team and trains new attendants on accessibility procedures.", train:"Experience as an attendant plus on-the-job leadership training."},
+          {name:"Ground Ops Coordinator", desc:"Coordinates gate, ramp, and passenger teams so flights stay on schedule.", train:"Strong communication skills and cross-team scheduling experience."}
+        ]},
+      { from:"Porter / Custodian", fit:["Fixing / building things","Attention to detail","Problem-solving"],
+        roles:[
+          {name:"Building Engineer", desc:"Maintains a building's mechanical, electrical, and plumbing systems.", train:"Technical certification or a trade apprenticeship."},
+          {name:"Facilities Supervisor", desc:"Leads the custodial/maintenance team and manages schedules and supplies.", train:"Experience plus supervisor training."},
+          {name:"HVAC Technician", desc:"Installs and repairs heating and cooling systems.", train:"Trade school or apprenticeship certification."}
+        ]},
+      { from:"Food Service Worker", fit:["Working with food","Attention to detail","Leading others"],
+        roles:[
+          {name:"Line Cook", desc:"Prepares menu items to standard during service.", train:"Kitchen experience and building speed and technique."},
+          {name:"Kitchen Manager", desc:"Oversees kitchen staff, inventory, and food cost.", train:"Food safety certification plus leadership experience."},
+          {name:"Food Safety Manager", desc:"Makes sure the kitchen follows health-code standards.", train:"A food safety manager certification (like ServSafe)."}
+        ]},
+      { from:"Security Guard", fit:["Keeping people & places safe","Organizing & planning","Problem-solving"],
+        roles:[
+          {name:"Security Supervisor", desc:"Leads a security team's shift schedule and responds to incidents.", train:"Guard-card experience plus supervisor training."},
+          {name:"Loss Prevention", desc:"Monitors for theft and safety risks in retail or warehouse settings.", train:"Strong observation and report-writing skills."},
+          {name:"Emergency Management", desc:"Plans and coordinates emergency response procedures for a site.", train:"Additional certification in emergency planning."}
+        ]}
     ],
+    quizQ:(from,role)=>`What usually helps someone move from ${from} to ${role}?`,
+    quizOptions:["Getting additional training or certification and building experience","Waiting for someone to notice you automatically","Doing the exact same tasks with no new skills","Switching to a completely unrelated field with no connection"],
+    quizCorrectIdx:0,
+    quizCorrectMsg:"That's right — moving up almost always takes a mix of experience, training, and being ready to take initiative.",
+    quizIncorrectMsg:"Not quite — moving up almost always takes a mix of experience, training, and being ready to take initiative. Try to keep that in mind as you plan your own path.",
     presentEyebrow:"READY TO PRESENT", presentPathTpl:(from)=>`From: <b>${from}</b>`,
+    interestsLbl:"My Interests", skillsLbl:"My Skills", dreamLbl:"My Dream", reflectionLbl:"Why This Path",
     printBtn:"Print / Save as PDF", restartBtn:"Start Over",
     saveNote:"Turn your screen to the class (or read it aloud) and share what you explored! Take a screenshot or tap Print to keep it."
   },
   es:{
     eyebrow:"MÓDULO 2 • ACTIVIDAD ADICIONAL", title:"Explorador de Caminos Profesionales", langBtn:"English",
-    q0:"Toca cada camino para explorar a dónde puede llevar", h0:'Luego toca "Elegir Este Camino" en el que más te interese.',
-    q1:"¿Qué te sorprendió o te emociona de este camino?", h1:"Escribe una o dos oraciones — las compartirás con la clase.", ph1:"Lo que me emociona es...",
+    q0:"¿Cómo te llamas?", h0:"Vas a crear una tarjeta completa de camino profesional para presentar a la clase.", ph0:"Escribe tu nombre",
+    q1:"Intereses: ¿Qué tipo de trabajo disfrutas?", h1:"Toca todas las que apliquen.",
+    q2:"Habilidades: ¿En qué ya eres bueno/a?", h2:"Toca todas las que apliquen.",
+    q3:"Sueño: Si nada te lo impidiera, ¿qué trabajo o vida querrías en 5 años?", h3:"Escribe una o dos oraciones. No hay respuesta incorrecta.", ph3:"En 5 años quiero...",
+    q4:"Toca cada camino para explorar a dónde puede llevar", h4:'Luego toca "Elegir Este Camino" en el que mejor se ajuste a tus intereses, habilidades o sueño.',
+    q5quiz:"Verificación Rápida",
+    q6:"¿Qué te sorprendió o te emociona de este camino?", h6:"Conéctalo con tus intereses, habilidades o sueño de antes. Lo compartirás con la clase.", ph6:"Lo que me emociona es...",
     next:"Siguiente", back:"Atrás", finish:"Crear Mi Tarjeta de Explorador",
     needChoice:"Por favor elige un camino para explorar primero.", needText:"Por favor escribe una respuesta corta para continuar.",
+    needPill:"Por favor toca al menos una opción para continuar.", needQuiz:"Por favor elige una respuesta para continuar.",
     footer:"Introducción a las Oportunidades Laborales • BSIC SKL 101CE • West Los Angeles College",
     pickBtn:"Elegir Este Camino", pickedBtn:"✓ Este Es Mi Camino",
-    fromLabel:"Desde", pathways:[
-      { from:"Asistente de Sillas de Ruedas / Aeropuerto", roles:["Supervisor de Rampa","Líder de Servicios al Pasajero","Coordinador de Operaciones Terrestres"] },
-      { from:"Portero / Conserje", roles:["Ingeniero de Edificio","Supervisor de Instalaciones","Técnico de HVAC"] },
-      { from:"Trabajador de Servicio de Comida", roles:["Cocinero de Línea","Gerente de Cocina","Gerente de Seguridad Alimentaria"] },
-      { from:"Guardia de Seguridad", roles:["Supervisor de Seguridad","Prevención de Pérdidas","Gestión de Emergencias"] }
+    fromLabel:"Desde", fitLabel:"Puede ajustarse a ti si disfrutas:", trainLabel:"Para llegar ahí normalmente se necesita:",
+    interests:["Ayudar a las personas","Reparar / construir cosas","Organizar y planificar","Estar activo/a / en movimiento","Trabajar con comida","Mantener seguras a las personas y los lugares"],
+    skills:["Comunicación","Trabajo en equipo","Atención al detalle","Conciencia de seguridad","Resolución de problemas","Liderar a otros"],
+    pathways:[
+      { from:"Asistente de Sillas de Ruedas / Aeropuerto", fit:["Ayudar a las personas","Organizar y planificar","Comunicación"],
+        roles:[
+          {name:"Supervisor de Rampa", desc:"Supervisa al equipo de rampa que carga y descarga aviones de forma segura y a tiempo.", train:"1–2 años de experiencia en rampa más capacitación de seguridad/supervisión."},
+          {name:"Líder de Servicios al Pasajero", desc:"Dirige al equipo de asistencia a pasajeros y capacita a nuevos asistentes en procedimientos de accesibilidad.", train:"Experiencia como asistente más capacitación de liderazgo en el trabajo."},
+          {name:"Coordinador de Operaciones Terrestres", desc:"Coordina los equipos de puerta, rampa y pasajeros para que los vuelos se mantengan a tiempo.", train:"Buenas habilidades de comunicación y experiencia coordinando varios equipos."}
+        ]},
+      { from:"Portero / Conserje", fit:["Reparar / construir cosas","Atención al detalle","Resolución de problemas"],
+        roles:[
+          {name:"Ingeniero de Edificio", desc:"Mantiene los sistemas mecánicos, eléctricos y de plomería de un edificio.", train:"Certificación técnica o un aprendizaje de oficio."},
+          {name:"Supervisor de Instalaciones", desc:"Dirige al equipo de limpieza/mantenimiento y administra horarios y suministros.", train:"Experiencia más capacitación de supervisión."},
+          {name:"Técnico de HVAC", desc:"Instala y repara sistemas de calefacción y aire acondicionado.", train:"Escuela técnica o certificación de aprendizaje."}
+        ]},
+      { from:"Trabajador de Servicio de Comida", fit:["Trabajar con comida","Atención al detalle","Liderar a otros"],
+        roles:[
+          {name:"Cocinero de Línea", desc:"Prepara los platillos del menú según el estándar durante el servicio.", train:"Experiencia en cocina y desarrollo de velocidad y técnica."},
+          {name:"Gerente de Cocina", desc:"Supervisa al personal de cocina, el inventario y el costo de los alimentos.", train:"Certificación de seguridad alimentaria más experiencia de liderazgo."},
+          {name:"Gerente de Seguridad Alimentaria", desc:"Se asegura de que la cocina siga las normas del código de salud.", train:"Una certificación de gerente de seguridad alimentaria (como ServSafe)."}
+        ]},
+      { from:"Guardia de Seguridad", fit:["Mantener seguras a las personas y los lugares","Organizar y planificar","Resolución de problemas"],
+        roles:[
+          {name:"Supervisor de Seguridad", desc:"Dirige el horario de turnos del equipo de seguridad y responde a incidentes.", train:"Experiencia con tarjeta de guardia más capacitación de supervisión."},
+          {name:"Prevención de Pérdidas", desc:"Vigila el robo y los riesgos de seguridad en tiendas o almacenes.", train:"Buenas habilidades de observación y de redacción de reportes."},
+          {name:"Gestión de Emergencias", desc:"Planea y coordina los procedimientos de respuesta a emergencias de un lugar.", train:"Certificación adicional en planificación de emergencias."}
+        ]}
     ],
+    quizQ:(from,role)=>`¿Qué suele ayudar a alguien a pasar de ${from} a ${role}?`,
+    quizOptions:["Obtener capacitación o certificación adicional y ganar experiencia","Esperar a que alguien lo note automáticamente","Hacer exactamente las mismas tareas sin nuevas habilidades","Cambiar a un campo completamente diferente sin ninguna conexión"],
+    quizCorrectIdx:0,
+    quizCorrectMsg:"Correcto — avanzar casi siempre requiere una combinación de experiencia, capacitación y tomar la iniciativa.",
+    quizIncorrectMsg:"No exactamente — avanzar casi siempre requiere una combinación de experiencia, capacitación y tomar la iniciativa. Ten esto en cuenta mientras planeas tu propio camino.",
     presentEyebrow:"LISTO/A PARA PRESENTAR", presentPathTpl:(from)=>`Desde: <b>${from}</b>`,
+    interestsLbl:"Mis Intereses", skillsLbl:"Mis Habilidades", dreamLbl:"Mi Sueño", reflectionLbl:"Por Qué Este Camino",
     printBtn:"Imprimir / Guardar como PDF", restartBtn:"Empezar de Nuevo",
     saveNote:"Voltea tu pantalla hacia la clase (o léelo en voz alta) y comparte lo que exploraste. Toma una captura de pantalla o presiona Imprimir para guardarla."
   }
 };
 let lang = "en";
-const state = { chosenPath: null, openPath: null, reflection: "" };
-const TOTAL_STEPS = 2;
+const state = { name:"", interests:[], skills:[], dream:"", chosenPath:null, openPath:null, quizAnswered:false, quizCorrect:false, reflection:"" };
+const TOTAL_STEPS = 7;
 
 function toggleLang(){ lang = (lang==="en") ? "es" : "en"; applyLang(); }
 function applyLang(){
@@ -155,10 +310,30 @@ function applyLang(){
   document.getElementById("langBtn").textContent = t.langBtn;
   document.querySelectorAll("[data-k]").forEach(el=>{ const k=el.getAttribute("data-k"); if(t[k]!==undefined) el.textContent=t[k]; });
   document.querySelectorAll("[data-k-ph]").forEach(el=>{ const k=el.getAttribute("data-k-ph"); if(t[k]!==undefined) el.setAttribute("placeholder", t[k]); });
-  renderExploreList();
+  renderInterestGrid(); renderSkillGrid(); renderExploreList();
+  if(getActiveStepIndex()===5) renderQuiz();
   if(document.getElementById("step-present").classList.contains("active")) renderPresent();
   updateProgressLabel();
 }
+function renderPillGrid(containerId, items, selectedArr){
+  const t = STR[lang];
+  const wrap = document.getElementById(containerId);
+  wrap.innerHTML = "";
+  items.forEach(label=>{
+    const on = selectedArr.includes(label);
+    const div = document.createElement("div");
+    div.className = "pill" + (on ? " selected" : "");
+    div.textContent = (on ? "✓ " : "") + label;
+    div.onclick = ()=>{
+      const idx = selectedArr.indexOf(label);
+      if(idx>-1) selectedArr.splice(idx,1); else selectedArr.push(label);
+      if(containerId==="interestGrid") renderInterestGrid(); else renderSkillGrid();
+    };
+    wrap.appendChild(div);
+  });
+}
+function renderInterestGrid(){ renderPillGrid("interestGrid", STR[lang].interests, state.interests); }
+function renderSkillGrid(){ renderPillGrid("skillGrid", STR[lang].skills, state.skills); }
 function renderExploreList(){
   const t = STR[lang];
   const wrap = document.getElementById("exploreList");
@@ -174,13 +349,46 @@ function renderExploreList(){
         <span class="arrow">&#9660;</span>
       </div>
       <div class="explore-body"><div class="explore-body-inner">
-        ${p.roles.map(r=>'<div class="explore-role">'+r+'</div>').join("")}
+        ${p.roles.map(r=>'<div class="explore-role"><div class="role-name">'+r.name+'</div><div class="role-desc">'+r.desc+'</div><div class="role-train">'+t.trainLabel+' '+r.train+'</div></div>').join("")}
+        <div class="fit-row"><span class="hint" style="margin:8px 0 0; font-size:12.5px;">${t.fitLabel}</span></div>
+        <div class="fit-row">${p.fit.map(f=>'<span class="fit-tag">'+f+'</span>').join("")}</div>
         <button class="pick-btn${picked?" selected":""}" data-idx="${i}">${picked ? t.pickedBtn : t.pickBtn}</button>
       </div></div>
     `;
     div.querySelector(".explore-head").onclick = ()=>{ state.openPath = (state.openPath===i) ? null : i; renderExploreList(); };
-    div.querySelector(".pick-btn").onclick = (e)=>{ e.stopPropagation(); state.chosenPath = i; renderExploreList(); };
+    div.querySelector(".pick-btn").onclick = (e)=>{ e.stopPropagation(); state.chosenPath = i; state.quizAnswered=false; state.quizCorrect=false; renderExploreList(); };
     wrap.appendChild(div);
+  });
+}
+function renderQuiz(){
+  const t = STR[lang];
+  const path = t.pathways[state.chosenPath];
+  const role = path.roles[0].name;
+  document.getElementById("quizPrompt").textContent = t.quizQ(path.from, role);
+  const optWrap = document.getElementById("quizOptions");
+  optWrap.innerHTML = "";
+  const fb = document.getElementById("quizFeedback");
+  if(state.quizAnswered){
+    fb.textContent = state.quizCorrect ? t.quizCorrectMsg : t.quizIncorrectMsg;
+    fb.className = "quiz-feedback show " + (state.quizCorrect ? "correct" : "incorrect");
+  } else {
+    fb.className = "quiz-feedback"; fb.textContent = "";
+  }
+  t.quizOptions.forEach((opt,i)=>{
+    const btn = document.createElement("button");
+    btn.className = "quiz-opt"; btn.type="button"; btn.textContent = opt;
+    if(state.quizAnswered){
+      btn.disabled = true;
+      if(i===t.quizCorrectIdx) btn.classList.add("correct");
+      else if(i===state.pickedQuizIdx) btn.classList.add("incorrect");
+    }
+    btn.onclick = ()=>{
+      if(state.quizAnswered) return;
+      state.quizAnswered = true; state.pickedQuizIdx = i; state.quizCorrect = (i===t.quizCorrectIdx);
+      document.getElementById("note-5").textContent = "";
+      renderQuiz();
+    };
+    optWrap.appendChild(btn);
   });
 }
 function updateProgressLabel(){
@@ -194,6 +402,7 @@ function showStep(i){
   for(let j=0;j<TOTAL_STEPS;j++) document.getElementById("step-"+j).classList.remove("active");
   document.getElementById("step-present").classList.remove("active");
   document.getElementById("step-"+i).classList.add("active");
+  if(i===5) renderQuiz();
   updateProgressLabel();
   window.scrollTo({top:0, behavior:"smooth"});
 }
@@ -201,14 +410,20 @@ function goBack(i){ showStep(i-1); }
 function goNext(i){
   const t = STR[lang];
   if(i===0){
-    if(state.chosenPath===null){ document.getElementById("note-0").textContent=t.needChoice; document.getElementById("note-0").className="note warn"; return; }
+    state.name = document.getElementById("name").value.trim();
+    if(!state.name){ document.getElementById("note-0").textContent=t.needText; document.getElementById("note-0").className="note warn"; return; }
   }
+  if(i===1){ if(state.interests.length===0){ document.getElementById("note-1").textContent=t.needPill; document.getElementById("note-1").className="note warn"; return; } }
+  if(i===2){ if(state.skills.length===0){ document.getElementById("note-2").textContent=t.needPill; document.getElementById("note-2").className="note warn"; return; } }
+  if(i===3){ state.dream = document.getElementById("dream").value.trim(); if(!state.dream){ document.getElementById("note-3").textContent=t.needText; document.getElementById("note-3").className="note warn"; return; } }
+  if(i===4){ if(state.chosenPath===null){ document.getElementById("note-4").textContent=t.needChoice; document.getElementById("note-4").className="note warn"; return; } }
+  if(i===5){ if(!state.quizAnswered){ document.getElementById("note-5").textContent=t.needQuiz; document.getElementById("note-5").className="note warn"; return; } }
   showStep(i+1);
 }
 function showPresent(){
   const t = STR[lang];
   state.reflection = document.getElementById("reflection").value.trim();
-  if(!state.reflection){ document.getElementById("note-1").textContent=t.needText; document.getElementById("note-1").className="note warn"; return; }
+  if(!state.reflection){ document.getElementById("note-6").textContent=t.needText; document.getElementById("note-6").className="note warn"; return; }
   for(let j=0;j<TOTAL_STEPS;j++) document.getElementById("step-"+j).classList.remove("active");
   document.getElementById("step-present").classList.add("active");
   document.getElementById("progressFill").style.width="100%";
@@ -222,9 +437,19 @@ function renderPresent(){
   document.getElementById("step-present").innerHTML = `
     <div class="present-card">
       <div class="present-eyebrow">${t.presentEyebrow}</div>
-      <div class="present-name">${path.roles.join(" · ")}</div>
+      <div class="present-name">${state.name}</div>
       <div class="present-path">${t.presentPathTpl(path.from)}</div>
-      <div class="present-reflection">${state.reflection}</div>
+      <div class="present-tags">${path.roles.map(r=>'<span class="present-tag">'+r.name+'</span>').join("")}</div>
+      <div class="present-block">
+        <div class="lbl">${t.interestsLbl}</div>
+        <p>${state.interests.join(", ")}</p>
+        <div class="lbl">${t.skillsLbl}</div>
+        <p>${state.skills.join(", ")}</p>
+        <div class="lbl">${t.dreamLbl}</div>
+        <p>${state.dream}</p>
+        <div class="lbl">${t.reflectionLbl}</div>
+        <p>${state.reflection}</p>
+      </div>
     </div>
     <div class="nav-row no-print" style="margin-top:20px;">
       <button class="btn btn-secondary" onclick="restart()">${t.restartBtn}</button>
@@ -234,12 +459,13 @@ function renderPresent(){
   `;
 }
 function restart(){
-  state.chosenPath=null; state.openPath=null; state.reflection="";
-  document.getElementById("reflection").value="";
-  renderExploreList();
+  state.name=""; state.interests=[]; state.skills=[]; state.dream=""; state.chosenPath=null; state.openPath=null;
+  state.quizAnswered=false; state.quizCorrect=false; state.reflection="";
+  document.getElementById("name").value=""; document.getElementById("dream").value=""; document.getElementById("reflection").value="";
+  renderInterestGrid(); renderSkillGrid(); renderExploreList();
   showStep(0);
 }
-renderExploreList();
+renderInterestGrid(); renderSkillGrid(); renderExploreList();
 updateProgressLabel();
 </script>
 </body>
